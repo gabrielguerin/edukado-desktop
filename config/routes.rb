@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :blogs
+      resources :comments
+      resources :faqs
+      resources :posts
+      resources :statics
+      resources :tags
+
+      root to: "users#index"
+    end
   resources :faqs
   resources :blogs
   resources :statics

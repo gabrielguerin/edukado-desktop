@@ -1,0 +1,9 @@
+<table class="table table-striped table-hover table-sm-responsive">
+  <tbody>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <%= render partial: 'article-card', locals: { blog: blog } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

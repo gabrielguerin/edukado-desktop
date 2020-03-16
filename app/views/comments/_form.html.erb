@@ -1,15 +1,4 @@
-
-<%= form_for(@comment, html: { class: 'form-horizontal' }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-  </div>
-
-  <div class="d-flex">
-    <div class="ml-auto">
-      <%= f.submit class: 'btn btn-primary' %>
-      <%= link_to "Cancel", comments_path, class: 'btn btn-outline-default' %>
-    </div>
-  </div>
+<%= form_with(model: [post, Comment.new], local: true) do |f| %>
+  <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1" %>
+  <span class="input-group-append"><%= f.submit 'Envoyer', class: 'btn btn-primary' %></span>
 <% end %>
-
