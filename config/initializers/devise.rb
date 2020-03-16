@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '6366ba9e5211a3a053485f604afbec726b16129eda09eec92a280852f35d98286a2ddae32c83ee46abc6e9d0283b07df308a3112272ec689d3ec93f08291c861'
+  # config.secret_key = 'bebbd0c735e95c198f65260af39897f1cc346c170c1cfb588fc4549e2109e4ccc30b29f05817682f0526aa652cf1d506f16b5804323d2b6f5738a8d331d30caa'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -18,13 +18,13 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'gabriel.guerin@edukado.co'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -114,13 +114,62 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'f310d94ace2c8a848dfb3a6562ed8fc44d0564b91f963f17a7fd418088f3f336760cfd50bbd48a1d0c367c30ab664030e1ccc568300fa25b1685a2627d736639'
+  # config.pepper = '9715bba952cf21ced7680898d00514b33e4c76860c82ac79421fda68a2b85a8f7f8bd455d4bd92b089d21cac5fd280aaf0ee2e167287e79b893b5c153c69099c'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
+
+  # ==> Configuration for :invitable
+  # The period the generated invitation token is valid.
+  # After this period, the invited resource won't be able to accept the invitation.
+  # When invite_for is 0 (the default), the invitation won't expire.
+  config.invite_for = 2.weeks
+
+  # Number of invitations users can send.
+  # - If invitation_limit is nil, there is no limit for invitations, users can
+  # send unlimited invitations, invitation_limit column is not used.
+  # - If invitation_limit is 0, users can't send invitations by default.
+  # - If invitation_limit n > 0, users can send n invitations.
+  # You can change invitation_limit column for some users so they can send more
+  # or less invitations, even with global invitation_limit = 0
+  # Default: nil
+  # config.invitation_limit = 5
+
+  # The key to be used to check existing users when sending an invitation
+  # and the regexp used to test it when validate_on_invite is not set.
+  # config.invite_key = { email: /\A[^@]+@[^@]+\z/ }
+  # config.invite_key = { email: /\A[^@]+@[^@]+\z/, username: nil }
+
+  # Ensure that invited record is valid.
+  # The invitation won't be sent if this check fails.
+  # Default: false
+  # config.validate_on_invite = true
+
+  # Resend invitation if user with invited status is invited again
+  # Default: true
+  config.resend_invitation = true
+
+  # The class name of the inviting model. If this is nil,
+  # the #invited_by association is declared to be polymorphic.
+  # Default: nil
+  # config.invited_by_class_name = 'User'
+
+  # The foreign key to the inviting model (if invited_by_class_name is set)
+  # Default: :invited_by_id
+  # config.invited_by_foreign_key = :invited_by_id
+
+  # The column name used for counter_cache column. If this is nil,
+  # the #invited_by association is declared without counter_cache.
+  # Default: nil
+  config.invited_by_counter_cache = :invitations_count
+
+  # Auto-login after the user accepts the invite. If this is false,
+  # the user will need to manually log in after accepting the invite.
+  # Default: true
+  # config.allow_insecure_sign_in_after_accept = false
 
   # ==> Configuration for :invitable
   # The period the generated invitation token is valid.
@@ -345,14 +394,10 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-Rails.application.config.to_prepare do
-  Devise::Mailer.layout "email"
-  Devise::Mailer.send(:include, EmailTemplateHelper)
+  Rails.application.config.to_prepare do
+    Devise::Mailer.layout "email"
+    Devise::Mailer.include EmailTemplateHelper
 
-  Devise::Mailer.send(:helper, EmailTemplateHelper)
-
-end
-
-  
-
+    Devise::Mailer.send(:helper, EmailTemplateHelper)
+  end
 end

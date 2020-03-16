@@ -1,7 +1,15 @@
 // Typography
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-  "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif !default;
+$base-font-family: -apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+"Roboto",
+"Oxygen",
+"Ubuntu",
+"Cantarell",
+"Fira Sans",
+"Droid Sans",
+"Helvetica Neue",
+sans-serif !default;
 $heading-font-family: $base-font-family !default;
 
 $base-font-size: 1em !default;
@@ -47,12 +55,10 @@ $focus-outline: $focus-outline-width solid $focus-outline-color;
 $focus-outline-offset: 1px;
 
 // Flash Colors
-$flash-colors: (
-  alert: $light-yellow,
+$flash-colors: (alert: $light-yellow,
   error: $red,
   notice: mix($white, $blue, 50%),
-  success: $light-green
-);
+  success: $light-green);
 
 // Border
 $base-border-color: $grey-1 !default;
