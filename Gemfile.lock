@@ -198,6 +198,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rubyzip (2.3.0)
+    rufo (0.11.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.2.1-x64-mingw32)
@@ -271,6 +272,7 @@ DEPENDENCIES
   pg_search
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
+  rufo
   sass-rails (>= 6)
   selenium-webdriver
   turbolinks (~> 5)

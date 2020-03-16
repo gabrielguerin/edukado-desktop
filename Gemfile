@@ -113,3 +113,7 @@ gem 'administrate'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
 
 gem 'kaminari'
+
+# Properly indent Ruby code
+
+gem 'rufo'

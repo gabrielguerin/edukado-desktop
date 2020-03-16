@@ -1,0 +1,18 @@
+<div class="card card-mini card-mini-solid-icon">
+  <div class="h-100 d-flex flex-column">
+    <div class="card-body">
+      <div class="media">
+        <div class="media-body text-center">
+          <div class="text-center text-primary">
+            <span style="font-size: 48px;">
+              <%= fa_icon_tag(badge.custom_fields[:icon_tag]) %>
+            </span>
+            <h4 class="text-black mb-4">#<%= badge.name %></h4>
+          </div>
+          <h6 class="text-center text-muted">Description</h6>
+          <p class="text-center"><%= badge.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

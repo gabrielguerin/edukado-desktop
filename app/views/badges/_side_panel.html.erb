@@ -1,0 +1,16 @@
+<% if @user.badges.present? %>
+  <div class="card">
+    <div class="card-body text-center">
+      <p>Les 3 derniers badges de <%= "#{@user.first_name}" %></p>
+    </div>
+  </div>
+  <% @user.badges.last(3).each do |badge| %>
+    <%= render partial: 'badges/badge', locals: { badge: badge } %>
+  <% end %>
+<% else %>
+  <div class="card">
+    <div class="card-body text-center">
+      <%= "#{@user.first_name}" %> n'a pas encore obtenu de badges.
+    </div>
+  </div>
+<% end %>
