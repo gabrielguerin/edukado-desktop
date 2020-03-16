@@ -7,13 +7,9 @@ class User < ApplicationRecord
 
   friendly_id :full_name, use: :slugged
 
-  mount_uploader :avatar, AvatarUploader
-
   acts_as_voter
 
   after_commit :welcome_send
-
-  after_commit :remove_avatar!, on: :destroy
 
   # Include default devise modules. Others available are:
 
@@ -44,9 +40,9 @@ class User < ApplicationRecord
 
   # validates_presence_of :avatar
 
-  validates_integrity_of :avatar
+  # validates_integrity_of :avatar
 
-  validates_processing_of :avatar
+  # validates_processing_of :avatar
 
   def full_name
     "#{first_name} #{last_name}"

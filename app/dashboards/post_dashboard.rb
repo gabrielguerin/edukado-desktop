@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class PostDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -8,13 +10,19 @@ class PostDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    user: Field::BelongsTo,
+    comments: Field::HasMany,
+    posts_tags: Field::HasMany,
+    tags: Field::HasMany,
+    file_attachment: Field::HasOne,
+    file_blob: Field::HasOne,
+    votes_for: Field::HasMany.with_options(class_name: 'ActsAsVotable::Vote'),
     id: Field::Number,
-    user_id: Field::Number,
     title: Field::String,
     description: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    slug: Field::String,
+    slug: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,32 +31,44 @@ class PostDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  id
-  user_id
-  title
-  description
+    user
+    comments
+    posts_tags
+    tags
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  id
-  user_id
-  title
-  description
-  created_at
-  updated_at
-  slug
+    user
+    comments
+    posts_tags
+    tags
+    file_attachment
+    file_blob
+    votes_for
+    id
+    title
+    description
+    created_at
+    updated_at
+    slug
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  user_id
-  title
-  description
-  slug
+    user
+    comments
+    posts_tags
+    tags
+    file_attachment
+    file_blob
+    votes_for
+    title
+    description
+    slug
   ].freeze
 
   # COLLECTION_FILTERS
