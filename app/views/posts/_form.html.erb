@@ -1,15 +1,26 @@
-
-<%= form_for(@post, html: { class: 'form-horizontal' }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
+<div class="card">
+  <div class="card-header d-flex justify-content-center">
+    <h5 class="mb-0">Ajouter une publication</h5>
   </div>
-
-  <div class="d-flex">
-    <div class="ml-auto">
-      <%= f.submit class: 'btn btn-primary' %>
-      <%= link_to "Cancel", posts_path, class: 'btn btn-outline-default' %>
-    </div>
+  <div class="card-body">
+    <%= simple_form_for(@post, url: posts_path(@post)) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+        <%= f.input :tag_list, label: 'Tags', placeholder: "tag1, tag2, tag3...", required: true %>
+        <%= f.input :title, label: 'Titre', placeholder: "Titre", required: true %>
+        <%= f.input :description, as: :text, autocomplete: "description", placeholder: "Description", required: true %>
+        <script type="application/javascript">
+          $('input[type="file"]').change(function(e){
+              var fileName = e.target.files[0].name;
+              $('.custom-file-label').html(fileName);
+          });
+        </script>
+        <%= f.input :file, as: :file, input_html: { class: "custom-file-input" }, label: "Fichier", label_html: { class: "custom-file-label", for: "inputFile" }, direct_upload: true, required: true %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit 'Publier', class: "btn btn-primary ml-auto" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
+</div>

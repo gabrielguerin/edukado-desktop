@@ -1,0 +1,29 @@
+<header class="landing-header-1">
+  <%= render partial: 'layouts/statics_nav' %>
+  <div class="container header-caption">
+    <div class="row">
+      <div class="col-12 px-5">
+        <div class="text-center text-white">
+          <h1 class="font-weight-bold leading-tight">Trouvez des
+            <div class="my-5">
+              <span id="typed"></span>
+            </div>
+            <script>
+              var options = {
+                strings: ['exercices^1000', 'fiches de révision^1000', 'présentations^1000', 'notes de cours^1000'],
+                typeSpeed: 60,
+                backSpeed: 30,
+                loop: true
+              }
+              var typed = new Typed("#typed", options);
+            </script>
+          </h1>
+          <p class="">La plateforme entièrement dédiée au partage de fichiers basée sur le principe de donnant-donnant.</p>
+          <div class="mt-5">
+            <%= link_to "Rejoindre la plateforme", new_user_registration_path, class: "btn btn-light" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,5 @@
+$("#posts").html("<%= escape_javascript(render("users/posts")) %>");
+$("#paginate").html("<%= escape_javascript(paginate(@posts, remote: true)) %>");
+$(document).ready(function(){
+$(this).scrollTop(0);
+});

@@ -1,0 +1,9 @@
+<table class="table table-striped table-hover table-sm-responsive">
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <%= render partial: 'post', locals: { post: post } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

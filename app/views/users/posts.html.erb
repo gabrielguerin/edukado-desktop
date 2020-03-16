@@ -1,25 +1,29 @@
-<% @title = "##{@tag.title}" %>
+<% @title = "Publications de #{@user.first_name} #{@user.last_name}" %>
 <div class="container">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-lg-9 col-md-8 order-md-1 order-sm-2">
       <div id="posts">
         <% if @posts.present? %>
           <%= render partial: 'posts', locals: { posts: @posts } %>
         <% else %>
           <div class="card">
             <div class="card-body text-center">
-              <p>Il n'y a pas encore eu de publications.</p>
+              <p><%= @user.first_name %> n'a pas encore publié.</p>
             </div>
           </div>
         <% end %>
       </div>
-      <% if @tag.posts.length > 5 %>
+      <% if @user.posts.length > 5 %>
         <div class="card">
           <div class="card-body d-flex justify-content-center" id="paginate">
             <%= paginate @posts, remote: true %>
           </div>
         </div>
       <% end %>
+    </div>
+    <div id="sidebar" class="col-lg-3 col-md-4 order-md-2 order-sm-1">
+      <%= render partial: 'side_panel' %>
+      <%= render partial: 'badges/side_panel' %>
     </div>
   </div>
 </div>
