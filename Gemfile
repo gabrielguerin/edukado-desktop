@@ -85,3 +85,31 @@ gem 'kiso_themes', '~>1.0.2', source: 'https://gems.kiso.io/'
 # Flexible authentication solution for Rails with Warden
 
 gem 'devise'
+
+# Adds support to Devise for sending invitations by email
+
+gem 'devise_invitable', '~> 2.0.0'
+
+# Votable ActiveRecord for Rails
+
+gem 'acts_as_votable'
+
+# pg_search builds ActiveRecord named scopes that take advantage of PostgreSQL’s full text search
+
+gem 'pg_search'
+
+# Adds reputation behavior to Rails apps in the form of Badges, Points, and Rankings
+
+gem 'merit'
+
+# "Swiss Army bulldozer" of slugging and permalink plugins for ActiveRecord.
+
+gem 'friendly_id', '~> 5.2.4'
+
+# Framework for creating flexible, powerful admin dashboards in Rails
+
+gem 'administrate'
+
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
+
+gem 'kaminari'
