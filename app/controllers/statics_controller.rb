@@ -1,60 +1,37 @@
+# frozen_string_literal: true
+
 class StaticsController < ApplicationController
-  layout "scaffold"
+  before_action :check_signed_in
 
-  before_action :set_static, only: [:show, :edit, :update, :destroy]
+  layout '_base'
 
-  # GET /statics
-  def index
-    @statics = Static.all
-  end
+  def index; end
 
-  # GET /statics/1
   def show
-  end
+    if valid_page?
 
-  # GET /statics/new
-  def new
-    @static = Static.new
-  end
+      render template: "statics/#{params[:page]}"
 
-  # GET /statics/1/edit
-  def edit
-  end
-
-  # POST /statics
-  def create
-    @static = Static.new(static_params)
-
-    if @static.save
-      redirect_to @static, notice: 'Static was successfully created.'
     else
-      render :new
+
+      render template: 'statics/errors/404', status: :not_found
+
     end
   end
 
-  # PATCH/PUT /statics/1
-  def update
-    if @static.update(static_params)
-      redirect_to @static, notice: 'Static was successfully updated.'
-    else
-      render :edit
-    end
-  end
+  # Redirects users to the web application if they are already signed in
 
-  # DELETE /statics/1
-  def destroy
-    @static.destroy
-    redirect_to statics_url, notice: 'Static was successfully destroyed.'
+  def check_signed_in
+    redirect_to posts_path if signed_in?
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_static
-      @static = Static.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def static_params
-      params.fetch(:static, {})
-    end
+  def valid_page?
+    File.exist?(
+      Pathname.new(
+        Rails.root + "app/views/statics/#{params[:page]}.html.erb"
+      )
+    )
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # All Administrate controllers inherit from this `Admin::ApplicationController`,
 # making it the ideal place to put authentication logic or other
 # before_actions.
@@ -6,10 +8,19 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    # layout 'layouts/admin/_side_menu'
+    # layout 'layouts/admin/_dashboard_top_nav'
+    before_action :authenticate_user!
     before_action :authenticate_admin
 
     def authenticate_admin
-      # TODO Add authentication logic here.
+      redirect_to '/', alert: 'Not authorized.' unless current_user && access?
+    end
+
+    private
+
+    def access?
+      current_user.admin = true
     end
 
     # Override this value to specify the number of elements to display at a time
