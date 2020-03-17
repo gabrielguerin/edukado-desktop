@@ -12,9 +12,10 @@
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': 'reload'%>
     <%= yield :styles %>
     <%= favicon_link_tag asset_path('logos/logo.png') %>
+    <%# favicon_link_tag "apple-touch-icon.png", :rel => "apple-touch-icon" %>
     <%= render 'layouts/external_js_libs' %>
     <%= yield :external_js_libs %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload' %>
     <%= yield :javascript %>
     <%= yield :head %>
   </head>
