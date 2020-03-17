@@ -113,21 +113,13 @@
         </li>
         <li class="nav-item dropdown user-nav">
           <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if current_user.avatar.attached? %>
-              <%= image_tag(current_user.avatar, class: "avatar rounded-circle", style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
-            <% else %>
-              <%= link_to image_tag('fallback/default', class: "avatar rounded-circle", width: '34', height: '34', alt: 'profile picture') %>
-            <% end %>
+            <%= image_tag(user_avatar(current_user), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
             <li class="dropdown-item text-center">
               <div class="card">
                 <div class="card-body">
-                  <% if current_user.avatar.attached? %>
-                    <%= link_to image_tag(current_user.avatar, class: "rounded-circle light-shadow p-1 border border-primary", style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
-                  <% else %>
-                    <%= link_to image_tag('fallback/default', class: "rounded-circle light-shadow p-1 border border-primary", width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
-                  <% end %>
+                  <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
                   <p class="mt-1 p0 d-block"><%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %></p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
