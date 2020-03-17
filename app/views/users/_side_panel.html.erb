@@ -1,7 +1,11 @@
 <div class="card card-image card-image-avatar mb-3">
   <div class="h-100 d-flex flex-column">
     <div class="card-header pb-0">
-      <%= image_tag(@user.avatar.url, class: "rounded-circle shadow image-offset", width: '128', height: '128', alt: 'profile picture') %>
+      <% if @user.avatar.attached? %>
+        <%= image_tag(@user.avatar, class: "rounded-circle shadow image-offset", width: '128', height: '128', alt: 'profile picture') %>
+      <% else %>
+        <%= image_tag('fallback/default', class: "rounded-circle shadow image-offset", width: '128', height: '128', alt: 'profile picture') %>
+      <% end %>
       <h4 class="card-title text-primary text-center mt-4 my-2"><%= @user.first_name %> <%= @user.last_name %></h4>
     </div>
     <div class="card-body">

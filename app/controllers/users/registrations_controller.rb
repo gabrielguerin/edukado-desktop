@@ -125,8 +125,6 @@ module Users
           :gender,
           :description,
           :avatar,
-          :avatar_cache,
-          :remove_avatar,
           :password,
           :password_confirmation
         )
@@ -140,8 +138,6 @@ module Users
           :gender,
           :description,
           :avatar,
-          :avatar_cache,
-          :remove_avatar,
           :password,
           :password_confirmation,
           :current_password

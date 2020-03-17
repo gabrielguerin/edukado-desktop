@@ -34,7 +34,7 @@
         <section class="row post-footer bg-white rounded py-4">
           <div class="col-12">
             <div class="media color-grey-50">
-              <%= image_tag(blog.user.avatar.url(:thumb), class: "d-flex rounded mr-3", width: '40', height: '40', alt: 'profile picture') %>
+              <%= image_tag(blog.user.avatar, class: "d-flex rounded mr-3", width: '40', height: '40', alt: 'profile picture') %>
               <div class="media-body d-flex justify-content-between">
                 <div>
                   <p class="m-0 media-heading">Publié le <time><%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time></p>

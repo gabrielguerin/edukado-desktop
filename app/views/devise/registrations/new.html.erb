@@ -12,7 +12,6 @@
           <%= f.form_group :avatar, class: "row" do |f| %>
             <%= f.label "Photo de profil", class: "custom-file-label" %>
             <%= f.file_field :avatar, class: "custom-file-input" %>
-            <%= f.hidden_field :avatar_cache %>
             <%= f.error_messages %>
             <script type="application/javascript">
               $('input[type="file"]').change(function(e){

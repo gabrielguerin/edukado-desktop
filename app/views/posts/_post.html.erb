@@ -18,7 +18,11 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex pb-0 px-0">
         <div class="mr-auto d-flex align-items-center">
-          <%= link_to image_tag(post.user.avatar_url, class: "rounded-circle border border-primary mr-1", width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
+          <% if post.user.avatar.attached? %>
+            <%= link_to image_tag(post.user.avatar, class: "rounded-circle border border-primary mr-1", width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
+          <% else %>
+            <%= link_to image_tag('fallback/default', class: "rounded-circle border border-primary mr-1", width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
+          <% end %>
           <div class="mr-auto d-flex flex-column">
             <h6 class="mb-0"><%= link_to "#{post.user.first_name} #{post.user.last_name}", posts_user_path(post.user) %></h6>
             <small>
@@ -58,7 +62,7 @@
   </div>
   <div class="card-footer d-flex flex-row pt-0" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
-      <%= image_tag(current_user.avatar.url(:thumb), class: "rounded-circle border border-primary mr-1", width: '40', height: '40', alt: 'profile picture') %>
+      <%= image_tag(current_user.avatar, class: "rounded-circle border border-primary mr-1", width: '40', height: '40', alt: 'profile picture') %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>

@@ -113,13 +113,13 @@
         </li>
         <li class="nav-item dropdown user-nav">
           <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag(current_user.avatar.url, class: "avatar rounded-circle", width: '34', height: '34', alt: 'profile picture') %>
+            <%= image_tag(current_user.avatar, class: "avatar rounded-circle", width: '34', height: '34', alt: 'profile picture') %>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
             <li class="dropdown-item text-center">
               <div class="card">
                 <div class="card-body">
-                  <%= link_to image_tag(current_user.avatar.url, class: "rounded-circle light-shadow p-1 border border-primary", width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
+                  <%= link_to image_tag(current_user.avatar, class: "rounded-circle light-shadow p-1 border border-primary", width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
                   <p class="mt-1 p0 d-block"><%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %></p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
