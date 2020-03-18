@@ -10,6 +10,7 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     # layout 'layouts/admin/_side_menu'
     # layout 'layouts/admin/_dashboard_top_nav'
+
     before_action :authenticate_user!
     before_action :authenticate_admin
 
