@@ -119,7 +119,7 @@
             <li class="dropdown-item text-center">
               <div class="card">
                 <div class="card-body">
-                  <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
+                  <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
                   <p class="mt-1 p0 d-block"><%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %></p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">

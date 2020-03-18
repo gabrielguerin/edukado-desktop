@@ -3,7 +3,7 @@
     <h2 class="leading-normal mb-3"><%= link_to blog.title, blog_path(blog) %></h2>
     <p><%= truncate(blog.description, length: 150) %></p>
     <div class="article-meta color-grey-50">
-      <%= image_tag(blog.user.avatar, class: "d-flex rounded mr-3", width: '40', height: '40', alt: 'profile picture') %>
+      <%= link_to image_tag(user_avatar(blog.user), class: 'd-flex rounded mr-3', style: 'object-fit: cover;', width: '40', height: '40') %>
       <div class="media-body d-flex align-items-center">
         <p class="m-0 media-heading"><a href="<%= posts_user_path(blog.user) %>">Par <%= blog.user.first_name %> <%= blog.user.last_name %></a> &bull; <time>Publié le <%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time></p>
       </div>

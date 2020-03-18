@@ -9,7 +9,7 @@ as defined by the routes in the `admin/` namespace
 <nav class="nav-side-menu navbar-expand-lg">
   <div class="navbar-header">
     <div class="profile">
-      <%= image_tag(current_user.avatar, class: "rounded-circle profile-image", width: '60', height: '60', alt: 'profile picture') %>
+      <%= image_tag(user_avatar(current_user), class: 'rounded-circle profile-image', style: 'object-fit: cover;', width: '60', height: '60', alt: 'profile picture') %>
       <div class="profile-body">
         <h6><%= current_user.first_name %> <%= current_user.last_name %></h6>
       </div>
