@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
     resources :tags_users
 
+    resources :blogs_tags
+
     namespace :merit do
       resources :activity_logs
 

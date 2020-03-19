@@ -5,6 +5,12 @@ class StaticsController < ApplicationController
 
   layout '_base'
 
+  # Redirects users to the web application if they are already signed in
+
+  def check_signed_in
+    redirect_to posts_path if signed_in?
+  end
+
   def index; end
 
   def show
@@ -17,12 +23,6 @@ class StaticsController < ApplicationController
       render template: 'statics/errors/404', status: :not_found
 
     end
-  end
-
-  # Redirects users to the web application if they are already signed in
-
-  def check_signed_in
-    redirect_to posts_path if signed_in?
   end
 
   private

@@ -2,6 +2,7 @@
 
 class Blog < ApplicationRecord
   has_rich_text :body
+  has_one_attached :cover
   extend FriendlyId
   friendly_id :title, use: :slugged
   include PgSearch::Model

@@ -44,7 +44,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 
@@ -59,10 +59,6 @@ group :development, :test do
 
   gem 'faker'
 
-  # Open emails in the browser
-
-  gem 'letter_opener'
-
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
@@ -72,6 +68,10 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
 
   gem 'web-console', '>= 3.3.0'
+
+  # Open emails in the browser
+
+  gem 'letter_opener'
 end
 
 group :test do
@@ -122,10 +122,14 @@ gem 'friendly_id', '~> 5.2.4'
 
 gem 'administrate'
 
+# Support Active Storage in Administrate
+
+gem 'administrate-field-active_storage'
+
+# Mini replacement for RMagick
+
+gem 'mini_magick'
+
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
 
 gem 'kaminari'
-
-# Properly indent Ruby code
-
-gem 'rufo'

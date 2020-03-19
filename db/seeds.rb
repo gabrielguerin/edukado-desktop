@@ -65,7 +65,7 @@ end
 # Create posts
 
 100.times do
-  Post.create!(
+  @post = Post.create!(
     user: User.all.sample,
 
     title: Faker::BossaNova.song,
@@ -73,6 +73,12 @@ end
     description: Faker::Movies::VForVendetta.quote,
 
     tags: Tag.all.sample(3)
+  )
+  @post.file.attach(
+    io: File.open('app/assets/images/seed/SEO.pdf'),
+    filename: 'SEO.pdf',
+    content_type: 'application/pdf',
+    identify: false
   )
 end
 
@@ -111,7 +117,7 @@ end
 # Create blogs
 
 50.times do
-  Blog.create!(
+  @blog = Blog.create!(
     user: User.all.sample,
 
     title: Faker::BossaNova.song,
@@ -121,6 +127,12 @@ end
     description: Faker::Movies::VForVendetta.quote,
 
     body: Faker::Lorem.paragraphs
+  )
+  @blog.cover.attach(
+    io: File.open('app/assets/images/seed/blog_cover.jpg'),
+    filename: 'blog_cover.jpg',
+    content_type: 'image/jpg',
+    identify: false
   )
 end
 

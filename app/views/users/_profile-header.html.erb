@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center justify-content-center flex-column">
     <div class="fileinput fileinput-avatar fileinput-new d-flex flex-column align-items-center" data-provides="fileinput" style="height: 180px; width: 200px">
       <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-        <%= image_tag(@user.avatar.url, class: "rounded-circle shadow", width: '128', height: '128', alt: 'profile picture') %>
+        <%= image_tag(user_avatar(current_user), class: 'rounded-circle shadow', style: 'object-fit: cover;', width: '128', height: '128') %>
       </div>
     </div>
   </div>

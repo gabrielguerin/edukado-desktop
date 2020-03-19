@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   friendly_id :full_name, use: :slugged
 
+  has_one_attached :avatar
+
   acts_as_voter
 
   after_commit :welcome_send
@@ -14,6 +16,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
 
   # :lockable, :timeoutable, :trackable and :omniauthable
+
+  after_commit :remove_avatar!, on: :destroy
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
@@ -37,12 +41,6 @@ class User < ApplicationRecord
     too_long: '%<count> caractères est le maximum autorisé'
 
   }, presence: false
-
-  # validates_presence_of :avatar
-
-  # validates_integrity_of :avatar
-
-  # validates_processing_of :avatar
 
   def full_name
     "#{first_name} #{last_name}"
