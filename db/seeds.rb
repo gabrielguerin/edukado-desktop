@@ -65,7 +65,7 @@ end
 # Create posts
 
 100.times do
-  Post.create!(
+  @post = Post.create!(
     user: User.all.sample,
 
     title: Faker::BossaNova.song,
@@ -73,6 +73,12 @@ end
     description: Faker::Movies::VForVendetta.quote,
 
     tags: Tag.all.sample(3)
+  )
+  @post.file.attach(
+    io: File.open('app/assets/images/seed/SEO.pdf'),
+    filename: 'SEO.pdf',
+    content_type: 'application/pdf',
+    identify: false
   )
 end
 
