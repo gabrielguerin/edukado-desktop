@@ -80,6 +80,7 @@ class BlogsController < ApplicationController
       :title,
       :description,
       :body,
+      :cover,
       :created_at,
       :updated_at
     )

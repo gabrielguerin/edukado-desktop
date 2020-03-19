@@ -111,7 +111,7 @@ end
 # Create blogs
 
 50.times do
-  Blog.create!(
+  @blog = Blog.create!(
     user: User.all.sample,
 
     title: Faker::BossaNova.song,
@@ -121,6 +121,12 @@ end
     description: Faker::Movies::VForVendetta.quote,
 
     body: Faker::Lorem.paragraphs
+  )
+  @blog.cover.attach(
+    io: File.open('app/assets/images/seed/blog_cover.jpg'),
+    filename: 'blog_cover.jpg',
+    content_type: 'image/jpg',
+    identify: false
   )
 end
 
