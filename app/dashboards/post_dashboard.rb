@@ -14,8 +14,7 @@ class PostDashboard < Administrate::BaseDashboard
     comments: Field::HasMany,
     posts_tags: Field::HasMany,
     tags: Field::HasMany,
-    file_attachment: Field::HasOne,
-    file_blob: Field::HasOne,
+    file: Field::ActiveStorage,
     votes_for: Field::HasMany.with_options(class_name: 'ActsAsVotable::Vote'),
     id: Field::Number,
     title: Field::String,
@@ -40,16 +39,15 @@ class PostDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
-    comments
-    posts_tags
-    tags
-    file_attachment
-    file_blob
-    votes_for
     id
+    user
+    tags
     title
     description
+    file
+    comments
+    posts_tags
+    votes_for
     created_at
     updated_at
     slug
@@ -60,14 +58,10 @@ class PostDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     user
-    comments
-    posts_tags
     tags
-    file_attachment
-    file_blob
-    votes_for
     title
     description
+    file
     slug
   ].freeze
 

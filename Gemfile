@@ -122,6 +122,14 @@ gem 'friendly_id', '~> 5.2.4'
 
 gem 'administrate'
 
+# Support Active Storage in Administrate
+
+gem 'administrate-field-active_storage'
+
+# Mini replacement for RMagick
+
+gem 'mini_magick'
+
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
 
 gem 'kaminari'

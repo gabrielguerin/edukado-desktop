@@ -17,6 +17,8 @@ class BlogDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     body: RichTextAreaField,
+    cover_attachment: Field::HasOne,
+    cover_blob: Field::HasOne,
     description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -39,13 +41,14 @@ class BlogDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    user
-    blogs_tags
-    body
-    tags
     id
+    user
     title
     description
+    body
+    tags
+    cover_blob
+    cover_attachment
     created_at
     updated_at
     slug
@@ -55,12 +58,11 @@ class BlogDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    body
-    user
-    blogs_tags
-    tags
     title
     description
+    body
+    user
+    tags
     slug
   ].freeze
 

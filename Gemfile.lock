@@ -71,6 +71,9 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate-field-active_storage (0.1.8)
+      administrate (>= 0.2.0.rc1)
+      rails (>= 5.2)
     ambry (1.0.0)
     autoprefixer-rails (9.7.4)
       execjs
@@ -274,6 +277,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable
   administrate
+  administrate-field-active_storage
   better_errors
   bootsnap (>= 1.4.2)
   byebug
@@ -288,6 +292,7 @@ DEPENDENCIES
   kiso_themes (~> 1.0.2)!
   letter_opener
   merit
+  mini_magick
   pg (>= 0.18, < 2.0)
   pg_search
   puma (~> 4.1)
