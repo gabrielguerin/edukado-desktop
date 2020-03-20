@@ -17,8 +17,6 @@ class User < ApplicationRecord
 
   # :lockable, :timeoutable, :trackable and :omniauthable
 
-  after_commit :remove_avatar!, on: :destroy
-
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
