@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   layout 'scaffold'
 
-  before_action :set_user, only: [:posts]
+  before_action :set_user, only: %i[posts]
 
   def posts
     @posts = @user.posts.order(created_at: :desc).page(params[:page])
@@ -16,6 +16,8 @@ class UsersController < ApplicationController
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
 
   def set_user
     @user = User.friendly.find(params[:id])
