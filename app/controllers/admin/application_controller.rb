@@ -8,8 +8,7 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
-    # layout 'layouts/admin/_side_menu'
-    # layout 'layouts/admin/_dashboard_top_nav'
+    layout 'sidenav'
 
     before_action :authenticate_user!
     before_action :authenticate_admin
