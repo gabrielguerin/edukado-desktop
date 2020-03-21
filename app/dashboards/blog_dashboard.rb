@@ -35,7 +35,6 @@ class BlogDashboard < Administrate::BaseDashboard
     title
     description
     tags
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
