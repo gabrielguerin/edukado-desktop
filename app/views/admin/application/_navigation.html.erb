@@ -21,7 +21,8 @@ as defined by the routes in the `admin/` namespace
   <div id="menu-content" class="navbar-collapse collapse">
     <div class="nav-side-container">
       <ul class="navbar-nav flex-column">
-        <% Administrate::Namespace.new(namespace).resources.each do |resource| %>
+        <% resources = AdminNavigation.routes(Administrate::Namespace.new(namespace)) %>
+        <% resources.each do |resource| %>
           <li class="nav-item"><%= link_to(
               display_resource_name(resource),
               [namespace, resource_index_route_key(resource)],

@@ -30,27 +30,28 @@ class PostDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    user
-    comments
-    posts_tags
+    id
+    title
+    description
+    file
     tags
+    user
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    user
-    tags
     title
+    slug
     description
+    tags
     file
+    user
     comments
-    posts_tags
     votes_for
     created_at
     updated_at
-    slug
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -80,7 +81,7 @@ class PostDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how posts are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(post)
-  #   "Post ##{post.id}"
-  # end
+  def display_resource(post)
+    post.title.to_s
+  end
 end
