@@ -71,22 +71,22 @@ to display a collection of resources in an HTML table.
         <% end %>
         <% if valid_action? :edit, collection_presenter.resource_name %>
           <td>
-            <div class="button-group">
-              <%= link_to(
+            <%= link_to(
             t("administrate.actions.edit"),
             [:edit, namespace, resource],
             class: "btn",
           ) if show_action? :edit, resource%>
-            <% end %>
-            <% if valid_action? :destroy, collection_presenter.resource_name %>
-              <%= link_to(
+          <% end %>
+        </td>
+        <td>
+          <% if valid_action? :destroy, collection_presenter.resource_name %>
+            <%= link_to(
             t("administrate.actions.destroy"),
             [namespace, resource],
-            class: "btn",
+            class: "btn btn-danger",
             method: :delete,
             data: { confirm: t("administrate.actions.confirm") }
           ) if show_action? :destroy, resource %>
-            </div>
           </td>
         <% end %>
       </tr>
