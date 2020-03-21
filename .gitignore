@@ -32,3 +32,4 @@ yarn-debug.log*
 
 # Ignore API keys
 .env
+/config/local_env.yml
