@@ -1,10 +1,10 @@
 <div class="navbar-header">
   <div class="profile">
-    <%= random_avatar 60, "rounded-circle profile-image" %>
+    <%= image_tag(user_avatar(current_user), class: 'rounded-circle profile-image', style: 'object-fit: cover;', width: '60', height: '60', alt: 'profile picture') %>
     <div class="profile-body">
-      <h6>Fill Murray</h6>
+      <h6><%= current_user.first_name %> <%= current_user.last_name %></h6>
       <div class="user-links">
-        <a class="btn btn-link" href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Profile">
+        <a class="btn btn-link" href="<%= edit_user_registration_path %>" data-placement="bottom" data-toggle="tooltip" data-original-title="Profil">
           <%= theme_icon_tag "user" %>
         </a>
         <a class="btn btn-link" href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Messages">

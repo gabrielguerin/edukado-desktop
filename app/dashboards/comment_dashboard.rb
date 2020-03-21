@@ -38,7 +38,6 @@ class CommentDashboard < Administrate::BaseDashboard
     post
     user
     description
-    votes_for
     created_at
     updated_at
   ].freeze
@@ -67,7 +66,7 @@ class CommentDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how comments are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(comment)
-  #   "Comment ##{comment.id}"
-  # end
+  def display_resource(comment)
+    "Comment ##{comment.id} – #{comment.post.title}"
+  end
 end
