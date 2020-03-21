@@ -1,2 +1,2 @@
-import '../components/table'
-import '../components/date_time_picker'
+import '../components/table.js'
+import '../components/date_time_picker.js'
