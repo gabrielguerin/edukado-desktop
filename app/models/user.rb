@@ -44,6 +44,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def likes_sum
+    @user.votes.up.size
+  end
+
+  def dislikes_sum
+    @user.votes.down.size
+  end
+
   private
 
   def welcome_send

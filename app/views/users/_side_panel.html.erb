@@ -1,7 +1,7 @@
 <div class="card card-image card-image-avatar mb-3">
   <div class="h-100 d-flex flex-column">
     <div class="card-header pb-0">
-      <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle shadow image-offset', style: 'object-fit: cover;', width: '128', height: '128', alt: 'profile picture') %>
+      <%= image_tag(user_avatar(@user), class: 'rounded-circle shadow image-offset', style: 'object-fit: cover;', width: '128', height: '128', alt: 'profile picture') %>
       <h4 class="card-title text-primary text-center mt-4 my-2"><%= @user.first_name %> <%= @user.last_name %></h4>
     </div>
     <div class="card-body">
