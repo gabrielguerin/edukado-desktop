@@ -10,10 +10,7 @@
                 html: { method: :put, novalidate: true, multipart: true, class: "form-horizontal" } do |f| %>
           <%= f.error_notification %>
           <%= f.form_group :avatar, class: "row" do |f| %>
-            <div class="col-sm-4 col-form-label checkbox">
-              <%= f.check_box :remove_avatar %>
-              <%= f.label :remove_avatar, "Supprimer la photo de profil" %>
-            </div>
+            <%= f.label "Photo de profil", class: "col-sm-4 col-form-label" %>
             <div class="col-md-8">
               <%= f.label "Photo de profil", class: "custom-file-label" %>
               <%= f.file_field :avatar, class: "custom-file-input" %>
