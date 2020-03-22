@@ -1,6 +1,6 @@
-<header class="landing-header-1">
+<header class="landing-header-1 bg-primary d-flex flex-column pb-0" style="min-height: 100vh;">
   <%= render partial: 'layouts/statics_nav' %>
-  <div class="container header-caption">
+  <div class="container header-caption align-items-center" style="height: 100%">
     <div class="row">
       <div class="col-12 px-5">
         <div class="text-center text-white">
@@ -8,10 +8,10 @@
             <div class="my-5">
               <span id="typed"></span>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
             <script>
-              import Typed from 'typed.js';
               var options = {
-                strings: ['exercices^1000', 'fiches de révision^1000', 'présentations^1000', 'notes de cours^1000'],
+                strings: ['exercices^1000', 'fiches de révision^1000', 'présentations^1000', 'notes de cours^1000', 'corrigés^1000'],
                 typeSpeed: 60,
                 backSpeed: 30,
                 loop: true

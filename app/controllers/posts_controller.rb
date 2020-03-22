@@ -3,6 +3,8 @@
 class PostsController < ApplicationController
   layout 'scaffold'
 
+  before_action :authenticate_user!
+
   before_action :set_post, only: %i[show edit update destroy like dislike]
 
   before_action :user, only: %i[show]

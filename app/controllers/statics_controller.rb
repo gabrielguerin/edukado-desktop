@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 class StaticsController < ApplicationController
-  before_action :check_signed_in
-
   layout '_base'
-
-  # Redirects users to the web application if they are already signed in
-
-  def check_signed_in
-    redirect_to posts_path if signed_in?
-  end
 
   def index; end
 

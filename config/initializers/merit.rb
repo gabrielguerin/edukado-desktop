@@ -163,56 +163,64 @@ Merit::Badge.create!(
   id: 18,
   name: 'judgemental',
   description: 'User voted 1 time.',
-  level: 1
+  level: 1,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 19,
   name: 'judgemental',
   description: 'User voted 3 times.',
-  level: 2
+  level: 2,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 20,
   name: 'judgemental',
   description: 'El Mundo: User voted 5 times.',
-  level: 3
+  level: 3,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 21,
   name: 'judgemental',
   description: 'Corriere della Sera: User voted 10 times.',
-  level: 4
+  level: 4,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 22,
   name: 'judgemental',
   description: 'The Times: User voted 15 times.',
-  level: 5
+  level: 5,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 23,
   name: 'judgemental',
   description: 'Der Spiegel: User voted 25 times.',
-  level: 6
+  level: 6,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 24,
   name: 'judgemental',
   description: 'Le Monde: User voted 50 times.',
-  level: 7
+  level: 7,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 Merit::Badge.create!(
   id: 25,
   name: 'judgemental',
   description: 'The New York Times: User voted 100 times.',
-  level: 8
+  level: 8,
+  custom_fields: { icon_tag: 'balance-scale' }
 )
 
 # Liked
@@ -281,35 +289,21 @@ Merit::Badge.create!(
   custom_fields: { icon_tag: 'grin-hearts' }
 )
 
-Merit::Badge.create!(
-  id: 34,
-  name: 'friendly',
-  description: 'User invited 1 person.',
-  level: 1,
-  custom_fields: { icon_tag: 'user-friends' }
-)
+# Merit::Badge.create!(
+#   id: 34,
+#   name: 'friendly',
+#   description: 'User invited 1 person.',
+#   level: 1,
+#   custom_fields: { icon_tag: 'user-friends' }
+# )
 
-Merit::Badge.create!(
-  id: 35,
-  name: 'friendly',
-  description: 'User invited 3 persons.',
-  level: 2,
-  custom_fields: { icon_tag: 'user-friends' }
-)
-
-Merit::Badge.create!(
-  id: 36,
-  name: 'autobiographer',
-  description: 'User added a description.',
-  custom_fields: { icon_tag: 'paragraph' }
-)
-
-Merit::Badge.create!(
-  id: 37,
-  name: 'photographer',
-  description: 'User added a profile picture.',
-  custom_fields: { icon_tag: 'portrait' }
-)
+# Merit::Badge.create!(
+#   id: 35,
+#   name: 'friendly',
+#   description: 'User invited 3 persons.',
+#   level: 2,
+#   custom_fields: { icon_tag: 'user-friends' }
+# )
 
 # Create application badges (uses https://github.com/norman/ambry)
 # badge_id = 0
