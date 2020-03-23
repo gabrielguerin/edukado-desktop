@@ -34,7 +34,9 @@ module Users
       if resource_invited
 
         if is_flashing_format? && resource.invitation_sent_at
+
           set_flash_message :notice, :send_instructions, email: resource.email
+
         end
 
         if method(:after_invite_path_for).arity == 1
@@ -134,7 +136,9 @@ module Users
         self.resource = resource_class.new
 
         if is_flashing_format?
+
           set_flash_message :alert, :no_invitations_remaining
+
         end
 
         respond_with_navigational(resource) { render :new }
@@ -146,7 +150,9 @@ module Users
       unless params[:invitation_token] && self.resource = resource_class.find_by_invitation_token(params[:invitation_token], true)
 
         if is_flashing_format?
+
           set_flash_message(:alert, :invitation_token_invalid)
+
         end
 
         redirect_to after_sign_out_path_for(resource_name)

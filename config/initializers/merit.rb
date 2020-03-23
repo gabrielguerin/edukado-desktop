@@ -289,21 +289,21 @@ Merit::Badge.create!(
   custom_fields: { icon_tag: 'grin-hearts' }
 )
 
-# Merit::Badge.create!(
-#   id: 34,
-#   name: 'friendly',
-#   description: 'User invited 1 person.',
-#   level: 1,
-#   custom_fields: { icon_tag: 'user-friends' }
-# )
+Merit::Badge.create!(
+  id: 34,
+  name: 'friendly',
+  description: 'User invited 1 person.',
+  level: 1,
+  custom_fields: { icon_tag: 'user-friends' }
+)
 
-# Merit::Badge.create!(
-#   id: 35,
-#   name: 'friendly',
-#   description: 'User invited 3 persons.',
-#   level: 2,
-#   custom_fields: { icon_tag: 'user-friends' }
-# )
+Merit::Badge.create!(
+  id: 35,
+  name: 'friendly',
+  description: 'User invited 3 persons.',
+  level: 2,
+  custom_fields: { icon_tag: 'user-friends' }
+)
 
 # Create application badges (uses https://github.com/norman/ambry)
 # badge_id = 0
