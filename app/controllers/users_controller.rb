@@ -3,6 +3,8 @@
 class UsersController < ApplicationController
   layout 'scaffold'
 
+  before_action :authenticate_user!
+
   before_action :set_user, only: %i[posts]
 
   def posts

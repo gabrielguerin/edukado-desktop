@@ -3,6 +3,8 @@
 class TagsController < ApplicationController
   layout 'scaffold'
 
+  before_action :authenticate_user!
+
   before_action :set_tag, only: [:show]
 
   # GET /tags/1
