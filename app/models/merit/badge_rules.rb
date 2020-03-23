@@ -291,6 +291,82 @@ module Merit
         post.user.posts.sum(&:likes_sum) == 100
       end
 
+      # Voted
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 1,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 1
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 2,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 5
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 3,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 10
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 4,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 25
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 5,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 50
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 6,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 100
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 7,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 250
+      end
+
+      grant_on ['posts#like', 'posts#dislike'],
+               badge: 'judgemental',
+
+               level: 8,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 500
+      end
+
+      # Members
+
       # Invitations
 
       # grant_on 'users/invitations#create',
@@ -314,96 +390,6 @@ module Merit
       #          to: :itself do |user|
       #   user.invitations_count == 3
       # end
-
-      # Voted
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 1
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 5
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 10
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 25
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 50
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 100
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 250
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 500
-      end
     end
   end
 end
