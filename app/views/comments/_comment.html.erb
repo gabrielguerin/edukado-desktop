@@ -1,5 +1,5 @@
 <% post.comments.each do |comment| %>
-  <div class="card-header p-0">
+  <div class="card-header p-0 border-0">
     <ul class="list-group list-group-flush w-100">
       <li class="list-group-item px-0 pb-0">
         <div class="d-flex justify-content-between">
@@ -28,7 +28,7 @@
       </li>
     </ul>
   </div>
-  <div class="btn-group mb-4 d-flex border-bottom" style="min-height: 0rem;">
+  <div class="btn-group mb-4 d-flex" style="min-height: 0rem;">
     <%= link_to like_post_comment_path(comment.post, comment), remote: true, id: "like_comment_#{comment.id}", class: 'btn btn-light border-bottom-0', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('arrow-up') %>
