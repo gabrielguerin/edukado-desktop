@@ -50,19 +50,19 @@
   </div>
   <div class="btn-group d-flex border-bottom" style="min-height: 0rem;">
     <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('arrow-up') %>
         <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
       </div>
     <% end %>
     <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('arrow-down') %>
         <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
       </div>
     <% end %>
     <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light', style: 'font-size: 16px;' do %>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('comment') %>
         <div class="ml-2">Commenter · <%= post.comments.count %></div>
       </div>
@@ -74,9 +74,11 @@
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>
-  <div class="card-body py-0">
-    <ul class="list-group list-group-flush" id="#comments">
-      <%= render partial: 'comments/comment', locals: { post: post } %>
-    </ul>
-  </div>
+  <% if post.comments.present? %>
+    <div class="card-body pt-0">
+      <ul class="list-group list-group-flush" id="#comments">
+        <%= render partial: 'comments/comment', locals: { post: post } %>
+      </ul>
+    </div>
+  <% end %>
 </div>
