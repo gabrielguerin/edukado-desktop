@@ -390,6 +390,72 @@ module Merit
                to: :itself do |user|
         user.invitations_count == 3
       end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 5
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 10
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 15
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 25
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 50
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 100
+      end
     end
   end
 end

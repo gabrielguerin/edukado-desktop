@@ -305,6 +305,54 @@ Merit::Badge.create!(
   custom_fields: { icon_tag: 'glass' }
 )
 
+Merit::Badge.create!(
+  id: 36,
+  name: 'friendly',
+  description: 'User invited 5 persons.',
+  level: 3,
+  custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 37,
+  name: 'friendly',
+  description: 'User invited 10 persons.',
+  level: 4,
+  custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 38,
+  name: 'friendly',
+  description: 'User invited 15 persons.',
+  level: 5,
+  custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 39,
+  name: 'friendly',
+  description: 'User invited 25 persons.',
+  level: 6,
+  custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 40,
+  name: 'friendly',
+  description: 'User invited 50 persons.',
+  level: 7,
+  custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 41,
+  name: 'friendly',
+  description: 'User invited 100 persons.',
+  level: 8,
+  custom_fields: { icon_tag: 'glass' }
+)
+
 # Create application badges (uses https://github.com/norman/ambry)
 # badge_id = 0
 # [{
