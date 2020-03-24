@@ -47,4 +47,3 @@ require('sparklines')
 require("trix")
 require("@rails/actiontext")
 require("kiso_themes")
-require('typed.js/lib/typed.min.js');

@@ -376,7 +376,7 @@ module Merit
 
                model_name: 'User',
 
-               to: :action_user do |user|
+               to: :itself do |user|
         user.invitations_count == 1
       end
 
@@ -387,7 +387,7 @@ module Merit
 
                model_name: 'User',
 
-               to: :action_user do |user|
+               to: :itself do |user|
         user.invitations_count == 3
       end
     end

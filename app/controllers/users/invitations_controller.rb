@@ -4,7 +4,7 @@ module Users
   class InvitationsController < Devise::InvitationsController
     prepend_before_action :authenticate_inviter!, only: %i[new create]
 
-    prepend_before_action :has_invitations_left?, only: [:create]
+    prepend_before_action :has_invitations_left?, only: %i[create]
 
     prepend_before_action :require_no_authentication, only: %i[edit update destroy]
 
@@ -25,6 +25,8 @@ module Users
     # POST /resource/invitation
 
     def create
+      @invitation = current_inviter
+
       self.resource = invite_resource
 
       resource_invited = resource.errors.empty?
