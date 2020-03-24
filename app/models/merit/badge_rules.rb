@@ -291,38 +291,12 @@ module Merit
         post.user.posts.sum(&:likes_sum) == 100
       end
 
-      # Invitations
-
-      # grant_on 'users/invitations#create',
-      #          badge: 'friendly',
-
-      #          level: 1,
-
-      #          model_name: 'User',
-
-      #          to: :itself do |user|
-      #   user.invitations_count == 1
-      # end
-
-      # grant_on 'users/invitations#create',
-      #          badge: 'friendly',
-
-      #          level: 2,
-
-      #          model_name: 'User',
-
-      #          to: :itself do |user|
-      #   user.invitations_count == 3
-      # end
-
       # Voted
 
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
                level: 1,
-
-               model_name: 'User',
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 1
@@ -331,9 +305,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 2,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 5
@@ -342,9 +314,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 3,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 10
@@ -353,9 +323,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 4,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 25
@@ -364,9 +332,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 5,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 50
@@ -375,9 +341,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 6,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 100
@@ -386,9 +350,7 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
-               level: 1,
-
-               model_name: 'User',
+               level: 7,
 
                to: :action_user do |user|
         user.likes_sum + user.dislikes_sum == 250
@@ -397,12 +359,102 @@ module Merit
       grant_on ['posts#like', 'posts#dislike'],
                badge: 'judgemental',
 
+               level: 8,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 500
+      end
+
+      # Members
+
+      # Invitations
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
                level: 1,
 
                model_name: 'User',
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 500
+               to: :itself do |user|
+        user.invitations_count == 1
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 3
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 5
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 10
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 15
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 25
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 50
+      end
+
+      grant_on 'users/invitations#create',
+               badge: 'friendly',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.invitations_count == 100
       end
     end
   end

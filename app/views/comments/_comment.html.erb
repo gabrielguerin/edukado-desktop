@@ -1,38 +1,45 @@
 <% post.comments.each do |comment| %>
-  <div class="card-body px-0 py-0">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex px-0 pb-0">
-        <div class="mr-auto d-flex align-items-center">
-          <%= link_to image_tag(user_avatar(comment.user), class: 'rounded-circle border border-primary mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(comment.user) %>
-          <div class="mr-auto d-flex flex-column">
-            <h6 class="mb-0"><%= link_to "#{comment.user.first_name} #{comment.user.last_name}", posts_user_path(comment.user) %></h6>
-            <small>
-              <time>Il y a <%= time_ago_in_words(comment.created_at) %></time>
-            </small>
+  <div class="card-header p-0 border-0">
+    <ul class="list-group list-group-flush w-100">
+      <li class="list-group-item px-0 pb-0">
+        <div class="d-flex justify-content-between">
+          <div class="mr-auto d-flex flex-row align-items-center">
+            <%= link_to image_tag(user_avatar(comment.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(comment.user) %>
+            <div class="mr-auto d-flex flex-column">
+              <h6 class="mb-0"><%= link_to "#{comment.user.first_name} #{comment.user.last_name}", posts_user_path(comment.user) %></h6>
+              <small>
+                <time>Il y a <%= time_ago_in_words(comment.created_at) %></time>
+              </small>
+            </div>
           </div>
+          <% if current_user == post.user %>
+            <div class="dropdown">
+              <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <%= link_to 'Modifier', edit_post_comment_path(comment.post, comment), class: 'dropdown-item' %>
+                <%= link_to 'Supprimer', [comment.post, comment], data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </li>
-      <li class="list-group-item d-flex px-0 pt-0 border-top-0 border-bottom">
+      <li class="list-group-item d-flex px-0 pt-0 border-0">
         <p class="mt-1 mb-1 text-break"><%= comment.description %></p>
       </li>
     </ul>
   </div>
-  <div class="card-header py-1 border-0 justify-content-around h-5">
-    <ul class="nav nav-pills nav-pills-round nav-pills-warning mb-1">
-      <li class="nav-item d-flex flex-row align-items-center mr-3">
-        <%= link_to fa_icon_tag("arrow-up"), like_post_comment_path(comment.post, comment), remote: :true, id: "like_comment_#{comment.post.id}", class: 'nav-link mr-1' %> • <%= comment.get_likes.size %>
-      </li>
-      <li class="nav-item d-flex flex-row align-items-center mr-3">
-        <%= link_to fa_icon_tag("arrow-down"), dislike_post_comment_path(comment.post, comment), remote: :true, id: "dislike_comment_#{comment.post.id}", class: 'nav-link mr-1' %> • <%= comment.get_dislikes.size %>
-      </li>
-      <% if current_user == comment.user %>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("pencil"), edit_post_comment_path(comment.post, comment), class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("trash"), [comment.post, comment], data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, class: 'nav-link' %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="btn-group mb-4 d-flex" style="min-height: 0rem;">
+    <%= link_to like_post_comment_path(comment.post, comment), remote: true, id: "like_comment_#{comment.id}", class: 'btn btn-light border-bottom-0', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-up') %>
+        <div class="ml-2">Vote positif · <%= comment.get_likes.size %></div>
+      </div>
+    <% end %>
+    <%= link_to dislike_post_comment_path(comment.post, comment), remote: true, id: "dislike_comment_#{comment.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-down') %>
+        <div class="ml-2">Vote négatif · <%= comment.get_dislikes.size %></div>
+      </div>
+    <% end %>
   </div>
 <% end %>

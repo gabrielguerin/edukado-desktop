@@ -1,24 +1,40 @@
-<div class="card card-tabbed overflow-visible inspectable border-0">
-  <div class="card-header text-center flex-column py-2" style="min-height: 0rem;">
-    <h5><%= post.title %></h5>
-    <div>
+<div class="card">
+  <div class="pb-2">
+    <div class="card-header pb-0 border-bottom-0" style="min-height: 0rem;">
+      <div class="dropdown" style="visibility: hidden;">
+        <%= button_tag theme_icon_tag('more'), class: 'nav-link btn btn-icon' %>
+      </div>
+      <h5><%= link_to post.title, post_path(post) %></h5>
+      <div class="dropdown">
+        <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
+          <%= link_to 'Partager', edit_post_path(post), class: 'dropdown-item' %>
+          <% if current_user == post.user %>
+            <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
+            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="text-center border-bottom">
       <% post.tags.each do |tag| %>
         <a href="<%= tag_path(tag) %>" class="badge badge-info" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
-    </div>
-    <div class="my-2">
-      <% if post.file.attached? %>
-        <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
-      <% else %>
-        <p>Il n'y a aucun fichier attaché</p>
-      <% end %>
+      <div class="my-3">
+        <% if post.file.attached? %>
+          <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
+        <% else %>
+          <p>Il n'y a aucun fichier attaché</p>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex pb-0 px-0">
         <div class="mr-auto d-flex align-items-center">
-          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle border border-primary mr-1', style: 'object-fit: cover;', width: '64', height: '64'), posts_user_path(post.user) %>
+          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64'), posts_user_path(post.user) %>
           <div class="mr-auto d-flex flex-column">
             <h6 class="mb-0"><%= link_to "#{post.user.first_name} #{post.user.last_name}", posts_user_path(post.user) %></h6>
             <small>
@@ -32,38 +48,46 @@
       </li>
     </ul>
   </div>
-  <div class="card-header py-1 border-0 justify-content-around" style="min-height: 0rem;">
-    <ul class="nav nav-pills nav-pills-round nav-pills-warning my-1">
-      <li class="nav-item d-flex flex-row align-items-center mr-3">
-        <%= link_to fa_icon_tag("arrow-up"), like_post_path(post), remote: true, id: "like_post_#{post.id}", class: "nav-link mr-1" %> • <%= post.get_likes.size %>
-      </li>
-      <li class="nav-item d-flex flex-row align-items-center mr-3">
-        <%= link_to fa_icon_tag("arrow-down"), dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: "nav-link mr-1" %> • <%= post.get_dislikes.size %>
-      </li>
-      <li class="nav-item d-flex flex-row align-items-center mr-3">
-        <%= link_to fa_icon_tag("comment"), new_post_comment_path(post), remote: true, class: 'nav-link mr-1', id: "new-comment" %> • <%= post.comments.count %>
-      </li>
-      <li class="nav-item">
-        <%= link_to fa_icon_tag("eye"), post_path(post), class: 'nav-link' %>
-      </li>
-      <% if current_user == post.user %>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("pencil"), edit_post_path(post), class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("trash"), post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, class: 'nav-link', remote: true %>
-        </li>
+  <div class="btn-group d-flex" style="min-height: 0rem;">
+    <% if current_user.voted_up_on? post.id %>
+      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-up') %>
+          <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
+        </div>
       <% end %>
-    </ul>
+    <% else %>
+      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-up') %>
+          <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-down') %>
+        <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
+      </div>
+    <% end %>
+    <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('comment') %>
+        <div class="ml-2">Commenter · <%= post.comments.count %></div>
+      </div>
+    <% end %>
   </div>
-  <div class="card-footer d-flex flex-row pt-0" style="background-color: #fff">
+  <div class="card-footer d-flex flex-row" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
-      <%= image_tag(user_avatar(current_user), class: 'rounded-circle border border-primary mr-1', style: 'object-fit: cover;', width: '40', height: '40') %>
+      <%= image_tag(user_avatar(current_user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40') %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>
-  <div class="card-body pb-2 pt-0">
-    <ul class="list-group list-group-flush" id="#comments">
-      <%= render partial: 'comments/comment', locals: { post: post } %>
-    </ul>
-  </div>
+  <% if post.comments.present? %>
+    <div class="card-body pt-0">
+      <ul class="list-group list-group-flush" id="#comments">
+        <%= render partial: 'comments/comment', locals: { post: post } %>
+      </ul>
+    </div>
+  <% end %>
+</div>
