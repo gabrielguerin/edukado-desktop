@@ -34,7 +34,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex pb-0 px-0">
         <div class="mr-auto d-flex align-items-center">
-          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle border border-primary mr-1', style: 'object-fit: cover;', width: '64', height: '64'), posts_user_path(post.user) %>
+          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64'), posts_user_path(post.user) %>
           <div class="mr-auto d-flex flex-column">
             <h6 class="mb-0"><%= link_to "#{post.user.first_name} #{post.user.last_name}", posts_user_path(post.user) %></h6>
             <small>
@@ -55,7 +55,7 @@
         <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
       </div>
     <% end %>
-    <%= link_to dislike_post_path(post), remote: true, id: 'dislike_post_#{post.id}', class: 'btn btn-light mb-2', style: 'font-size: 16px;' do %>
+    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light mb-2', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center">
         <%= theme_icon_tag('arrow-down') %>
         <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
@@ -70,7 +70,7 @@
   </div>
   <div class="card-footer d-flex flex-row pt-0" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
-      <%= image_tag(user_avatar(current_user), class: 'rounded-circle border border-primary mr-1', style: 'object-fit: cover;', width: '40', height: '40') %>
+      <%= image_tag(user_avatar(current_user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40') %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>
