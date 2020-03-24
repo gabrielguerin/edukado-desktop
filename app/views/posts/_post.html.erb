@@ -1,17 +1,32 @@
-<div class="card card-tabbed overflow-visible inspectable border-0">
-  <div class="card-header text-center flex-column py-2" style="min-height: 0rem;">
-    <h5><%= post.title %></h5>
-    <div>
+<div class="card card-tabbed">
+  <div class="pb-2">
+    <div class="card-header pb-0 border-bottom-0" style="min-height: 0rem;">
+      <div class="dropdown" style="visibility: hidden;">
+        <%= button_tag theme_icon_tag('more'), class: 'nav-link btn btn-icon' %>
+      </div>
+      <h5><%= post.title %></h5>
+      <div class="dropdown">
+        <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= link_to 'Partager', edit_post_path(post), class: 'dropdown-item' %>
+          <% if current_user == post.user %>
+            <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
+            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="text-center border-bottom">
       <% post.tags.each do |tag| %>
         <a href="<%= tag_path(tag) %>" class="badge badge-info" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
-    </div>
-    <div class="my-2">
-      <% if post.file.attached? %>
-        <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
-      <% else %>
-        <p>Il n'y a aucun fichier attaché</p>
-      <% end %>
+      <div class="my-3">
+        <% if post.file.attached? %>
+          <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
+        <% else %>
+          <p>Il n'y a aucun fichier attaché</p>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
@@ -46,14 +61,8 @@
       <li class="nav-item">
         <%= link_to fa_icon_tag("eye"), post_path(post), class: 'nav-link' %>
       </li>
-      <% if current_user == post.user %>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("pencil"), edit_post_path(post), class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to fa_icon_tag("trash"), post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, class: 'nav-link', remote: true %>
-        </li>
-      <% end %>
+      <li class="nav-item">
+      </li>
     </ul>
   </div>
   <div class="card-footer d-flex flex-row pt-0" style="background-color: #fff">
