@@ -48,33 +48,33 @@
       </li>
     </ul>
   </div>
-  <div class="btn-group pb-2 d-flex" style="min-height: 0rem;">
-    <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom-0 mb-2', style: 'font-size: 16px;' do %>
+  <div class="btn-group d-flex border-bottom" style="min-height: 0rem;">
+    <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center">
         <%= theme_icon_tag('arrow-up') %>
         <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
       </div>
     <% end %>
-    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light mb-2', style: 'font-size: 16px;' do %>
+    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center">
         <%= theme_icon_tag('arrow-down') %>
         <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
       </div>
     <% end %>
-    <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light mb-2', style: 'font-size: 16px;' do %>
+    <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center">
         <%= theme_icon_tag('comment') %>
         <div class="ml-2">Commenter · <%= post.comments.count %></div>
       </div>
     <% end %>
   </div>
-  <div class="card-footer d-flex flex-row pt-0" style="background-color: #fff">
+  <div class="card-footer d-flex flex-row" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
       <%= image_tag(user_avatar(current_user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40') %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>
-  <div class="card-body pb-2 pt-0">
+  <div class="card-body py-0">
     <ul class="list-group list-group-flush" id="#comments">
       <%= render partial: 'comments/comment', locals: { post: post } %>
     </ul>
