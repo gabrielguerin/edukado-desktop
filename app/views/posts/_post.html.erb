@@ -49,7 +49,7 @@
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
-    <% if current_user.voted_up_on? post.id %>
+    <% if current_user.voted_up_on? post %>
       <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
@@ -57,7 +57,7 @@
         </div>
       <% end %>
     <% else %>
-      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;' do %>
+      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
           <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
