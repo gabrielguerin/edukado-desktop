@@ -64,11 +64,20 @@
         </div>
       <% end %>
     <% end %>
-    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
-      <div class="d-flex justify-content-center align-items-center">
-        <%= theme_icon_tag('arrow-down') %>
-        <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
-      </div>
+    <% if current_user.voted_down_on? post %>
+      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-down') %>
+          <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-down') %>
+          <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
+        </div>
+      <% end %>
     <% end %>
     <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center align-items-center">
