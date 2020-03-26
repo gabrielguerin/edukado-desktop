@@ -13,9 +13,9 @@
       <% end %>
       <h6 class="text-center text-muted">Publications</h6>
       <p class="text-center"><%= @user.posts.count %></p>
-      <h6 class="text-center text-muted">Votes pour</h6>
+      <h6 class="text-center text-muted">Votes positifs</h6>
       <p class="text-center"><%= @user.posts.sum(&:likes_sum) %></p>
-      <h6 class="text-center text-muted">Votes contre</h6>
+      <h6 class="text-center text-muted">Votes négatifs</h6>
       <p class="text-center"><%= @user.posts.sum(&:dislikes_sum) %></p>
       <h6 class="text-center text-muted">Badges</h6>
       <p class="text-center"><%= @user.badges.count %></p>
