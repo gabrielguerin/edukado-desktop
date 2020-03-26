@@ -6,13 +6,19 @@
     </div>
     <div class="card-body">
       <h6 class="text-center text-muted">Description</h6>
-      <p class="text-center"><%= @user.description %></p>
+      <% if @user.description? %>
+        <p class="text-center"><%= @user.description %></p>
+      <% else %>
+        <p class="text-center"><%= @user.first_name %> n'a pas encore de description</p>
+      <% end %>
       <h6 class="text-center text-muted">Publications</h6>
       <p class="text-center"><%= @user.posts.count %></p>
       <h6 class="text-center text-muted">Votes pour</h6>
       <p class="text-center"><%= @user.posts.sum(&:likes_sum) %></p>
       <h6 class="text-center text-muted">Votes contre</h6>
       <p class="text-center"><%= @user.posts.sum(&:dislikes_sum) %></p>
+      <h6 class="text-center text-muted">Badges</h6>
+      <p class="text-center"><%= @user.badges.count %></p>
     </div>
   </div>
 </div>
