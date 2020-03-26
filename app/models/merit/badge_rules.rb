@@ -465,7 +465,84 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= 1
+        (Date.today - user.created_at.to_date).to_i >= 30
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 90
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 3,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 180
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 4,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 365
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 5,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 2)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 6,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 3)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 7,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 5)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 8,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 10)
       end
     end
   end
