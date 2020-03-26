@@ -5,7 +5,7 @@
     </div>
   </div>
   <% @user.badges.last(3).each do |badge| %>
-    <%= render partial: 'badges/badge', locals: { badge: badge } %>
+    <%= render partial: 'badges/badge', locals: { badge: badge, shadow: '', padding: '' } %>
   <% end %>
 <% else %>
   <div class="card">
