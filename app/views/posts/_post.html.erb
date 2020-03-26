@@ -9,11 +9,14 @@
         <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
         <div class="dropdown-menu dropdown-menu-right">
           <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
-          <%= link_to 'Partager', edit_post_path(post), class: 'dropdown-item' %>
           <% if current_user == post.user %>
             <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
             <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
           <% end %>
+          <h6 class="dropdown-header text-muted">Partager</h6>
+          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= link_to "Email", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
         </div>
       </div>
     </div>
