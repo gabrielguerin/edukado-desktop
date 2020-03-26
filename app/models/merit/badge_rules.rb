@@ -456,6 +456,17 @@ module Merit
                to: :itself do |user|
         user.invitations_count == 100
       end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 1,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 1
+      end
     end
   end
 end

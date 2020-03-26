@@ -164,7 +164,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'User voted 1 time.',
   level: 1,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -172,7 +172,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'User voted 3 times.',
   level: 2,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -180,7 +180,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'El Mundo: User voted 5 times.',
   level: 3,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -188,7 +188,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Corriere della Sera: User voted 10 times.',
   level: 4,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -196,7 +196,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'The Times: User voted 15 times.',
   level: 5,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -204,7 +204,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Der Spiegel: User voted 25 times.',
   level: 6,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -212,7 +212,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Le Monde: User voted 50 times.',
   level: 7,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 Merit::Badge.create!(
@@ -220,7 +220,7 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'The New York Times: User voted 100 times.',
   level: 8,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: { icon_tag: 'gavel' }
 )
 
 # Liked
@@ -351,6 +351,70 @@ Merit::Badge.create!(
   description: 'User invited 100 persons.',
   level: 8,
   custom_fields: { icon_tag: 'glass' }
+)
+
+Merit::Badge.create!(
+  id: 42,
+  name: 'referent',
+  description: 'Member since 1 month.',
+  level: 1,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 43,
+  name: 'referent',
+  description: 'Member since 3 months.',
+  level: 2,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 44,
+  name: 'referent',
+  description: 'Member since 6 months.',
+  level: 3,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 45,
+  name: 'referent',
+  description: 'Member since 1 year.',
+  level: 4,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 46,
+  name: 'referent',
+  description: 'Member since 2 years.',
+  level: 5,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 47,
+  name: 'referent',
+  description: 'Member since 3 years.',
+  level: 6,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 48,
+  name: 'referent',
+  description: 'Member since 5 years.',
+  level: 7,
+  custom_fields: { icon_tag: 'star' }
+)
+
+Merit::Badge.create!(
+  id: 49,
+  name: 'referent',
+  description: 'Member since 10 years.',
+  level: 8,
+  custom_fields: { icon_tag: 'star' }
 )
 
 # Create application badges (uses https://github.com/norman/ambry)

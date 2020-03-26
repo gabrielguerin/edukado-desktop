@@ -59,7 +59,9 @@ Rails.application.routes.draw do
 
     invitations: 'users/invitations',
 
-    confirmations: 'users/confirmations'
+    confirmations: 'users/confirmations',
+
+    sessions: 'users/sessions'
 
   }
 
