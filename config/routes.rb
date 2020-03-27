@@ -53,6 +53,8 @@ Rails.application.routes.draw do
 
   resources :tags, only: %i[show]
 
+  resources :badges, only: %i[index show]
+
   devise_for :users, path: 'users', controllers: {
 
     registrations: 'users/registrations',

@@ -1,0 +1,9 @@
+<table class="table table-striped table-hover table-sm-responsive">
+  <tbody>
+    <% @badges.each do |badge| %>
+      <tr>
+        <%= render partial: 'badge', locals: { badge: badge, shadow: '', padding: '' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
