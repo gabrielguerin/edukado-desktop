@@ -30,7 +30,7 @@
             <h6 class="mb-0">Dernier badge gagné</h6>
           </div>
           <% current_user.badges.last(1).each do |badge| %>
-            <%= render partial: 'badges/badge', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
+            <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
           <% end %>
           <div class="card-footer">
             <a href="#" class="pull-right">
