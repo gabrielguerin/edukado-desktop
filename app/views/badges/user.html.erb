@@ -1,4 +1,8 @@
-<% @title = "Badges obtenus par #{@user.first_name}" %>
+<% if current_user == @user %>
+  <% @title = "Vos badges" %>
+<% else %>
+  <% @title = "Badges obtenus par #{@user.first_name}" %>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="col-md-9">
@@ -24,11 +28,19 @@
           </div>
         </div>
       <% else %>
-        <div class="card">
-          <div class="card-body text-center">
-            <p><%= @user.first_name %> n'a pas encore obtenu de badges.</p>
+        <% if current_user == @user %>
+          <div class="card">
+            <div class="card-body text-center">
+              <p>Vous n'avez pas encore obtenu de badges.</p>
+            </div>
           </div>
-        </div>
+        <% else %>
+          <div class="card">
+            <div class="card-body text-center">
+              <p><%= @user.first_name %> n'a pas encore obtenu de badges.</p>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div id="sidebar" class="col-lg-3 col-md-4 order-md-2 order-sm-1">

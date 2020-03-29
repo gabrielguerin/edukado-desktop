@@ -1,4 +1,8 @@
-<% @title = "Publications de #{@user.first_name} #{@user.last_name}" %>
+<% if current_user == @user %>
+  <% @title = "Vos publications" %>
+<% else %>
+  <% @title = "Publications de #{@user.first_name} #{@user.last_name}" %>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="col-lg-9 col-md-8 order-md-1 order-sm-2">
@@ -8,7 +12,11 @@
         <% else %>
           <div class="card">
             <div class="card-body text-center">
-              <p><%= @user.first_name %> n'a pas encore publié.</p>
+              <% if current_user == @user %>
+                <p>Vous n'avez pas encore publié.</p>
+              <% else %>
+                <p><%= @user.first_name %> n'a pas encore publié.</p>
+              <% end %>
             </div>
           </div>
         <% end %>

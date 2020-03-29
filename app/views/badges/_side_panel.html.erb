@@ -1,7 +1,11 @@
 <% if @user.badges.present? %>
   <div class="card">
     <div class="card-body text-center">
-      <p>Les 3 derniers badges de <%= "#{@user.first_name}" %></p>
+      <% if current_user == @user %>
+        <p>Vos 3 derniers badges</p>
+      <% else %>
+        <p>Les 3 derniers badges de <%= "#{@user.first_name}" %></p>
+      <% end %>
     </div>
   </div>
   <% @user.badges.last(3).each do |badge| %>
@@ -10,7 +14,11 @@
 <% else %>
   <div class="card">
     <div class="card-body text-center">
-      <%= "#{@user.first_name}" %> n'a pas encore obtenu de badges.
+      <% if current_user == @user %>
+        <p>Vous n'avez pas encore obtenu de badges.</p>
+      <% else %>
+        <p><%= "#{@user.first_name}" %> n'a pas encore obtenu de badges.</p>
+      <% end %>
     </div>
   </div>
 <% end %>

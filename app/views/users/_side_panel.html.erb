@@ -9,7 +9,11 @@
       <% if @user.description? %>
         <p class="text-center"><%= @user.description %></p>
       <% else %>
-        <p class="text-center"><%= @user.first_name %> n'a pas encore de description</p>
+        <% if current_user == @user %>
+          <p class="text-center">Vous n'avez pas encore de description</p>
+        <% else %>
+          <p class="text-center"><%= @user.first_name %> n'a pas encore de description</p>
+        <% end %>
       <% end %>
       <h6 class="text-center text-muted">Publications</h6>
       <p class="text-center"><%= @user.posts.count %></p>

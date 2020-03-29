@@ -29,8 +29,12 @@
           <div class="card-header border-bottom-0 justify-content-center py-0">
             <h6 class="mb-0">Dernier badge gagné</h6>
           </div>
-          <% current_user.badges.last(1).each do |badge| %>
-            <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
+          <% if current_user.badges.present? %>
+            <% current_user.badges.last(1).each do |badge| %>
+              <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
+            <% end %>
+          <% else %>
+            <p>Vous n'avez pas encore gagné de badges</p>
           <% end %>
           <div class="card-footer">
             <a href="#" class="pull-right">
