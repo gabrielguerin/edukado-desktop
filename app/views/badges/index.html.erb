@@ -1,0 +1,16 @@
+<% @title = "Badges" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <% if @badges.present? %>
+        <%= render partial: 'badges', locals: {badges: @badges} %>
+      <% else %>
+        <div class="card">
+          <div class="card-body text-center">
+            <p>Il n'y a pas de badges.</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

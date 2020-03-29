@@ -53,17 +53,25 @@ Rails.application.routes.draw do
 
   resources :tags, only: %i[show]
 
+  resources :badges, only: %i[index show user] do
+    member do
+      get :user
+    end
+  end
+
   devise_for :users, path: 'users', controllers: {
 
     registrations: 'users/registrations',
 
     invitations: 'users/invitations',
 
-    confirmations: 'users/confirmations'
+    confirmations: 'users/confirmations',
+
+    sessions: 'users/sessions'
 
   }
 
-  resources :users do
+  resources :users, only: %i[posts] do
     member do
       get :posts
     end

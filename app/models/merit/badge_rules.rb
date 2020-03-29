@@ -39,24 +39,6 @@ module Merit
 
       # Find badge by badge_id, badge_id takes presidence over badge
 
-      # If it has 10 comments, grant commenter-10 badge
-
-      # grant_on 'comments#create', badge: 'commenter', level: 10 do |comment|
-
-      #   comment.user.comments.count  == 10
-
-      # end
-
-      # If it has 5 votes, grant relevant-commenter badge
-
-      # grant_on 'comments#vote', badge: 'relevant-commenter',
-
-      #   to: :user do |comment|
-
-      #   comment.votes.count == 5
-
-      # end
-
       # Registration
 
       grant_on 'users/confirmations#show', badge: 'just-registered',
@@ -455,6 +437,94 @@ module Merit
 
                to: :itself do |user|
         user.invitations_count == 100
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 1,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 30
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 90
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 3,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 180
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 4,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 365
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 5,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 2)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 6,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 3)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 7,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 5)
+      end
+
+      grant_on 'users/sessions#create',
+               badge: 'referent',
+
+               level: 8,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 10)
       end
     end
   end

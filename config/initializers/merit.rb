@@ -25,7 +25,10 @@ Merit::Badge.create!(
   id: 1,
   name: 'just-registered',
   description: 'New member',
-  custom_fields: { icon_tag: 'user' }
+  custom_fields: {
+    icon_tag: 'user',
+    category: 'user'
+  }
 )
 
 # Contributor
@@ -34,7 +37,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 1 time to the community.',
   level: 1,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -42,7 +48,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 3 times to the community.',
   level: 2,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -50,7 +59,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 5 times to the community.',
   level: 3,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -58,7 +70,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 10 times to the community.',
   level: 4,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -66,7 +81,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 15 times to the community.',
   level: 5,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -74,7 +92,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 25 times to the community.',
   level: 6,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -82,7 +103,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 50 times to the community.',
   level: 7,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 Merit::Badge.create!(
@@ -90,7 +114,10 @@ Merit::Badge.create!(
   name: 'contributor',
   description: 'User contributed 100 times to the community.',
   level: 8,
-  custom_fields: { icon_tag: 'star' }
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'contributor'
+  }
 )
 
 # Critic
@@ -99,7 +126,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 1 time.',
   level: 1,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -107,7 +137,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 5 times.',
   level: 2,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -115,7 +148,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 10 times.',
   level: 3,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -123,7 +159,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 25 times.',
   level: 4,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -131,7 +170,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 50 times.',
   level: 5,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -139,7 +181,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 100 times.',
   level: 6,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -147,7 +192,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 250 times.',
   level: 7,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 Merit::Badge.create!(
@@ -155,7 +203,10 @@ Merit::Badge.create!(
   name: 'critic',
   description: 'User commented 500 times.',
   level: 8,
-  custom_fields: { icon_tag: 'comments' }
+  custom_fields: {
+    icon_tag: 'comments',
+    category: 'critic'
+  }
 )
 
 # Judgemental
@@ -164,7 +215,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'User voted 1 time.',
   level: 1,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -172,7 +226,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'User voted 3 times.',
   level: 2,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -180,7 +237,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'El Mundo: User voted 5 times.',
   level: 3,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -188,7 +248,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Corriere della Sera: User voted 10 times.',
   level: 4,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -196,7 +259,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'The Times: User voted 15 times.',
   level: 5,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -204,7 +270,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Der Spiegel: User voted 25 times.',
   level: 6,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -212,7 +281,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'Le Monde: User voted 50 times.',
   level: 7,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 Merit::Badge.create!(
@@ -220,7 +292,10 @@ Merit::Badge.create!(
   name: 'judgemental',
   description: 'The New York Times: User voted 100 times.',
   level: 8,
-  custom_fields: { icon_tag: 'balance-scale' }
+  custom_fields: {
+    icon_tag: 'gavel',
+    category: 'judgemental'
+  }
 )
 
 # Liked
@@ -229,7 +304,10 @@ Merit::Badge.create!(
   name: 'liked',
   description: 'User received 1 upvote.',
   level: 1,
-  custom_fields: { icon_tag: 'heart' }
+  custom_fields: {
+    icon_tag: 'heart',
+    category: 'liked'
+  }
 )
 
 Merit::Badge.create!(
@@ -237,7 +315,10 @@ Merit::Badge.create!(
   name: 'liked',
   description: 'User received 3 upvotes.',
   level: 2,
-  custom_fields: { icon_tag: 'heart' }
+  custom_fields: {
+    icon_tag: 'heart',
+    category: 'liked'
+  }
 )
 
 Merit::Badge.create!(
@@ -245,7 +326,10 @@ Merit::Badge.create!(
   name: 'liked',
   description: 'User received 5 upvotes.',
   level: 3,
-  custom_fields: { icon_tag: 'heart' }
+  custom_fields: {
+    icon_tag: 'heart',
+    category: 'liked'
+  }
 )
 
 Merit::Badge.create!(
@@ -253,7 +337,10 @@ Merit::Badge.create!(
   name: 'liked',
   description: 'User received 10 upvotes.',
   level: 4,
-  custom_fields: { icon_tag: 'heart' }
+  custom_fields: {
+    icon_tag: 'heart',
+    category: 'liked'
+  }
 )
 
 # Loved
@@ -262,7 +349,10 @@ Merit::Badge.create!(
   name: 'loved',
   description: 'User received 15 upvotes.',
   level: 1,
-  custom_fields: { icon_tag: 'grin-hearts' }
+  custom_fields: {
+    icon_tag: 'heartbeat',
+    category: 'loved'
+  }
 )
 
 Merit::Badge.create!(
@@ -270,7 +360,10 @@ Merit::Badge.create!(
   name: 'loved',
   description: 'User received 25 upvotes.',
   level: 2,
-  custom_fields: { icon_tag: 'grin-hearts' }
+  custom_fields: {
+    icon_tag: 'heartbeat',
+    category: 'loved'
+  }
 )
 
 Merit::Badge.create!(
@@ -278,7 +371,10 @@ Merit::Badge.create!(
   name: 'loved',
   description: 'User received 50 upvotes.',
   level: 3,
-  custom_fields: { icon_tag: 'grin-hearts' }
+  custom_fields: {
+    icon_tag: 'heartbeat',
+    category: 'loved'
+  }
 )
 
 Merit::Badge.create!(
@@ -286,7 +382,10 @@ Merit::Badge.create!(
   name: 'loved',
   description: 'User received 100 upvotes.',
   level: 4,
-  custom_fields: { icon_tag: 'grin-hearts' }
+  custom_fields: {
+    icon_tag: 'heartbeat',
+    category: 'loved'
+  }
 )
 
 Merit::Badge.create!(
@@ -294,7 +393,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 1 person.',
   level: 1,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -302,7 +404,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 3 persons.',
   level: 2,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -310,7 +415,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 5 persons.',
   level: 3,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -318,7 +426,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 10 persons.',
   level: 4,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -326,7 +437,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 15 persons.',
   level: 5,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -334,7 +448,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 25 persons.',
   level: 6,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -342,7 +459,10 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 50 persons.',
   level: 7,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
 )
 
 Merit::Badge.create!(
@@ -350,7 +470,98 @@ Merit::Badge.create!(
   name: 'friendly',
   description: 'User invited 100 persons.',
   level: 8,
-  custom_fields: { icon_tag: 'glass' }
+  custom_fields: {
+    icon_tag: 'glass',
+    category: 'friendly'
+  }
+)
+
+Merit::Badge.create!(
+  id: 42,
+  name: 'referent',
+  description: 'Member since 1 month.',
+  level: 1,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 43,
+  name: 'referent',
+  description: 'Member since 3 months.',
+  level: 2,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 44,
+  name: 'referent',
+  description: 'Member since 6 months.',
+  level: 3,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 45,
+  name: 'referent',
+  description: 'Member since 1 year.',
+  level: 4,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 46,
+  name: 'referent',
+  description: 'Member since 2 years.',
+  level: 5,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 47,
+  name: 'referent',
+  description: 'Member since 3 years.',
+  level: 6,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 48,
+  name: 'referent',
+  description: 'Member since 5 years.',
+  level: 7,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
+)
+
+Merit::Badge.create!(
+  id: 49,
+  name: 'referent',
+  description: 'Member since 10 years.',
+  level: 8,
+  custom_fields: {
+    icon_tag: 'star',
+    category: 'referent'
+  }
 )
 
 # Create application badges (uses https://github.com/norman/ambry)
