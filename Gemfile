@@ -62,6 +62,9 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
+
+  # A Ruby gem to load environment variables from `.env`
+  gem 'dotenv'
 end
 
 group :development do
@@ -133,3 +136,7 @@ gem 'mini_magick'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
 
 gem 'kaminari'
+
+# Official Twilio SendGrid Led, Community Driven Ruby API Library
+
+gem 'sendgrid-ruby'
