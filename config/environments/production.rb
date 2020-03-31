@@ -27,7 +27,7 @@ Rails.application.configure do
 
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
 
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
 
@@ -164,4 +164,26 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
 
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.default_url_options = { host: 'https://edukado-web-staging.herokuapp.com/' }
+
+  ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+
+    address: 'smtp.sendgrid.net',
+
+    port: '25',
+
+    domain: 'heroku.com',
+
+    user_name: Rails.application.credentials[:production][:sendgrid_username],
+
+    password: Rails.application.credentials[:production][:sendgrid_password],
+
+    authentication: 'plain',
+
+    enable_starttls_auto: true
+
+  }
 end
