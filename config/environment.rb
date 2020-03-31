@@ -16,7 +16,7 @@ ActionMailer::Base.smtp_settings = {
 
   password: Rails.application.credentials[:production][:sendgrid_password],
 
-  domain: 'edukado.co',
+  domain: 'heroku.com',
 
   address: 'smtp.sendgrid.net',
 
