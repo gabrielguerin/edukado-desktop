@@ -1,5 +1,5 @@
 {
-  "name": "edukado_desktop",
+  "name": "edukado_web",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
