@@ -137,3 +137,7 @@ gem 'kaminari'
 # Official Twilio SendGrid Led, Community Driven Ruby API Library
 
 gem 'sendgrid-ruby'
+
+# official AWS SDK for Ruby
+
+gem 'aws-sdk-s3', require: false
