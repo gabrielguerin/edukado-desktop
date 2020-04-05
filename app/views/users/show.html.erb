@@ -1,3 +1,4 @@
+<% @title = 'Modifier mon profil' %>
 <div class="profile-header jumbotron  d-flex align-items-center justify-content-center flex-column p-0">
   <div class="d-flex align-items-center justify-content-center flex-column">
     <div class="fileinput fileinput-avatar fileinput-new d-flex flex-column align-items-center" data-provides="fileinput" style="height: 180px; width: 200px">
@@ -6,16 +7,16 @@
       </div>
     </div>
   </div>
-  <h2 class="m-0 mb-2"><%= @user.first_name %> <%= @user.last_name %></h2>
+  <h2 class="m-0 mb-2"><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="profile-tab" data-toggle="tab" href="001_user_account_profile$app_nav.html#home" role="tab" aria-controls="home" aria-expanded="true">Profil</a>
+      <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="notifications-tab" data-toggle="tab" href="001_user_account_profile$app_nav.html#notifications" role="tab" aria-controls="notifications" aria-expanded="false">Notifications</a>
+      <a class="nav-link" id="badges-tab" data-toggle="tab" href="#badges" role="tab" aria-controls="badges" aria-expanded="false">Mes badges</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="support-tab" data-toggle="tab" href="001_user_account_profile$app_nav.html#support" role="tab" aria-controls="support" aria-expanded="false">Support</a>
+      <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-expanded="false">Support</a>
     </li>
   </ul>
 </div>
@@ -23,12 +24,11 @@
   <div class="row">
     <div class="col-12 col-md-8 mr-auto ml-auto">
       <div class="tab-content pt-2 pb-2" id="myTabContent">
-        <div class="tab-pane fade show active" id="notifications" role="tabpanel" aria-labelledby="notifications">
-          <div class="card">
-            <div class="card-body">
-              <%= render partial: 'users/_user_account/notifications' %>
-            </div>
-          </div>
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <%= render partial: 'users/_user_account/edit' %>
+        </div>
+        <div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
+          <%= render partial: 'users/_user_account/badges' %>
         </div>
         <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support">
           <div class="card">

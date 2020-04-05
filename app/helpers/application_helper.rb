@@ -12,4 +12,8 @@ module ApplicationHelper
       image_url('fallback/default')
     end
   end
+
+  def owner?(object)
+    current_user == object.user
+  end
 end

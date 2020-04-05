@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class BlogsController < ApplicationController
+  layout 'statics'
+
   before_action :set_blog, only: %i[show edit update destroy]
 
   # GET /blogs
 
   def index
     @blogs = Blog.order(created_at: :desc).page(params[:page])
+
     respond_to do |format|
       format.js
+
       format.html
     end
   end
