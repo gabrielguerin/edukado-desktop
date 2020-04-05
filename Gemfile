@@ -62,9 +62,6 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
-
-  # A Ruby gem to load environment variables from `.env`
-  gem 'dotenv'
 end
 
 group :development do

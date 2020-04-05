@@ -12,7 +12,7 @@
               </small>
             </div>
           </div>
-          <% if current_user == post.user %>
+          <% if owner?(comment) %>
             <div class="dropdown">
               <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
               <div class="dropdown-menu dropdown-menu-right">

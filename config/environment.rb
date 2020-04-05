@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
 # Load the Rails application.
+
 require_relative 'application'
 
 # Initialize the Rails application.
+
 Rails.application.initialize!
 
 # Sendgrid
+
 ActionMailer::Base.smtp_settings = {
-  domain: 'edukado.co',
+
+  user_name: Rails.application.credentials[:production][:sendgrid_username],
+
+  password: Rails.application.credentials[:production][:sendgrid_password],
+
+  domain: 'edukado-web-staging.herokuapp.com',
+
   address: 'smtp.sendgrid.net',
+
   port: 587,
+
   authentication: :plain,
-  user_name: 'apikey',
-  password: ENV['SENDGRID_API_KEY']
+
+  enable_starttls_auto: true
+
 }

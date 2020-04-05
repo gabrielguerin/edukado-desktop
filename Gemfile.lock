@@ -110,7 +110,6 @@ GEM
     devise_invitable (2.0.1)
       actionmailer (>= 5.0)
       devise (>= 4.6)
-    dotenv (2.7.5)
     erubi (1.9.0)
     execjs (2.7.0)
     faker (2.10.2)
@@ -288,7 +287,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   devise_invitable (~> 2.0.0)
-  dotenv
   faker
   friendly_id (~> 5.2.4)
   image_processing (~> 1.2)

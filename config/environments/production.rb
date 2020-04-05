@@ -55,7 +55,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
 
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
 
@@ -165,25 +165,5 @@ Rails.application.configure do
 
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: 'https://edukado-web-staging.herokuapp.com/' }
-
-  ActionMailer::Base.delivery_method = :smtp
-
-  ActionMailer::Base.smtp_settings = {
-
-    address: 'smtp.sendgrid.net',
-
-    port: '25',
-
-    domain: 'heroku.com',
-
-    user_name: Rails.application.credentials[:production][:sendgrid_username],
-
-    password: Rails.application.credentials[:production][:sendgrid_password],
-
-    authentication: 'plain',
-
-    enable_starttls_auto: true
-
-  }
+  config.action_mailer.default_url_options = { host: 'edukado-web-staging.herokuapp.com', protocol: 'http' }
 end

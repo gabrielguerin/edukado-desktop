@@ -1,29 +1,23 @@
 <%= content_for :js_libs, "modernizr parallax prettify" %>
-<main class="landing-5">
-  <%= render partial: 'layouts/statics_nav' %>
-</main>
-</div>
 <div class="container">
   <article class="blog-1 blog-archive py-5">
     <div class="col-12 col-md-8 mr-md-auto ml-md-auto">
-      <ol class="list-unstyled">
+      <% if @blogs.present? %>
         <div id="blogs">
-          <% if @blogs.present? %>
-            <%= render partial: 'articles', locals: { blogs: @blogs } %>
-          <% else %>
-            <div class="card">
-              <div class="card-body">
-                <p>Il n'y a pas encore d'articles publiés.</p>
-              </div>
-            </div>
-          <% end %>
+          <%= render partial: 'articles', locals: { blogs: @blogs } %>
         </div>
-      </ol>
-      <div class="card">
-        <div class="card-body d-flex justify-content-center" id="paginate">
-          <%= paginate @blogs, remote: true %>
+        <div class="card">
+          <div class="card-body d-flex justify-content-center" id="paginate">
+            <%= paginate @blogs, remote: true %>
+          </div>
         </div>
-      </div>
+      <% else %>
+        <div class="card">
+          <div class="card-body text-center">
+            <p>Il n'y a pas encore d'articles publiés.</p>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </article>
