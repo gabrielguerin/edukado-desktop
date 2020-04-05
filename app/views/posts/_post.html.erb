@@ -9,7 +9,7 @@
         <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
         <div class="dropdown-menu dropdown-menu-right">
           <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
-          <% if current_user == post.user %>
+          <% if owner?(post) %>
             <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
             <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
           <% end %>
