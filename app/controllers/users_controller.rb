@@ -1,11 +1,21 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  layout 'scaffold'
+  layout 'scaffold', only: %i[posts]
+
+  layout '_app_nav', only: %i[show]
 
   before_action :authenticate_user!
 
-  before_action :set_user, only: %i[posts]
+  before_action :set_user, only: %i[show posts]
+
+  def show
+    unless current_user == @user
+
+      redirect_back fallback_location: root_path, notice: "Vous ne pouvez pas modifier le profil d'un autre utilisateur"
+
+    end
+  end
 
   def posts
     @posts = @user.posts.order(created_at: :desc).page(params[:page])

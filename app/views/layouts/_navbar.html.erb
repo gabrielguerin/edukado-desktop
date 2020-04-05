@@ -61,7 +61,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between">
               <div>
-                <%= link_to "Modifier mon profil", edit_user_registration_path, method: :get, class: "btn btn-secondary text-uppercase" %>
+                <%= link_to "Modifier mon profil", user_path(current_user), method: :get, class: "btn btn-secondary text-uppercase" %>
               </div>
               <div>
                 <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white text-uppercase" %>
