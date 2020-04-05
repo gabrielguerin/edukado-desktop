@@ -17,7 +17,6 @@
   <li class="nav-item dropdown notifications">
     <a class="nav-link with-count justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= theme_icon_tag "cup" %>
-      <span class="badge badge-sm">2</span>
       <span class="badge badge-sm"><%= current_user.points %></span>
     </a>
     <ul class="dropdown-menu  dropdown-menu-right">
@@ -36,103 +35,40 @@
           <% else %>
             <p>Vous n'avez pas encore gagné de badges</p>
           <% end %>
-          <div class="card-footer">
-            <a href="#" class="pull-right">
-              <%= theme_icon_tag "settings" %>
-            </a>
-            <a href="#">View all Notifications</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link justify-content-end" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= theme_icon_tag "settings" %>
-      <span class="caret caret-light"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-      <li>
-        <a class="dropdown-item" href="#">Site management</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">User management</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">Settings</a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item dropdown notifications">
-    <a class="nav-link with-count justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= theme_icon_tag "bell" %>
-      <span class="badge badge-sm">2</span>
-      <span class="d-none d-xs-block">Notifications</span>
-    </a>
-    <ul class="dropdown-menu  dropdown-menu-right">
-      <li class="dropdown-item">
-        <div class="card">
-          <div class="card-header text-center text-primary">
-            <strong>You have
-              <span>2</span>notifications</strong>
-          </div>
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <div class="media">
-                <img class="d-flex mr-3 rounded-circle" width="32" height="32" src="/assets/kiso_themes/stock/3-9b9d225ea3cf9c9f07cea81d16c455fb6248b9ccf19717395fbcc184411f0a89.jpg" alt="profile picture">
-                <div class="media-body">
-                  <p>My name is Inigo Montoya.</p>
-                  <small class="text-muted d-block">10 minutes ago</small>
-                </div>
-              </div>
-            </a>
-            <a href="" class="media list-group-item">
-              <span class="media-body">
-                <div>
-                  <p>You've reached your space quota!</p>
-                  <div class="progress progress-sm m0">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                      <span class="sr-only">100% Complete</span>
-                    </div>
-                  </div>
-                </div>
-                <small class="text-muted">12 hours ago</small>
-              </span>
-            </a>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="pull-right">
-              <%= theme_icon_tag "settings" %>
-            </a>
-            <a href="#">View all Notifications</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item dropdown user-nav">
-    <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= image_tag(user_avatar(current_user), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-      <li class="dropdown-item text-center">
-        <div class="card">
-          <div class="card-body">
-            <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
-            <p class="mt-1 p0 d-block">
-              <%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %>
-            </p>
-          </div>
           <div class="card-footer d-flex justify-content-between">
             <div>
-              <%= link_to "MODIFIER MON PROFIL", edit_user_registration_path, method: :get, class: "btn btn-secondary" %>
+              <%= link_to "Voir mes badges", user_badge_path(current_user), class: "btn btn-secondary text-uppercase" %>
             </div>
             <div>
-              <%= link_to "SE DÉCONNECTER", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white" %>
+              <%= link_to "Tous les badges", badges_path, class: "btn btn-primary text-white text-uppercase" %>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
-  </li>
-</ul>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown user-nav">
+      <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= image_tag(user_avatar(current_user), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li class="dropdown-item text-center">
+          <div class="card">
+            <div class="card-body">
+              <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
+              <p class="mt-1 p0 d-block">
+                <%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <div>
+                <%= link_to "Modifier mon profil", edit_user_registration_path, method: :get, class: "btn btn-secondary text-uppercase" %>
+              </div>
+              <div>
+                <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white text-uppercase" %>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
