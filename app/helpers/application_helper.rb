@@ -7,9 +7,13 @@ module ApplicationHelper
 
   def user_avatar(user)
     if user.avatar.attached?
+
       user.avatar
+
     else
-      image_url('fallback/default')
+
+      image_url('fallback/default.png')
+
     end
   end
 
