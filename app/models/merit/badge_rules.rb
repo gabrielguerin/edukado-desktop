@@ -140,7 +140,7 @@ module Merit
                level: 2,
 
                to: :user do |comment|
-        comment.user && comment.user.comments.count == 2
+        comment.user && comment.user.comments.count == 5
       end
 
       grant_on 'comments#create',
@@ -149,7 +149,7 @@ module Merit
                level: 3,
 
                to: :user do |comment|
-        comment.user && comment.user.comments.count == 3
+        comment.user && comment.user.comments.count == 10
       end
 
       grant_on 'comments#create',
