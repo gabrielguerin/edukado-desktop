@@ -9,6 +9,8 @@ class PostsController < ApplicationController
 
   before_action :user, only: %i[show]
 
+  respond_to :js, :html, :json
+
   # GET /posts
 
   def index
@@ -107,23 +109,23 @@ class PostsController < ApplicationController
   def like
     if @post.user != current_user
 
-      if current_user.voted_for? @post
+      if params[:format] == 'like'
 
-        flash[:alert] = 'You have already upvoted this post.'
+        @post.liked_by current_user
+
+      elsif params[:format] == 'unlike'
+
+        @post.unliked_by current_user
+
+      end
+
+      if @post.save!
+
+        flash[:notice] = "You have successfuly upvoted #{@post.title}"
 
       else
 
-        @post.upvote_by current_user
-
-        if @post.save!
-
-          flash[:notice] = "You have successfuly upvoted #{@post.title}"
-
-        else
-
-          flash[:alert] = "Could not upvote this #{@post.title}"
-
-        end
+        flash[:alert] = "Could not upvote this #{@post.title}"
 
       end
 
@@ -131,14 +133,6 @@ class PostsController < ApplicationController
 
       flash[:alert] = 'You cannot upvote your own post.'
 
-    end
-
-    respond_to do |format|
-      format.html { redirect_to :back }
-
-      format.js
-
-      format.json
     end
   end
 
