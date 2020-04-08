@@ -72,10 +72,36 @@ class CommentsController < ApplicationController
   end
 
   def like
-    @comment.liked_by current_user
+    if @comment.user != current_user
+
+      if current_user.voted_for? @comment
+
+        flash[:alert] = 'You have already upvoted this post.'
+
+      else
+
+        @comment.upvote_by current_user
+
+        if @comment.save!
+
+          flash[:notice] = 'You have successfuly upvoted this comment.'
+
+        else
+
+          flash[:alert] = 'Could not upvote this comment.'
+
+        end
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot upvote your own comment.'
+
+    end
 
     respond_to do |format|
-      format.html { redirect_to posts_path }
+      format.html { redirect_to :back }
 
       format.js
 
@@ -84,10 +110,36 @@ class CommentsController < ApplicationController
   end
 
   def dislike
-    @comment.disliked_by current_user
+    if @comment.user != current_user
+
+      if current_user.voted_for? @comment
+
+        flash[:alert] = 'You have already downvoted this comment.'
+
+      else
+
+        @comment.downvote_by current_user
+
+        if @comment.save!
+
+          flash[:notice] = 'You have successfuly downvoted this comment.'
+
+        else
+
+          flash[:alert] = 'Could not downvote this comment.'
+
+        end
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot downvote your own comment.'
+
+    end
 
     respond_to do |format|
-      format.html { redirect_to posts_path }
+      format.html { redirect_to :back }
 
       format.js
 

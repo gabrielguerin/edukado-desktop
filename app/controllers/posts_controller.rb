@@ -105,7 +105,33 @@ class PostsController < ApplicationController
   end
 
   def like
-    @post.liked_by current_user
+    if @post.user != current_user
+
+      if current_user.voted_for? @post
+
+        flash[:alert] = 'You have already upvoted this post.'
+
+      else
+
+        @post.upvote_by current_user
+
+        if @post.save!
+
+          flash[:notice] = "You have successfuly upvoted #{@post.title}"
+
+        else
+
+          flash[:alert] = "Could not upvote this #{@post.title}"
+
+        end
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot upvote your own post.'
+
+    end
 
     respond_to do |format|
       format.html { redirect_to :back }
@@ -117,7 +143,33 @@ class PostsController < ApplicationController
   end
 
   def dislike
-    @post.disliked_by current_user
+    if @post.user != current_user
+
+      if current_user.voted_for? @post
+
+        flash[:alert] = 'You have already downvoted this post.'
+
+      else
+
+        @post.downvote_by current_user
+
+        if @post.save!
+
+          flash[:notice] = "You have successfuly downvoted #{@post.title}"
+
+        else
+
+          flash[:alert] = "Could not downvote this #{@post.title}"
+
+        end
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot downvote your own post.'
+
+    end
 
     respond_to do |format|
       format.html { redirect_to :back }
