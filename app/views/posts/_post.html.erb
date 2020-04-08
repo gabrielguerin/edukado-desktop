@@ -91,7 +91,7 @@
   </div>
   <div class="card-footer d-flex flex-row" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
-      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>
