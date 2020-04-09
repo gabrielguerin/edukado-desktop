@@ -1,7 +1,3 @@
-$("#disliked_post_<%= @post.id %>").on('ajax:success', function(){
-$(this).find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
-$(this).closest("#disliked_post_<%= @post.id %>").removeClass('btn btn-light mb-2 text-danger').addClass('btn btn-light');   
-});
 $("#dislike_post_<%= @post.id %>").on('ajax:success', function(){
 $('#liked_post_<%= @post.id %>').find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
 $("#liked_post_<%= @post.id %>").removeClass('btn btn-light text-success').addClass('btn btn-light');
