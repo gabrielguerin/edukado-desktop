@@ -25,6 +25,12 @@ class PostsController < ApplicationController
              end
 
     @posts = @posts.order(created_at: :desc).page(params[:page])
+
+    respond_to do |format|
+      format.js
+
+      format.html
+    end
   end
 
   # GET /posts/1

@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
 
   before_action :post
 
-  before_action :set_comment, only: %i[show edit update destroy like dislike]
+  before_action :set_comment, only: %i[show edit update destroy like unlike dislike undislike]
+
+  respond_to :js, :html, :json
 
   # GET /comments
 
@@ -74,23 +76,15 @@ class CommentsController < ApplicationController
   def like
     if @comment.user != current_user
 
-      if current_user.voted_for? @comment
+      @comment.liked_by current_user
 
-        flash[:alert] = 'You have already upvoted this post.'
+      if @comment.save!
+
+        flash[:notice] = 'You have successfuly upvoted this comment.'
 
       else
 
-        @comment.upvote_by current_user
-
-        if @comment.save!
-
-          flash[:notice] = 'You have successfuly upvoted this comment.'
-
-        else
-
-          flash[:alert] = 'Could not upvote this comment.'
-
-        end
+        flash[:alert] = 'Could not upvote this comment.'
 
       end
 
@@ -99,36 +93,24 @@ class CommentsController < ApplicationController
       flash[:alert] = 'You cannot upvote your own comment.'
 
     end
+  end
 
-    respond_to do |format|
-      format.html { redirect_to :back }
-
-      format.js
-
-      format.json
-    end
+  def unlike
+    @comment.unliked_by current_user if @comment.user != current_user
   end
 
   def dislike
     if @comment.user != current_user
 
-      if current_user.voted_for? @comment
+      @comment.disliked_by current_user
 
-        flash[:alert] = 'You have already downvoted this comment.'
+      if @comment.save!
+
+        flash[:notice] = 'You have successfuly downvoted this comment.'
 
       else
 
-        @comment.downvote_by current_user
-
-        if @comment.save!
-
-          flash[:notice] = 'You have successfuly downvoted this comment.'
-
-        else
-
-          flash[:alert] = 'Could not downvote this comment.'
-
-        end
+        flash[:alert] = 'Could not downvote this comment.'
 
       end
 
@@ -137,14 +119,10 @@ class CommentsController < ApplicationController
       flash[:alert] = 'You cannot downvote your own comment.'
 
     end
+  end
 
-    respond_to do |format|
-      format.html { redirect_to :back }
-
-      format.js
-
-      format.json
-    end
+  def undislike
+    @comment.undisliked_by current_user if @comment.user != current_user
   end
 
   private
