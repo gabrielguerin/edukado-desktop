@@ -1,24 +1,9 @@
-/* Post buttons hover */
-.card-header .btn.btn-outline-dark:hover {
-    color: #fff;
-    background: #283d52;
-}
-
-.nav-pills-round .nav-item .nav-link:hover {
-    color: #2C2C2C;
-}
-
-/*Landing page components*/
+/* Landing page components */
 .devise-1 header img {
     position: static;
 }
 
-/* flashes */
-.close:not(:disabled):not(.disabled):hover,
-.close:not(:disabled):not(.disabled):focus {
-    opacity: .75;
-}
-
+/* Flashes */
 .close:hover {
     text-decoration: none;
     cursor: pointer;

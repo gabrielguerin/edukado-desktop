@@ -5,9 +5,11 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user!
 
-  before_action :set_post, only: %i[show edit update destroy like dislike]
+  before_action :set_post, only: %i[show edit update destroy like unlike dislike undislike]
 
   before_action :user, only: %i[show]
+
+  respond_to :js, :html, :json
 
   # GET /posts
 
@@ -105,27 +107,55 @@ class PostsController < ApplicationController
   end
 
   def like
-    @post.liked_by current_user
+    if @post.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to :back }
+      @post.liked_by current_user
 
-      format.js
+      if @post.save!
 
-      format.json
+        flash[:notice] = "You have successfuly upvoted #{@post.title}"
+
+      else
+
+        flash[:alert] = "Could not upvote this #{@post.title}"
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot upvote your own post.'
+
     end
   end
 
+  def unlike
+    @post.unliked_by current_user if @post.user != current_user
+  end
+
   def dislike
-    @post.disliked_by current_user
+    if @post.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to :back }
+      @post.disliked_by current_user
 
-      format.js
+      if @post.save!
 
-      format.json
+        flash[:notice] = "You have successfuly downvoted #{@post.title}"
+
+      else
+
+        flash[:alert] = "Could not downvote this #{@post.title}"
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot downvote your own post.'
+
     end
+  end
+
+  def undislike
+    @post.undisliked_by current_user if @post.user != current_user
   end
 
   private

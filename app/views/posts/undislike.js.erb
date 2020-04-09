@@ -1,0 +1,4 @@
+$("#disliked_post_<%= @post.id %>").on('ajax:success', function(){
+$(this).find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
+$(this).closest("#disliked_post_<%= @post.id %>").removeClass('btn btn-light mb-2 text-danger').addClass('btn btn-light');   
+});
