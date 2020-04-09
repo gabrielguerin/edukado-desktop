@@ -25,12 +25,6 @@ class PostsController < ApplicationController
              end
 
     @posts = @posts.order(created_at: :desc).page(params[:page])
-
-    respond_to do |format|
-      format.js
-
-      format.html
-    end
   end
 
   # GET /posts/1
@@ -139,13 +133,15 @@ class PostsController < ApplicationController
   def dislike
     if @post.user != current_user
 
-      if current_user.voted_for? @post
+      if params[:format] == 'dislike'
 
-        flash[:alert] = 'You have already downvoted this post.'
+        @post.disliked_by current_user
 
-      else
+      elsif params[:format] == 'undislike'
 
-        @post.downvote_by current_user
+        @post.undisliked_by current_user
+
+      end
 
         if @post.save!
 
@@ -157,20 +153,10 @@ class PostsController < ApplicationController
 
         end
 
-      end
-
     else
 
       flash[:alert] = 'You cannot downvote your own post.'
 
-    end
-
-    respond_to do |format|
-      format.html { redirect_to :back }
-
-      format.js
-
-      format.json
     end
   end
 
