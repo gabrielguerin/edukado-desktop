@@ -137,3 +137,7 @@ gem 'kaminari'
 # Official Twilio SendGrid Led, Community Driven Ruby API Library
 
 gem 'sendgrid-ruby'
+
+# Integrate the AWS SDK for Ruby with Ruby on Rails
+
+gem 'aws-sdk-s3', require: false
