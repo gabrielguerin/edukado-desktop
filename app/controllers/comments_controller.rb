@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
 
   before_action :post
 
-  before_action :set_comment, only: %i[show edit update destroy like dislike]
+  before_action :set_comment, only: %i[show edit update destroy like unlike dislike undislike]
+
+  respond_to :js, :html, :json
 
   # GET /comments
 
@@ -72,27 +74,55 @@ class CommentsController < ApplicationController
   end
 
   def like
-    @comment.liked_by current_user
+    if @comment.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to posts_path }
+      @comment.liked_by current_user
 
-      format.js
+      if @comment.save!
 
-      format.json
+        flash[:notice] = 'You have successfuly upvoted this comment.'
+
+      else
+
+        flash[:alert] = 'Could not upvote this comment.'
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot upvote your own comment.'
+
     end
   end
 
+  def unlike
+    @comment.unliked_by current_user if @comment.user != current_user
+  end
+
   def dislike
-    @comment.disliked_by current_user
+    if @comment.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to posts_path }
+      @comment.disliked_by current_user
 
-      format.js
+      if @comment.save!
 
-      format.json
+        flash[:notice] = 'You have successfuly downvoted this comment.'
+
+      else
+
+        flash[:alert] = 'Could not downvote this comment.'
+
+      end
+
+    else
+
+      flash[:alert] = 'You cannot downvote your own comment.'
+
     end
+  end
+
+  def undislike
+    @comment.undisliked_by current_user if @comment.user != current_user
   end
 
   private

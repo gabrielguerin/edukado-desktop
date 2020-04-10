@@ -52,33 +52,33 @@
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
-    <% if current_user.voted_up_on? post %>
-      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;' do %>
+    <% if current_user.liked? post %>
+      <%= link_to unlike_post_path(post), remote: true, id: "liked_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;', method: :put do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
-          <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
+          <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
         </div>
       <% end %>
     <% else %>
-      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
+      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
-          <div class="ml-2">Vote positif · <%= post.get_likes.size %></div>
+          <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
         </div>
       <% end %>
     <% end %>
-    <% if current_user.voted_down_on? post %>
-      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;' do %>
+    <% if current_user.disliked? post %>
+      <%= link_to undislike_post_path(post), remote: true, id: "disliked_post_#{post.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;', method: :put do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-down') %>
-          <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
+          <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
         </div>
       <% end %>
     <% else %>
-      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;' do %>
+      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-down') %>
-          <div class="ml-2">Vote négatif · <%= post.get_dislikes.size %></div>
+          <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
         </div>
       <% end %>
     <% end %>
@@ -91,7 +91,7 @@
   </div>
   <div class="card-footer d-flex flex-row" style="background-color: #fff">
     <div class="new-comment d-flex flex-row w-100">
-      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
       <%= render partial: 'comments/form', locals: { post: post } %>
     </div>
   </div>

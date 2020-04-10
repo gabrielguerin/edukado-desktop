@@ -162,11 +162,19 @@ Rails.application.routes.draw do
 
       member do
 
-        get 'like'
+        put 'like'
 
 
 
-        get 'dislike'
+        put 'unlike'
+
+
+
+        put 'dislike'
+
+
+
+        put 'undislike'
 
       end
 
@@ -176,11 +184,19 @@ Rails.application.routes.draw do
 
     member do
 
-      get 'like'
+      put 'like'
 
 
 
-      get 'dislike'
+      put 'unlike'
+
+
+
+      put 'dislike'
+
+
+
+      put 'undislike'
 
     end
 

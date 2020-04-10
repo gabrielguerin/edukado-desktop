@@ -138,6 +138,6 @@ gem 'kaminari'
 
 gem 'sendgrid-ruby'
 
-# official AWS SDK for Ruby
+# Official AWS SDK for Ruby
 
 gem 'aws-sdk-s3', require: false
