@@ -10,6 +10,8 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.order(created_at: :desc).page(params[:page])
 
+    @blogs_size = Blog.all.size
+
     respond_to do |format|
       format.js
 

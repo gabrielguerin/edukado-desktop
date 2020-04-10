@@ -26,6 +26,8 @@ class PostsController < ApplicationController
 
     @posts = @posts.order(created_at: :desc).page(params[:page])
 
+    @posts_size = Post.all.size
+
     respond_to do |format|
       format.js
 
