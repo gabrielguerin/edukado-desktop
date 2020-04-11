@@ -98,7 +98,7 @@
   <% if post.comments.present? %>
     <div class="card-body pt-0">
       <ul class="list-group list-group-flush" id="#comments">
-        <%= render partial: 'comments/comment', locals: { post: post } %>
+        <%= render post.comments %>
       </ul>
     </div>
   <% end %>
