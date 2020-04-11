@@ -5,19 +5,27 @@ class CommentsController < ApplicationController
 
   before_action :post
 
-  before_action :set_comment, only: %i[show edit update destroy like unlike dislike undislike]
+  before_action :set_comment, only: %i[
+
+    show
+
+    edit
+
+    update
+
+    destroy
+
+    like
+
+    unlike
+
+    dislike
+
+    undislike
+
+  ]
 
   respond_to :js, :html, :json
-
-  # GET /comments
-
-  def index
-    @comments = post.comments.order(created_at: :desc)
-  end
-
-  # GET /comments/1
-
-  def show; end
 
   # GET /comments/new
 
@@ -32,11 +40,9 @@ class CommentsController < ApplicationController
   # POST /comments
 
   def create
-    @comment = Comment.new(post: post,
-
-                           user: current_user,
-
-                           description: comment_params[:description])
+    @comment = post.comments.create!(
+      comment_params.merge(user_id: current_user.id)
+    )
 
     if @comment.save
 
