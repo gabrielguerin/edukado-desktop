@@ -97,7 +97,7 @@
   </div>
   <% if post.comments.present? %>
     <div class="card-body pt-0">
-      <ul class="list-group list-group-flush" id="#comments">
+      <ul class="list-group list-group-flush" id="comments_<%= post.id %>">
         <%= render post.comments %>
       </ul>
     </div>
