@@ -60,9 +60,11 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
 
   def update
-    if @comment.update(comment_params)
+    if @comment.update!(
+      comment_params.merge(user_id: current_user.id)
+    )
 
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      redirect_to post, notice: 'Le commentaire a été mis à jour avec succès.'
 
     else
 
