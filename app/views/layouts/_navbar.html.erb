@@ -15,15 +15,14 @@
     </ul>
   </li>
   <li class="nav-item dropdown notifications">
-    <a class="nav-link with-count justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= theme_icon_tag "cup" %>
-      <span class="badge badge-sm"><%= current_user.points %></span>
     </a>
     <ul class="dropdown-menu  dropdown-menu-right">
       <li class="dropdown-item">
         <div class="card">
           <div class="card-header justify-content-center text-primary">
-            <p>Vous avez actuellement <%= current_user.points %> points.</p>
+            <p>Vous avez actuellement <strong><%= current_user.points %></strong> points.</p>
           </div>
           <div class="card-header border-bottom-0 justify-content-center py-0">
             <h6 class="mb-0">Dernier badge gagné</h6>

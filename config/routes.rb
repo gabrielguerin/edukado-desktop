@@ -202,5 +202,8 @@ Rails.application.routes.draw do
 
   end
 
+
+  get "/statics/:page" => "statics#show"
+
 end
 

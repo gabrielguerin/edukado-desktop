@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class StaticsController < ApplicationController
-  layout '_base'
+  layout :determine_layout
 
-  before_action :check_signed_in
+  before_action :check_signed_in, only: %i[index]
 
   def index; end
 
@@ -33,5 +33,9 @@ class StaticsController < ApplicationController
         Rails.root + "app/views/statics/#{params[:page]}.html.erb"
       )
     )
+  end
+
+  def determine_layout
+    current_user ? '_app_nav' : 'statics'
   end
 end
