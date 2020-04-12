@@ -3,7 +3,7 @@
 class StaticsController < ApplicationController
   layout :determine_layout
 
-  before_action :check_signed_in, only: %i[index]
+  before_action :check_signed_in
 
   def index; end
 
@@ -19,12 +19,6 @@ class StaticsController < ApplicationController
     end
   end
 
-  # Redirects users to the web application if they are already signed in
-
-  def check_signed_in
-    redirect_to posts_path if signed_in?
-  end
-
   private
 
   def valid_page?
@@ -33,6 +27,12 @@ class StaticsController < ApplicationController
         Rails.root + "app/views/statics/#{params[:page]}.html.erb"
       )
     )
+  end
+
+  # Redirects users to the web application if they are already signed in
+
+  def check_signed_in
+    redirect_to posts_path if signed_in?
   end
 
   def determine_layout
