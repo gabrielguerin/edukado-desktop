@@ -3,4 +3,5 @@ $('#disliked_post_<%= @post.id %>').find('#dislike_count').html('Vote négatif �
 $("#disliked_post_<%= @post.id %>").removeClass('btn btn-light text-danger').addClass('btn btn-light');
 $(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
 $(this).closest("#like_post_<%= @post.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-success');
+<%= ajax_flash('#flashes') %>
 });
