@@ -88,17 +88,17 @@ class CommentsController < ApplicationController
 
       if @comment.save!
 
-        flash[:notice] = 'You have successfuly upvoted this comment.'
+        flash.now[:notice] = 'You have successfuly upvoted this comment.'
 
       else
 
-        flash[:alert] = 'Could not upvote this comment.'
+        flash.now[:error] = 'Could not upvote this comment.'
 
       end
 
     else
 
-      flash[:alert] = 'You cannot upvote your own comment.'
+      flash.now[:error] = 'You cannot upvote your own comment.'
 
     end
   end
@@ -114,17 +114,17 @@ class CommentsController < ApplicationController
 
       if @comment.save!
 
-        flash[:notice] = 'You have successfuly downvoted this comment.'
+        flash.now[:notice] = 'You have successfuly downvoted this comment.'
 
       else
 
-        flash[:alert] = 'Could not downvote this comment.'
+        flash.now[:error] = 'Could not downvote this comment.'
 
       end
 
     else
 
-      flash[:alert] = 'You cannot downvote your own comment.'
+      flash.now[:error] = 'You cannot downvote your own comment.'
 
     end
   end

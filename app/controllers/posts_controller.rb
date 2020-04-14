@@ -127,17 +127,17 @@ class PostsController < ApplicationController
 
       if @post.save!
 
-        flash[:notice] = "You have successfuly upvoted #{@post.title}"
+        flash.now[:notice] = "You have successfuly upvoted #{@post.title}"
 
       else
 
-        flash[:alert] = "Could not upvote this #{@post.title}"
+        flash.now[:error] = "Could not upvote this #{@post.title}"
 
       end
 
     else
 
-      flash[:alert] = 'You cannot upvote your own post.'
+      flash.now[:error] = 'You cannot upvote your own post.'
 
     end
   end
@@ -153,17 +153,17 @@ class PostsController < ApplicationController
 
       if @post.save!
 
-        flash[:notice] = "You have successfuly downvoted #{@post.title}"
+        flash.now[:notice] = "You have successfuly downvoted #{@post.title}"
 
       else
 
-        flash[:alert] = "Could not downvote this #{@post.title}"
+        flash.now[:error] = "Could not downvote this #{@post.title}"
 
       end
 
     else
 
-      flash[:alert] = 'You cannot downvote your own post.'
+      flash.now[:error] = 'You cannot downvote your own post.'
 
     end
   end
