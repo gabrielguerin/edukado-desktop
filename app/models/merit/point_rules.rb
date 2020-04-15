@@ -19,32 +19,19 @@ module Merit
     include Merit::PointRulesMethods
 
     def initialize
-      score 10, to: :action_user, on: 'users/registrations#new', model_name: 'User'
-
       # If user adds a post
 
       score 50,
-            to: :user,
+            to: :action_user,
 
-            on: 'posts#create',
-
-            model_name: 'User',
-
-            category: 'post_activity' do |post|
-        post.title.present?
+            on: 'posts#create' do |post|
+        post.file.present?
       end
 
-      # score 15, :on => 'reviews#create', :to => [:reviewer, :reviewed]
+      score -50,
+            to: :action_user,
 
-      # score 20, :on => [
-
-      #   'comments#create',
-
-      #   'photos#create'
-
-      # ]
-
-      # score -10, :on => 'comments#destroy'
+            on: 'active_storage/blobs#show'
     end
   end
 end
