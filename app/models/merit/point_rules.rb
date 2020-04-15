@@ -22,18 +22,14 @@ module Merit
       # If user adds a post
 
       score 50,
-            to: :user,
+            to: :action_user,
 
-            on: 'posts#create',
-
-            model_name: 'User' do |post|
+            on: 'posts#create' do |post|
         post.file.present?
       end
 
       score -50,
             to: :action_user,
-
-            model_name: 'User',
 
             on: 'active_storage/blobs#show'
     end
