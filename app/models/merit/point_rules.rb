@@ -19,15 +19,21 @@ module Merit
     include Merit::PointRulesMethods
 
     def initialize
+      # New user
+      score 10,
+            on: 'users/confirmations#show',
+
+            model_name: 'User',
+
+            to: :itself
+
       # If user adds a post
-
       score 50,
-            to: :action_user,
+            to: :user,
 
-            on: 'posts#create' do |post|
-        post.file.present?
-      end
+            on: 'posts#create'
 
+      # If user downloads a file
       score -50,
             to: :action_user,
 
