@@ -8,29 +8,29 @@
     </div>
   </div>
   <h2 class="m-0 mb-2"><%= current_user.first_name %> <%= current_user.last_name %></h2>
-  <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+  <ul class="nav nav-tabs mt-5">
     <li class="nav-item">
-      <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true">Profil</a>
+      <a href="#profile" data-toggle="tab" class="nav-link">Profil</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="badges-tab" data-toggle="tab" href="#badges" role="tab" aria-controls="badges" aria-expanded="false">Mes badges</a>
+      <a href="#badges" data-toggle="tab" class="nav-link">Badges</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-expanded="false">Support</a>
+      <a href="#support" data-toggle="tab" class="nav-link">Support</a>
     </li>
   </ul>
 </div>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-8 mr-auto ml-auto">
-      <div class="tab-content pt-2 pb-2" id="myTabContent">
-        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="tab-content pt-2 pb-2" id="tabs">
+        <div class="tab-pane" id="profile">
           <%= render partial: 'users/_user_account/edit' %>
         </div>
-        <div class="tab-pane fade" id="badges" role="tabpanel" aria-labelledby="badges-tab">
+        <div class="tab-pane" id="badges">
           <%= render partial: 'users/_user_account/badges' %>
         </div>
-        <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support">
+        <div class="tab-pane" id="support">
           <div class="card">
             <div class="card-body">
               <%= render partial: 'users/_user_account/support' %>
@@ -41,3 +41,10 @@
     </div>
   </div>
 </div>
+<script>
+  function activateTab(tab){
+      $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+  };
+  
+  activateTab('profile');
+</script>
