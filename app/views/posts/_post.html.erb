@@ -25,10 +25,14 @@
         <a href="<%= tag_path(tag) %>" class="badge badge-info" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
       <div class="my-3">
-        <% if post.file.attached? %>
-          <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
+        <% if current_user.points < 50 %>
+          <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
         <% else %>
-          <p>Il n'y a aucun fichier attaché</p>
+          <% if post.file.attached? %>
+            <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
+          <% else %>
+            <p>Il n'y a aucun fichier attaché</p>
+          <% end %>
         <% end %>
       </div>
     </div>
