@@ -25,7 +25,9 @@ class PostsController < ApplicationController
 
   ]
 
-  before_action :user, only: %i[show]
+  # before_action :user, only: %i[show]
+
+  before_action :posts, only: %i[show create]
 
   respond_to :js, :html, :json
 
@@ -47,7 +49,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1
 
-  def show; end
+  def show
+    @user = @post.user
+  end
 
   # GET /posts/new
 
@@ -62,8 +66,6 @@ class PostsController < ApplicationController
   # POST /posts
 
   def create
-    @posts = Post.all.order(created_at: :desc).page(params[:page])
-
     @post = current_user.posts.create!(post_params)
 
     respond_to do |format|
@@ -117,13 +119,16 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to ponies_url }
+      format.html do
+        redirect_to :back,
+                    notice: 'Votre publication a bien été supprimé.'
+      end
 
       format.json { head :no_content }
 
       format.js   { render layout: false }
     end
-      end
+  end
 
   def like
     if @post.user != current_user
@@ -181,8 +186,8 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
 
-  def user
-    @user = @post.user
+  def posts
+    @posts = Post.all.order(created_at: :desc).page(params[:page])
   end
 
   def set_post
