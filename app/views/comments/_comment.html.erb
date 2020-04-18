@@ -1,61 +1,63 @@
-<div class="card-header p-0 border-0">
-  <ul class="list-group list-group-flush w-100">
-    <li class="list-group-item px-0 pb-0">
-      <div class="d-flex justify-content-between">
-        <div class="mr-auto d-flex flex-row align-items-center">
-          <%= link_to image_tag(user_avatar(comment.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(comment.user) %>
-          <div class="mr-auto d-flex flex-column">
-            <h6 class="mb-0"><%= link_to "#{comment.user.first_name} #{comment.user.last_name}", posts_user_path(comment.user) %></h6>
-            <small>
-              <time>Il y a <%= time_ago_in_words(comment.created_at) %></time>
-            </small>
-          </div>
-        </div>
-        <% if owner?(comment) %>
-          <div class="dropdown">
-            <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <%= link_to 'Modifier', edit_post_comment_path(comment.post, comment), class: 'dropdown-item', remote: true %>
-              <%= link_to 'Supprimer', [comment.post, comment], data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+<div id="comment_<%= comment.id %>">
+  <div class="card-header p-0 border-0">
+    <ul class="list-group list-group-flush w-100">
+      <li class="list-group-item px-0 pb-0">
+        <div class="d-flex justify-content-between">
+          <div class="mr-auto d-flex flex-row align-items-center">
+            <%= link_to image_tag(user_avatar(comment.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(comment.user) %>
+            <div class="mr-auto d-flex flex-column">
+              <h6 class="mb-0"><%= link_to "#{comment.user.first_name} #{comment.user.last_name}", posts_user_path(comment.user) %></h6>
+              <small>
+                <time>Il y a <%= time_ago_in_words(comment.created_at) %></time>
+              </small>
             </div>
           </div>
-        <% end %>
-      </div>
-    </li>
-    <li class="list-group-item d-flex px-0 pt-0 border-0">
-      <p class="mt-1 mb-1 text-break"><span id="comment_<%= comment.id %>"><%= comment.description %></span></p>
-    </li>
-  </ul>
-</div>
-<div class="btn-group mb-4 d-flex" style="min-height: 0rem;">
-  <% if current_user.liked? comment %>
-    <%= link_to unlike_post_comment_path(comment.post, comment), remote: true, id: "liked_comment_#{comment.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;', method: :put do %>
-      <div class="d-flex justify-content-center align-items-center">
-        <%= theme_icon_tag('arrow-up') %>
-        <%= content_tag(:div, "Vote positif · #{comment.likes_sum}", class: 'ml-2', id: "like_count_#{comment.id}") %>
-      </div>
+          <% if owner?(comment) %>
+            <div class="dropdown">
+              <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <%= link_to 'Modifier', edit_post_comment_path(comment.post, comment), class: 'dropdown-item', remote: true %>
+                <%= link_to 'Supprimer', [comment.post, comment], data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_comment_#{comment.id}" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </li>
+      <li class="list-group-item d-flex px-0 pt-0 border-0">
+        <p class="mt-1 mb-1 text-break"><span id="comment_<%= comment.id %>"><%= comment.description %></span></p>
+      </li>
+    </ul>
+  </div>
+  <div class="btn-group mb-2 d-flex" style="min-height: 0rem;">
+    <% if current_user.liked? comment %>
+      <%= link_to unlike_post_comment_path(comment.post, comment), remote: true, id: "liked_comment_#{comment.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;', method: :put do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-up') %>
+          <%= content_tag(:div, "Vote positif · #{comment.likes_sum}", class: 'ml-2', id: "like_count_#{comment.id}") %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to like_post_comment_path(comment.post, comment), remote: true, id: "like_comment_#{comment.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-up') %>
+          <%= content_tag(:div, "Vote positif · #{comment.likes_sum}", class: 'ml-2', id: "like_count_#{comment.id}") %>
+        </div>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= link_to like_post_comment_path(comment.post, comment), remote: true, id: "like_comment_#{comment.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
-      <div class="d-flex justify-content-center align-items-center">
-        <%= theme_icon_tag('arrow-up') %>
-        <%= content_tag(:div, "Vote positif · #{comment.likes_sum}", class: 'ml-2', id: "like_count_#{comment.id}") %>
-      </div>
+    <% if current_user.disliked? comment %>
+      <%= link_to undislike_post_comment_path(comment.post, comment), remote: true, id: "disliked_comment_#{comment.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;', method: :put do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-down') %>
+          <%= content_tag(:div, "Vote négatif · #{comment.dislikes_sum}", class: 'ml-2', id: "dislike_count_#{comment.id}") %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to dislike_post_comment_path(comment.post, comment), remote: true, id: "dislike_comment_#{comment.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-down') %>
+          <%= content_tag(:div, "Vote négatif · #{comment.dislikes_sum}", class: 'ml-2', id: "dislike_count_#{comment.id}") %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if current_user.disliked? comment %>
-    <%= link_to undislike_post_comment_path(comment.post, comment), remote: true, id: "disliked_comment_#{comment.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;', method: :put do %>
-      <div class="d-flex justify-content-center align-items-center">
-        <%= theme_icon_tag('arrow-down') %>
-        <%= content_tag(:div, "Vote négatif · #{comment.dislikes_sum}", class: 'ml-2', id: "dislike_count_#{comment.id}") %>
-      </div>
-    <% end %>
-  <% else %>
-    <%= link_to dislike_post_comment_path(comment.post, comment), remote: true, id: "dislike_comment_#{comment.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
-      <div class="d-flex justify-content-center align-items-center">
-        <%= theme_icon_tag('arrow-down') %>
-        <%= content_tag(:div, "Vote négatif · #{comment.dislikes_sum}", class: 'ml-2', id: "dislike_count_#{comment.id}") %>
-      </div>
-    <% end %>
-  <% end %>
+  </div>
 </div>

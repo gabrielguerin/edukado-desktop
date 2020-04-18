@@ -78,7 +78,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to posts_path, notice: 'Votre commentaire a bien été supprimé.'
+    respond_to do |format|
+      format.html do
+        redirect_to :back,
+                    notice: 'Votre commentaire a bien été supprimé.'
+      end
+
+      format.json { head :no_content }
+
+      format.js   { render layout: false }
+    end
   end
 
   def like
