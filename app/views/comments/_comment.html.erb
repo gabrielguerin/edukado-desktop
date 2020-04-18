@@ -28,7 +28,7 @@
       </li>
     </ul>
   </div>
-  <div class="btn-group mb-4 d-flex" style="min-height: 0rem;">
+  <div class="btn-group mb-2 d-flex" style="min-height: 0rem;">
     <% if current_user.liked? comment %>
       <%= link_to unlike_post_comment_path(comment.post, comment), remote: true, id: "liked_comment_#{comment.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;', method: :put do %>
         <div class="d-flex justify-content-center align-items-center">
