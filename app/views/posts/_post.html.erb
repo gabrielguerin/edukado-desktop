@@ -1,5 +1,5 @@
 <% @posts.each do |post| %>
-  <div class="card">
+  <div class="card" id="post_<%= post.id %>">
     <div class="pb-2">
       <div class="card-header pb-0 border-bottom-0" style="min-height: 0rem;">
         <div class="dropdown" style="visibility: hidden;">
@@ -12,7 +12,7 @@
             <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
             <% if owner?(post) %>
               <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
-              <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+              <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
             <% end %>
             <h6 class="dropdown-header text-muted">Partager</h6>
             <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>

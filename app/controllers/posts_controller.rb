@@ -90,6 +90,7 @@ class PostsController < ApplicationController
         end
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
+
         format.js { render layout: false, content_type: 'text/javascript' }
 
       end
@@ -116,16 +117,13 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html do
-        redirect_to :back,
-                    notice: 'Votre publication a bien été supprimé.'
-      end
-
-      format.js
+      format.html { redirect_to ponies_url }
 
       format.json { head :no_content }
+
+      format.js   { render layout: false }
     end
-  end
+      end
 
   def like
     if @post.user != current_user
