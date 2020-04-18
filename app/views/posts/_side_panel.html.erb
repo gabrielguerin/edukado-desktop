@@ -26,9 +26,9 @@
       </li>
     </ul>
     <div class="table-responsive tab-content">
-      <%= render partial: 'ranking', locals: { date_id: 'today', since_date: Date.today } %>
-      <%= render partial: 'ranking', locals: { date_id: 'week', since_date: 1.week.ago } %>
-      <%= render partial: 'ranking', locals: { date_id: 'month', since_date: 1.month.ago } %>
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
     </div>
   </div>
 </div>
