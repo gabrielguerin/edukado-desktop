@@ -1,4 +1,3 @@
-  
 <table class="table table-hover table-striped tab-pane" id="<%= date_id %>">
   <thead>
     <tr>
@@ -11,16 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <%= Merit::Score.top_scored(since_date: since_date,
+    <%= Merit::Score.top_scored(since_date: since_date,
         limit: 25).map do |top_score_hash| %>
+      <tr>
         <td>
           <%= link_to image_tag(user_avatar(User.find(top_score_hash["user_id"])), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture'), posts_user_path(User.find(top_score_hash["user_id"])) %>
           <%= link_to "#{User.find(top_score_hash["user_id"]).full_name}", posts_user_path(User.find(top_score_hash["user_id"])) %>
         </td>
         <td class="font-weight-bold">
           <%= top_score_hash["sum_points"].to_s %>
-        <% end.to_sentence %>
-      </tr>
+        </tr>
+      <% end.to_sentence %>
     </tbody>
   </table>
