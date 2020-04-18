@@ -2,7 +2,7 @@
   <div class="h-100 d-flex flex-column">
     <div class="card-header pb-0">
       <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle shadow image-offset', style: 'object-fit: cover;', width: '128', height: '128', alt: 'profile picture'), posts_user_path(@user) %>
-      <h4 class="card-title text-primary text-center mt-4 my-2"><%= link_to "#{@user.first_name} #{@user.last_name}", posts_user_path(@user) %></h4>
+      <h4 class="card-title text-primary text-center mt-4 my-2"><%= link_to "#{@user.full_name}", posts_user_path(@user) %></h4>
     </div>
     <div class="card-body">
       <h6 class="text-center text-muted">Description</h6>
