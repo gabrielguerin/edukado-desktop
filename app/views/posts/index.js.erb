@@ -1,4 +1,4 @@
-$("#posts").html("<%= escape_javascript(render("posts")) %>");
+$("#posts").html("<%= escape_javascript(render("post")) %>");
 $("#paginate").html("<%= escape_javascript(paginate(@posts, remote: true)) %>");
 $(document).ready(function(){
 $(this).scrollTop(0);
