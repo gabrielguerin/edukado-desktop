@@ -1,7 +1,7 @@
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
       <div class="d-flex justify-content-center mb-4" id="new-post">
         <%= link_to new_post_path, class: 'btn btn-primary btn-large pull-right', remote: true do %>
           <%= fa_icon_tag "plus" %> Ajouter une publication
@@ -11,7 +11,7 @@
     <div class="col-md-9">
       <% if @posts.present? %>
         <div id="posts">
-          <%= render partial: 'posts', locals: {posts: @posts} %>
+          <%= render @posts %>
         </div>
         <% if @posts_size > 5 %>
           <div class="card">
