@@ -9,6 +9,14 @@
     cursor: pointer;
 }
 
+.close:hover text {
+    cursor: pointer;
+}
+
+.alert:hover {
+    cursor: default;
+}
+
 /* Tags */
 .badge-light {
     background-color: #eef1f5;
