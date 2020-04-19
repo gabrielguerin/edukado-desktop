@@ -1,36 +1,36 @@
-<div id="sidebar" class="col-lg-3 col-md-9 order-md-2 order-sm-1">
-  <div class="card card-tabbed">
-    <div class="card-header d-flex justify-content-center d-flex flex-row">
-      <div class="d-flex flex-column">
-        <div class="text-center">
-          <%= theme_icon_tag "medall", class: 'display-1 text-brand-primary-lightest' %>
-          <h6 class="mt-2">Classement</h6>
-        </div>
+  
+<div class="card card-tabbed">
+  <div class="card-header d-flex justify-content-center d-flex flex-row">
+    <div class="d-flex flex-column">
+      <div class="text-center">
+        <%= theme_icon_tag "medall", class: 'display-1 text-brand-primary-lightest' %>
+        <h6 class="mt-2">Classement</h6>
       </div>
     </div>
-    <ul class="nav rounded-nav-tabs d-flex flex-column text-center">
-      <li class="nav-item">
-        <a class="nav-link" href="#today" data-toggle="tab">
-          Aujourd'hui
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#week" data-toggle="tab">
-          Cette semaine
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#month" data-toggle="tab">
-          Ce mois-ci
-        </a>
-      </li>
-    </ul>
-    <div class="table-responsive tab-content">
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
-    </div>
   </div>
+  <ul class="nav rounded-nav-tabs d-flex flex-column text-center">
+    <li class="nav-item">
+      <a class="nav-link" href="#today" data-toggle="tab">
+        Aujourd'hui
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#week" data-toggle="tab">
+        Cette semaine
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#month" data-toggle="tab">
+        Ce mois-ci
+      </a>
+    </li>
+  </ul>
+  <div class="table-responsive tab-content">
+    <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
+    <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
+    <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
+  </div>
+</div>
 </div>
 <script>
   function activateTab(tab){
