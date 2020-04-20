@@ -1,0 +1,7 @@
+meta_product_name: "Edukado"
+meta_title: "Edukado - Décloisonnons le savoir"
+meta_description: "La plateforme de partage de fichiers entièrement basé sur le principe donnant-donnant."
+# should exist in 'app/assets/images/'
+meta_image: "facebook_opengraph-01.jpg"
+# required for Twitter Cards
+twitter_account: "@product_twitter_account"
