@@ -14,8 +14,8 @@
             <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
           <% end %>
           <h6 class="dropdown-header text-muted">Partager</h6>
-          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
-          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' }, target: '_blank' %>
+          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
           <%= link_to "Email", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
         </div>
       </div>
