@@ -1,7 +1,11 @@
-$("#like_comment_<%= @comment.id %>").on('ajax:success', function(){
-$('#disliked_comment_<%= @comment.id %>').find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
-$("#disliked_comment_<%= @comment.id %>").removeClass('btn btn-light text-danger').addClass('btn btn-light');
-$(this).find("#like_count_<%= @comment.id %>").html('Vote positif · <%= @comment.likes_sum %>');
-$(this).closest("#like_comment_<%= @comment.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-success');
-<%= ajax_flash('#flashes') %>
-});
+<% if @comment.user != current_user %>
+  $("#like_comment_<%= @comment.id %>").on('ajax:success', function(){
+  $('#disliked_comment_<%= @comment.id %>').find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
+  $("#disliked_comment_<%= @comment.id %>").removeClass('btn btn-light text-danger').addClass('btn btn-light');
+  $(this).find("#like_count_<%= @comment.id %>").html('Vote positif · <%= @comment.likes_sum %>');
+  $(this).closest("#like_comment_<%= @comment.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-success');
+  <%= ajax_flash('#flashes') %>
+  });
+<% else %>
+  <%= ajax_flash('#flashes') %>
+<% end %>

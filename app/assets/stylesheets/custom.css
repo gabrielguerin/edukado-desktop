@@ -8,3 +8,20 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.close:hover text {
+    cursor: pointer;
+}
+
+.alert:hover {
+    cursor: default;
+}
+
+/* Tags */
+.badge-light {
+    background-color: #eef1f5;
+}
+
+.badge-light:hover {
+    background-color: #e6e6e6;
+}

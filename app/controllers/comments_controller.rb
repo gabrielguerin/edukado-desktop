@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = post.comments.create!(
-      comment_params.merge(user_id: current_user.id)
+      comment_params
     )
 
     if @comment.save
@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update!(
-      comment_params.merge(user_id: current_user.id)
+      comment_params
     )
 
       redirect_to post, notice: 'Le commentaire a été mis à jour avec succès.'
@@ -78,7 +78,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to posts_path, notice: 'Votre commentaire a bien été supprimé.'
+    respond_to do |format|
+      format.html do
+        redirect_to :back,
+                    notice: 'Votre commentaire a bien été supprimé.'
+      end
+
+      format.json { head :no_content }
+
+      format.js   { render layout: false }
+    end
   end
 
   def like
@@ -148,6 +157,8 @@ class CommentsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
 
   def comment_params
-    params.require(:comment).permit(:description)
+    params.require(:comment).permit(:description).merge(
+      user_id: current_user.id
+    )
   end
 end

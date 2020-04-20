@@ -1,14 +1,25 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '155283329235338',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v6.0'
+    });
+  };
+</script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-9 col-md-12 col-sm-12">
       <div class="d-flex justify-content-center mb-4" id="new-post">
         <%= link_to new_post_path, class: 'btn btn-primary btn-large pull-right', remote: true do %>
           <%= fa_icon_tag "plus" %> Ajouter une publication
         <% end %>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9 col-md-12 col-sm-12">
       <% if @posts.present? %>
         <div id="posts">
           <%= render partial: 'posts', locals: {posts: @posts} %>
@@ -28,6 +39,8 @@
         </div>
       <% end %>
     </div>
-    <%= render partial: 'side_panel' %>
+    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+      <%= render partial: 'side_panel' %>
+    </div>
   </div>
 </div>

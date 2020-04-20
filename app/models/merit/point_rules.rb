@@ -20,6 +20,7 @@ module Merit
 
     def initialize
       # New user
+
       score 10,
             on: 'users/confirmations#show',
 
@@ -28,16 +29,19 @@ module Merit
             to: :itself
 
       # If user adds a post
+
       score 50,
             to: :user,
 
             on: 'posts#create'
 
       # If user downloads a file
-      score -50,
-            to: :action_user,
 
-            on: 'active_storage/blobs#show'
+      # score -50,
+
+      #       to: :action_user,
+
+      #       on: 'active_storage/blobs#show'
     end
   end
 end

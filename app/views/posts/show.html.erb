@@ -1,10 +1,12 @@
 <% @title = "#{@post.title}" %>
+<% content_for :meta_title, "#{@post.title}" %>
+<% content_for :meta_description, @post.description %>
 <div class="container">
   <div class="row">
-    <div class="col-md-9">
-      <%= render partial: 'post', locals: {post: @post} %>
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <%= render @post %>
     </div>
-    <div id="sidebar" class="col-lg-3 col-md-4 order-md-2 order-sm-1">
+    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
       <%= render 'users/side_panel', locals: {user: @user} %>
       <%= render partial: 'badges/side_panel' %>
     </div>

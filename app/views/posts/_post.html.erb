@@ -1,28 +1,28 @@
-<div class="card">
+<div class="card" id="post_<%= post.id %>">
   <div class="pb-2">
     <div class="card-header pb-0 border-bottom-0" style="min-height: 0rem;">
       <div class="dropdown" style="visibility: hidden;">
         <%= button_tag theme_icon_tag('more'), class: 'nav-link btn btn-icon' %>
       </div>
-      <h5><%= link_to post.title, post_path(post) %></h5>
+      <h4><%= link_to post.title, post_path(post) %></h4>
       <div class="dropdown">
         <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
         <div class="dropdown-menu dropdown-menu-right">
           <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
           <% if owner?(post) %>
             <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
-            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item' %>
+            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
           <% end %>
           <h6 class="dropdown-header text-muted">Partager</h6>
-          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
-          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' }, target: '_blank' %>
+          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
           <%= link_to "Email", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
         </div>
       </div>
     </div>
     <div class="text-center border-bottom">
       <% post.tags.each do |tag| %>
-        <a href="<%= tag_path(tag) %>" class="badge badge-info" title="<%= tag.title %>">#<%= tag.title %></a>
+        <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
       <div class="my-3">
         <% if current_user.points < 50 %>
@@ -94,16 +94,16 @@
     <% end %>
   </div>
   <div class="card-footer d-flex flex-row" style="background-color: #fff">
-    <div class="new-comment d-flex flex-row w-100">
+    <div class="d-flex flex-row w-100">
       <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
-      <%= render partial: 'comments/form', locals: { post: post } %>
+      <div class="w-100" id="new_comment_<%= post.id %>">
+        <%= render partial: 'comments/form', locals: { post: post } %>
+      </div>
     </div>
   </div>
   <% if post.comments.present? %>
-    <div class="card-body pt-0">
-      <ul class="list-group list-group-flush" id="comments_<%= post.id %>">
-        <%= render post.comments %>
-      </ul>
+    <div id="comments_<%= post.id %>">
+      <%= render post.comments.order(created_at: :desc) %>
     </div>
   <% end %>
 </div>
