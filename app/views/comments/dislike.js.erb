@@ -1,9 +1,9 @@
 <% if @comment.user != current_user %>
   $("#dislike_comment_<%= @comment.id %>").on('ajax:success', function(){
   $('#liked_comment_<%= @comment.id %>').find('#like_count_<%= @comment.id %>').html('Vote positif · <%= @comment.likes_sum %>');
-  $("#liked_comment_<%= @comment.id %>").removeClass('btn btn-light text-success').addClass('btn btn-light');
+  $("#liked_comment_<%= @comment.id %>").removeClass('text-success');
   $(this).find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
-  $(this).closest("#dislike_comment_<%= @comment.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-danger');
+  $(this).closest("#dislike_comment_<%= @comment.id %>").addClass('text-danger');
   <%= ajax_flash('#flashes') %>
   });
 <% else %>
