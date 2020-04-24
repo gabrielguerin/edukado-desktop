@@ -25,3 +25,12 @@
 .badge-light:hover {
     background-color: #e6e6e6;
 }
+
+/* Buttons */
+.btn-light {
+    box-shadow: none;
+}
+
+.btn-light:hover {
+    border-bottom: none;
+}
