@@ -14,7 +14,7 @@ class StaticsController < ApplicationController
 
     else
 
-      render template: 'statics/errors/404', status: :not_found
+      render page: '/public/404.html', status: :not_found
 
     end
   end

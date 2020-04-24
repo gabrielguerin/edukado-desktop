@@ -3,7 +3,7 @@
 class PostsController < ApplicationController
   layout 'scaffold'
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[show index]
 
   before_action :set_post, only: %i[
 
