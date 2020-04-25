@@ -5,6 +5,7 @@
   $(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
   $(this).closest("#like_post_<%= @post.id %>").addClass('text-success');
   $(this).attr("href", '/posts/<%= @post.id %>/unlike');
+  $("#dislike_post_<%= @post.id %>").attr("href", '/posts/<%= @post.id %>/dislike');
   <%= ajax_flash('#flashes') %>
   });
 <% else %>

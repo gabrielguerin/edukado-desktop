@@ -1,4 +1,5 @@
-$("#liked_comment_<%= @comment.id %>").on('ajax:success', function(){
+$("#like_comment_<%= @comment.id %>").on('ajax:success', function(){
 $(this).find('#like_count_<%= @comment.id %>').html('Vote positif · <%= @comment.likes_sum %>');
-$(this).closest("#liked_comment_<%= @comment.id %>").removeClass('text-success');   
+$(this).closest("#like_comment_<%= @comment.id %>").removeClass('text-success');
+$(this).attr("href", '/posts/<%= @post.id %>/comments/<%= @comment.id %>/like');
 });
