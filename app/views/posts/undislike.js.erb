@@ -1,4 +1,5 @@
-$("#disliked_post_<%= @post.id %>").on('ajax:success', function(){
+$("#dislike_post_<%= @post.id %>").on('ajax:success', function(){
 $(this).find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
-$(this).closest("#disliked_post_<%= @post.id %>").removeClass('text-danger');   
+$(this).closest("#dislike_post_<%= @post.id %>").removeClass('text-danger');
+$(this).attr("href", '/posts/<%= @post.id %>/dislike');
 });
