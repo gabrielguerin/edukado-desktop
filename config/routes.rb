@@ -80,24 +80,24 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments do
       member do
-        put 'like'
+        get 'like'
 
-        put 'unlike'
+        get 'unlike'
 
-        put 'dislike'
+        get 'dislike'
 
-        put 'undislike'
+        get 'undislike'
       end
     end
 
     member do
-      put 'like'
+      get 'like'
 
-      put 'unlike'
+      get 'unlike'
 
-      put 'dislike'
+      get 'dislike'
 
-      put 'undislike'
+      get 'undislike'
     end
   end
 
