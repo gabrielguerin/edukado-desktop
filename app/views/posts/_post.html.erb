@@ -105,7 +105,7 @@
         </div>
       <% end %>
     <% end %>
-    <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
+    <%= link_to post_path(post), id: 'new-comment', class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('comment') %>
         <div class="ml-2">
@@ -133,7 +133,9 @@
   </div>
   <% if post.comments.present? %>
     <div id="comments_<%= post.id %>">
+    <% if current_page?(post_path(post)) %>
       <%= render post.comments.order(created_at: :desc) %>
+    <% end %>
     </div>
   <% end %>
 </div>
