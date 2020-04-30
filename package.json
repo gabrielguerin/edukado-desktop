@@ -18,7 +18,7 @@
     "flot": "^4.2.0",
     "gmaps.core": "^0.5.1",
     "jasny-bootstrap": "^4.0.0",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jquery-countdown": "^2.2.0",
     "jquery-countto": "^1.2.0",
     "jquery-parallax.js": "^1.5.0",
