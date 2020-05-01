@@ -1,4 +1,5 @@
-$("#liked_post_<%= @post.id %>").on('ajax:success', function(){
+$("#like_post_<%= @post.id %>").on('ajax:success', function(){
 $(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
-$(this).closest("#liked_post_<%= @post.id %>").removeClass('btn btn-light mb-2 text-success').addClass('btn btn-light');   
+$(this).closest("#like_post_<%= @post.id %>").removeClass('text-success');
+$(this).attr("href", '/posts/<%= @post.id %>/like');
 });

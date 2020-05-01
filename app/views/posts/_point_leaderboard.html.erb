@@ -1,5 +1,5 @@
 <table class="table table-hover table-striped tab-pane" id="<%= date_id %>">
-  <thead class='w-100' style='display: table;'>
+  <thead>
     <tr>
       <th>
         Contributeur
@@ -9,7 +9,7 @@
       </th>
     </tr>
   </thead>
-  <tbody class='w-100' style='display: table;'>
+  <tbody>
     <%= Merit::Score.top_scored(since_date: since_date,
         limit: 25).map do |top_score_hash| %>
       <tr>

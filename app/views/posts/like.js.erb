@@ -1,9 +1,11 @@
 <% if @post.user != current_user %>
   $("#like_post_<%= @post.id %>").on('ajax:success', function(){
-  $('#disliked_post_<%= @post.id %>').find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
-  $("#disliked_post_<%= @post.id %>").removeClass('btn btn-light text-danger').addClass('btn btn-light');
+  $('#dislike_post_<%= @post.id %>').find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
+  $("#dislike_post_<%= @post.id %>").removeClass('text-danger');
   $(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
-  $(this).closest("#like_post_<%= @post.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-success');
+  $(this).closest("#like_post_<%= @post.id %>").addClass('text-success');
+  $(this).attr("href", '/posts/<%= @post.id %>/unlike');
+  $("#dislike_post_<%= @post.id %>").attr("href", '/posts/<%= @post.id %>/dislike');
   <%= ajax_flash('#flashes') %>
   });
 <% else %>

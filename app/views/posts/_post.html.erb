@@ -14,8 +14,8 @@
             <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
           <% end %>
           <h6 class="dropdown-header text-muted">Partager</h6>
-          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
-          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' }, target: '_blank' %>
+          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
           <%= link_to "Email", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
         </div>
       </div>
@@ -25,6 +25,7 @@
         <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
       <div class="my-3">
+      <% if user_signed_in? %>
         <% if current_user.points < 50 %>
           <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
         <% else %>
@@ -34,6 +35,9 @@
             <p>Il n'y a aucun fichier attaché</p>
           <% end %>
         <% end %>
+      <% else %>
+        Connectez ou inscrivez-vous pour accéder à ce fichier
+      <% end %>
       </div>
     </div>
   </div>
@@ -56,15 +60,16 @@
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
+  <% if user_signed_in? %>
     <% if current_user.liked? post %>
-      <%= link_to unlike_post_path(post), remote: true, id: "liked_post_#{post.id}", class: 'btn btn-light text-success', style: 'font-size: 16px;', method: :put do %>
+      <%= link_to unlike_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom text-success', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
           <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
         </div>
       <% end %>
     <% else %>
-      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
+      <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-up') %>
           <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
@@ -72,38 +77,68 @@
       <% end %>
     <% end %>
     <% if current_user.disliked? post %>
-      <%= link_to undislike_post_path(post), remote: true, id: "disliked_post_#{post.id}", class: 'btn btn-light text-danger', style: 'font-size: 16px;', method: :put do %>
+      <%= link_to undislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom text-danger', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-down') %>
           <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
         </div>
       <% end %>
     <% else %>
-      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light', style: 'font-size: 16px;', method: :put do %>
+      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
         <div class="d-flex justify-content-center align-items-center">
           <%= theme_icon_tag('arrow-down') %>
           <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
         </div>
       <% end %>
     <% end %>
-    <%= link_to new_post_comment_path(post), remote: true, id: 'new-comment', class: 'btn btn-light', style: 'font-size: 16px;' do %>
+    <% else %>
+        <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom disabled', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-up') %>
+          <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
+        </div>
+      <% end %>
+      <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom disabled', style: 'font-size: 16px;' do %>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= theme_icon_tag('arrow-down') %>
+          <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= link_to post_path(post), id: 'new-comment', class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
       <div class="d-flex justify-content-center align-items-center">
         <%= theme_icon_tag('comment') %>
-        <div class="ml-2">Commenter · <%= post.comments.count %></div>
+        <div class="ml-2">
+          <% if post.comments.count == 0 %>
+          Commentaire
+          <% else %>
+          Commentaires
+          <% end %>
+           · <%= post.comments.count %>
+        </div>
       </div>
     <% end %>
   </div>
+        <% unless current_page?(posts_path) %>
+
   <div class="card-footer d-flex flex-row" style="background-color: #fff">
     <div class="d-flex flex-row w-100">
-      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
-      <div class="w-100" id="new_comment_<%= post.id %>">
-        <%= render partial: 'comments/form', locals: { post: post } %>
-      </div>
+      <% if user_signed_in? %>
+        <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+      <% else %>
+        <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
+      <% end %>
+        <div class="w-100" id="new_comment_<%= post.id %>">
+          <%= render partial: 'comments/form', locals: { post: post } %>
+        </div>
     </div>
   </div>
+        <% end %>
   <% if post.comments.present? %>
     <div id="comments_<%= post.id %>">
+    <% if current_page?(post_path(post)) %>
       <%= render post.comments.order(created_at: :desc) %>
+    <% end %>
     </div>
   <% end %>
 </div>
