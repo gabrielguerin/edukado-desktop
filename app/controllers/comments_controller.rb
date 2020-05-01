@@ -37,12 +37,16 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # POST /comments
 
   def create
-    @comment = @post.comments.create!(
+    @comment = @post.comments.build(
       comment_params
     )
 
@@ -66,13 +70,19 @@ class CommentsController < ApplicationController
       comment_params
     )
 
-      redirect_to @post, notice: 'Le commentaire a été mis à jour avec succès.'
+      respond_to do |format|
+        format.html { redirect_to @post }
+
+        format.js
+      end
 
     else
 
-      render :edit
+      flash[:alert] = 'Votre commentaire n\'a pas pu être modifié, veuillez essayer à nouveau.'
 
-    end
+      redirect_to @post
+
+  end
   end
 
   # DELETE /comments/1
@@ -159,8 +169,8 @@ class CommentsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
 
   def comment_params
-    params.require(:comment).permit(:description).merge(
-      user_id: current_user.id
+    params.require(:comment).permit(:description, :post_id).merge(
+      user: current_user
     )
   end
 end
