@@ -1,5 +1,5 @@
 <div class="w-100" id="comment_form">
-  <%= form_with(model: [post, Comment.new], local: true) do |f| %>
+  <%= form_with(model: [@post, @comment]) do |f| %>
     <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1", id: "comment_description_#{post.id}" %>
     <span class="input-group-append"><%= f.submit 'Envoyer', class: 'btn btn-primary border-0', style: 'display: none' %></span>
   <% end %>

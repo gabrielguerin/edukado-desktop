@@ -1,2 +1,2 @@
+$('#comment_<%= @comment.id %>').hide();
 $('#comments_<%= @post.id %>').prepend("<%=j render 'comments/comment', post: @post, comment: @comment, remote: true %>");
-$('#my-comment-form-id').hide(); // or .remove();
