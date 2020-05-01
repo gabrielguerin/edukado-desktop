@@ -1,0 +1,32 @@
+<div class="card card-tabbed">
+  <div class="card-header d-flex justify-content-center d-flex flex-row">
+    <div class="d-flex flex-column">
+      <div class="text-center">
+        <%= theme_icon_tag "medall", class: 'display-1 text-brand-primary-lightest' %>
+        <h6 class="mt-2">Classement</h6>
+      </div>
+    </div>
+  </div>
+  <ul class="nav rounded-nav-tabs d-flex flex-column text-center" id="point_leaderboard" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="today-tab" data-toggle="tab" href="#today" role="tab" aria-controls="today" aria-selected="true">Aujourd'hui</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="week-tab" data-toggle="tab" href="#week" role="tab" aria-controls="week" aria-selected="false">Cette semaine</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="false">Ce mois-ci</a>
+    </li>
+  </ul>
+  <div class="tab-content table-responsive" id="point_leaderboard_content">
+    <div class="tab-pane fade active show" id="today" role="tabpanel" aria-labelledby="today-tab">
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
+    </div>
+    <div class="tab-pane fade" id="week" role="tabpanel" aria-labelledby="week-tab">
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
+    </div>
+    <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
+      <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-$("#disliked_comment_<%= @comment.id %>").on('ajax:success', function(){
+$("#dislike_comment_<%= @comment.id %>").on('ajax:success', function(){
 $(this).find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
-$(this).closest("#disliked_comment_<%= @comment.id %>").removeClass('btn btn-light mb-2 text-danger').addClass('btn btn-light');   
+$(this).closest("#dislike_comment_<%= @comment.id %>").removeClass('text-danger');
+$(this).attr("href", '/posts/<%= @post.id %>/comments/<%= @comment.id %>/dislike');
 });

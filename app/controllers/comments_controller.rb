@@ -3,7 +3,9 @@
 class CommentsController < ApplicationController
   layout 'scaffold'
 
-  before_action :post
+  before_action :set_post
+
+  before_action :authenticate_user!
 
   before_action :set_comment, only: %i[
 
@@ -30,7 +32,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
 
   def new
-    @comment = post.comments.build
+    @comment = @post.comments.build
   end
 
   # GET /comments/1/edit
@@ -40,8 +42,8 @@ class CommentsController < ApplicationController
   # POST /comments
 
   def create
-    @comment = post.comments.create!(
-      comment_params.merge(user_id: current_user.id)
+    @comment = @post.comments.create!(
+      comment_params
     )
 
     if @comment.save
@@ -54,17 +56,17 @@ class CommentsController < ApplicationController
 
     end
 
-    redirect_to post
+    redirect_to @post
   end
 
   # PATCH/PUT /comments/1
 
   def update
     if @comment.update!(
-      comment_params.merge(user_id: current_user.id)
+      comment_params
     )
 
-      redirect_to post, notice: 'Le commentaire a été mis à jour avec succès.'
+      redirect_to @post, notice: 'Le commentaire a été mis à jour avec succès.'
 
     else
 
@@ -78,7 +80,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to posts_path, notice: 'Votre commentaire a bien été supprimé.'
+    respond_to do |format|
+      format.html do
+        redirect_to :back,
+                    notice: 'Votre commentaire a bien été supprimé.'
+      end
+
+      format.json { head :no_content }
+
+      format.js   { render layout: false }
+    end
   end
 
   def like
@@ -88,17 +99,17 @@ class CommentsController < ApplicationController
 
       if @comment.save!
 
-        flash[:notice] = 'You have successfuly upvoted this comment.'
+        flash.now[:notice] = 'You have successfuly upvoted this comment.'
 
       else
 
-        flash[:alert] = 'Could not upvote this comment.'
+        flash.now[:error] = 'Could not upvote this comment.'
 
       end
 
     else
 
-      flash[:alert] = 'You cannot upvote your own comment.'
+      flash.now[:error] = 'You cannot upvote your own comment.'
 
     end
   end
@@ -114,17 +125,17 @@ class CommentsController < ApplicationController
 
       if @comment.save!
 
-        flash[:notice] = 'You have successfuly downvoted this comment.'
+        flash.now[:notice] = 'You have successfuly downvoted this comment.'
 
       else
 
-        flash[:alert] = 'Could not downvote this comment.'
+        flash.now[:error] = 'Could not downvote this comment.'
 
       end
 
     else
 
-      flash[:alert] = 'You cannot downvote your own comment.'
+      flash.now[:error] = 'You cannot downvote your own comment.'
 
     end
   end
@@ -138,16 +149,18 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
 
   def set_comment
-    @comment = post.comments.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
-  def post
-    Post.friendly.find(params[:post_id])
+  def set_post
+    @post = Post.friendly.find(params[:post_id])
   end
 
   # Only allow a trusted parameter "white list" through.
 
   def comment_params
-    params.require(:comment).permit(:description)
+    params.require(:comment).permit(:description).merge(
+      user_id: current_user.id
+    )
   end
 end
