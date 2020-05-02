@@ -50,17 +50,17 @@ class CommentsController < ApplicationController
       comment_params
     )
 
-    if @comment.save
-
-      flash[:success] = 'Votre commentaire a été créé avec succès.'
-
-    else
-
-      flash[:danger] = "Votre commentaire n'a pas été créé."
-
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post, notice: 'Votre commentaire a été créé avec succès.' }
+        format.json { render :show, status: :created, location: @post }
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
+      end
     end
-
-    redirect_to @post
   end
 
   # PATCH/PUT /comments/1

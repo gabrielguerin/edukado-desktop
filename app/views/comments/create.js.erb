@@ -1,1 +1,2 @@
 $('#comments_<%= @post.id %>').prepend("<%= j render @comment %>");
+document.getElementById('comment_description_<%= @post.id %>').value = '';
