@@ -119,21 +119,20 @@
       </div>
     <% end %>
   </div>
-        <% unless current_page?(posts_path) %>
-
-  <div class="card-footer d-flex flex-row" style="background-color: #fff">
-    <div class="d-flex flex-row w-100">
-      <% if user_signed_in? %>
-        <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
-      <% else %>
-        <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
-      <% end %>
-        <div class="w-100" id="new_comment_<%= post.id %>">
-          <%= render partial: 'comments/form', locals: { post: post } %>
-        </div>
-    </div>
-  </div>
+  <% unless current_page?(posts_path) %>
+    <div class="card-footer d-flex flex-row" style="background-color: #fff">
+      <div class="d-flex flex-row w-100">
+        <% if user_signed_in? %>
+          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+        <% else %>
+          <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
         <% end %>
+          <div class="w-100" id="new_comment_<%= post.id %>">
+            <%= render partial: 'comments/form', locals: { post: post } %>
+          </div>
+      </div>
+    </div>
+  <% end %>
   <% if post.comments.present? %>
     <div id="comments_<%= post.id %>">
     <% if current_page?(post_path(post)) %>
