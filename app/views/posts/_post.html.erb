@@ -45,7 +45,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item d-flex pb-0 px-0">
         <div class="mr-auto d-flex align-items-center">
-          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64'), posts_user_path(post.user) %>
+          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
           <div class="mr-auto d-flex flex-column">
             <h6 class="mb-0"><%= link_to "#{post.user.first_name} #{post.user.last_name}", posts_user_path(post.user) %></h6>
             <small>
