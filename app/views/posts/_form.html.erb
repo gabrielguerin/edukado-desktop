@@ -1,5 +1,5 @@
 <%= form_for @post, url: posts_path(@post),
-                html: { multipart: true, class: "card form" } do |f| %>
+                html: { multipart: true, class: "card form" }, remote: true do |f| %>
   <div class="card-header d-flex justify-content-center">
     <h5 class="mb-0">Ajouter une publication</h5>
   </div>

@@ -119,7 +119,7 @@
       </div>
     <% end %>
   </div>
-  <% unless current_page?(posts_path) %>
+  <% unless current_page?(posts_path) || current_page?(posts_user_path(post.user)) %>
     <div class="card-footer d-flex flex-row" style="background-color: #fff">
       <div class="d-flex flex-row w-100">
         <% if user_signed_in? %>
