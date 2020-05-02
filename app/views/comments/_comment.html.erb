@@ -13,7 +13,7 @@
             </div>
           </div>
           <% if owner?(comment) %>
-            <div class="dropdown">
+            <div class="dropdown" id="dropdown-menu_comment_<%= comment.id %>">
               <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
               <div class="dropdown-menu dropdown-menu-right">
                 <%= link_to 'Modifier', edit_post_comment_path(comment.post, comment), class: 'dropdown-item', remote: true %>
@@ -24,7 +24,7 @@
         </div>
       </li>
       <li class="list-group-item d-flex px-0 pt-0 border-0">
-        <p class="mt-1 mb-1 text-break"><span id="comment_<%= comment.id %>"><%= comment.description %></span></p>
+        <p class="mt-1 mb-1 text-break w-100"><span id="comment_description_<%= comment.id %>"><%= comment.description %></span></p>
       </li>
     </ul>
   </div>

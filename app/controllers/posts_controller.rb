@@ -51,6 +51,7 @@ class PostsController < ApplicationController
 
   def show
     @user = @post.user
+    @comment = @post.comments.new
   end
 
   # GET /posts/new
@@ -66,36 +67,22 @@ class PostsController < ApplicationController
   # POST /posts
 
   def create
-    @post = current_user.posts.create!(post_params)
+    @post = Post.new(post_params)
 
-    respond_to do |format|
-      if @post.save
+    if @post.save
 
-        format.js {}
+      respond_to do |format|
+        format.js { render layout: false }
 
         format.html do
           redirect_to root_path, notice: 'Votre publication a bien été ajoutée.'
         end
-
-        format.json { render :show, status: :created, location: @post }
-
-      else
-
-        format.html do
-          flash[:danger] = "Votre publication n'a pas été ajoutée : #{
-
-          @post.errors.messages
-
-        }"
-
-          render :new
-        end
-
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-
-        format.js { render layout: false, content_type: 'text/javascript' }
-
       end
+
+    else
+
+      render :new
+
     end
   end
 
@@ -204,6 +191,8 @@ class PostsController < ApplicationController
       :updated_at,
       :file,
       :tag_list
+    ).merge(
+      user: current_user
     )
   end
 end
