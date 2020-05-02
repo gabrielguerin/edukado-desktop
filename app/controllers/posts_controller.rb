@@ -51,6 +51,7 @@ class PostsController < ApplicationController
 
   def show
     @user = @post.user
+
     @comment = @post.comments.new
   end
 
@@ -69,20 +70,28 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    if @post.save
+    @comment = Comment.new
 
-      respond_to do |format|
-        format.js { render layout: false }
+    respond_to do |format|
+      if @post.save
+
+        format.js { redirect_to @post }
 
         format.html do
-          redirect_to root_path, notice: 'Votre publication a bien été ajoutée.'
+          redirect_to @post, notice: 'Votre publication a bien été ajoutée.'
         end
+
+        format.json { render action: 'show', status: :created, location: @post }
+
+      else
+
+        format.html { render action: 'new' }
+
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+
+        format.js   { render 'create_errors', status: :unprocessable_entity }
+
       end
-
-    else
-
-      render :new
-
     end
   end
 
