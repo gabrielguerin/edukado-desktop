@@ -1,6 +1,6 @@
 <div class="card p-3">
   <div class="card-header">
-    <%= link_to image_tag((blog.cover), class: 'card-img-top', style: 'object-fit: cover;', height: '200', align: 'center') %>
+    <%= link_to image_tag((blog.cover), class: 'card-img-top', style: 'object-fit: cover;', height: '200', align: 'center'), blog_path(blog) %>
   </div>
   <div class="card-body">
     <h2 class="leading-normal mb-3"><%= link_to blog.title, blog_path(blog) %></h2>
