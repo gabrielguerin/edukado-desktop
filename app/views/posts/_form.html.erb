@@ -25,19 +25,15 @@
         <%= f.error_messages %>
       </div>
     <% end %>
-    <%= f.form_group :file, class: "column" do |f| %>
-      <label class="col-sm-4 col-form-label pl-0">Fichier</label>
-      <div class="col-12">
-        <%= f.label "Fichier", class: "custom-file-label" %>
-        <%= f.file_field :file, class: "custom-file-input", required: true %>
-        <%= f.error_messages %>
+    <%= f.form_group :description, class: "column" do |f| %>
+      <%= f.label :file, 'Fichier', class: "col-sm-4 col-form-label pl-0" %>
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-max-file-size="5" data-dropzone-max-files="1">
+        <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
+        <div class="dropzone-msg dz-message needsclick text-gray-600">
+          <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
+          <span class="dropzone-msg-desc text-sm">2 Mo maximum. Types de fichier autorisés : jpg, pdf & png.</span>
+        </div>
       </div>
-      <script type="application/javascript">
-        $('input[type="file"]').change(function(e){
-            var fileName = e.target.files[0].name;
-            $('.custom-file-label').html(fileName);
-        });
-      </script>
     <% end %>
     <div class="d-flex">
       <div class="ml-auto">
