@@ -47,3 +47,5 @@ require('sparklines')
 require("trix")
 require("@rails/actiontext")
 require("kiso_themes")
+
+import "controllers"
