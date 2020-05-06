@@ -1,7 +1,7 @@
 <%= content_for :js_libs, "modernizr parallax prettify" %>
 <div class="container">
   <article class="blog-1 blog-archive py-5">
-    <div class="col-12 col-md-8 mr-md-auto ml-md-auto">
+    <div class="col-12 col-md-8 col-sm-12 mr-md-auto ml-md-auto">
       <% if @blogs.present? %>
         <div id="blogs">
           <%= render partial: 'articles', locals: { blogs: @blogs } %>
