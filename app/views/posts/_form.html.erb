@@ -25,7 +25,7 @@
         <%= f.error_messages %>
       </div>
     <% end %>
-    <%= f.form_group :description, class: "column" do |f| %>
+    <%= f.form_group :file, class: "column" do |f| %>
       <%= f.label :file, 'Fichier', class: "col-sm-4 col-form-label pl-0" %>
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-max-file-size="5" data-dropzone-max-files="1">
         <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
