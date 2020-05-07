@@ -141,3 +141,7 @@ gem 'sendgrid-ruby'
 # Official AWS SDK for Ruby
 
 gem 'aws-sdk-s3', require: false
+
+# Intelligent search made easy with Rails and Elasticsearch
+
+gem 'searchkick'

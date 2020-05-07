@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  include PgSearch::Model
+  searchkick
   extend FriendlyId
   friendly_id :title, use: :slugged
   belongs_to :user
@@ -11,19 +11,23 @@ class Post < ApplicationRecord
   has_one_attached :file
   acts_as_votable
   validates :title, presence: true, length: {
-    in: 2..80,
-    too_short: '%<count> caractères est le minimum autorisé',
-    too_long: '%<count> caractères est le maximum autorisé'
+    minimum: 10, too_short: '%<count> caractères est le minimum autorisé'
   }
   validates :description, presence: true, length: {
     minimum: 2, too_short: '%<count> caractères est le minimum autorisé'
   }
-  pg_search_scope :search,
-                  against: %i[title description],
-                  associated_against: {
-                    tags: %i[title],
-                    user: %i[first_name last_name description]
-                  }
+
+  scope :search_import, -> { includes(:user, :comments, :tags) }
+
+  def search_data
+    {
+      title: title,
+      description: description,
+      user: user.full_name,
+      comment: comment.description,
+      tag: tag.title
+    }
+  end
 
   def likes_sum
     get_likes.size
