@@ -1,31 +1,51 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  searchkick
+  searchkick word_start: %i[title tag]
+
   extend FriendlyId
+
   friendly_id :title, use: :slugged
+
   belongs_to :user
+
   has_many :comments, dependent: :destroy
+
   has_many :posts_tags, dependent: :destroy
+
   has_many :tags, through: :posts_tags
+
   has_one_attached :file
+
   acts_as_votable
+
   validates :title, presence: true, length: {
+
     minimum: 10, too_short: '%<count> caractères est le minimum autorisé'
+
   }
+
   validates :description, presence: true, length: {
+
     minimum: 2, too_short: '%<count> caractères est le minimum autorisé'
+
   }
 
   scope :search_import, -> { includes(:user, :comments, :tags) }
 
   def search_data
     {
+
       title: title,
+
       description: description,
+
       user: user.full_name,
-      comment: comment.description,
-      tag: tag.title
+
+      comments: comments.map(&:description),
+
+      tag: tags.map(&:title)
+
     }
   end
 

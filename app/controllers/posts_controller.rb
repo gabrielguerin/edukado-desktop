@@ -39,6 +39,7 @@ class PostsController < ApplicationController
     @posts = if search
 
                Post.search(params[:search], page: params[:page], per_page: 20)
+
              else
 
                Post.all.order(created_at: :desc).page(params[:page])
@@ -46,6 +47,21 @@ class PostsController < ApplicationController
              end
 
     @posts_size = Post.all.size
+  end
+
+  def autocomplete
+    render json: Post.search(params[:search], {
+
+                               fields: %w[title tag],
+
+                               match: :word_start,
+
+                               limit: 10,
+
+                               load: false,
+
+                               misspellings: { below: 5 }
+                             }).map(&:title)
   end
 
   # GET /posts/1
