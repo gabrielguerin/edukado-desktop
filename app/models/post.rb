@@ -21,7 +21,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: {
 
-    minimum: 10, too_short: '%<count> caractères est le minimum autorisé'
+    minimum: 2, too_short: '%<count> caractères est le minimum autorisé'
 
   }
 
