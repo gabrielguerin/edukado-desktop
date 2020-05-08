@@ -1,0 +1,47 @@
+<li class="nav-item dropdown notifications">
+  <a class="nav-link with-count" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="ti-bell "></i>
+    <span class="badge badge-sm"><%= current_user.notifications.count %></span>
+    <span class="d-none d-xs-block">Notifications</span>
+  </a>
+  <ul class="dropdown-menu  dropdown-menu-right">
+    <li class="dropdown-item">
+      <div class="card">
+        <div class="card-header text-center text-primary">
+          <strong>You have
+            <span><%= current_user.notifications.count %></span> notifications</strong>
+        </div>
+        <div class="list-group">
+          <a href="001_app_nav_bars.html#" class="list-group-item">
+            <div class="media">
+              <img class="d-flex mr-3 rounded-circle" width="34" height="34" data-turbolinks-permanent="true" src="../../assets/rrt/stock/3-9b9d225ea3cf9c9f07cea81d16c455fb6248b9ccf19717395fbcc184411f0a89.jpg" alt="3">
+              <div class="media-body">
+                <p>My name is Inigo Montoya.</p>
+                <small class="text-muted d-block">10 minutes ago</small>
+              </div>
+            </div>
+          </a>
+          <a href="001_app_nav_bars.html" class="media list-group-item">
+            <span class="media-body">
+              <div>
+                <p>You've reached your space quota!</p>
+                <div class="progress progress-sm m0">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    <span class="sr-only">100% Complete</span>
+                  </div>
+                </div>
+              </div>
+              <small class="text-muted">12 hours ago</small>
+            </span>
+          </a>
+        </div>
+        <div class="card-footer">
+          <a href="001_app_nav_bars.html#" class="pull-right">
+            <i class="ti-settings "></i>
+          </a>
+          <a href="001_app_nav_bars.html#">View all Notifications</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</li>

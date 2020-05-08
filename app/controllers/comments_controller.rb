@@ -52,13 +52,23 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+
+        create_notification @post, @comment
+
         format.html { redirect_to @post, notice: 'Votre commentaire a été créé avec succès.' }
+
         format.json { render :show, status: :created, location: @post }
+
         format.js
+
       else
+
         format.html { render :new }
+
         format.json { render json: @post.errors, status: :unprocessable_entity }
+
         format.js
+
       end
     end
   end
@@ -82,7 +92,7 @@ class CommentsController < ApplicationController
 
       redirect_to @post
 
-  end
+    end
   end
 
   # DELETE /comments/1
@@ -164,6 +174,20 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.friendly.find(params[:post_id])
+  end
+
+  def create_notification(post, comment)
+    return if post.user.id == current_user.id
+
+    Notification.create(user_id: post.user.id,
+
+                        notified_by_id: current_user.id,
+
+                        post_id: post.id,
+
+                        identifier: comment.id,
+
+                        notice_type: 'comment')
   end
 
   # Only allow a trusted parameter "white list" through.

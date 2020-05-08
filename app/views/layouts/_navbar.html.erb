@@ -53,6 +53,7 @@
       </a>
     </li>
     <% if user_signed_in? %>
+      <%= render 'notifications/notification_dropdown' %>
       <li class="nav-item dropdown user-nav">
         <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= image_tag(user_avatar(current_user), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
