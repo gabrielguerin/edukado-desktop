@@ -7,8 +7,14 @@ class NotificationsController < ApplicationController
 
   before_action :set_notification, only: %i[link_through]
 
+  respond_to :js, :html, :json
+
   def index
     @notifications = current_user.notifications.page(params[:page]).per(20)
+  end
+
+  def read_all
+    current_user.notifications.where(read: false).update_all(read: true)
   end
 
   def link_through

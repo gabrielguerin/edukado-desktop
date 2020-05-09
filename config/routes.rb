@@ -109,7 +109,9 @@ Rails.application.routes.draw do
       to: 'notifications#link_through',
       as: :link_through
 
-  resources :notifications, only: %i[index]
+  resources :notifications, only: %i[index] do
+    post :read_all, on: :collection
+  end
 
   get '/statics/:page' => 'statics#show'
 end

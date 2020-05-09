@@ -1,22 +1,29 @@
 <li class="nav-item dropdown notifications">
   <a class="nav-link with-count" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="ti-bell"></i>
-    <span class="badge badge-sm"><%= current_user.notifications.where(read: false).count %></span>
+    <span class="badge badge-sm" id="notifications_count_badge"><%= current_user.notifications.where(read: false).count %></span>
     <span class="d-none d-xs-block">Notifications</span>
   </a>
-  <ul class="dropdown-menu  dropdown-menu-right">
+  <ul class="dropdown-menu dropdown-menu-right">
     <li class="dropdown-item">
       <div class="card">
-        <div class="card-header text-primary justify-content-center">
-          <p>Vous avez <strong><span><%= current_user.notifications.where(read: false).count %></span></strong> <%= "notification".pluralize(current_user.notifications.count) %>.</p>
+        <div class="card-header text-primary justify-content-between">
+          <p>Vous avez 
+            <strong>
+              <span id="notifications_count_text">
+                <%= current_user.notifications.where(read: false).count %>
+              </span>
+            </strong>
+            <%= "notification".pluralize(current_user.notifications.count) %>.
+          </p>
+          <%= link_to read_all_notifications_path, method: :post, class: 'btn btn-circle btn-icon btn-default d-flex justify-content-center align-items-center', id: 'notification_read_all', remote: true, title: 'Tout marquer commme lu', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do %>
+            <%= theme_icon_tag "check" %>
+          <% end %>
         </div>
         <div class="list-group">
-          <%= render current_user.notifications.where(read: false).order(created_at: :desc).last(10) %>
+          <%= render current_user.notifications.order(created_at: :desc).first(5) %>
         </div>
         <div class="card-footer">
-          <a href="001_app_nav_bars.html#" class="pull-right">
-            <i class="ti-settings"></i>
-          </a>
           <%= link_to 'Voir toutes les notifications', notifications_path %>
         </div>
       </div>
