@@ -1,0 +1,5 @@
+$("#notification_read_all").on('ajax:success', function(){
+$('#notifications_count_badge').html('<%= current_user.notifications.where(read: false).count %>');
+$('#notifications_count_text').html('<%= current_user.notifications.where(read: false).count %>');
+$(".unread_notification").html('');
+});

@@ -15,6 +15,8 @@ class Post < ApplicationRecord
 
   has_many :tags, through: :posts_tags
 
+  has_many :notifications, dependent: :destroy
+
   has_one_attached :file
 
   acts_as_votable

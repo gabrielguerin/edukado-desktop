@@ -1,0 +1,19 @@
+<% @title = "Vos notifications" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-9 mr-auto ml-auto">
+      <div class="card">
+        <div id="notifications">
+          <%= render @notifications.order(created_at: :desc) %>
+        </div>
+      </div>
+      <% if @notifications.count > 5 %>
+        <div class="card">
+          <div class="card-body d-flex justify-content-center" id="paginate">
+            <%= paginate @notifications, remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

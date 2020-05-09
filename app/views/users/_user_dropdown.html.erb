@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+  <li class="nav-item dropdown user-nav">
+    <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <%= image_tag(user_avatar(current_user), class: 'avatar rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
+      <span class="caret caret-light"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li class="dropdown-item text-center">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle light-shadow p-1 border border-primary', style: 'object-fit: cover;', width: '120', height: '120', alt: 'profile picture'), posts_user_path(current_user) %>
+            <p class="mt-1 p-0 d-block">
+              <%= link_to "#{current_user.first_name} #{current_user.last_name}", posts_user_path(current_user) %>
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <div>
+              <%= link_to "Modifier mon profil", user_path(current_user), method: :get, class: "btn btn-secondary text-uppercase" %>
+            </div>
+            <div>
+              <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white text-uppercase" %>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+<% else %>
+  <li class="nav-item">
+    <%= link_to 'Se connecter', new_user_session_path, class: "nav-link btn btn-outline-light text-white text-hover-dark" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "S'inscrire", new_user_registration_path, class: "nav-link btn btn-light" %>
+  </li>
+<% end %>

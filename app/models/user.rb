@@ -32,6 +32,8 @@ class User < ApplicationRecord
 
   has_many :invitations, class_name: to_s, as: :invited_by
 
+  has_many :notifications, dependent: :destroy
+
   validates :description, length: {
 
     maximum: 550,
