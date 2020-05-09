@@ -17,7 +17,7 @@
     cursor: default;
 }
 
-/* Tags */
+/* Badges */
 .badge-light {
     background-color: #eef1f5;
 }
@@ -33,4 +33,9 @@
 
 .btn-light:hover {
     border-bottom: none;
+}
+
+/* Tooltips */
+.tooltip-inner {
+    padding: 0.7rem 0.5rem;
 }

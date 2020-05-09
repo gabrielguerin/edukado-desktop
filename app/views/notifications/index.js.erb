@@ -1,0 +1,5 @@
+$("#notifications").html("<%= j render(@notifications) %>");
+$("#paginate").html("<%= escape_javascript(paginate(@notifications, remote: true)) %>");
+$(document).ready(function(){
+$(this).scrollTop(0);
+});

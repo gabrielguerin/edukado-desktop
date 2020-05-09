@@ -150,6 +150,8 @@ class PostsController < ApplicationController
 
       if @post.save!
 
+        create_notification @post
+
         flash.now[:notice] = "You have successfuly upvoted #{@post.title}"
 
       else
@@ -205,6 +207,20 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.friendly.find(params[:id])
+  end
+
+  def create_notification(post)
+    return if post.user.id == current_user.id
+
+    Notification.create(user_id: post.user.id,
+
+                        notified_by_id: current_user.id,
+
+                        post_id: post.id,
+
+                        identifier: post.id,
+
+                        notice_type: 'aimé')
   end
 
   # Only allow a trusted parameter "white list" through.
