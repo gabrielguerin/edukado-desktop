@@ -34,3 +34,8 @@
 .btn-light:hover {
     border-bottom: none;
 }
+
+/* Tooltips */
+.tooltip-inner {
+    padding: 0.7rem 0.5rem;
+}
