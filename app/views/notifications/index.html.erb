@@ -1,0 +1,10 @@
+<% @title = "Vos notifications" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-9 mr-auto ml-auto">
+      <div class="card">
+        <%= render @notifications.order(created_at: :desc) %>
+      </div>
+    </div>
+  </div>
+</div>

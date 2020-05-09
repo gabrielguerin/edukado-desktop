@@ -11,13 +11,13 @@
           <p>Vous avez <strong><span><%= current_user.notifications.where(read: false).count %></span></strong> <%= "notification".pluralize(current_user.notifications.count) %>.</p>
         </div>
         <div class="list-group">
-          <%= render current_user.notifications.where(read: false).order(created_at: :desc) %>
+          <%= render current_user.notifications.where(read: false).order(created_at: :desc).last(10) %>
         </div>
         <div class="card-footer">
           <a href="001_app_nav_bars.html#" class="pull-right">
             <i class="ti-settings"></i>
           </a>
-          <a href="001_app_nav_bars.html#">Voir toutes les notifications</a>
+          <%= link_to 'Voir toutes les notifications', notifications_path %>
         </div>
       </div>
     </li>
