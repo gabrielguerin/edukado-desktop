@@ -187,7 +187,7 @@ class CommentsController < ApplicationController
 
                         identifier: comment.id,
 
-                        notice_type: 'comment')
+                        notice_type: 'commenté')
   end
 
   # Only allow a trusted parameter "white list" through.

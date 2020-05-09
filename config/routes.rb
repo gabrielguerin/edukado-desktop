@@ -105,5 +105,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'notifications/:id/link_through', to: 'notifications#link_through', as: :link_through
+
   get '/statics/:page' => 'statics#show'
 end

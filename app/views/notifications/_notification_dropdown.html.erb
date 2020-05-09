@@ -1,21 +1,21 @@
 <li class="nav-item dropdown notifications">
   <a class="nav-link with-count" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="ti-bell"></i>
-    <span class="badge badge-sm"><%= current_user.notifications.count %></span>
+    <span class="badge badge-sm"><%= current_user.notifications.where(read: false).count %></span>
     <span class="d-none d-xs-block">Notifications</span>
   </a>
   <ul class="dropdown-menu  dropdown-menu-right">
     <li class="dropdown-item">
       <div class="card">
         <div class="card-header text-primary justify-content-center">
-          <p>Vous avez <strong><span><%= current_user.notifications.count %></span></strong> <%= "notification".pluralize(current_user.notifications.count) %>.</p>
+          <p>Vous avez <strong><span><%= current_user.notifications.where(read: false).count %></span></strong> <%= "notification".pluralize(current_user.notifications.count) %>.</p>
         </div>
         <div class="list-group">
-          <%= render current_user.notifications %>
+          <%= render current_user.notifications.where(read: false).order(created_at: :desc) %>
         </div>
         <div class="card-footer">
           <a href="001_app_nav_bars.html#" class="pull-right">
-            <i class="ti-settings "></i>
+            <i class="ti-settings"></i>
           </a>
           <a href="001_app_nav_bars.html#">Voir toutes les notifications</a>
         </div>
