@@ -6,7 +6,7 @@
         <div id="blogs">
           <%= render partial: 'articles', locals: { blogs: @blogs } %>
         </div>
-        <% if @blogs_size > 5 %>
+        <% if @blogs.count > 5 %>
           <div class="card">
             <div class="card-body d-flex justify-content-center" id="paginate">
               <%= paginate @blogs, remote: true %>

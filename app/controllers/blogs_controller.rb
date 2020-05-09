@@ -5,18 +5,14 @@ class BlogsController < ApplicationController
 
   before_action :set_blog, only: %i[show edit update destroy]
 
+  respond_to :js, :html, :json
+
   # GET /blogs
 
   def index
     @blogs = Blog.order(created_at: :desc).page(params[:page])
 
     @blogs_size = Blog.all.size
-
-    respond_to do |format|
-      format.js
-
-      format.html
-    end
   end
 
   # GET /blogs/1
