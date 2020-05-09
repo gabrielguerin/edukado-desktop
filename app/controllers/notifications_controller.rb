@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[link_through]
 
   def index
-    @notifications = current_user.notifications
+    @notifications = current_user.notifications.page(params[:page]).per(20)
   end
 
   def link_through

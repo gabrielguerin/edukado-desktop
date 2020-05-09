@@ -7,5 +7,8 @@
         <time>Il y a <%= time_ago_in_words(notification.created_at) %></time>
       </small>
     </div>
+    <% if notification.read == false %>
+      <span class="text-primary">•</span>
+    <% end %>
   </div>
 <% end %>
