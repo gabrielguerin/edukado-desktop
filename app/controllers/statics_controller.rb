@@ -5,16 +5,14 @@ class StaticsController < ApplicationController
 
   before_action :check_signed_in
 
-  def index; end
-
   def show
     if valid_page?
 
-      render template: "statics/#{params[:page]}"
+      render template: params[:page].to_s
 
     else
 
-      render page: '/public/404.html', status: :not_found
+      render page: '/public/404', status: :not_found
 
     end
   end

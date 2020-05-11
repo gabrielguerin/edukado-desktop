@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # Admin routes
+
   namespace :admin do
     resources :users
 
@@ -45,19 +47,27 @@ Rails.application.routes.draw do
     root to: 'users#index'
   end
 
-  root 'statics#show', page: 'index'
+  # FAQ routes
 
   resources :faqs, only: %i[index], path: 'faq'
 
+  # Blogs routes
+
   resources :blogs, only: %i[show index], path: 'blog'
 
+  # Tags routes
+
   resources :tags, only: %i[show]
+
+  # Badges routes
 
   resources :badges, only: %i[index show user] do
     member do
       get :user
     end
   end
+
+  # Devise routes
 
   devise_for :users, path: 'users', controllers: {
 
@@ -71,13 +81,28 @@ Rails.application.routes.draw do
 
   }
 
+  # Users routes
+
   resources :users, only: %i[show posts] do
     member do
       get :posts
     end
   end
 
+  # Posts routes
+
   resources :posts do
+    member do
+      get 'like'
+
+      get 'unlike'
+
+      get 'dislike'
+
+      get 'undislike'
+    end
+
+    # Comments routes
     resources :comments do
       member do
         get 'like'
@@ -90,28 +115,27 @@ Rails.application.routes.draw do
       end
     end
 
-    member do
-      get 'like'
-
-      get 'unlike'
-
-      get 'dislike'
-
-      get 'undislike'
-    end
+    # Search routes
 
     collection do
       get :autocomplete
     end
   end
 
+  # Notifications routes
+
   get 'notifications/:id/link_through',
       to: 'notifications#link_through',
+
       as: :link_through
 
   resources :notifications, only: %i[index] do
     post :read_all, on: :collection
   end
 
-  get '/statics/:page' => 'statics#show'
+  # Statics routes
+
+  root 'statics#show', page: 'home'
+
+  get '/:page', to: 'statics#show'
 end
