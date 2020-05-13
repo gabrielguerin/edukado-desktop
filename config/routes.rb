@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   resources :badges, only: %i[index show user] do
     member do
-      get :user, path: ''
+      get :user
     end
   end
 
