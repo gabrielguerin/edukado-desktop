@@ -2,22 +2,19 @@
   <div class="card-body">
     <h5 class="mb-4">PROFIL</h5>
     <div class="container">
-      <%= form_for resource, as: resource_name, url: registration_path(resource_name),
-                html: { method: :put, novalidate: true, multipart: true, class: "form-horizontal" } do |f| %>
+      <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true, multipart: true, class: "form-horizontal" } do |f| %>
         <%= f.error_notification %>
         <%= f.form_group :avatar, class: "row" do |f| %>
-          <%= f.label "Photo de profil", class: "col-sm-4 col-form-label" %>
+          <%= f.label :avatar, 'Photo de profil', class: "col-sm-4 col-form-label" %>
           <div class="col-md-8">
-            <%= f.label "Photo de profil", class: "custom-file-label" %>
-            <%= f.file_field :avatar, class: "custom-file-input" %>
-            <%= f.error_messages %>
+            <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-max-file-size="5" data-dropzone-max-files="1">
+              <%= f.file_field :avatar, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
+              <div class="dropzone-msg dz-message needsclick text-gray-600">
+                <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
+                <span class="dropzone-msg-desc text-sm">2 Mo maximum. Types de fichier autorisés : jpg & png.</span>
+              </div>
+            </div>
           </div>
-          <script type="application/javascript">
-            $('input[type="file"]').change(function(e){
-                var fileName = e.target.files[0].name;
-                $('.custom-file-label').html(fileName);
-            });
-          </script>
         <% end %>
         <%= f.form_group :first_name, class: "row" do |f| %>
           <%= f.label "Prénom", class: "col-sm-4 col-form-label" %>

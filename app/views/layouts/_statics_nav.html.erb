@@ -1,40 +1,26 @@
 <%= render :layout => "layouts/base" do %>
-  <main class="landing-5">
-    <header class="bg-primary">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <nav class="navbar navbar-landing navbar-centered navbar-expand-lg mb-3">
-              <a href="<%= root_path %>" class="navbar-brand d-lg-none"><%= image_tag image_path('logos/edukado_white.png'), height: 32, class: 'mr-2'%></a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#standardLandingNavbarWithCenteredBrand" aria-controls="standardLandingNavbarWithCenteredBrand" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse text-white" id="standardLandingNavbarWithCenteredBrand">
-                <ul class="nav navbar-nav navbar-left">
-                  <li class="nav-item">
-                    <a class="nav-link" href="<%= root_path %>">Accueil</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="<%= blogs_path %>">Blog</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="mailto:contact@edukado.co">Contact</a>
-                  </li>
-                </ul>
-                <a href="javascript:" class="navbar-brand navbar-center text-center d-none d-sm-none d-md-none d-lg-block"><%= image_tag image_path('logos/edukado_white.png'), width: 200, class: 'mr-2'%></a>
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="nav-item">
-                    <%= link_to 'Se connecter', new_user_session_path, class: "btn btn-outline-light text-white text-hover-dark" %>
-                  </li>
-                  <li class="nav-item">
-                    <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-light" %>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </header>
-    </main>
-    <%= yield %>
-  <% end %>
+  <nav class="navbar navbar-expand-lg mb-0">
+    <%# Navbar icon %>
+    <a href="<%= posts_path %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
+    <%# Navbar toggler %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%# Navbar links %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+          <a class="nav-link" href="<%= root_path %>">Accueil</a>
+        </li>
+        <li class="nav-item <%= 'active' if current_page?(blogs_path) %>">
+          <a class="nav-link" href="<%= blogs_path %>">Blog</a>
+        </li>
+        <li class="nav-item <%= 'active' if current_page?("mailto:contact@edukado.co") %>">
+          <a class="nav-link" href="mailto:contact@edukado.co">Contact</a>
+        </li>
+      </ul>
+      <%= render partial: 'layouts/navbar' %>
+    </div>
+  </nav>
+  <%= yield %>
+<% end %>

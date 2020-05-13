@@ -1,5 +1,5 @@
 <% @title = 'Modifier mon profil' %>
-<div class="profile-header jumbotron  d-flex align-items-center justify-content-center flex-column p-0">
+<div class="profile-header jumbotron d-flex align-items-center justify-content-center flex-column p-0">
   <div class="d-flex align-items-center justify-content-center flex-column">
     <div class="fileinput fileinput-avatar fileinput-new d-flex flex-column align-items-center" data-provides="fileinput" style="height: 180px; width: 200px">
       <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -7,6 +7,7 @@
       </div>
     </div>
   </div>
+  <%# User full name %>
   <h2 class="m-0 mb-2"><%= current_user.first_name %> <%= current_user.last_name %></h2>
   <ul class="nav nav-tabs mt-5">
     <li class="nav-item">
@@ -22,17 +23,20 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-12 col-md-8 mr-auto ml-auto">
+    <div class="col-12 col-lg-9 col-md-9 mr-auto ml-auto">
       <div class="tab-content pt-2 pb-2" id="tabs">
         <div class="tab-pane" id="profile">
+          <%# Edit user %>
           <%= render partial: 'users/_user_account/edit' %>
         </div>
         <div class="tab-pane" id="badges">
+          <%# User badges %>
           <%= render partial: 'users/_user_account/badges' %>
         </div>
         <div class="tab-pane" id="support">
           <div class="card">
             <div class="card-body">
+              <%# Support %>
               <%= render partial: 'users/_user_account/support' %>
             </div>
           </div>

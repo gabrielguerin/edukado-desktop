@@ -1,1 +1,3 @@
-$("#comment_<%= @comment.id %>").replaceWith("<%= j render 'comments/form', post: @post, comment: @comment %>");
+$("#dropdown-menu_comment_<%= @comment.id %>").removeClass('show');
+<%# Render comment form %>
+$("#comment_description_<%= @comment.id %>").replaceWith("<%= j render 'comments/form', post: @post, comment: @comment %>");

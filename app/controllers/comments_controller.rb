@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
+
+  # Find post
 
   before_action :set_post
 
+  # Authenticate user
+
   before_action :authenticate_user!
+
+  # Find comment
 
   before_action :set_comment, only: %i[
 
@@ -27,6 +35,8 @@ class CommentsController < ApplicationController
 
   ]
 
+  # Respond to different formats
+
   respond_to :js, :html, :json
 
   # GET /comments/new
@@ -37,26 +47,38 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # POST /comments
 
   def create
-    @comment = @post.comments.create!(
+    @comment = @post.comments.build(
       comment_params
     )
 
-    if @comment.save
+    respond_to do |format|
+      if @comment.save
 
-      flash[:success] = 'Votre commentaire a été créé avec succès.'
+        create_notification @post, @comment
 
-    else
+        format.html { redirect_to @post, notice: 'Votre commentaire a été créé avec succès.' }
 
-      flash[:danger] = "Votre commentaire n'a pas été créé."
+        format.json { render :show, status: :created, location: @post }
 
+      else
+
+        format.html { render :new }
+
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+
+      end
+
+      format.js
     end
-
-    redirect_to @post
   end
 
   # PATCH/PUT /comments/1
@@ -66,11 +88,17 @@ class CommentsController < ApplicationController
       comment_params
     )
 
-      redirect_to @post, notice: 'Le commentaire a été mis à jour avec succès.'
+      respond_to do |format|
+        format.html { redirect_to @post }
+
+        format.js
+      end
 
     else
 
-      render :edit
+      flash[:alert] = 'Votre commentaire n\'a pas pu être modifié, veuillez essayer à nouveau.'
+
+      redirect_to @post
 
     end
   end
@@ -92,14 +120,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Like comment
+
   def like
     if @comment.user != current_user
 
       @comment.liked_by current_user
 
       if @comment.save!
-
-        flash.now[:notice] = 'You have successfuly upvoted this comment.'
 
       else
 
@@ -114,9 +142,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Unlike comment
+
   def unlike
     @comment.unliked_by current_user if @comment.user != current_user
   end
+
+  # Dislike comment
 
   def dislike
     if @comment.user != current_user
@@ -124,8 +156,6 @@ class CommentsController < ApplicationController
       @comment.disliked_by current_user
 
       if @comment.save!
-
-        flash.now[:notice] = 'You have successfuly downvoted this comment.'
 
       else
 
@@ -140,27 +170,47 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Undislike comment
+
   def undislike
     @comment.undisliked_by current_user if @comment.user != current_user
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set comment
 
   def set_comment
     @comment = @post.comments.find(params[:id])
   end
 
+  # Set post
+
   def set_post
     @post = Post.friendly.find(params[:post_id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Create notification when commenting on a post
+
+  def create_notification(post, comment)
+    return if post.user.id == current_user.id
+
+    Notification.create(user_id: post.user.id,
+
+                        notified_by_id: current_user.id,
+
+                        post_id: post.id,
+
+                        identifier: comment.id,
+
+                        notice_type: 'commenté')
+  end
+
+  # Comment parameters
 
   def comment_params
-    params.require(:comment).permit(:description).merge(
-      user_id: current_user.id
+    params.require(:comment).permit(:description, :post_id).merge(
+      user: current_user
     )
   end
 end

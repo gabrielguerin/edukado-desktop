@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  # Layout
+
   layout :determine_layout
 
-  before_action :authenticate_user!
+  # Find user
 
   before_action :set_user, only: %i[show posts]
+
+  # GET /users/1
 
   def show
     unless current_user == @user
@@ -16,6 +20,8 @@ class UsersController < ApplicationController
 
     end
   end
+
+  # Display user's posts
 
   def posts
     @posts = @user.posts.order(created_at: :desc).page(params[:page])
@@ -29,11 +35,13 @@ class UsersController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set user
 
   def set_user
     @user = User.friendly.find(params[:id])
   end
+
+  # Set layout based on action
 
   def determine_layout
     case action_name

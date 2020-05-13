@@ -1,0 +1,19 @@
+<li class="nav-item dropdown">
+  <a class="nav-link justify-content-end" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%# Search icon %>
+    <%= theme_icon_tag "search" %>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSearchButton">
+    <li>
+      <%# Search form %>
+      <%= form_tag(posts_path, method: 'get', class: 'form-inline', role: 'search') do %>
+        <div class="input-group my-0">
+          <%# Search field %>
+          <%= text_field_tag :search, nil, placeholder: "Rechercher", class: "form-control", id: "search", name: "search", autocomplete: :off %>
+          <%# Submit button %>
+          <%= submit_tag '', style: "display: none;" %>
+        </div>
+      <% end %>
+    </li>
+  </ul>
+</li>

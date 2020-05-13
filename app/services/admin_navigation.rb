@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminNavigation
-  # Set pages to remove from Admin Dashboard's sidebar
+  # Set pages to hide from Admin Dashboard's sidebar
 
   HIDDEN_PAGES = %w[
 

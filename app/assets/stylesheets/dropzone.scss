@@ -1,0 +1,11 @@
+@import "dropzone/dist/dropzone";
+@import "dropzone/dist/basic";
+
+.dropzone {
+    border: 3px dashed #aebac8;
+    opacity: 1;
+
+    &.dz-drag-hover {
+        border: 3px dashed #c8d0d9;
+    }
+}

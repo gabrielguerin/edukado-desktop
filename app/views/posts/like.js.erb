@@ -1,12 +1,17 @@
 <% if @post.user != current_user %>
   $("#like_post_<%= @post.id %>").on('ajax:success', function(){
+  <%# Update dislike count %>
   $('#dislike_post_<%= @post.id %>').find('#dislike_count').html('Vote négatif · <%= @post.dislikes_sum %>');
+  <%# Remove dislike button class %>
   $("#dislike_post_<%= @post.id %>").removeClass('text-danger');
+  <%# Update like count %>
   $(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
+  <%# Add like button class %>
   $(this).closest("#like_post_<%= @post.id %>").addClass('text-success');
+  <%# Set like button url to unlike %>
   $(this).attr("href", '/posts/<%= @post.id %>/unlike');
+  <%# Set dislike button url to dislike %>
   $("#dislike_post_<%= @post.id %>").attr("href", '/posts/<%= @post.id %>/dislike');
-  <%= ajax_flash('#flashes') %>
   });
 <% else %>
   <%= ajax_flash('#flashes') %>

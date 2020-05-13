@@ -1,0 +1,35 @@
+<%# Badges navbar dropdown menu %>
+<% if user_signed_in? %>
+  <li class="nav-item dropdown user-nav">
+    <a class="nav-link justify-content-end" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= theme_icon_tag "cup" %>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li class="dropdown-item text-center">
+        <div class="card">
+          <div class="card-header justify-content-center text-center text-primary">
+            <p>Vous avez actuellement <strong><%= current_user.points %></strong> points.</p>
+          </div>
+          <div class="card-header border-bottom-0 justify-content-center py-0">
+            <h6 class="mb-0">Dernier badge gagné</h6>
+          </div>
+          <% if current_user.badges.present? %>
+            <% current_user.badges.last(1).each do |badge| %>
+              <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
+            <% end %>
+          <% else %>
+            <p>Vous n'avez pas encore gagné de badges</p>
+          <% end %>
+          <div class="card-footer d-flex justify-content-between">
+            <div>
+              <%= link_to "Voir mes badges", user_badge_path(current_user), class: "btn btn-secondary text-uppercase" %>
+            </div>
+            <div>
+              <%= link_to "Tous les badges", badges_path, class: "btn btn-primary text-white text-uppercase" %>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </li>
+<% end %>

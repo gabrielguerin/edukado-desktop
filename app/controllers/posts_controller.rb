@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
 
+  # Authenticate user
+
   before_action :authenticate_user!, except: %i[show index]
+
+  # Find post
 
   before_action :set_post, only: %i[
 
@@ -25,32 +31,61 @@ class PostsController < ApplicationController
 
   ]
 
-  # before_action :user, only: %i[show]
+  # Find posts
 
   before_action :posts, only: %i[show create]
+
+  # Respond to different formats
 
   respond_to :js, :html, :json
 
   # GET /posts
 
   def index
-    @posts = if params[:search].present?
+    search = params[:search].present? ? params[:search] : nil
 
-               Post.perform_search(params[:search])
+    @posts = if search
+
+               # Render search results
+
+               Post.search(params[:search], page: params[:page], per_page: 20)
 
              else
+
+               # Render posts
 
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
 
+    # Get posts size
+
     @posts_size = Post.all.size
+  end
+
+  # Autocomplete search results
+
+  def autocomplete
+    render json: Post.search(params[:search], {
+
+                               fields: %w[title tag],
+
+                               match: :word_start,
+
+                               limit: 10,
+
+                               load: false,
+
+                               misspellings: { below: 5 }
+                             }).map(&:title)
   end
 
   # GET /posts/1
 
   def show
     @user = @post.user
+
+    @comment = @post.comments.new
   end
 
   # GET /posts/new
@@ -66,34 +101,28 @@ class PostsController < ApplicationController
   # POST /posts
 
   def create
-    @post = current_user.posts.create!(post_params)
+    @post = Post.new(post_params)
+
+    @comment = Comment.new
 
     respond_to do |format|
       if @post.save
 
-        format.js {}
+        format.js { redirect_to @post }
 
         format.html do
-          redirect_to root_path, notice: 'Votre publication a bien été ajoutée.'
+          redirect_to @post, notice: 'Votre publication a bien été ajoutée.'
         end
 
-        format.json { render :show, status: :created, location: @post }
+        format.json { render action: 'show', status: :created, location: @post }
 
       else
 
-        format.html do
-          flash[:danger] = "Votre publication n'a pas été ajoutée : #{
-
-          @post.errors.messages
-
-        }"
-
-          render :new
-        end
+        format.html { render action: 'new' }
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
 
-        format.js { render layout: false, content_type: 'text/javascript' }
+        format.js   { render 'create_errors', status: :unprocessable_entity }
 
       end
     end
@@ -130,6 +159,8 @@ class PostsController < ApplicationController
     end
   end
 
+  # Like post
+
   def like
     if @post.user != current_user
 
@@ -137,7 +168,7 @@ class PostsController < ApplicationController
 
       if @post.save!
 
-        flash.now[:notice] = "You have successfuly upvoted #{@post.title}"
+        create_notification @post
 
       else
 
@@ -152,9 +183,13 @@ class PostsController < ApplicationController
     end
   end
 
+  # Unlike post
+
   def unlike
     @post.unliked_by current_user if @post.user != current_user
   end
+
+  # Dislike post
 
   def dislike
     if @post.user != current_user
@@ -162,8 +197,6 @@ class PostsController < ApplicationController
       @post.disliked_by current_user
 
       if @post.save!
-
-        flash.now[:notice] = "You have successfuly downvoted #{@post.title}"
 
       else
 
@@ -178,23 +211,43 @@ class PostsController < ApplicationController
     end
   end
 
+  # Undislike post
+
   def undislike
     @post.undisliked_by current_user if @post.user != current_user
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set posts
 
   def posts
     @posts = Post.all.order(created_at: :desc).page(params[:page])
   end
 
+  # Set post
+
   def set_post
     @post = Post.friendly.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Create notification when post is liked
+
+  def create_notification(post)
+    return if post.user.id == current_user.id
+
+    Notification.create(user_id: post.user.id,
+
+                        notified_by_id: current_user.id,
+
+                        post_id: post.id,
+
+                        identifier: post.id,
+
+                        notice_type: 'aimé')
+  end
+
+  # Post parameters
 
   def post_params
     params.require(:post).permit(
@@ -204,6 +257,8 @@ class PostsController < ApplicationController
       :updated_at,
       :file,
       :tag_list
+    ).merge(
+      user: current_user
     )
   end
 end
