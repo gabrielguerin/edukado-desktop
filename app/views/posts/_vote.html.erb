@@ -1,0 +1,58 @@
+  <% if user_signed_in? %>
+  <% if current_user.liked? post %>
+    <%= link_to unlike_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom text-success', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-up') %>
+        <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-up') %>
+        <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
+      </div>
+    <% end %>
+  <% end %>
+  <% if current_user.disliked? post %>
+    <%= link_to undislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom text-danger', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-down') %>
+        <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
+      <div class="d-flex justify-content-center align-items-center">
+        <%= theme_icon_tag('arrow-down') %>
+        <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to like_post_path(post), remote: true, id: "like_post_#{post.id}", class: 'btn btn-light border-bottom disabled', style: 'font-size: 16px;' do %>
+    <div class="d-flex justify-content-center align-items-center">
+      <%= theme_icon_tag('arrow-up') %>
+      <div class="ml-2" id="like_count">Vote positif · <%= post.likes_sum %></div>
+    </div>
+  <% end %>
+  <%= link_to dislike_post_path(post), remote: true, id: "dislike_post_#{post.id}", class: 'btn btn-light border-bottom disabled', style: 'font-size: 16px;' do %>
+    <div class="d-flex justify-content-center align-items-center">
+      <%= theme_icon_tag('arrow-down') %>
+      <div class="ml-2" id="dislike_count">Vote négatif · <%= post.dislikes_sum %></div>
+    </div>
+  <% end %>
+<% end %>
+<%= link_to post_path(post), id: 'new-comment', class: 'btn btn-light border-bottom', style: 'font-size: 16px;' do %>
+  <div class="d-flex justify-content-center align-items-center">
+    <%= theme_icon_tag('comment') %>
+    <div class="ml-2">
+      <% if post.comments.count == 0 %>
+        Commentaire
+      <% else %>
+        Commentaires
+      <% end %>
+      · <%= post.comments.count %>
+    </div>
+  </div>
+<% end %>

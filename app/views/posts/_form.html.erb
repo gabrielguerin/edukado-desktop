@@ -1,9 +1,9 @@
-<%= form_for @post,
-                html: { multipart: true, class: "card form" }, remote: true do |f| %>
+<%= form_for @post, html: { multipart: true, class: "card form" }, remote: true do |f| %>
   <div class="card-header d-flex justify-content-center">
     <h5 class="mb-0">Ajouter une publication</h5>
   </div>
   <div class="card-body">
+    <%# Tags %>
     <%= f.form_group :tag_list, class: "row" do |f| %>
       <%= f.label "Tags", class: "col-sm-4 col-form-label" %>
       <div class="col-12">
@@ -11,6 +11,7 @@
         <%= f.error_messages %>
       </div>
     <% end %>
+    <%# Title %>
     <%= f.form_group :title, class: "row" do |f| %>
       <%= f.label "Titre", class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
@@ -18,6 +19,7 @@
         <%= f.error_messages %>
       </div>
     <% end %>
+    <%# Description %>
     <%= f.form_group :description, class: "row" do |f| %>
       <%= f.label :description, class: "col-sm-4 col-form-label" %>
       <div class="col-12">
@@ -25,6 +27,7 @@
         <%= f.error_messages %>
       </div>
     <% end %>
+    <%# File %>
     <%= f.form_group :file, class: "column" do |f| %>
       <%= f.label :file, 'Fichier', class: "col-sm-4 col-form-label pl-0" %>
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-max-file-size="5" data-dropzone-max-files="1">
@@ -37,6 +40,7 @@
     <% end %>
     <div class="d-flex">
       <div class="ml-auto">
+        <%# Buttons %>
         <%= link_to "Retour", posts_path, class: "btn btn-outline-default" %>
         <%= f.submit "Publier", class: "btn btn-primary" %>
       </div>

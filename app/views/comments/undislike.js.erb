@@ -1,5 +1,5 @@
 $("#dislike_comment_<%= @comment.id %>").on('ajax:success', function(){
-<%# Update dislike sum %>
+<%# Update dislike count %>
 $(this).find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
 <%# Remove dislike button class %>
 $(this).closest("#dislike_comment_<%= @comment.id %>").removeClass('text-danger');
