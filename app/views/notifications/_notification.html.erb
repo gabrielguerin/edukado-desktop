@@ -1,12 +1,16 @@
 <%= link_to(link_through_path(notification), html_options={class: 'list-group-item'}) do %>
   <div class="media d-flex align-items-center">
+    <%# Notified by user avatar %>
     <%= image_tag(user_avatar(notification.notified_by), class: 'd-flex mr-3 rounded-circle', style: 'object-fit: cover;', width: '34', height: '34', alt: 'profile picture') %>
     <div class="media-body">
+      <%# Notificaiton description %>
       <p class="text-wrap"><%= notification.notified_by.full_name %> a <%= notification.notice_type %> votre publication.</p>
       <small class="text-muted d-block">
+        <%# Notification created at %>
         <time>Il y a <%= time_ago_in_words(notification.created_at) %></time>
       </small>
     </div>
+    <%# Unread notification indicator %>
     <% if notification.read == false %>
       <span class="unread_notification">•</span>
     <% end %>

@@ -1,17 +1,27 @@
 <div class="card p-3">
   <div class="card-header">
+    <%# Blog cover %>
     <%= link_to image_tag((blog.cover), class: 'card-img-top', style: 'object-fit: cover;', height: '200', align: 'center'), blog_path(blog) %>
   </div>
   <div class="card-body">
+    <%# Blog title %>
     <h2 class="leading-normal mb-3"><%= link_to blog.title, blog_path(blog) %></h2>
+    <%# Blog description %>
     <p><%= truncate(blog.description, length: 150) %></p>
     <div class="article-meta color-grey-50">
+      <%# Author avatar %>
       <%= link_to image_tag(user_avatar(blog.user), class: 'd-flex rounded mr-3', style: 'object-fit: cover;', width: '40', height: '40') %>
       <div class="media-body d-flex align-items-center">
-        <p class="m-0 media-heading"><a href="<%= posts_user_path(blog.user) %>">Par <%= blog.user.first_name %> <%= blog.user.last_name %></a> &bull; <time>Publié le <%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time></p>
+        <p class="m-0 media-heading">
+          <%# Author full name %>
+          <a href="<%= posts_user_path(blog.user) %>">Par <%= blog.user.first_name %> <%= blog.user.last_name %></a>
+          <%# Date published %>
+          &bull; <time>Publié le <%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time>
+        </p>
       </div>
     </div>
     <div class="pt-2">
+      <%# Blog path %>
       <a href="<%= blog_path(blog) %>">Lire l'article &rarr;</a>
     </div>
   </div>

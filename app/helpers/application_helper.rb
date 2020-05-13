@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  # Application name
   def app_name
     'Edukado'
   end
 
+  # Set default user avatar if user has no avatar
   def user_avatar(user)
     if user.avatar.attached?
 
@@ -17,9 +19,12 @@ module ApplicationHelper
     end
   end
 
+  # Check if current_user is the object owner
   def owner?(object)
     current_user == object.user
   end
+
+  # Render flash messages with AJAX
 
   def ajax_flash(div_id)
     response = ''

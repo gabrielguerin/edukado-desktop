@@ -1,9 +1,3 @@
-<table class="table table-striped table-hover table-sm-responsive">
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <%= render partial: 'posts/post', locals: { post: post } %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @posts.each do |post| %>
+  <%= render partial: 'posts/post', locals: { post: post } %>
+<% end %>

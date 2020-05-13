@@ -1,5 +1,8 @@
 $("#dislike_comment_<%= @comment.id %>").on('ajax:success', function(){
+<%# Update dislike count %>
 $(this).find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
+<%# Remove dislike button class %>
 $(this).closest("#dislike_comment_<%= @comment.id %>").removeClass('text-danger');
+<%# Set dislike button url to dislike %>
 $(this).attr("href", '/posts/<%= @post.id %>/comments/<%= @comment.id %>/dislike');
 });

@@ -1,7 +1,13 @@
-class FaqsController < ApplicationController
-  layout "scaffold"
+# frozen_string_literal: true
 
-  before_action :set_faq, only: [:show, :edit, :update, :destroy]
+class FaqsController < ApplicationController
+  # Layout
+
+  layout 'scaffold'
+
+  # Find FAQ
+
+  before_action :set_faq, only: %i[show edit update destroy]
 
   # GET /faqs
   def index
@@ -9,8 +15,7 @@ class FaqsController < ApplicationController
   end
 
   # GET /faqs/1
-  def show
-  end
+  def show; end
 
   # GET /faqs/new
   def new
@@ -18,8 +23,7 @@ class FaqsController < ApplicationController
   end
 
   # GET /faqs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /faqs
   def create
@@ -48,13 +52,14 @@ class FaqsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_faq
-      @faq = Faq.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def faq_params
-      params.fetch(:faq, {})
-    end
+  # Set FAQ
+  def set_faq
+    @faq = Faq.find(params[:id])
+  end
+
+  # FAQ parameters
+  def faq_params
+    params.fetch(:faq, {})
+  end
 end

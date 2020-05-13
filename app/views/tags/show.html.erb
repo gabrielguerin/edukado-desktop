@@ -3,9 +3,11 @@
   <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12">
       <% if @posts.present? %>
+        <%# Posts %>
         <div id="posts">
           <%= render partial: 'posts', locals: { posts: @posts } %>
         </div>
+        <%# Pagination  %>
         <% if @tag.posts.length > 5 %>
           <div class="card">
             <div class="card-body d-flex justify-content-center" id="paginate">

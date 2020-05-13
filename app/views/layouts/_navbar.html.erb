@@ -1,11 +1,19 @@
 <ul class="nav navbar-nav">
+  <%# Search dropdown %>
   <%= render 'searches/search_dropdown' %>
+  <%# Badge dropdown %>
   <%= render 'badges/badge_dropdown' %>
+  <%# Help dropdown%>
   <li class="nav-item">
-    <a class="nav-link" href='/statics/about'>
+    <%= link_to '/about', class: 'nav-link' do %>
       <%= theme_icon_tag "help-alt" %>
-    </a>
+    <% end %>
   </li>
-  <%= render 'notifications/notification_dropdown' %>
+  <%# Notification dropdown %>
+  <% if url_for('admin').start_with?("admin") %>
+  <% else %>
+    <%= render 'notifications/notification_dropdown' %>
+  <% end %>
+  <%# User dropdown %>
   <%= render 'users/user_dropdown' %>
 </ul>

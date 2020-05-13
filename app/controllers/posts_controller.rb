@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
 
+  # Authenticate user
+
   before_action :authenticate_user!, except: %i[show index]
+
+  # Find post
 
   before_action :set_post, only: %i[
 
@@ -25,9 +31,11 @@ class PostsController < ApplicationController
 
   ]
 
-  # before_action :user, only: %i[show]
+  # Find posts
 
   before_action :posts, only: %i[show create]
+
+  # Respond to different formats
 
   respond_to :js, :html, :json
 
@@ -38,16 +46,24 @@ class PostsController < ApplicationController
 
     @posts = if search
 
+               # Render search results
+
                Post.search(params[:search], page: params[:page], per_page: 20)
 
              else
+
+               # Render posts
 
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
 
+    # Get posts size
+
     @posts_size = Post.all.size
   end
+
+  # Autocomplete search results
 
   def autocomplete
     render json: Post.search(params[:search], {
@@ -143,6 +159,8 @@ class PostsController < ApplicationController
     end
   end
 
+  # Like post
+
   def like
     if @post.user != current_user
 
@@ -151,8 +169,6 @@ class PostsController < ApplicationController
       if @post.save!
 
         create_notification @post
-
-        flash.now[:notice] = "You have successfuly upvoted #{@post.title}"
 
       else
 
@@ -167,9 +183,13 @@ class PostsController < ApplicationController
     end
   end
 
+  # Unlike post
+
   def unlike
     @post.unliked_by current_user if @post.user != current_user
   end
+
+  # Dislike post
 
   def dislike
     if @post.user != current_user
@@ -177,8 +197,6 @@ class PostsController < ApplicationController
       @post.disliked_by current_user
 
       if @post.save!
-
-        flash.now[:notice] = "You have successfuly downvoted #{@post.title}"
 
       else
 
@@ -193,21 +211,27 @@ class PostsController < ApplicationController
     end
   end
 
+  # Undislike post
+
   def undislike
     @post.undisliked_by current_user if @post.user != current_user
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set posts
 
   def posts
     @posts = Post.all.order(created_at: :desc).page(params[:page])
   end
 
+  # Set post
+
   def set_post
     @post = Post.friendly.find(params[:id])
   end
+
+  # Create notification when post is liked
 
   def create_notification(post)
     return if post.user.id == current_user.id
@@ -223,7 +247,7 @@ class PostsController < ApplicationController
                         notice_type: 'aimé')
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Post parameters
 
   def post_params
     params.require(:post).permit(

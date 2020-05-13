@@ -1,9 +1,13 @@
 <div class="navbar-header">
   <div class="profile">
+    <%# User avatar %>
     <%= image_tag(user_avatar(current_user), class: 'rounded-circle profile-image', style: 'object-fit: cover;', width: '60', height: '60', alt: 'profile picture') %>
     <div class="profile-body">
+      <%# User full name %>
       <h6><%= current_user.first_name %> <%= current_user.last_name %></h6>
+      <%# User links %>
       <div class="user-links">
+        <%# Edit user %>
         <a class="btn btn-link" href="<%= edit_user_registration_path %>" data-placement="bottom" data-toggle="tooltip" data-original-title="Profil">
           <%= theme_icon_tag "user" %>
         </a>
@@ -19,6 +23,7 @@
       </div>
     </div>
   </div>
+  <%# Side menu toggler %>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#menu-content" aria-controls="menu-content" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
