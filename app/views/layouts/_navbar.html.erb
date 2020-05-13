@@ -5,9 +5,9 @@
   <%= render 'badges/badge_dropdown' %>
   <%# Help dropdown%>
   <li class="nav-item">
-    <a class="nav-link" href='about'>
+    <%= link_to '/about', class: 'nav-link' do %>
       <%= theme_icon_tag "help-alt" %>
-    </a>
+    <% end %>
   </li>
   <%# Notification dropdown %>
   <% if url_for('admin').start_with?("admin") %>

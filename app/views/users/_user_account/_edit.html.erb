@@ -2,8 +2,7 @@
   <div class="card-body">
     <h5 class="mb-4">PROFIL</h5>
     <div class="container">
-      <%= form_for resource, as: resource_name, url: registration_path(resource_name),
-                html: { method: :put, novalidate: true, multipart: true, class: "form-horizontal" } do |f| %>
+      <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, novalidate: true, multipart: true, class: "form-horizontal" } do |f| %>
         <%= f.error_notification %>
         <%= f.form_group :avatar, class: "row" do |f| %>
           <%= f.label :avatar, 'Photo de profil', class: "col-sm-4 col-form-label" %>
