@@ -29,6 +29,8 @@ class NotificationsController < ApplicationController
     current_user.notifications.where(read: false).update_all(read: true)
   end
 
+  # If user clicks on notification, mark as read
+
   def link_through
     @notification.update read: true
 

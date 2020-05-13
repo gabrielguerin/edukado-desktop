@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-md-9">
       <% if @badges.present? %>
+        <%# Badges %>
         <%= render partial: 'badges', locals: {badges: @badges} %>
       <% else %>
         <div class="card">
