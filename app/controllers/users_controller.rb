@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
   end
 
-  # Determine layout based on action
+  # Set layout based on action
 
   def determine_layout
     case action_name

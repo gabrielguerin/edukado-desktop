@@ -1,11 +1,16 @@
 <ul class="nav navbar-nav">
+  <%# Search dropdown %>
   <%= render 'searches/search_dropdown' %>
+  <%# Badge dropdown %>
   <%= render 'badges/badge_dropdown' %>
+  <%# Help dropdown%>
   <li class="nav-item">
     <a class="nav-link" href='about'>
       <%= theme_icon_tag "help-alt" %>
     </a>
   </li>
+  <%# Notification dropdown %>
   <%= render 'notifications/notification_dropdown' %>
+  <%# User dropdown %>
   <%= render 'users/user_dropdown' %>
 </ul>
