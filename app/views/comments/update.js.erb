@@ -1,2 +1,4 @@
+<%# Hide duplicate comment %>
 $('#comment_<%= @comment.id %>').hide();
+<%# Render comment %>
 $('#comments_<%= @post.id %>').prepend("<%=j render 'comments/comment', post: @post, comment: @comment, remote: true %>");

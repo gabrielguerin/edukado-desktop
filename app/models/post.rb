@@ -65,13 +65,13 @@ class Post < ApplicationRecord
     }
   end
 
-  # Sum of likes
+  # Like count
 
   def likes_sum
     get_likes.size
   end
 
-  # Sum of dislikes
+  # Dislike count
 
   def dislikes_sum
     get_dislikes.size
