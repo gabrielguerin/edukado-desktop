@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 class StaticsController < ApplicationController
-  layout :determine_layout
+  # Layout
+
+  layout 'statics'
+
+  # Check if user is signed in
 
   before_action :check_signed_in
+
+  # GET /:page
 
   def show
     if valid_page?
@@ -19,6 +25,8 @@ class StaticsController < ApplicationController
 
   private
 
+  # Check if file exists in views/statics
+
   def valid_page?
     File.exist?(
       Pathname.new(
@@ -27,13 +35,9 @@ class StaticsController < ApplicationController
     )
   end
 
-  # Redirects users to the web application if they are already signed in
+  # Redirect to posts#index if user is already signed in
 
   def check_signed_in
     redirect_to posts_path if signed_in?
-  end
-
-  def determine_layout
-    current_user ? '_app_nav' : 'statics'
   end
 end

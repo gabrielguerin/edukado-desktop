@@ -12,15 +12,18 @@
 
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    # Layout
+
     layout 'sidenav'
 
-    before_action :authenticate_user!
-
+    # Find admin
     before_action :authenticate_admin
 
+    # Authenticate admin user
     def authenticate_admin
       unless current_user&.admin?
-        redirect_to '/', alert: "Vous n'êtes pas autorisé à accéder à cette page."
+        redirect_to '/',
+                    alert: "Vous n'êtes pas autorisé à accéder à cette page."
       end
     end
 

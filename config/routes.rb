@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   resources :badges, only: %i[index show user] do
     member do
-      get :user
+      get :user, path: ''
     end
   end
 
@@ -103,6 +103,7 @@ Rails.application.routes.draw do
     end
 
     # Comments routes
+
     resources :comments do
       member do
         get 'like'

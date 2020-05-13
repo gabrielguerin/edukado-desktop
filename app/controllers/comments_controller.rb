@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
+
+  # Find post
 
   before_action :set_post
 
+  # Authenticate user
+
   before_action :authenticate_user!
+
+  # Find comment
 
   before_action :set_comment, only: %i[
 
@@ -26,6 +34,8 @@ class CommentsController < ApplicationController
     undislike
 
   ]
+
+  # Respond to different formats
 
   respond_to :js, :html, :json
 
@@ -59,17 +69,15 @@ class CommentsController < ApplicationController
 
         format.json { render :show, status: :created, location: @post }
 
-        format.js
-
       else
 
         format.html { render :new }
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
 
-        format.js
-
       end
+
+      format.js
     end
   end
 
@@ -112,14 +120,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Like comment
+
   def like
     if @comment.user != current_user
 
       @comment.liked_by current_user
 
       if @comment.save!
-
-        flash.now[:notice] = 'You have successfuly upvoted this comment.'
 
       else
 
@@ -134,9 +142,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Unlike comment
+
   def unlike
     @comment.unliked_by current_user if @comment.user != current_user
   end
+
+  # Dislike comment
 
   def dislike
     if @comment.user != current_user
@@ -144,8 +156,6 @@ class CommentsController < ApplicationController
       @comment.disliked_by current_user
 
       if @comment.save!
-
-        flash.now[:notice] = 'You have successfuly downvoted this comment.'
 
       else
 
@@ -160,21 +170,27 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Undislike comment
+
   def undislike
     @comment.undisliked_by current_user if @comment.user != current_user
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set comment
 
   def set_comment
     @comment = @post.comments.find(params[:id])
   end
 
+  # Set post
+
   def set_post
     @post = Post.friendly.find(params[:post_id])
   end
+
+  # Create notification when commenting on a post
 
   def create_notification(post, comment)
     return if post.user.id == current_user.id
@@ -190,7 +206,7 @@ class CommentsController < ApplicationController
                         notice_type: 'commenté')
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Comment parameters
 
   def comment_params
     params.require(:comment).permit(:description, :post_id).merge(
