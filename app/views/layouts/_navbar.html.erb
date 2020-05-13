@@ -10,10 +10,7 @@
     <% end %>
   </li>
   <%# Notification dropdown %>
-  <% if url_for('admin').start_with?("admin") %>
-  <% else %>
-    <%= render 'notifications/notification_dropdown' %>
-  <% end %>
+  <%= render 'notifications/notification_dropdown' %>
   <%# User dropdown %>
   <%= render 'users/user_dropdown' %>
 </ul>
