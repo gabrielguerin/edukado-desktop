@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module UsersHelper
+  # Render Devise forms outside of Devise views
+
   def resource_name
     :user
   end

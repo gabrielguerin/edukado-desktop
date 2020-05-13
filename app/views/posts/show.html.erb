@@ -4,10 +4,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12">
+      <%# Post %>
       <%= render @post %>
     </div>
     <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+      <%# User side panel %>
       <%= render 'users/side_panel', locals: {user: @user} %>
+      <%# Badges side panel %>
       <%= render partial: 'badges/side_panel' %>
     </div>
   </div>

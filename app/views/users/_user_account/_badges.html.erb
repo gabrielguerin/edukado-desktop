@@ -13,6 +13,7 @@
         <tbody>
           <% current_user.badges.each do |badge| %>
             <tr>
+              <%# Badges %>
               <%= render partial: 'badges/badge-list', locals: { badge: badge } %>
             </tr>
           <% end %>

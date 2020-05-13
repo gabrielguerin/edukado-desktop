@@ -1,5 +1,8 @@
+<%# Render notifications %>
 $("#notifications").html("<%= j render(@notifications) %>");
+<%# Render pagination %>
 $("#paginate").html("<%= escape_javascript(paginate(@notifications, remote: true)) %>");
 $(document).ready(function(){
+<%# Scroll to the of window %>
 $(this).scrollTop(0);
 });

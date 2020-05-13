@@ -29,5 +29,9 @@ module EdukadoDesktop
     config.to_prepare do
       Administrate::ApplicationController.helper EdukadoDesktop::Application.helpers
     end
+
+    # Add views/statics to default view paths
+
+    config.paths['app/views'].unshift("#{Rails.root}/app/views/statics/")
   end
 end

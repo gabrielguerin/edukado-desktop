@@ -3,7 +3,9 @@
   <div class="container">
     <header class="text-center text-white">
       <div class="container">
+        <%# Blog title %>
         <h1><%= @blog.title %></h1>
+        <%# Blog description %>
         <h2 class="h4"><%= @blog.description %></h2>
       </div>
     </header>
@@ -14,10 +16,13 @@
     <div class="row">
       <div class="col-12 col-md-3 text-muted">
         <aside class="small text-center mt-3">
+          <%# Blog author %>
           <em>Par <%= @blog.user.first_name %> <%= @blog.user.last_name %></em>
+          <%# Date published %>
           <p class="m-0">Publié le <time><%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time></p>
           <hr class="nub" />
           <dl class="">
+            <%# Blog tags %>
             <dt>Tags</dt>
             <dd>
               <ul class="list-unstyled">
@@ -33,21 +38,26 @@
       </div>
       <div class="col-12 col-md-8 ">
         <div class ="mb-5">
+          <%# Blog body %>
           <%= @blog.body %>
         </div>
         <section class="row post-footer bg-white rounded py-4">
           <div class="col-12">
             <div class="media color-grey-50">
+              <%# Author avatar %>
               <%= link_to image_tag(user_avatar(blog.user), class: 'd-flex rounded mr-3', style: 'object-fit: cover;', width: '40', height: '40') %>
               <div class="media-body d-flex justify-content-between">
                 <div>
+                  <%# Date published %>
                   <p class="m-0 media-heading">Publié le <time><%= l(blog.updated_at.to_time, format: "%-d %B %Y") %></time></p>
+                  <%# Blog author %>
                   <a href="<%= posts_user_path(blog.user) %>">Par <%= @blog.user.first_name %> <%= @blog.user.last_name %></a>
                 </div>
                 <span class="social">
                   <p class="m-0 text-muted small">
                     Partagez cet article
                   </p>
+                  <%# Share blog %>
                   <div class="social-links">
                     <a class="social-icon" href="#" data-platform="twitter" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fa fa-twitter"></i></a>
                     <a class="social-icon" href="#" data-platform="facebook" data-message="Message about this post" data-url="http://writertheme.com/post"><i class="fa fa-facebook-official"></i></a>

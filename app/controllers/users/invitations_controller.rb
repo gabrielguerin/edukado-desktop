@@ -12,7 +12,25 @@ module Users
 
     helper_method :after_sign_in_path_for if respond_to? :helper_method
 
-    layout 'scaffold', only: %i[new]
+    # Layout
+
+    layout :determine_layout
+
+    # Set layout based on action
+
+    def determine_layout
+      case action_name
+
+      when 'new'
+
+        'scaffold'
+
+      when 'edit'
+
+        'statics'
+
+      end
+    end
 
     # GET /resource/invitation/new
 

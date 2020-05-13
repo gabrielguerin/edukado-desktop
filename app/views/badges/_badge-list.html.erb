@@ -1,10 +1,11 @@
+<%# Badge list %>
 <td>
   <span class="mr-3" style="font-size: 48px;">
     <%= fa_icon_tag(badge.custom_fields[:icon_tag]) %>
   </span>
 </td>
 <td>
-  #<%= badge.name %>
+  <%= link_to "##{badge.name}", badge_path(badge) %>
 </td>
 <td>
   <%= badge.description %>

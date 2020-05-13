@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  # Associations
+
   belongs_to :post
 
   belongs_to :user
 
+  # Vote
+
   acts_as_votable
+
+  # Validations
 
   validates :description, length: {
 
@@ -15,9 +21,13 @@ class Comment < ApplicationRecord
 
   }
 
+  # Like count
+
   def likes_sum
     get_likes.size
   end
+
+  # Dislike count
 
   def dislikes_sum
     get_dislikes.size

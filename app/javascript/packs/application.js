@@ -48,6 +48,6 @@ require("trix")
 require("@rails/actiontext")
 require("kiso_themes")
 require("packs/typeahead.bundle")
-require("packs/posts")
+require("packs/search-post")
 
 import "controllers"

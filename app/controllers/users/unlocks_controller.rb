@@ -2,6 +2,10 @@
 
 module Users
   class UnlocksController < Devise::UnlocksController
+    # Layout
+
+    layout 'statics'
+
     # GET /resource/unlock/new
     # def new
     #   super
