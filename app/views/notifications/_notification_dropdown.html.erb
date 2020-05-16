@@ -28,7 +28,7 @@
             <%# Render notifications %>
             <%= render current_user.notifications.order(created_at: :desc).first(5) %>
           </div>
-          <div class="card-footer">
+          <div class="card-footer text-center">
             <%# All notifications %>
             <%= link_to 'Voir toutes les notifications', notifications_path %>
           </div>
