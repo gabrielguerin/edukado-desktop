@@ -2,6 +2,10 @@
 $("#posts").html("<%= j render(@posts) %>");
 <%# Render pagination %>
 $("#paginate").html("<%= escape_javascript(paginate(@posts, remote: true)) %>");
+<%# Remove form %>
+$('#new-post form').remove();
+<%# Display new post button %>
+$('#new-post a').show();
 <%# Scroll to top of the page %>
 $(document).ready(function(){
 $(this).scrollTop(0);
