@@ -30,6 +30,8 @@ PostsTag.delete_all
 
 Blog.delete_all
 
+Notification.delete_all
+
 # Create users
 
 20.times do
@@ -74,10 +76,14 @@ end
 
     tags: Tag.all.sample(3)
   )
+
   @post.file.attach(
     io: File.open('app/assets/images/seed/SEO.pdf'),
+
     filename: 'SEO.pdf',
+
     content_type: 'application/pdf',
+
     identify: false
   )
 end
@@ -128,10 +134,14 @@ end
 
     body: Faker::Lorem.paragraphs
   )
+
   @blog.cover.attach(
     io: File.open('app/assets/images/seed/blog_cover.jpg'),
+
     filename: 'blog_cover.jpg',
+
     content_type: 'image/jpg',
+
     identify: false
   )
 end
