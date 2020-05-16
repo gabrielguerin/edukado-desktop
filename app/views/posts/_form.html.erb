@@ -1,6 +1,13 @@
 <%= form_for @post, html: { multipart: true, class: "card form" }, remote: true do |f| %>
   <div class="card-header d-flex justify-content-center">
-    <h5 class="mb-0">Ajouter une publication</h5>
+    <h5 class="mb-0">
+      <% if current_page?(new_post_path) %>
+        <%# 'Modifier votre ' if current_page?(edit_post_path) %>
+        Ajouter une publication
+      <% else %>
+        Modifier votre publication
+      <% end %>
+    </h5>
   </div>
   <div class="card-body">
     <%# Tags %>
