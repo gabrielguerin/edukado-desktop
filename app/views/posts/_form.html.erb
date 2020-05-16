@@ -1,6 +1,12 @@
 <%= form_for @post, html: { multipart: true, class: "card form" }, remote: true do |f| %>
   <div class="card-header d-flex justify-content-center">
-    <h5 class="mb-0">Ajouter une publication</h5>
+    <h5 class="mb-0">
+      <% if current_page?(new_post_path) %>
+        Ajouter une publication
+      <% else %>
+        Modifier votre publication
+      <% end %>
+    </h5>
   </div>
   <div class="card-body">
     <%# Tags %>
@@ -41,7 +47,7 @@
     <div class="d-flex">
       <div class="ml-auto">
         <%# Buttons %>
-        <%= link_to "Retour", posts_path, class: "btn btn-outline-default" %>
+        <%= link_to "Retour", posts_path, class: "btn btn-outline-default", "#{ajax}": true %>
         <%= f.submit "Publier", class: "btn btn-primary" %>
       </div>
     </div>
