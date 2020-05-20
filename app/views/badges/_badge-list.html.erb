@@ -1,11 +1,6 @@
 <%# Badge list %>
 <td>
-  <span class="mr-3" style="font-size: 48px;">
-    <%= fa_icon_tag(badge.custom_fields[:icon_tag]) %>
-  </span>
-</td>
-<td>
-  <%= link_to "##{badge.name}", badge_path(badge) %>
+  <%= render partial: 'badge', locals: { badge: badge } %>
 </td>
 <td>
   <%= badge.description %>

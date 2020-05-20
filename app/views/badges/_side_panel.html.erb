@@ -5,13 +5,19 @@
       <% if current_user == @user %>
         <p>Vos 3 derniers badges</p>
       <% else %>
-        <p>Les 3 derniers badges de <%= "#{@user.first_name}" %></p>
+        <p>Les 3 derniers badges de <%= @user.first_name %></p>
+      <% end %>
+      <% @user.badges.last(3).each do |badge| %>
+        <% if @user.badges.count > 1 %>
+          <div style="margin-bottom: 0.9375rem;">
+            <%= render partial: 'badges/badge', locals: { badge: badge } %>
+          </div>
+        <% else %>
+          <%= render partial: 'badges/badge', locals: { badge: badge } %>
+        <% end %>
       <% end %>
     </div>
   </div>
-  <% @user.badges.last(3).each do |badge| %>
-    <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: '', padding: '' } %>
-  <% end %>
 <% else %>
   <div class="card">
     <div class="card-body text-center">

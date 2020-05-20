@@ -41,7 +41,7 @@ module Merit
 
       # Registration
 
-      grant_on 'users/confirmations#show', badge: 'just-registered',
+      grant_on 'users/confirmations#show', badge_id: 1,
 
                                            model_name: 'User',
 
@@ -52,202 +52,74 @@ module Merit
       # Contributor
 
       grant_on 'posts#create',
-               badge: 'contributor',
+               badge_id: 2,
 
                level: 1,
-
-               to: :user do |post|
-        post.user && post.user.posts.count == 1
-      end
-
-      grant_on 'posts#create',
-               badge: 'contributor',
-
-               level: 2,
-
-               to: :user do |post|
-        post.user && post.user.posts.count == 3
-      end
-
-      grant_on 'posts#create',
-               badge: 'contributor',
-
-               level: 3,
-
-               to: :user do |post|
-        post.user && post.user.posts.count == 5
-      end
-
-      grant_on 'posts#create',
-               badge: 'contributor',
-
-               level: 4,
 
                to: :user do |post|
         post.user && post.user.posts.count == 10
       end
 
       grant_on 'posts#create',
-               badge: 'contributor',
+               badge_id: 3,
 
-               level: 5,
-
-               to: :user do |post|
-        post.user && post.user.posts.count == 15
-      end
-
-      grant_on 'posts#create',
-               badge: 'contributor',
-
-               level: 6,
+               level: 2,
 
                to: :user do |post|
         post.user && post.user.posts.count == 25
       end
 
       grant_on 'posts#create',
-               badge: 'contributor',
+               badge_id: 4,
 
-               level: 7,
-
-               to: :user do |post|
-        post.user && post.user.posts.count == 50
-      end
-
-      grant_on 'posts#create',
-               badge: 'contributor',
-
-               level: 8,
+               level: 3,
 
                to: :user do |post|
         post.user && post.user.posts.count == 100
       end
 
-      # Critic
+      # Voter
 
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 1,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 1
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 2,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 5
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 3,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 10
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 4,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 25
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 5,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 50
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 6,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 100
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 7,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 250
-      end
-
-      grant_on 'comments#create',
-               badge: 'critic',
-
-               level: 8,
-
-               to: :user do |comment|
-        comment.user && comment.user.comments.count == 500
-      end
-
-      # Liked
-
-      grant_on 'posts#like',
-               badge: 'liked',
+      grant_on ['posts#like', 'posts#dislike'],
+               badge_id: 5,
 
                level: 1,
 
-               to: :user do |post|
-        post.user.posts.sum(&:likes_sum) == 1
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 10
       end
 
-      grant_on 'posts#like',
-               badge: 'liked',
-
-               level: 2,
-
-               to: :user do |post|
-        post.user.posts.sum(&:likes_sum) == 3
-      end
-
-      grant_on 'posts#like',
-               badge: 'liked',
+      grant_on ['posts#like', 'posts#dislike'],
+               badge_id: 6,
 
                level: 3,
 
-               to: :user do |post|
-        post.user.posts.sum(&:likes_sum) == 5
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 100
       end
 
-      grant_on 'posts#like',
-               badge: 'liked',
+      grant_on ['posts#like', 'posts#dislike'],
+               badge_id: 7,
 
                level: 4,
+
+               to: :action_user do |user|
+        user.likes_sum + user.dislikes_sum == 500
+      end
+
+      # Representant
+
+      grant_on 'posts#like',
+               badge_id: 8,
+
+               level: 1,
 
                to: :user do |post|
         post.user.posts.sum(&:likes_sum) == 10
       end
 
-      # Loved
-
       grant_on 'posts#like',
-               badge: 'loved',
-
-               level: 1,
-
-               to: :user do |post|
-        post.user.posts.sum(&:likes_sum) == 15
-      end
-
-      grant_on 'posts#like',
-               badge: 'loved',
+               badge_id: 9,
 
                level: 2,
 
@@ -256,138 +128,95 @@ module Merit
       end
 
       grant_on 'posts#like',
-               badge: 'loved',
+               badge_id: 10,
 
                level: 3,
-
-               to: :user do |post|
-        post.user.posts.sum(&:likes_sum) == 50
-      end
-
-      grant_on 'posts#like',
-               badge: 'loved',
-
-               level: 4,
 
                to: :user do |post|
         post.user.posts.sum(&:likes_sum) == 100
       end
 
-      # Voted
+      # Critic
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      grant_on 'posts#dislike',
+               badge_id: 11,
 
                level: 1,
 
                to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 1
+        user.dislikes_sum == 1
       end
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      # Comments
+
+      grant_on 'comments#create',
+               badge_id: 12,
+
+               level: 1,
+
+               to: :user do |comment|
+        comment.user && comment.user.comments.count == 10
+      end
+
+      grant_on 'comments#create',
+               badge_id: 13,
 
                level: 2,
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 5
+               to: :user do |comment|
+        comment.user && comment.user.comments.count == 100
       end
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      grant_on 'comments#create',
+               badge_id: 14,
 
                level: 3,
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 10
+               to: :user do |comment|
+        comment.user && comment.user.comments.count == 500
       end
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      # Member
 
-               level: 4,
+      grant_on 'users/sessions#create',
+               badge_id: 46,
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 25
+               level: 1,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= 365
       end
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      grant_on 'users/sessions#create',
+               badge_id: 47,
 
-               level: 5,
+               level: 2,
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 50
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 3)
       end
 
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
+      grant_on 'users/sessions#create',
+               badge_id: 48,
 
-               level: 6,
+               level: 3,
 
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 100
+               model_name: 'User',
+
+               to: :itself do |user|
+        (Date.today - user.created_at.to_date).to_i >= (365 * 10)
       end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 7,
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 250
-      end
-
-      grant_on ['posts#like', 'posts#dislike'],
-               badge: 'judgemental',
-
-               level: 8,
-
-               to: :action_user do |user|
-        user.likes_sum + user.dislikes_sum == 500
-      end
-
-      # Members
 
       # Invitations
 
       grant_on 'users/invitations#create',
-               badge: 'friendly',
+               badge_id: 51,
 
                level: 1,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 1
-      end
-
-      grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 3
-      end
-
-      grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 5
-      end
-
-      grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
 
                model_name: 'User',
 
@@ -396,18 +225,7 @@ module Merit
       end
 
       grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 15
-      end
-
-      grant_on 'users/invitations#create',
-               badge: 'friendly',
+               badge_id: 52,
 
                level: 2,
 
@@ -418,113 +236,14 @@ module Merit
       end
 
       grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 50
-      end
-
-      grant_on 'users/invitations#create',
-               badge: 'friendly',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.invitations_count == 100
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 1,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= 30
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= 90
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
+               badge_id: 53,
 
                level: 3,
 
                model_name: 'User',
 
                to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= 180
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 4,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= 365
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 5,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= (365 * 2)
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 6,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= (365 * 3)
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 7,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= (365 * 5)
-      end
-
-      grant_on 'users/sessions#create',
-               badge: 'referent',
-
-               level: 8,
-
-               model_name: 'User',
-
-               to: :itself do |user|
-        (Date.today - user.created_at.to_date).to_i >= (365 * 10)
+        user.invitations_count == 100
       end
     end
   end
