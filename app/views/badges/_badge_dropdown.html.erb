@@ -10,12 +10,23 @@
           <div class="card-header justify-content-center text-center text-primary">
             <p>Vous avez actuellement <strong><%= current_user.points %></strong> points.</p>
           </div>
-          <div class="card-header border-bottom-0 justify-content-center py-0">
-            <h6 class="mb-0">Dernier badge gagné</h6>
-          </div>
           <% if current_user.badges.present? %>
             <% current_user.badges.last(1).each do |badge| %>
-              <%= render partial: 'badges/badge-card', locals: { badge: badge, shadow: 'shadow-none', padding: 'pt-0' } %>
+              <%# Badge card %>
+              <div class="card card-mini card-mini-solid-icon shadow-none">
+                <div class="card-body">
+                  <div class="media">
+                    <div class="media-body text-center">
+                      <h5>Dernier badge gagné</h5>
+                      <div style="margin-bottom: 0.9375rem;">
+                        <%= render partial: 'badges/badge', locals: { badge: badge } %>
+                      </div>
+                      <h6 class="text-center text-muted">Description</h6>
+                      <p class="text-center text-wrap"><%= badge.description %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% end %>
           <% else %>
             <p>Vous n'avez pas encore gagné de badges</p>
