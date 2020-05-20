@@ -33,6 +33,10 @@ class BadgesController < ApplicationController
 
   def set_badge
     @badge = Merit::Badge.find(params[:badge_id])
+
+    @id = @badge.keys[params[:id].to_i]
+
+    @badge = @badge.find(@id)
   end
 
   # Set user
