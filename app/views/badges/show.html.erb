@@ -1,0 +1,6 @@
+<%= @badge.name %>
+<%= @badge.description %>
+<%= @badge.users.count %>
+<% @badge.users.each do |user| %>
+  <%= user.full_name %>
+<% end %>
