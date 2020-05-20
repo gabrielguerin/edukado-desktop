@@ -12,7 +12,12 @@
         <tbody>
           <% @badges.each do |badge| %>
             <tr>
-              <%= render partial: 'badge-list', locals: { badge: badge } %>
+              <td>
+                <%= render partial: 'badge', locals: { badge: badge } %>
+              </td>
+              <td>
+                <%= badge.description %>
+              </td>
             </tr>
           <% end %>
         </tbody>
