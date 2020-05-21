@@ -1,6 +1,52 @@
-<%= @badge.name %>
-<%= @badge.description %>
-<%= @badge.users.count %>
-<% @badge.users.each do |user| %>
-  <%= user.full_name %>
-<% end %>
+<% @title = @badge.name %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-9 mr-auto ml-auto">
+      <div class="card">
+        <div class="card-header">
+          <%= render partial: 'badge', locals: { badge: @badge } %>
+          <%= @badge.description %>
+        </div>
+        <div class="card-body">
+          <span class="text-muted">Ce badge a été décerné <%= @badge.users.count %> fois.</span>
+          <div class="table-responsive">
+            <table class="table table-sm-responsive">
+              <tbody>
+                <% @badge.users.each do |user| %>
+                  <tr>
+                    <td>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex pb-0 px-0">
+                          <div class="mr-auto d-flex align-items-center">
+                            <%# User avatar %>
+                            <%= link_to image_tag(user_avatar(user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(user) %>
+                            <div class="mr-auto d-flex flex-column">
+                              <%# User full name %>
+                              <h6 class="mb-0"><%= link_to "#{user.full_name}", posts_user_path(user) %></h6>
+                              <div class="d-flex align-items-center flex-row ">
+                                <%= render partial: 'badges/badges_user-info', locals: { user: user } %>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </td>
+                    <td>
+                      Décerné le <%= I18n.localize((user.sash.badges_sashes[params[:id].to_i].created_at), format: "%-d %B %Y") %>
+                    </td>
+                    <td>
+                      <div class="btn-group btn-group-xs">
+                        <a href="<%= posts_user_path(user) %>" data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses publications"><i class="ti-files"></i></a>
+                        <a href="<%= user_badge_path(user) %>"data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses badges"><i class="ti-cup"></i> </a>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

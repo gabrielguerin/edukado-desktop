@@ -1,10 +1,10 @@
-  <a href="<%= badge_path(badge) %>" class="badge badge-dark text-white" title="<%= badge.name %>">
+<a href="<%= badge_path(badge.id - 1) %>" class="badge badge-dark text-white" title="<%= badge.name %>">
   <% if badge.custom_fields[:difficulty] === 'bronze' %>
-    <span style="color: #D1A684">• </span>
+    <span style="color: #A66641">• </span>
   <% elsif badge.custom_fields[:difficulty] === 'silver' %>
-    <span style="color: #B4B8BC">• </span>
+    <span style="color: #BFBFBF">• </span>
   <% else %>
-    <span style="color: #FFCC01">• </span>
+    <span style="color: #F2CA50">• </span>
   <% end %>
   <%= badge.name %>
 </a>
