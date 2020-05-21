@@ -1,6 +1,35 @@
-<%= @badge.name %>
-<%= @badge.description %>
-<%= @badge.users.count %>
-<% @badge.users.each do |user| %>
-  <%= user.full_name %>
-<% end %>
+<% @title = @badge.name %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-9 mr-auto ml-auto">
+      <div class="card">
+        <div class="card-header">
+          <%= render partial: 'badge', locals: { badge: @badge } %>
+          <%= @badge.description %>
+        </div>
+        <div class="card-body">
+          <span class="text-muted">Ce badge a été décerné <%= @badge.users.count %> fois.</span>
+          <div class="table-responsive">
+            <table class="table table-sm-responsive">
+              <tbody>
+                <tr>
+                  <% @badge.users.each do |user| %>
+                    <td>
+                      <%= link_to "#{user.full_name}", user_badge_path(user) %>
+                    </td>
+                    <td>
+                      <%= user.description %>
+                    </td>
+                    <td>
+                      Obtenu le <%= I18n.localize((user.sash.badges_sashes[params[:id].to_i].created_at), format: "%-d %B %Y") %>
+                    </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

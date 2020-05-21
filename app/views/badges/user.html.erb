@@ -10,21 +10,25 @@
         <div class="card">
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-hover table-sm-responsive">
+              <table class="table table-sm-responsive">
                 <thead>
                   <tr>
                     <th>Icône</th>
                     <th>Nom</th>
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% @user.badges.each do |badge| %>
+                  <% @user.sash.badges_sashes.each do |badge_sash| %>
                     <tr>
                       <td>
-                        <%= render partial: 'badge', locals: { badge: badge } %>
+                        <%= render partial: 'badge', locals: { badge: badge_sash.badge } %>
                       </td>
                       <td>
-                        <%= badge.description %>
+                        <%= badge_sash.badge.description %>
+                      </td>
+                      <td>
+                        <%= time_ago_in_words(badge_sash.created_at) %>
                       </td>
                     </tr>
                   <% end %>
