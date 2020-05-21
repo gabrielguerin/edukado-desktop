@@ -5,7 +5,7 @@
     <%= user.points %>
   </small>
   <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count > 0 %>
-    <span class="mr-1" style="color: #F2CA50;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges d'or">
+    <span class="mr-1" style="color: #F2CA50;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> <%= "badge".pluralize(1) %> d'or">
       •
     </span>
     <small class="text-muted mr-2" style="font-size: 12px;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges d'or">
@@ -13,7 +13,7 @@
     </small>
   <% end %>
   <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count > 0 %>
-    <span class="mr-1" style="color: #BFBFBF;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges d'argent">
+    <span class="mr-1" style="color: #BFBFBF;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> <%= "badge".pluralize(1) %> d'argent">
       •
     </span>
     <small class="text-muted mr-2" style="font-size: 12px;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges d'argent">
@@ -21,7 +21,7 @@
     </small>
   <% end %>
   <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count > 0 %>
-    <span class="mr-1" style="color: #A66641;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges de bronze">
+    <span class="mr-1" style="color: #A66641;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> <%= "badge".pluralize(1) %> de bronze">
       •
     </span>
     <small class="text-muted mr-2" style="font-size: 12px;" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> badges de bronze">
