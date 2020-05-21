@@ -28,7 +28,7 @@
                         <%= badge_sash.badge.description %>
                       </td>
                       <td>
-                        <%= time_ago_in_words(badge_sash.created_at) %>
+                        Obtenu le <%= I18n.localize((badge_sash.created_at), format: "%-d %B %Y") %>
                       </td>
                     </tr>
                   <% end %>

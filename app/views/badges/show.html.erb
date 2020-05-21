@@ -12,19 +12,36 @@
           <div class="table-responsive">
             <table class="table table-sm-responsive">
               <tbody>
-                <tr>
-                  <% @badge.users.each do |user| %>
+                <% @badge.users.each do |user| %>
+                  <tr>
                     <td>
-                      <%= link_to "#{user.full_name}", user_badge_path(user) %>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex pb-0 px-0">
+                          <div class="mr-auto d-flex align-items-center">
+                            <%# User avatar %>
+                            <%= link_to image_tag(user_avatar(user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(user) %>
+                            <div class="mr-auto d-flex flex-column">
+                              <%# User full name %>
+                              <h6 class="mb-0"><%= link_to "#{user.full_name}", posts_user_path(user) %></h6>
+                              <div class="d-flex align-items-center flex-row ">
+                                <%= render partial: 'badges/badges_user-info', locals: { user: user } %>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
                     </td>
                     <td>
-                      <%= user.description %>
+                      Décerné le <%= I18n.localize((user.sash.badges_sashes[params[:id].to_i].created_at), format: "%-d %B %Y") %>
                     </td>
                     <td>
-                      Obtenu le <%= I18n.localize((user.sash.badges_sashes[params[:id].to_i].created_at), format: "%-d %B %Y") %>
+                      <div class="btn-group btn-group-xs">
+                        <a href="<%= posts_user_path(user) %>" data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses publications"><i class="ti-files"></i></a>
+                        <a href="<%= user_badge_path(user) %>"data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses badges"><i class="ti-cup"></i> </a>
+                      </div>
                     </td>
-                  <% end %>
-                </tr>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>

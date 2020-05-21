@@ -60,39 +60,9 @@
           <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
           <div class="mr-auto d-flex flex-column">
             <%# User full name %>
-            <h6 class="mb-0"><%= link_to "#{post.user.first_name} #{post.user.last_name}", posts_user_path(post.user) %></h6>
+            <h6 class="mb-0"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
             <div class="d-flex align-items-center flex-row ">
-              <%# Badges %>
-              <% if post.user.badges.count > 0 %>
-                <%# Points %>
-                <small class="font-weight-bold mr-1 text-primary" style="font-size: 12px;">
-                    <%= post.user.points %>
-                </small>
-                <% if (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count > 0 %>
-                  <span class="mr-1" style="color: #F2CA50;">
-                    •
-                  </span>
-                  <small class="text-muted mr-2" style="font-size: 12px;">
-                    <%= (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count %>
-                  </small>
-                <% end %>
-                <% if (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count > 0 %>
-                  <span class="mr-1" style="color: #BFBFBF;">
-                    •
-                  </span>
-                  <small class="text-muted mr-2" style="font-size: 12px;">
-                    <%= (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %>
-                  </small>
-                <% end %>
-                <% if (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count > 0 %>
-                  <span class="mr-1" style="color: #A66641;">
-                    •
-                  </span>
-                  <small class="text-muted mr-2" style="font-size: 12px;">
-                    <%= (post.user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count %>
-                  </small>
-                <% end %>
-              <% end %>
+              <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
             </div>
             <%# Date published %>
             <small>
