@@ -4,7 +4,126 @@
     <div class="col-lg-9 col-md-12 col-sm-12">
       <% if @badges.present? %>
         <%# Badges %>
-        <%= render partial: 'badges', locals: {badges: @badges} %>
+        <%# Card start %>
+        <div class="card">
+          <%# Card header start %>
+          <div class="card-header">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a href="#index" data-toggle="tab" class="nav-link">Tous</a>
+              </li>
+              <li class="nav-item">
+                <a href="#gold" data-toggle="tab" class="nav-link">Or</a>
+              </li>
+              <li class="nav-item">
+                <a href="#silver" data-toggle="tab" class="nav-link">Argent</a>
+              </li>
+              <li class="nav-item">
+                <a href="#bronze" data-toggle="tab" class="nav-link">Bronze</a>
+              </li>
+            </ul>
+          </div>
+          <%# Card header end %>
+          <div class="card-body">
+            <div class="table-responsive">
+              <%# Index badges start %>
+              <div class="tab-content" id="tabs">
+                <div class="tab-pane" id="index">
+                  <table class="table table-sm-responsive">
+                    <thead>
+                      <tr>
+                        <th>Badge</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @badges.each do |badge| %>
+                        <tr>
+                          <td>
+                            <%= render partial: 'badge', locals: { badge: badge } %>
+                          </td>
+                          <td>
+                            <%= badge.description %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <%# Index badges end %>
+                <%# Gold badges %>
+                <div class="tab-pane" id="gold">
+                  <table class="table table-sm-responsive">
+                    <thead>
+                      <tr>
+                        <th>Badge</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }.each do |badge| %>
+                        <tr>
+                          <td>
+                            <%= render partial: 'badge', locals: { badge: badge } %>
+                          </td>
+                          <td>
+                            <%= badge.description %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <%# Silver badges %>
+                <div class="tab-pane" id="silver">
+                  <table class="table table-sm-responsive">
+                    <thead>
+                      <tr>
+                        <th>Badge</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }.each do |badge| %>
+                        <tr>
+                          <td>
+                            <%= render partial: 'badge', locals: { badge: badge } %>
+                          </td>
+                          <td>
+                            <%= badge.description %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <%# Bronze badges %>
+                <div class="tab-pane" id="bronze">
+                  <table class="table table-sm-responsive">
+                    <thead>
+                      <tr>
+                        <th>Badge</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }.each do |badge| %>
+                        <tr>
+                          <td>
+                            <%= render partial: 'badge', locals: { badge: badge } %>
+                          </td>
+                          <td>
+                            <%= badge.description %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <% else %>
         <div class="card">
           <div class="card-body text-center">
@@ -13,9 +132,16 @@
         </div>
       <% end %>
     </div>
-    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
-      <%# Badges index side panel %>
-      <%= render partial: 'badges/side_panel-index' %>
-    </div>
+  </div>
+  <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+    <%# Badges index side panel %>
+    <%= render partial: 'badges/side_panel-index' %>
   </div>
 </div>
+<script>
+  function activateTab(tab){
+      $('.nav-pills a[href="#' + tab + '"]').tab('show');
+  };
+  
+  activateTab('index');
+</script>
