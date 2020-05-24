@@ -1,0 +1,26 @@
+<div class="text-center">
+  <div class="card">
+    <div class="card-body">
+      <%= render partial: 'badge', locals: { badge: Merit::Badge.find(42) } %>
+      <p>
+        Les badges de bronze encouragent les utilisateurs à essayer de nouvelles fonctionnalités sur le site. Ils sont faciles à obtenir si vous essayez !
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <%= render partial: 'badge', locals: { badge: Merit::Badge.find(43) } %>
+      <p>
+        Les badge d'argent sont moins courants que ceux en bronze. Vous allez devoir planifier votre stratégie pour en obtenir un.
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <%= render partial: 'badge', locals: { badge: Merit::Badge.find(44) } %>
+      <p>
+        Les badges d'or reconnaissent les contributions importantes des membres de la communauté. Ils sont rarement décernés.
+      </p>
+    </div>
+  </div>
+</div>
