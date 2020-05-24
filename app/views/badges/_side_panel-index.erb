@@ -1,4 +1,5 @@
 <div class="text-center">
+  <%# Bronze badges %>
   <div class="card">
     <div class="card-body">
       <%= render partial: 'badge', locals: { badge: Merit::Badge.find(42) } %>
@@ -7,6 +8,7 @@
       </p>
     </div>
   </div>
+  <%# Silver badges %>
   <div class="card">
     <div class="card-body">
       <%= render partial: 'badge', locals: { badge: Merit::Badge.find(43) } %>
@@ -15,12 +17,34 @@
       </p>
     </div>
   </div>
+  <%# Gold badges %>
   <div class="card">
     <div class="card-body">
       <%= render partial: 'badge', locals: { badge: Merit::Badge.find(44) } %>
       <p>
         Les badges d'or reconnaissent les contributions importantes des membres de la communauté. Ils sont rarement décernés.
       </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header justify-content-center">
+      <h6>Badges récents</h6>
+    </div>
+    <div class="card-body text-left p-0">
+      <div class="table-responsive">
+        <table class="table table-sm-responsive">
+          <tbody>
+            <% Merit::BadgesSash.last_granted(limit: 20).each do |user| %>
+              <tr>
+                <td>
+                  <%= render partial: 'badge', locals: { badge: user[:badge] } %>
+                  <%= link_to user[:user].full_name, posts_user_path(user[:user]) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
