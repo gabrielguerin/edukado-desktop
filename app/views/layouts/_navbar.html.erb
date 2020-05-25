@@ -1,6 +1,11 @@
 <ul class="nav navbar-nav">
-  <%# Search dropdown %>
-  <%= render 'searches/search_dropdown' %>
+  <%# Search form %>
+  <%= form_tag(posts_path, method: 'get', class: 'form-inline', role: 'search') do %>
+    <%# Search field %>
+    <%= text_field_tag :search, nil, placeholder: "Rechercher", class: "form-control border-0", name: "search", autocomplete: :off, style: 'background-color: #fff; margin-right: 0.7rem;' %>
+    <%# Submit button %>
+    <%= submit_tag '', style: "display: none;" %>
+  <% end %>
   <%# Badge dropdown %>
   <%= render 'badges/badge_dropdown' %>
   <%# Help dropdown%>
