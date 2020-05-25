@@ -57,10 +57,6 @@ class PostsController < ApplicationController
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
-
-    # Get posts size
-
-    @posts_size = Post.all.size
   end
 
   # Autocomplete search results
