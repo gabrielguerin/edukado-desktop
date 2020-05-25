@@ -98,7 +98,7 @@ class Post < ApplicationRecord
   # Limit tags per post
 
   def validate_tags
-    if tags.size >= 5
+    if tags.size > 6
 
       errors.add(
         :tags,
