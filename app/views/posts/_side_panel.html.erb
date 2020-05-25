@@ -8,32 +8,38 @@
       </div>
     </div>
   </div>
-  <ul class="nav rounded-nav-tabs d-flex flex-column text-center" id="point_leaderboard" role="tablist">
+  <ul class="nav rounded-nav-tabs d-flex flex-column text-center">
     <li class="nav-item">
-      <%# Daily ranking %>
-      <a class="nav-link active" id="today-tab" data-toggle="tab" href="#today" role="tab" aria-controls="today" aria-selected="true">Aujourd'hui</a>
+      <a href="#today" data-toggle="tab" class="nav-link">Aujourd'hui</a>
     </li>
     <li class="nav-item">
-      <%# Weekly ranking %>
-      <a class="nav-link" id="week-tab" data-toggle="tab" href="#week" role="tab" aria-controls="week" aria-selected="false">Cette semaine</a>
+      <a href="#week" data-toggle="tab" class="nav-link">Cette semaine</a>
     </li>
     <li class="nav-item">
-      <%# Monthly ranking %>
-      <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="false">Ce mois-ci</a>
+      <a href="#month" data-toggle="tab" class="nav-link">Ce mois-ci</a>
     </li>
   </ul>
-  <div class="tab-content table-responsive" id="point_leaderboard_content">
-    <div class="tab-pane fade active show" id="today" role="tabpanel" aria-labelledby="today-tab">
-      <%# Daily point leaderboard %>
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
-    </div>
-    <div class="tab-pane fade" id="week" role="tabpanel" aria-labelledby="week-tab">
-      <%# Weekly point leaderboard %>
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
-    </div>
-    <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
-      <%# Monthly point leaderboard %>
-      <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
+  <div class="table-responsive">
+    <div class="tab-content" id="tabs">
+      <div class="tab-pane" id="today">
+        <%# Daily point leaderboard %>
+        <%= render partial: 'point_leaderboard', locals: { date_id: 'today', since_date: Date.today } %>
+      </div>
+      <div class="tab-pane" id="week">
+        <%# Weekly point leaderboard %>
+        <%= render partial: 'point_leaderboard', locals: { date_id: 'week', since_date: 1.week.ago } %>
+      </div>
+      <div class="tab-pane" id="month">
+        <%# Monthly point leaderboard %>
+        <%= render partial: 'point_leaderboard', locals: { date_id: 'month', since_date: 1.month.ago } %>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  function activateTab(tab){
+      $('.rounded-nav-tabs a[href="#' + tab + '"]').tab('show');
+  };
+  
+  activateTab('today');
+</script>
