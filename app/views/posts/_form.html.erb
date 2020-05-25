@@ -11,7 +11,7 @@
   <div class="card-body">
     <%# Tags %>
     <%= f.form_group :tag_list, class: "row" do |f| %>
-      <%= f.label "Tags", class: "col-sm-4 col-form-label" %>
+      <%= f.label "Tags (5 maximum)", class: "col-sm-4 col-form-label" %>
       <div class="col-12">
         <%= f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: 'tag1, tag2, tag3...', required: true %>
         <%= f.error_messages %>
