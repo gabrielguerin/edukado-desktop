@@ -19,10 +19,6 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  # Send welcome email
-
-  after_commit :welcome_send
-
   # Devise modules
 
   devise :invitable, :database_authenticatable, :registerable,
@@ -58,13 +54,5 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  private
-
-  # Send welcome email
-
-  def welcome_send
-    UserMailer.welcome_email(self).deliver_now
   end
 end
