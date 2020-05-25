@@ -122,8 +122,6 @@ class PostsController < ApplicationController
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
 
-        format.js   { render 'create_errors', status: :unprocessable_entity }
-
       end
     end
   end

@@ -47,6 +47,10 @@ class Post < ApplicationRecord
 
   }
 
+  # Limit tags per post
+
+  validate :validate_tags
+
   # Search data
 
   def search_data
@@ -89,5 +93,18 @@ class Post < ApplicationRecord
 
   def tag_list
     tags.map(&:title).join(', ')
+  end
+
+  # Limit tags per post
+
+  def validate_tags
+    if tags.size >= 5
+
+      errors.add(
+        :tags,
+        'Vous ne pouvez ajouter que 5 tags par publication'
+      )
+
+    end
   end
 end
