@@ -57,10 +57,6 @@ class PostsController < ApplicationController
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
-
-    # Get posts size
-
-    @posts_size = Post.all.size
   end
 
   # Autocomplete search results
@@ -108,17 +104,15 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
 
-        format.js { redirect_to @post }
-
         format.html do
           redirect_to @post, notice: 'Votre publication a bien été ajoutée.'
         end
 
-        format.json { render action: 'show', status: :created, location: @post }
+        format.json { render :show, status: :created, location: @post }
 
       else
 
-        format.html { render action: 'new' }
+        format.html { render :new }
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
 

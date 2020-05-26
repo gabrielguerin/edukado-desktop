@@ -145,3 +145,7 @@ gem 'aws-sdk-s3', require: false
 # Intelligent search made easy with Rails and Elasticsearch
 
 gem 'searchkick'
+
+# Support for `render` with Turbolinks in Rails controllers
+
+gem 'turbolinks_render'
