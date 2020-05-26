@@ -3,9 +3,7 @@
 class Post < ApplicationRecord
   # Search
 
-  searchkick word_start: %i[title tag]
-
-  scope :search_import, -> { includes(:user, :comments, :tags) }
+  searchkick word_start: %i[title]
 
   # Active Storage
 
