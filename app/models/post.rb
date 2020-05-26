@@ -3,9 +3,7 @@
 class Post < ApplicationRecord
   # Search
 
-  searchkick word_start: %i[title tag]
-
-  scope :search_import, -> { includes(:user, :comments, :tags) }
+  searchkick word_start: %i[title]
 
   # Active Storage
 
@@ -60,13 +58,13 @@ class Post < ApplicationRecord
 
       description: description,
 
-      user: user.full_name,
+      user: user.full_name
 
-      comments: comments.map(&:description),
+    }.merge(
+      tag: tags.map(&:title),
 
-      tag: tags.map(&:title)
-
-    }
+      comments: comments.map(&:description)
+    )
   end
 
   # Like count

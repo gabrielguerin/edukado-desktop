@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   # Authenticate user
 
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[show index autocomplete]
 
   # Find post
 
