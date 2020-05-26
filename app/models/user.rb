@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # Search
+
+  searchkick
+
   # Badges
 
   has_merit
