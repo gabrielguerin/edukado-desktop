@@ -60,13 +60,13 @@ class Post < ApplicationRecord
 
       description: description,
 
-      user: user.full_name,
+      user: user.full_name
 
-      comments: comments.map(&:description),
+    }.merge(
+      tag: tags.map(&:title),
 
-      tag: tags.map(&:title)
-
-    }
+      comments: comments.map(&:description)
+    )
   end
 
   # Like count
