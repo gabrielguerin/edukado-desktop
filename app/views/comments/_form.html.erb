@@ -1,8 +1,11 @@
-<div class="w-100" id="comment_form">
-  <%= form_with(model: [@post, @comment]) do |f| %>
-    <%# Description %>
-    <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1", id: "comment_description_#{post.id}" %>
-    <%# Button %>
-    <span class="input-group-append"><%= f.submit 'Envoyer', class: 'btn btn-primary border-0', style: 'display: none' %></span>
+<%= form_with(model: [@post, @comment], class: 'form-inline d-flex') do |f| %>
+  <%# Description %>
+  <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1 flex-grow-1", id: "comment_description_#{post.id}" %>
+  <%# File %>
+  <%= f.file_field :file, required: false, class: 'comment-inputfile' %>
+  <%= f.label :file, class: 'btn btn-circle btn-icon btn-outline-primary', style: 'float: right;' do %>
+    <%= theme_icon_tag('upload') %>
   <% end %>
-</div>
+  <%# Button %>
+  <span class="input-group-append"><%= f.submit 'Envoyer', class: 'btn btn-primary border-0', style: 'display: none' %></span>
+<% end %>

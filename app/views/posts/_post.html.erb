@@ -49,7 +49,10 @@
           <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
         <% else %>
           <% if post.file.attached? %>
-            <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
+            <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;">
+              <i class="ti-download"></i>
+            </a>
+            <%= post.file.filename %>
           <% else %>
             <p>Il n'y a aucun fichier attaché</p>
           <% end %>
@@ -88,12 +91,12 @@
   <div class="btn-group d-flex" style="min-height: 0rem;">
     <%= render partial: 'posts/vote', locals: { post: post } %>
   </div>
+  <%# Comment section %>
   <% unless current_page?(posts_path) || current_page?(posts_user_path(post.user)) || current_page?(tag_path) %>
-    <div class="card-footer d-flex flex-row" style="background-color: #fff">
-      <div class="d-flex flex-row w-100">
+      <div class="card-footer d-flex flex-row w-100" style="background-color: #fff">
         <% if user_signed_in? %>
           <%# Current user avatar %>
-          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2 d-flex align-items-center', style: 'object-fit: cover; max-height: ', width: '40', height: '40'), posts_user_path(current_user) %>
         <% else %>
           <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
         <% end %>
@@ -102,7 +105,6 @@
             <%= render partial: 'comments/form', locals: { post: post } %>
           </div>
       </div>
-    </div>
   <% end %>
   <%# Comments %>
   <% if post.comments.present? %>
