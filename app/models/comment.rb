@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  # Active Storage
+
+  has_one_attached :file
+
   # Associations
 
   belongs_to :post
