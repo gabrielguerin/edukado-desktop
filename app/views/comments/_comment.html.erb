@@ -65,22 +65,24 @@
                   </div>
                   <div class="media-body text-left" style="padding: 1rem 1.25rem;">
                     <h6 class="m-0"><%= comment.file.filename %></h6>
+                    <span class="text-muted">
                     <%# Image %>
                     <% if comment.file.content_type.include? 'image' %>
-                      <span class="text-muted">Image</span>
+                      Image
                       <%# Text %>
                     <% elsif comment.file.content_type.include? 'text' %>
-                      <span class="text-muted">Text</span>
+                      Text
                       <%# Audio %>
                     <% elsif comment.file.content_type.include? 'audio' %>
-                      <span class="text-muted">Audio</span>
+                      Audio
                       <%# Video %>
                     <% elsif comment.file.content_type.include? 'video' %>
-                      <span class="text-muted">Video</span>
+                      Video
                       <%# Document %>
                     <% else %>
-                      <span class="text-muted">Document</span>
+                      Document
                     <% end %>
+                    </span>
                   </div>
                   <div class="px-4 text-muted">
                     <span class="text-muted"><i class="ti-download" style="font-size: 20px; color: #6C757D;"></i></span>
