@@ -38,6 +38,7 @@
           </span>
         </p>
       </li>
+      <%# File %>
       <li class="list-group-item d-flex px-0 pt-0 border-0">
         <% if comment.file.attached? %>
           <a href="<%= rails_blob_path(comment.file, disposition: "attachment") %>" class='file w-100'>
