@@ -49,3 +49,9 @@
     position: absolute;
     z-index: -1;
 }
+
+
+/* File */
+.file:hover {
+    text-decoration: none;
+}

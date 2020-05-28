@@ -40,10 +40,54 @@
       </li>
       <li class="list-group-item d-flex px-0 pt-0 border-0">
         <% if comment.file.attached? %>
-          <a href="<%= rails_blob_path(comment.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;">
-            <i class="ti-download"></i>
+          <a href="<%= rails_blob_path(comment.file, disposition: "attachment") %>" class='file w-100'>
+            <div class="card card-mini card-mini-split inspectable">
+              <div class="card-body">
+                <div class="media align-items-center">
+                  <div class="d-flex align-self-center">
+                    <%# Image %>
+                    <% if comment.file.content_type.include? 'image' %>
+                      <i class="ti-image"style="font-size: 25px;"></i>
+                      <%# Text %>
+                    <% elsif comment.file.content_type.include? 'text' %>
+                      <i class="ti-text"style="font-size: 25px;"></i>
+                      <%# Audio %>
+                    <% elsif comment.file.content_type.include? 'audio' %>
+                      <i class="ti-music-alt"style="font-size: 25px;"></i>
+                      <%# Video %>
+                    <% elsif comment.file.content_type.include? 'video' %>
+                      <i class="ti-video-clapper"style="font-size: 25px;"></i>
+                      <%# Document %>
+                    <% else %>
+                      <i class="ti-file"style="font-size: 25px;"></i>
+                    <% end %>
+                  </div>
+                  <div class="media-body text-left" style="padding: 1rem 1.25rem;">
+                    <h6 class="m-0"><%= comment.file.filename %></h6>
+                    <%# Image %>
+                    <% if comment.file.content_type.include? 'image' %>
+                      <span class="text-muted">Image</span>
+                      <%# Text %>
+                    <% elsif comment.file.content_type.include? 'text' %>
+                      <span class="text-muted">Text</span>
+                      <%# Audio %>
+                    <% elsif comment.file.content_type.include? 'audio' %>
+                      <span class="text-muted">Audio</span>
+                      <%# Video %>
+                    <% elsif comment.file.content_type.include? 'video' %>
+                      <span class="text-muted">Video</span>
+                      <%# Document %>
+                    <% else %>
+                      <span class="text-muted">Document</span>
+                    <% end %>
+                  </div>
+                  <div class="px-4 text-muted">
+                    <span class="text-muted"><i class="ti-download" style="font-size: 20px; color: #6C757D;"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </a>
-          <%= comment.file.filename %>
         <% else %>
         <% end %>
       </li>

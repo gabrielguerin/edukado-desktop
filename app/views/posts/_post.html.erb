@@ -52,7 +52,7 @@
             <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;">
               <i class="ti-download"></i>
             </a>
-            <%= post.file.filename %>
+            <strong><%= post.file.filename %></strong>
           <% else %>
             <p>Il n'y a aucun fichier attaché</p>
           <% end %>
