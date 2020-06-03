@@ -19,7 +19,7 @@ class Comment < ApplicationRecord
 
   validates :description, length: {
 
-    minimum: 1, too_short: '%<count> caractères est le minimum autorisé',
+    minimum: 15, too_short: '%<count> caractères est le minimum autorisé',
 
     maximum: 500, too_long: '%<count> caractères est le maximum autorisé'
 
