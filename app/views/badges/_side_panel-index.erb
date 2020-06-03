@@ -34,14 +34,6 @@
       <div class="table-responsive">
         <table class="table table-sm-responsive">
           <tbody>
-            <% Merit::BadgesSash.last_granted(limit: 20).each do |user| %>
-              <tr>
-                <td>
-                  <%= render partial: 'badge', locals: { badge: user[:badge] } %>
-                  <%= link_to user[:user].full_name, posts_user_path(user[:user]) %>
-                </td>
-              </tr>
-            <% end %>
           </tbody>
         </table>
       </div>
