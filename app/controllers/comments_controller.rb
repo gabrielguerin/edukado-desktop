@@ -209,7 +209,11 @@ class CommentsController < ApplicationController
   # Comment parameters
 
   def comment_params
-    params.require(:comment).permit(:description, :post_id).merge(
+    params.require(:comment).permit(
+      :description,
+      :file,
+      :post_id
+    ).merge(
       user: current_user
     )
   end

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Tag < ApplicationRecord
+  # Search
+
+  searchkick
+
   # FriendlyId
 
   extend FriendlyId
