@@ -15,8 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= Merit::Score.top_scored(since_date: since_date,
-        limit: 25).map do |top_score_hash| %>
+      <%= Merit::Score.top_scored(since_date: since_date, limit: 25).map do |top_score_hash| %>
         <tr>
           <%= content_tag :td do %>
             <%# User avatar %>
@@ -26,8 +25,8 @@
           <% end %>
           <%# User points %>
           <%= content_tag(:td, top_score_hash["sum_points"].to_s, class: 'font-weight-bold') %>
-        <% end.to_sentence.tr(' et ', '') %>
-      </tr>
+        </tr>
+      <% end.to_sentence(words_connector: '', last_word_connector: '').tr('</tr>', '') %>
     </tbody>
   </table>
 <% end %>
