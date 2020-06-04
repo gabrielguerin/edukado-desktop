@@ -39,3 +39,19 @@
 .tooltip-inner {
     padding: 0.7rem 0.5rem;
 }
+
+/* Comment file input */
+.comment-inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+
+/* File */
+.file:hover {
+    text-decoration: none;
+}

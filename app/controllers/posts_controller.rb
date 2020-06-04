@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   # Authenticate user
 
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[show index autocomplete]
 
   # Find post
 
@@ -57,23 +57,6 @@ class PostsController < ApplicationController
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
-  end
-
-  # Autocomplete search results
-
-  def autocomplete
-    render json: Post.search(params[:search], {
-
-                               fields: %w[title tag],
-
-                               match: :word_start,
-
-                               limit: 10,
-
-                               load: false,
-
-                               misspellings: { below: 5 }
-                             }).map(&:title)
   end
 
   # GET /posts/1
@@ -207,6 +190,23 @@ class PostsController < ApplicationController
 
   def undislike
     @post.undisliked_by current_user if @post.user != current_user
+  end
+
+  # Autocomplete search results
+
+  def autocomplete
+    render json: Post.search(params[:search], {
+
+                               fields: %w[title],
+
+                               match: :word_start,
+
+                               limit: 10,
+
+                               load: false,
+
+                               misspellings: { below: 5 }
+                             }).map(&:title)
   end
 
   private
