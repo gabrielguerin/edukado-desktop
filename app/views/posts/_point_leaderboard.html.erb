@@ -27,7 +27,7 @@
           <%# User points %>
           <%= content_tag(:td, top_score_hash["sum_points"].to_s, class: 'font-weight-bold') %>
         </tr>
-      <% end.to_sentence.tr('</tr>', '') %>
+      <% end.to_sentence.tr(', e', '') %>
     </tbody>
   </table>
 <% end %>
