@@ -1,0 +1,20 @@
+<%= link_to(path, html_options = {class: 'file w-100'}) do %>
+  <div class="card card-mini card-mini-split inspectable">
+    <div class="card-body">
+      <div class="media align-items-center">
+        <div class="d-flex align-self-center">
+          <i class="ti-<%= icon %>"style="font-size: 25px;"></i>
+        </div>
+        <div class="media-body text-left" style="padding: 1rem 1.25rem;">
+          <h6 class="m-0"><%= post.file.filename %></h6>
+          <span class="text-muted">
+            <%= description %>
+          </span>
+        </div>
+        <div class="px-4 text-muted">
+          <span class="text-muted"><i class="ti-download" style="font-size: 20px; color: #6C757D;"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
