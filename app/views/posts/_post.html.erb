@@ -74,7 +74,7 @@
           <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
         <% else %>
         <% if post.file.attached? %>
-          <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class='file w-100'>
+          <%= link_to(new_download_path(post_id: post.id), html_options = {class: 'file w-100'}) do %>
             <div class="card card-mini card-mini-split inspectable">
               <div class="card-body">
                 <div class="media align-items-center">
@@ -123,7 +123,7 @@
                 </div>
               </div>
             </div>
-          </a>
+          <% end %>
         <% else %>
         <p>Il n'y a pas de fichier attaché.</p>
         <% end %>
