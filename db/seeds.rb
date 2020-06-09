@@ -96,7 +96,7 @@ end
 
     post: Post.all.sample,
 
-    description: Faker::Movies::StarWars.quote
+    description: Faker::Lorem.paragraph(sentence_count: 2)
   )
 end
 

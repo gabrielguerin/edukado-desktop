@@ -63,75 +63,12 @@
           </div>
         </div>
       </li>
+      <%# Description %>
       <li class="list-group-item d-flex pt-0 px-0 border-top-0 border-bottom">
-        <%# Description %>
         <p class="mt-1 mb-1 text-break"><%= post.description %></p>
       </li>
       <%# File %>
-      <li class="list-group-item d-flex px-0 pt-0 border-0">
-      <% if user_signed_in? %>
-        <% if current_user.points < 50 %>
-          <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
-        <% else %>
-        <% if post.file.attached? %>
-          <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class='file w-100'>
-            <div class="card card-mini card-mini-split inspectable">
-              <div class="card-body">
-                <div class="media align-items-center">
-                  <div class="d-flex align-self-center">
-                    <%# Image %>
-                    <% if post.file.content_type.include? 'image' %>
-                      <i class="ti-image"style="font-size: 25px;"></i>
-                      <%# Text %>
-                    <% elsif post.file.content_type.include? 'text' %>
-                      <i class="ti-text"style="font-size: 25px;"></i>
-                      <%# Audio %>
-                    <% elsif post.file.content_type.include? 'audio' %>
-                      <i class="ti-music-alt"style="font-size: 25px;"></i>
-                      <%# Video %>
-                    <% elsif post.file.content_type.include? 'video' %>
-                      <i class="ti-video-clapper"style="font-size: 25px;"></i>
-                      <%# Document %>
-                    <% else %>
-                      <i class="ti-file"style="font-size: 25px;"></i>
-                    <% end %>
-                  </div>
-                  <div class="media-body text-left" style="padding: 1rem 1.25rem;">
-                    <h6 class="m-0"><%= post.file.filename %></h6>
-                    <span class="text-muted">
-                    <%# Image %>
-                    <% if post.file.content_type.include? 'image' %>
-                      Image
-                      <%# Text %>
-                    <% elsif post.file.content_type.include? 'text' %>
-                      Text
-                      <%# Audio %>
-                    <% elsif post.file.content_type.include? 'audio' %>
-                      Audio
-                      <%# Video %>
-                    <% elsif post.file.content_type.include? 'video' %>
-                      Video
-                      <%# Document %>
-                    <% else %>
-                      Document
-                    <% end %>
-                    </span>
-                  </div>
-                  <div class="px-4 text-muted">
-                    <span class="text-muted"><i class="ti-download" style="font-size: 20px; color: #6C757D;"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        <% else %>
-        <p>Il n'y a pas de fichier attaché.</p>
-        <% end %>
-        <% end %>
-      <% else %>
-        Connectez ou inscrivez-vous pour accéder à ce fichier
-      <% end %>
-      </li>
+      <%= render partial: 'file', locals: { post: post } %>
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
