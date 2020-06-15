@@ -3,7 +3,7 @@
 class DownloadsController < ApplicationController
   # GET /posts/new
 
-  def new
+  def create
     resource = Post.find_by_id(params[:post_id]) || Comment.find_by_id(params[:comment_id])
 
     if resource

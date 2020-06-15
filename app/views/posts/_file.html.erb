@@ -19,7 +19,7 @@
       } %>
     <% else %>
       <% if post.file.attached? %>
-        <%= link_to(new_download_path(post_id: post.id), html_options = {class: 'file w-100'}) do %>
+        <%= link_to downloads_path(post_id: post.id), class: 'file w-100', method: :post do %>
           <div class="card card-mini card-mini-split inspectable">
             <div class="card-body">
               <div class="media align-items-center">

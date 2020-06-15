@@ -3876,7 +3876,6 @@ Style/StructInheritance:
   StyleGuide: '#no-extend-struct-new'
   Enabled: true
   VersionAdded: '0.29'
-  VersionChanged: '0.86'
 
 Style/SymbolArray:
   Description: 'Use %i or %I for arrays of symbols.'
