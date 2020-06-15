@@ -20,36 +20,28 @@
           <% end %>
           <%# Share %>
           <h6 class="dropdown-header text-muted">Partager</h6>
-          <%# Facebook %>
-          <%= link_to "Facebook", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' }, target: '_blank' %>
-          <%# Twitter %>
-          <%= link_to "Twitter", "https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
-          <%# Email %>
-          <%= link_to "Email", "https://www.facebook.com/sharer/sharer.php?u=https://www.edukado.co/posts/#{post_path(post)}", class: 'dropdown-item', data: { network: 'facebook' } %>
+          <%= content_tag(:div, class: 'd-flex justify-content-between', style: 'padding: 0 1.5rem;') do %>
+            <%# Facebook %>
+            <%= link_to("https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", data: { network: 'facebook' }, target: '_blank') do %>
+              <span style="font-size: 20px"><%= fa_icon_tag('facebook-square') %></span>
+            <% end %>
+            <%# Twitter %>
+            <%= link_to("https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", data: { network: 'facebook' }, target: '_blank') do %>
+               <span style="font-size: 20px"><%= fa_icon_tag('twitter-square') %></span>
+            <% end %>
+            <%# Email %>
+            <%= link_to("https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", data: { network: 'facebook' }, target: '_blank') do %>
+              <span style="font-size: 20px"><%= fa_icon_tag('envelope') %></span>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class="text-center border-bottom">
+    <div class="text-center border-bottom pb-4">
       <%# Tags %>
       <% post.tags.each do |tag| %>
         <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
-      <div class="my-3">
-      <%# File %>
-      <% if user_signed_in? %>
-        <% if current_user.points < 50 %>
-          <p>Vous n'avez pas assez de points pour accéder à ce contenu.</p>
-        <% else %>
-          <% if post.file.attached? %>
-            <a href="<%= rails_blob_path(post.file, disposition: "attachment") %>" class="btn btn-circle btn-icon btn-border-2x btn-outline-dark mr-2" style="padding-top: 0.5rem; height: 2.375rem; width: 2.375rem;"><i class="ti-download"></i></a><%= post.file.filename %>
-          <% else %>
-            <p>Il n'y a aucun fichier attaché</p>
-          <% end %>
-        <% end %>
-      <% else %>
-        Connectez ou inscrivez-vous pour accéder à ce fichier
-      <% end %>
-      </div>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
@@ -71,21 +63,23 @@
           </div>
         </div>
       </li>
+      <%# Description %>
       <li class="list-group-item d-flex pt-0 px-0 border-top-0 border-bottom">
-        <%# Description %>
-        <p class="mt-1 mb-1 text-break pb-3"><%= post.description %></p>
+        <p class="mt-1 mb-1 text-break"><%= post.description %></p>
       </li>
+      <%# File %>
+      <%= render partial: 'active_storage/file', locals: { object: post } %>
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
     <%= render partial: 'posts/vote', locals: { post: post } %>
   </div>
+  <%# Comment section %>
   <% unless current_page?(posts_path) || current_page?(posts_user_path(post.user)) || current_page?(tag_path) %>
-    <div class="card-footer d-flex flex-row" style="background-color: #fff">
-      <div class="d-flex flex-row w-100">
+      <div class="card-footer d-flex flex-row w-100" style="background-color: #fff">
         <% if user_signed_in? %>
           <%# Current user avatar %>
-          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(current_user) %>
+          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2 d-flex align-items-center', style: 'object-fit: cover; max-height: ', width: '40', height: '40'), posts_user_path(current_user) %>
         <% else %>
           <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
         <% end %>
@@ -94,7 +88,6 @@
             <%= render partial: 'comments/form', locals: { post: post } %>
           </div>
       </div>
-    </div>
   <% end %>
   <%# Comments %>
   <% if post.comments.present? %>

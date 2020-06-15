@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # Search
+
+  searchkick
+
   # Badges
 
   has_merit
@@ -18,10 +22,6 @@ class User < ApplicationRecord
   # Vote
 
   acts_as_voter
-
-  # Send welcome email
-
-  after_commit :welcome_send
 
   # Devise modules
 
@@ -58,13 +58,5 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  private
-
-  # Send welcome email
-
-  def welcome_send
-    UserMailer.welcome_email(self).deliver_now
   end
 end

@@ -81,6 +81,10 @@ Rails.application.routes.draw do
 
   }
 
+  # Download routes
+
+  resources :downloads, only: :create
+
   # Users routes
 
   resources :users, only: %i[show posts] do

@@ -3,9 +3,7 @@
 class Post < ApplicationRecord
   # Search
 
-  searchkick word_start: %i[title tag]
-
-  scope :search_import, -> { includes(:user, :comments, :tags) }
+  searchkick word_start: %i[title]
 
   # Active Storage
 
@@ -47,6 +45,10 @@ class Post < ApplicationRecord
 
   }
 
+  # Limit tags per post
+
+  validate :validate_tags
+
   # Search data
 
   def search_data
@@ -56,13 +58,13 @@ class Post < ApplicationRecord
 
       description: description,
 
-      user: user.full_name,
+      user: user.full_name
 
-      comments: comments.map(&:description),
+    }.merge(
+      tag: tags.map(&:title),
 
-      tag: tags.map(&:title)
-
-    }
+      comments: comments.map(&:description)
+    )
   end
 
   # Like count
@@ -89,5 +91,18 @@ class Post < ApplicationRecord
 
   def tag_list
     tags.map(&:title).join(', ')
+  end
+
+  # Limit tags per post
+
+  def validate_tags
+    if tags.size > 5
+
+      errors.add(
+        :tags,
+        'Vous ne pouvez ajouter que 5 tags par publication'
+      )
+
+    end
   end
 end

@@ -112,7 +112,7 @@ gem 'pg_search'
 
 # Adds reputation behavior to Rails apps in the form of Badges, Points, and Rankings
 
-gem 'merit'
+gem 'merit', '~> 3.0.3'
 
 # "Swiss Army bulldozer" of slugging and permalink plugins for ActiveRecord.
 
@@ -145,3 +145,7 @@ gem 'aws-sdk-s3', require: false
 # Intelligent search made easy with Rails and Elasticsearch
 
 gem 'searchkick'
+
+# Support for `render` with Turbolinks in Rails controllers
+
+gem 'turbolinks_render'

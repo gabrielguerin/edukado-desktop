@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   # Authenticate user
 
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[show index autocomplete]
 
   # Find post
 
@@ -57,27 +57,6 @@ class PostsController < ApplicationController
                Post.all.order(created_at: :desc).page(params[:page])
 
              end
-
-    # Get posts size
-
-    @posts_size = Post.all.size
-  end
-
-  # Autocomplete search results
-
-  def autocomplete
-    render json: Post.search(params[:search], {
-
-                               fields: %w[title tag],
-
-                               match: :word_start,
-
-                               limit: 10,
-
-                               load: false,
-
-                               misspellings: { below: 5 }
-                             }).map(&:title)
   end
 
   # GET /posts/1
@@ -108,21 +87,17 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
 
-        format.js { redirect_to @post }
-
         format.html do
           redirect_to @post, notice: 'Votre publication a bien été ajoutée.'
         end
 
-        format.json { render action: 'show', status: :created, location: @post }
+        format.json { render :show, status: :created, location: @post }
 
       else
 
-        format.html { render action: 'new' }
+        format.html { render :new }
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
-
-        format.js   { render 'create_errors', status: :unprocessable_entity }
 
       end
     end
@@ -215,6 +190,23 @@ class PostsController < ApplicationController
 
   def undislike
     @post.undisliked_by current_user if @post.user != current_user
+  end
+
+  # Autocomplete search results
+
+  def autocomplete
+    render json: Post.search(params[:search], {
+
+                               fields: %w[title],
+
+                               match: :word_start,
+
+                               limit: 10,
+
+                               load: false,
+
+                               misspellings: { below: 5 }
+                             }).map(&:title)
   end
 
   private
