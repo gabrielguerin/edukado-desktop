@@ -3,38 +3,36 @@
   <% if user_signed_in? %>
     <% if current_user.download_count.to_i >= 3 && current_user.posts.count < 1 %>
       <%# Case user has downloaded many files but has not contributed %>
-      <%= render partial: 'file-card', locals: {
-          post: post,
+      <%= render partial: 'active_storage/file-card', locals: {
           path: new_post_path,
           icon: 'gift',
           description: "Veuillez contribuer sur la plateforme #{1 - current_user.posts.count} fois afin d'accéder à ce fichier."
       } %>
     <% elsif current_user.download_count.to_i >= 5 && current_user.posts.count < 3 %>
       <%# Case user has downloaded many files but has not contributed %>
-      <%= render partial: 'file-card', locals: {
-          post: post,
+      <%= render partial: 'active_storage/file-card', locals: {
           path: new_post_path,
           icon: 'gift',
           description: "Veuillez contribuer sur la plateforme #{3 - current_user.posts.count} fois afin d'accéder à ce fichier."
       } %>
     <% else %>
-      <% if post.file.attached? %>
-        <%= link_to downloads_path(post_id: post.id), class: 'file w-100', method: :post do %>
+      <% if object.file.attached? %>
+        <%= link_to downloads_path("#{object.class.name.downcase}_id": object.id), class: 'file w-100', method: :post do %>
           <div class="card card-mini card-mini-split inspectable">
             <div class="card-body">
               <div class="media align-items-center">
                 <div class="d-flex align-self-center">
                   <%# Image %>
-                  <% if post.file.content_type.include? 'image' %>
+                  <% if object.file.content_type.include? 'image' %>
                     <i class="ti-image"style="font-size: 25px;"></i>
                     <%# Text %>
-                  <% elsif post.file.content_type.include? 'text' %>
+                  <% elsif object.file.content_type.include? 'text' %>
                     <i class="ti-text"style="font-size: 25px;"></i>
                     <%# Audio %>
-                  <% elsif post.file.content_type.include? 'audio' %>
+                  <% elsif object.file.content_type.include? 'audio' %>
                     <i class="ti-music-alt"style="font-size: 25px;"></i>
                     <%# Video %>
-                  <% elsif post.file.content_type.include? 'video' %>
+                  <% elsif object.file.content_type.include? 'video' %>
                     <i class="ti-video-clapper"style="font-size: 25px;"></i>
                     <%# Document %>
                   <% else %>
@@ -42,19 +40,19 @@
                   <% end %>
                 </div>
                 <div class="media-body text-left" style="padding: 1rem 1.25rem;">
-                  <h6 class="m-0"><%= post.file.filename %></h6>
+                  <h6 class="m-0"><%= object.file.filename %></h6>
                   <span class="text-muted">
                     <%# Image %>
-                    <% if post.file.content_type.include? 'image' %>
+                    <% if object.file.content_type.include? 'image' %>
                       Image
                       <%# Text %>
-                    <% elsif post.file.content_type.include? 'text' %>
+                    <% elsif object.file.content_type.include? 'text' %>
                       Text
                       <%# Audio %>
-                    <% elsif post.file.content_type.include? 'audio' %>
+                    <% elsif object.file.content_type.include? 'audio' %>
                       Audio
                       <%# Video %>
-                    <% elsif post.file.content_type.include? 'video' %>
+                    <% elsif object.file.content_type.include? 'video' %>
                       Video
                       <%# Document %>
                     <% else %>
@@ -72,19 +70,12 @@
           </div>
         <% end %>
       <% else %>
-        <%# Case there is no file attached %>
-        <%= render partial: 'file-card', locals: {
-            post: post,
-            path: posts_path,
-            icon: 'alert',
-            description: "Il n'y a pas de fichier attaché à cette publication."
-        } %>
+        <%# Case there is no file attached, render nothing %>
       <% end %>
     <% end %>
   <% else %>
     <%# Case user is not signed in %>
-    <%= render partial: 'file-card', locals: {
-        post: post,
+    <%= render partial: 'active_storage/file-card', locals: {
         path: new_user_session_path,
         icon: 'lock',
         description: "Connectez-vous ou inscrivez-vous afin d'accéder à ce fichier."
