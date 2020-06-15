@@ -68,7 +68,7 @@
         <p class="mt-1 mb-1 text-break"><%= post.description %></p>
       </li>
       <%# File %>
-      <%= render partial: 'file', locals: { post: post } %>
+      <%= render partial: 'active_storage/file', locals: { object: post } %>
     </ul>
   </div>
   <div class="btn-group d-flex" style="min-height: 0rem;">
