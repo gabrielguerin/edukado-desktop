@@ -83,7 +83,7 @@ Rails.application.routes.draw do
 
   # Download routes
 
-  resources :downloads, only: :new
+  resources :downloads, only: :create
 
   # Users routes
 

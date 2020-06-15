@@ -39,61 +39,7 @@
         </p>
       </li>
       <%# File %>
-      <li class="list-group-item d-flex px-0 pt-0 border-0">
-        <% if comment.file.attached? %>
-          <a href="<%= rails_blob_path(comment.file, disposition: "attachment") %>" class='file w-100'>
-            <div class="card card-mini card-mini-split inspectable">
-              <div class="card-body">
-                <div class="media align-items-center">
-                  <div class="d-flex align-self-center">
-                    <%# Image %>
-                    <% if comment.file.content_type.include? 'image' %>
-                      <i class="ti-image"style="font-size: 25px;"></i>
-                      <%# Text %>
-                    <% elsif comment.file.content_type.include? 'text' %>
-                      <i class="ti-text"style="font-size: 25px;"></i>
-                      <%# Audio %>
-                    <% elsif comment.file.content_type.include? 'audio' %>
-                      <i class="ti-music-alt"style="font-size: 25px;"></i>
-                      <%# Video %>
-                    <% elsif comment.file.content_type.include? 'video' %>
-                      <i class="ti-video-clapper"style="font-size: 25px;"></i>
-                      <%# Document %>
-                    <% else %>
-                      <i class="ti-file"style="font-size: 25px;"></i>
-                    <% end %>
-                  </div>
-                  <div class="media-body text-left" style="padding: 1rem 1.25rem;">
-                    <h6 class="m-0"><%= comment.file.filename %></h6>
-                    <span class="text-muted">
-                    <%# Image %>
-                    <% if comment.file.content_type.include? 'image' %>
-                      Image
-                      <%# Text %>
-                    <% elsif comment.file.content_type.include? 'text' %>
-                      Text
-                      <%# Audio %>
-                    <% elsif comment.file.content_type.include? 'audio' %>
-                      Audio
-                      <%# Video %>
-                    <% elsif comment.file.content_type.include? 'video' %>
-                      Video
-                      <%# Document %>
-                    <% else %>
-                      Document
-                    <% end %>
-                    </span>
-                  </div>
-                  <div class="px-4 text-muted">
-                    <span class="text-muted"><i class="ti-download" style="font-size: 20px; color: #6C757D;"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        <% else %>
-        <% end %>
-      </li>
+      <%= render partial: 'active_storage/file', locals: { object: comment } %>
     </ul>
   </div>
   <div class="btn-group mb-2 d-flex" style="min-height: 0rem;">
