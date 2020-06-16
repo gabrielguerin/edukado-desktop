@@ -39,6 +39,10 @@ class PostsController < ApplicationController
 
   respond_to :js, :html, :json
 
+  # Post views
+
+  impressionist actions: [:show]
+
   # GET /posts
 
   def index
