@@ -58,7 +58,7 @@
             </div>
             <%# Date published %>
             <small>
-              <time>Publié il y a <%= time_ago_in_words(post.created_at) %></time>
+              <time>Publié il y a <%= time_ago_in_words(post.created_at) %> | <%= pluralize(post.impressionist_count, 'vue', plural: 'vues') %></time>
             </small>
           </div>
         </div>

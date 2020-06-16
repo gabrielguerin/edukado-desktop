@@ -39,10 +39,6 @@ class PostsController < ApplicationController
 
   respond_to :js, :html, :json
 
-  # Post views
-
-  impressionist actions: [:show]
-
   # GET /posts
 
   def index
@@ -69,6 +65,8 @@ class PostsController < ApplicationController
     @user = @post.user
 
     @comment = @post.comments.new
+
+    impressionist(@post)
   end
 
   # GET /posts/new
