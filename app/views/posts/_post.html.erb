@@ -58,7 +58,14 @@
             </div>
             <%# Date published %>
             <small>
-              <time>Publié il y a <%= time_ago_in_words(post.created_at) %> | <%= pluralize(post.impressionist_count, 'vue', plural: 'vues') %></time>
+              <time>
+                Publié il y a <%= time_ago_in_words(post.created_at) %> | 
+                <% if post.impressionist_count(filter: :ip_address) == 0 %>
+                  0 vue
+                <% else %>
+                  <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
+                <% end %>
+              </time>
             </small>
           </div>
         </div>
