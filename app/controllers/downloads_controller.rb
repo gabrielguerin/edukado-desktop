@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DownloadsController < ApplicationController
-  # GET /posts/new
+  # POST /downloads
 
   def create
     resource = Post.find_by_id(params[:post_id]) || Comment.find_by_id(params[:comment_id])
