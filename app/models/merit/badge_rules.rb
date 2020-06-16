@@ -176,6 +176,35 @@ module Merit
         comment.user && comment.user.comments.count == 500
       end
 
+      # Downloads
+
+      grant_on 'downloads#create',
+               badge_id: 15,
+
+               level: 1,
+
+               to: :user do |user|
+        user.download_count == 2
+      end
+
+      grant_on 'downloads#create',
+               badge_id: 16,
+
+               level: 2,
+
+               to: :user do |user|
+        user.download_count == 4
+      end
+
+      grant_on 'downloads#create',
+               badge_id: 17,
+
+               level: 3,
+
+               to: :user do |user|
+        user.download_count == 5
+      end
+
       # Member
 
       grant_on 'users/sessions#create',

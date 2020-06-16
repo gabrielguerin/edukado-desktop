@@ -149,3 +149,7 @@ gem 'searchkick'
 # Support for `render` with Turbolinks in Rails controllers
 
 gem 'turbolinks_render'
+
+# Rails Plugin that tracks impressions and page views
+
+gem 'impressionist'
