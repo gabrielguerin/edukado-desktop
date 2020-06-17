@@ -220,7 +220,42 @@ module Merit
 
       # end
 
-      # Likes per post
+      # Comments per post
+
+      grant_on 'comments#create',
+               badge_id: 30,
+
+               level: 1,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 1
+      end
+
+      grant_on 'comments#create',
+               badge_id: 31,
+
+               level: 2,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 2
+      end
+
+      grant_on 'comments#create',
+               badge_id: 32,
+
+               level: 3,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 3
+      end
+
+      # Votes per post
 
       grant_on 'posts#like',
                badge_id: 33,
@@ -249,7 +284,7 @@ module Merit
         post.likes_sum == 100
       end
 
-      # Post views
+      # Views per post
 
       grant_on 'posts#show',
                badge_id: 36,
