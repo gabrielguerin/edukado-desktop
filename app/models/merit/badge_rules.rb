@@ -220,6 +220,35 @@ module Merit
 
       # end
 
+      # Likes per post
+
+      grant_on 'posts#like',
+               badge_id: 33,
+
+               level: 1,
+
+               to: :user do |post|
+        post.likes_sum == 10
+      end
+
+      grant_on 'posts#like',
+               badge_id: 34,
+
+               level: 2,
+
+               to: :user do |post|
+        post.likes_sum == 25
+      end
+
+      grant_on 'posts#like',
+               badge_id: 35,
+
+               level: 3,
+
+               to: :user do |post|
+        post.likes_sum == 100
+      end
+
       # Post views
 
       grant_on 'posts#show',
