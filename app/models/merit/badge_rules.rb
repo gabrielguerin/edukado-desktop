@@ -411,6 +411,17 @@ module Merit
                to: :itself do |user|
         user.invitations_count == 100
       end
+
+      grant_on 'users/registrations#update',
+               badge_id: 49,
+
+               level: 1,
+
+               model_name: 'User',
+
+               to: :action_user do |user|
+        user.description.length > 1
+      end
     end
   end
 end

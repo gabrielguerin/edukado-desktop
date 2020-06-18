@@ -112,7 +112,7 @@ gem 'pg_search'
 
 # Adds reputation behavior to Rails apps in the form of Badges, Points, and Rankings
 
-gem 'merit', '~> 3.0.3'
+gem 'merit'
 
 # "Swiss Army bulldozer" of slugging and permalink plugins for ActiveRecord.
 
