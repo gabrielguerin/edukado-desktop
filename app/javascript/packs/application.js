@@ -49,5 +49,4 @@ require("@rails/actiontext")
 require("kiso_themes")
 require("packs/typeahead.bundle")
 require("packs/autocomplete")
-require("packs/comment")
 import "controllers"

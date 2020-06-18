@@ -230,7 +230,7 @@ module Merit
                model_name: 'Post',
 
                to: :user do |post|
-        post.comments.count == 1
+        post.comments.count == 10
       end
 
       grant_on 'comments#create',
@@ -241,7 +241,7 @@ module Merit
                model_name: 'Post',
 
                to: :user do |post|
-        post.comments.count == 2
+        post.comments.count == 25
       end
 
       grant_on 'comments#create',
@@ -252,7 +252,7 @@ module Merit
                model_name: 'Post',
 
                to: :user do |post|
-        post.comments.count == 3
+        post.comments.count == 100
       end
 
       # Votes per post
@@ -311,6 +311,35 @@ module Merit
 
                to: :user do |post|
         post.impressionist_count(filter: :ip_address) == 10_000
+      end
+
+      # Votes per comment
+
+      grant_on 'comments#like',
+               badge_id: 39,
+
+               level: 1,
+
+               to: :user do |comment|
+        comment.likes_sum == 1
+      end
+
+      grant_on 'comments#like',
+               badge_id: 40,
+
+               level: 2,
+
+               to: :user do |comment|
+        comment.likes_sum == 2
+      end
+
+      grant_on 'comments#like',
+               badge_id: 41,
+
+               level: 3,
+
+               to: :user do |comment|
+        comment.likes_sum == 3
       end
 
       # Member
