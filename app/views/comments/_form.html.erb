@@ -1,6 +1,6 @@
 <%= form_with(model: [@post, @comment], class: 'form-inline d-flex') do |f| %>
   <%# Description %>
-  <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1 flex-grow-1", id: "comment_description_#{post.id}" %>
+  <%= f.text_field :description, autofocus: true, autocomplete: "off", placeholder: "Écrire un commentaire", class: "form-control mr-1 flex-grow-1", id: "comment_description" %>
   <%# File %>
   <%= f.file_field :file, required: false, class: 'comment-inputfile' %>
   <%= f.label :file, class: 'btn btn-circle btn-icon btn-outline-primary', style: 'float: right;' do %>
@@ -10,18 +10,5 @@
   <span class="input-group-append"><%= f.submit 'Envoyer', class: 'btn btn-primary border-0', style: 'display: none' %></span>
 <% end %>
 <small>
-  <time class="text-uppercase text-muted" id="character_count_<%= post.id %>">15 caractères restants</time>
+  <time class="text-uppercase text-muted" id="character_count">15 caractères restants</time>
 </small>
-<script>
-  const area = document.getElementById('comment_description_<%= post.id %>');
-  const description = document.getElementById('character_count_<%= post.id %>');
-  var minLength = 15;
-  var checkLength = function() {
-      if (area.value.length < minLength) {
-          description.innerHTML = (minLength-area.value.length) + " caractères restants";
-      } else {
-          description.innerHTML = '';
-      }
-  }
-  setInterval(checkLength, 300);
-</script>

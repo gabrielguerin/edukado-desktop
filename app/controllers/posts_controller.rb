@@ -65,6 +65,8 @@ class PostsController < ApplicationController
     @user = @post.user
 
     @comment = @post.comments.new
+
+    impressionist(@post)
   end
 
   # GET /posts/new

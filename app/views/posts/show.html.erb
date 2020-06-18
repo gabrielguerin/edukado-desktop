@@ -1,6 +1,9 @@
 <% @title = "#{@post.title}" %>
 <% content_for :meta_title, "#{@post.title}" %>
 <% content_for :meta_description, @post.description %>
+<% content_for :javascript do %>
+  <%= javascript_pack_tag "comment.js" %>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="col-lg-9 col-md-12 col-sm-12">
