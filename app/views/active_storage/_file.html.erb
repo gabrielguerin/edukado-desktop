@@ -4,6 +4,7 @@
     <% if current_user.download_count.to_i >= 3 && current_user.posts.count < 1 %>
       <%# Case user has downloaded many files but has not contributed %>
       <%= render partial: 'active_storage/file-card', locals: {
+          object: local_assigns[:object],
           path: new_post_path,
           icon: 'gift',
           description: "Veuillez contribuer sur la plateforme #{1 - current_user.posts.count} fois afin d'accéder à ce fichier."
@@ -11,6 +12,7 @@
     <% elsif current_user.download_count.to_i >= 5 && current_user.posts.count < 3 %>
       <%# Case user has downloaded many files but has not contributed %>
       <%= render partial: 'active_storage/file-card', locals: {
+          object: local_assigns[:object],
           path: new_post_path,
           icon: 'gift',
           description: "Veuillez contribuer sur la plateforme #{3 - current_user.posts.count} fois afin d'accéder à ce fichier."
@@ -76,6 +78,7 @@
   <% else %>
     <%# Case user is not signed in %>
     <%= render partial: 'active_storage/file-card', locals: {
+        object: local_assigns[:object],
         path: new_user_session_path,
         icon: 'lock',
         description: "Connectez-vous ou inscrivez-vous afin d'accéder à ce fichier."

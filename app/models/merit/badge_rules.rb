@@ -176,6 +176,172 @@ module Merit
         comment.user && comment.user.comments.count == 500
       end
 
+      # Downloads
+
+      # grant_on 'downloads#create',
+
+      #          badge_id: 15,
+
+      #          level: 1,
+
+      #          model_name: 'User',
+
+      #          to: :action_user do |post|
+
+      #   post.user.download_count == 1
+
+      # end
+
+      # grant_on 'downloads#create',
+
+      #          badge_id: 16,
+
+      #          level: 2,
+
+      #          model_name: 'User',
+
+      #          to: :action_user do |post|
+
+      #   post.user.download_count == 2
+
+      # end
+
+      # grant_on 'downloads#create',
+
+      #          badge_id: 17,
+
+      #          level: 3,
+
+      #          model_name: 'User',
+
+      #          to: :action_user do |post|
+
+      #   post.user.download_count == 3
+
+      # end
+
+      # Comments per post
+
+      grant_on 'comments#create',
+               badge_id: 30,
+
+               level: 1,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 10
+      end
+
+      grant_on 'comments#create',
+               badge_id: 31,
+
+               level: 2,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 25
+      end
+
+      grant_on 'comments#create',
+               badge_id: 32,
+
+               level: 3,
+
+               model_name: 'Post',
+
+               to: :user do |post|
+        post.comments.count == 100
+      end
+
+      # Votes per post
+
+      grant_on 'posts#like',
+               badge_id: 33,
+
+               level: 1,
+
+               to: :user do |post|
+        post.likes_sum == 10
+      end
+
+      grant_on 'posts#like',
+               badge_id: 34,
+
+               level: 2,
+
+               to: :user do |post|
+        post.likes_sum == 25
+      end
+
+      grant_on 'posts#like',
+               badge_id: 35,
+
+               level: 3,
+
+               to: :user do |post|
+        post.likes_sum == 100
+      end
+
+      # Views per post
+
+      grant_on 'posts#show',
+               badge_id: 36,
+
+               level: 1,
+
+               to: :user do |post|
+        post.impressionist_count(filter: :ip_address) == 1000
+      end
+
+      grant_on 'posts#show',
+               badge_id: 37,
+
+               level: 2,
+
+               to: :user do |post|
+        post.impressionist_count(filter: :ip_address) == 2500
+      end
+
+      grant_on 'posts#show',
+               badge_id: 38,
+
+               level: 3,
+
+               to: :user do |post|
+        post.impressionist_count(filter: :ip_address) == 10_000
+      end
+
+      # Votes per comment
+
+      grant_on 'comments#like',
+               badge_id: 39,
+
+               level: 1,
+
+               to: :user do |comment|
+        comment.likes_sum == 1
+      end
+
+      grant_on 'comments#like',
+               badge_id: 40,
+
+               level: 2,
+
+               to: :user do |comment|
+        comment.likes_sum == 2
+      end
+
+      grant_on 'comments#like',
+               badge_id: 41,
+
+               level: 3,
+
+               to: :user do |comment|
+        comment.likes_sum == 3
+      end
+
       # Member
 
       grant_on 'users/sessions#create',
@@ -244,6 +410,17 @@ module Merit
 
                to: :itself do |user|
         user.invitations_count == 100
+      end
+
+      grant_on 'users/registrations#update',
+               badge_id: 49,
+
+               level: 1,
+
+               model_name: 'User',
+
+               to: :action_user do |user|
+        user.description.length > 1
       end
     end
   end

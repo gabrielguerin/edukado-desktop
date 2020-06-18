@@ -31,6 +31,10 @@ class Post < ApplicationRecord
 
   acts_as_votable
 
+  # Views
+
+  is_impressionable
+
   # Validations
 
   validates :title, presence: true, length: {

@@ -54,6 +54,8 @@ Notification.delete_all
   user.skip_confirmation!
 
   user.save!
+
+  user.add_points(rand(2000))
 end
 
 # Create tags

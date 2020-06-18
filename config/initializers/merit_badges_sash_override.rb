@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Merit
-  class BadgesSash < ActiveRecord::Base
+  class BadgesSash
     def self.last_granted(options = {})
       options[:since_date] ||= 1.month.ago
 
