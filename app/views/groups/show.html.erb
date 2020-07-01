@@ -24,7 +24,25 @@ end %>
             <tbody>
               <% @group.posts.each do |post| %>
                 <tr class="tr-group" data-link="<%= post_path(post) %>">
-                  <td><%= post.title %></td>
+                  <td class="d-flex align-items-center">
+                    <%# Image %>
+                    <% if post.file.content_type.include? 'image' %>
+                      <i class="ti-image"style="font-size: 25px;"></i>
+                      <%# Text %>
+                    <% elsif post.file.content_type.include? 'text' %>
+                      <i class="ti-text"style="font-size: 25px;"></i>
+                      <%# Audio %>
+                    <% elsif post.file.content_type.include? 'audio' %>
+                      <i class="ti-music-alt"style="font-size: 25px;"></i>
+                      <%# Video %>
+                    <% elsif post.file.content_type.include? 'video' %>
+                      <i class="ti-video-clapper"style="font-size: 25px;"></i>
+                      <%# Document %>
+                    <% else %>
+                      <i class="ti-file"style="font-size: 25px;"></i>
+                    <% end %>
+                    <%= post.title %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>
