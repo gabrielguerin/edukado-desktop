@@ -14,40 +14,35 @@ end %>
         <div class="card-header">
           <h6 class="card-title">Publications les plus populaires</h6>
         </div>
-        <div class="card-body">
-          <table class="table table-hover inspectable">
-            <thead>
-              <tr>
-                <th>Publication</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @group.posts.each do |post| %>
-                <tr class="tr-group" data-link="<%= post_path(post) %>">
-                  <td class="d-flex align-items-center">
+        <table class="table table-hover inspectable">
+          <tbody>
+            <% @group.posts.each do |post| %>
+              <tr class="tr-group" data-link="<%= post_path(post) %>">
+                <td class="d-flex align-items-center">
+                  <span class="mr-2">
                     <%# Image %>
                     <% if post.file.content_type.include? 'image' %>
-                      <i class="ti-image"style="font-size: 25px;"></i>
+                      <i class="ti-image" style="font-size: 25px;"></i>
                       <%# Text %>
                     <% elsif post.file.content_type.include? 'text' %>
-                      <i class="ti-text"style="font-size: 25px;"></i>
+                      <i class="ti-text" style="font-size: 25px;"></i>
                       <%# Audio %>
                     <% elsif post.file.content_type.include? 'audio' %>
-                      <i class="ti-music-alt"style="font-size: 25px;"></i>
+                      <i class="ti-music-alt" style="font-size: 25px;"></i>
                       <%# Video %>
                     <% elsif post.file.content_type.include? 'video' %>
-                      <i class="ti-video-clapper"style="font-size: 25px;"></i>
+                      <i class="ti-video-clapper" style="font-size: 25px;"></i>
                       <%# Document %>
                     <% else %>
-                      <i class="ti-file"style="font-size: 25px;"></i>
+                      <i class="ti-file" style="font-size: 25px;"></i>
                     <% end %>
-                    <%= post.title %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
+                  </span>
+                  <%= post.title %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
