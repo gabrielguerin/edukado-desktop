@@ -1,7 +1,15 @@
+# frozen_string_literal: true
+
 class Group < ApplicationRecord
-    # Associations
+  # Friendly id
 
-    has_many :users
+  extend FriendlyId
 
-    has_many :posts  
+  friendly_id :name, use: :slugged
+
+  # Associations
+
+  has_many :users
+
+  has_many :posts
 end
