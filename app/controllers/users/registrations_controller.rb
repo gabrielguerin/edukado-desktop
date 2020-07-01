@@ -144,7 +144,8 @@ module Users
           :description,
           :avatar,
           :password,
-          :password_confirmation
+          :password_confirmation,
+          :group
         )
       end
 
@@ -158,7 +159,8 @@ module Users
           :avatar,
           :password,
           :password_confirmation,
-          :current_password
+          :current_password,
+          :group
         )
       end
     end
