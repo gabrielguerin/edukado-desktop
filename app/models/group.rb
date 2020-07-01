@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
-  # Friendly id
+  # FriendlyId
 
   extend FriendlyId
 

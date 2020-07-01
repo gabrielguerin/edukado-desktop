@@ -27,7 +27,7 @@
       <p class="text-center text-muted">Badges</p>
       <h6 class="text-center"><%= link_to @user.badges.count, user_badge_path(@user) %></h6>
       <p class="text-center text-muted">Université</p>
-      <h6 class="text-center"><%= link_to @user.group.name, group_path(@user.group.id) %></h6>
+      <h6 class="text-center"><%= link_to @user.group.name, group_path(@user.group) %></h6>
     </div>
   </div>
 </div>
