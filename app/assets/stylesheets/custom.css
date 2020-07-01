@@ -55,3 +55,8 @@
 .file:hover {
     text-decoration: none;
 }
+
+/* Groups */
+.tr-group:hover {
+    cursor: pointer;
+}

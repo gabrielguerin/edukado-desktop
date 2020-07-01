@@ -9,27 +9,33 @@ end %>
         <input type="text" class="form-control" placeholder="Recherchez un cours dans cette université et trouvez du contenu à ce sujet." aria-label="Username" aria-describedby="sizing-addon1">
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12">
       <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Publications les plus populaires</h6>
+        </div>
         <div class="card-body">
-          <div class="form-horizontal">
-            <div class="form-group row">
-              <label class="col-12 col-md-2 form-label">Name</label>
-              <div class="col-12 col-md-10 form-control uneditable-input">
-                <span>
-                  <%= @group.name %>
-                </span>
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="ml-auto">
-                <%= link_to fa_icon_tag("pencil") + ' Edit', edit_group_path(@group), class: 'btn btn-primary' %>
-                <%= link_to 'Back', groups_path, class: 'btn' %>
-              </div>
-            </div>
-          </div>
+          <table class="table table-hover inspectable">
+            <thead>
+              <tr>
+                <th>Publication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @group.posts.each do |post| %>
+                <tr class="tr-group" data-link="<%= post_path(post) %>">
+                  <td><%= post.title %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
