@@ -37,11 +37,15 @@
         </div>
       </div>
     </div>
-    <div class="text-center border-bottom pb-4">
+    <div class="text-center pb-4">
       <%# Tags %>
       <% post.tags.each do |tag| %>
         <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
       <% end %>
+    </div>
+    <div class="text-center border-bottom pb-4">
+      <%# Group %>
+      <h6><%= post.group.name %></h6>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
