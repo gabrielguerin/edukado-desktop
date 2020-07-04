@@ -45,7 +45,7 @@
     </div>
     <div class="text-center border-bottom pb-4">
       <%# Group %>
-      <h6><%= post.group.name %></h6>
+      <h6><%= link_to post.group.name, group_path(post.group) %></h6>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
