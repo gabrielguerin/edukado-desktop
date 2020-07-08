@@ -1,45 +1,40 @@
-<% @title = @group.name %>
+<% if @search.present? %>
+  <% @title = @search %>
+<% else %>
+  <% @title = @group.name %>
+<% end %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
 <div class="container">
   <div class="row">
     <div class="card">
-      <div class="input-group input-group-lg">
-        <input type="text" class="form-control" placeholder="Recherchez un cours dans cette université et trouvez du contenu à ce sujet." aria-label="Username" aria-describedby="sizing-addon1">
-      </div>
+      <%= form_tag(group_path(@group), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+        <%# Search field %>
+        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%# Submit button %>
+        <%= submit_tag '', style: "display: none;" %>
+      <% end %>
     </div>
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h6 class="card-title">Publications les plus populaires</h6>
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Publications les plus populaires</h6>
+          <% end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
-            <% @group.posts.each do |post| %>
-              <tr class="tr-group" data-link="<%= post_path(post) %>">
-                <td class="d-flex align-items-center">
-                  <span class="mr-2">
-                    <%# Image %>
-                    <% if post.file.content_type.include? 'image' %>
-                      <i class="ti-image" style="font-size: 25px;"></i>
-                      <%# Text %>
-                    <% elsif post.file.content_type.include? 'text' %>
-                      <i class="ti-text" style="font-size: 25px;"></i>
-                      <%# Audio %>
-                    <% elsif post.file.content_type.include? 'audio' %>
-                      <i class="ti-music-alt" style="font-size: 25px;"></i>
-                      <%# Video %>
-                    <% elsif post.file.content_type.include? 'video' %>
-                      <i class="ti-video-clapper" style="font-size: 25px;"></i>
-                      <%# Document %>
-                    <% else %>
-                      <i class="ti-file" style="font-size: 25px;"></i>
-                    <% end %>
-                  </span>
-                  <%= post.title %>
-                </td>
-              </tr>
+            <% if @search.present? %>
+              <% @posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% else %>
+              <% @group.posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
             <% end %>
           </tbody>
         </table>
