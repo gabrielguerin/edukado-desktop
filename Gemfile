@@ -62,10 +62,6 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
-
-  # Ruby static code analyzer and code formatter
-
-  gem 'rubocop', require: false
 end
 
 group :development do
