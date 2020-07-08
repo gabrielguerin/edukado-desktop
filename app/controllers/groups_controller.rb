@@ -81,6 +81,8 @@ class GroupsController < ApplicationController
 
   private
 
+  # Set search
+
   def set_search
     @search = params[:search].present? ? params[:search] : nil
   end
