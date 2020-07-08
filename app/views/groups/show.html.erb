@@ -1,4 +1,8 @@
-<% @title = @group.name %>
+<% if @search.present? %>
+  <% @title = @search %>
+<% else %>
+  <% @title = @group.name %>
+<% end %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
