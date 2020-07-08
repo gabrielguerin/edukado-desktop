@@ -10,6 +10,22 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
+    @search = params[:search].present? ? params[:search] : nil
+
+    if @search
+
+      # Render search results
+
+      @posts = Post.search(params[:search], where: { group_id: @group.id }, page: params[:page], per_page: 20)
+
+    else
+
+      # Render Group
+
+      @group = Group.friendly.find(params[:id])
+
+    end
+
   end
 
   # GET /groups/new
@@ -48,7 +64,15 @@ class GroupsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
+  # Set groups
+
+  def groups
+    @groups = Group.all.order(created_at: :desc).page(params[:page])
+  end
+
+  # Set group
+  
   def set_group
     @group = Group.friendly.find(params[:id])
   end

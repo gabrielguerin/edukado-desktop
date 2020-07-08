@@ -64,7 +64,11 @@ class Post < ApplicationRecord
 
       description: description,
 
-      user: user.full_name
+      user_full_name: user.full_name,
+
+      group_name: group.name,
+
+      group_id: group.id
 
     }.merge(
       tag: tags.map(&:title),
