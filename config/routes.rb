@@ -47,6 +47,10 @@ Rails.application.routes.draw do
     root to: 'users#index'
   end
 
+  # Group routes
+
+  resources :groups, only: %i[show index]
+
   # FAQ routes
 
   resources :faqs, only: %i[index], path: 'faq'

@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   # Associations
 
+  belongs_to :group
+
   has_many :tags_users, dependent: :destroy
 
   has_many :tags, through: :tags_users

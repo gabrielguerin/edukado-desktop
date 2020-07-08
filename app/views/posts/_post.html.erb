@@ -51,10 +51,13 @@
           <%# User avatar %>
           <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
           <div class="mr-auto d-flex flex-column">
-            <%# User full name %>
-            <h6 class="mb-0"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
-            <div class="d-flex align-items-center flex-row ">
-              <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
+            <div class="d-flex flex-row align-items-center">
+              <%# User's full name & Group %>
+              <h6 class="mb-0 mr-1"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
+              <span class="mr-1">|</span><%= link_to post.group.name, group_path(post.group) %>
+              <div class="d-flex align-items-center flex-row">
+                <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
+              </div>
             </div>
             <%# Date published %>
             <small>

@@ -32,6 +32,16 @@ Blog.delete_all
 
 Notification.delete_all
 
+Group.delete_all
+
+# Create groups
+
+20.times do
+  Group.create!(
+    name: Faker::University.name
+  )
+end
+
 # Create users
 
 20.times do
@@ -48,7 +58,9 @@ Notification.delete_all
 
     password: 'password',
 
-    password_confirmation: 'password'
+    password_confirmation: 'password',
+
+    group: Group.all.sample
   )
 
   user.skip_confirmation!
@@ -76,7 +88,9 @@ end
 
     description: Faker::Movies::VForVendetta.quote,
 
-    tags: Tag.all.sample(3)
+    tags: Tag.all.sample(3),
+
+    group: Group.all.sample
   )
 
   @post.file.attach(

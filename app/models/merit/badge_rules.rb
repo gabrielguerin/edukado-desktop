@@ -220,6 +220,41 @@ module Merit
 
       # end
 
+      # Reputation
+
+      grant_on 'users/sessions#create',
+               badge_id: 18,
+
+               level: 1,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.points >= 10
+      end
+
+      grant_on 'users/sessions#create',
+               badge_id: 18,
+
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.points >= 100
+      end
+
+      grant_on 'users/sessions#create',
+               badge_id: 18,
+
+               level: 3,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.points >= 200
+      end
+
       # Comments per post
 
       grant_on 'comments#create',
@@ -416,6 +451,8 @@ module Merit
                badge_id: 49,
 
                level: 1,
+
+               temporary: true,
 
                model_name: 'User',
 
