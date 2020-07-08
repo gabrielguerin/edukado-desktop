@@ -1,17 +1,35 @@
-class GroupsController < ApplicationController
-  layout "scaffold"
+# frozen_string_literal: true
 
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+class GroupsController < ApplicationController
+  layout 'scaffold'
+
+  # Set group
+
+  before_action :set_group, only: %i[show edit update destroy]
+
+  # Set search
+
+  before_action :set_search, only: %i[show index]
 
   # GET /groups
   def index
-    @groups = Group.all
+    @groups = if @search
+
+                # Render search results
+
+                Group.search(params[:search], page: params[:page], per_page: 20)
+
+              else
+
+                # Render posts
+
+                Group.all.order('name ASC').page(params[:page])
+
+             end
   end
 
   # GET /groups/1
   def show
-    @search = params[:search].present? ? params[:search] : nil
-
     if @search
 
       # Render search results
@@ -25,7 +43,6 @@ class GroupsController < ApplicationController
       @group = Group.friendly.find(params[:id])
 
     end
-
   end
 
   # GET /groups/new
@@ -34,8 +51,7 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /groups
   def create
@@ -65,14 +81,12 @@ class GroupsController < ApplicationController
 
   private
 
-  # Set groups
-
-  def groups
-    @groups = Group.all.order(created_at: :desc).page(params[:page])
+  def set_search
+    @search = params[:search].present? ? params[:search] : nil
   end
 
   # Set group
-  
+
   def set_group
     @group = Group.friendly.find(params[:id])
   end

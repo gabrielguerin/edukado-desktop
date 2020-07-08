@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
   # Group routes
 
-  resources :groups
+  resources :groups, only: %i[show index]
 
   # FAQ routes
 
