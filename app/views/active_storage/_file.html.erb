@@ -77,11 +77,13 @@
     <% end %>
   <% else %>
     <%# Case user is not signed in %>
-    <%= render partial: 'active_storage/file-card', locals: {
+    <% if object.file.attached? %>
+      <%= render partial: 'active_storage/file-card', locals: {
         object: local_assigns[:object],
         path: new_user_session_path,
         icon: 'lock',
         description: "Connectez-vous ou inscrivez-vous afin d'accéder à ce fichier."
     } %>
+    <% end %>
   <% end %>
 </li>
