@@ -1,18 +1,24 @@
 <% @title = "À quelle université étudiez-vous ?" %>
-<% content_for :description do %>
+<%# content_for :description do
   <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
-<% end %>
+end %>
 <div class="container">
   <div class="row">
     <div class="card">
       <%= form_tag(groups_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
         <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Tapez pour commencer la recherche.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%= text_field_tag :search, nil, placeholder: "Rechercher une université et trouver du contenu pour celle-ci.", class: "form-control border-0", name: "search", autocomplete: :off%>
         <%# Submit button %>
         <%= submit_tag '', style: "display: none;" %>
       <% end %>
     </div>
     <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+          <%= link_to 'Universités', groups_path %>
+        </li>
+      </ol>
       <%# Groups %>
       <div class="card">
         <div class="card-header">

@@ -23,7 +23,7 @@
           <% end %>
           <%= f.form_group :group, class: "row" do |f| %>
             <%= f.label 'Votre université', class: "form-label" %>
-            <%= f.collection_select(:group_id, Group.all, :id, :name) %>
+            <%= f.collection_select(:group_id, Group.all, :id, :name, {}, {class: 'custom-select'}) %>
             <%= f.error_messages %>
           <% end %>
           <%= f.form_group :password, class: "row" do |f| %>

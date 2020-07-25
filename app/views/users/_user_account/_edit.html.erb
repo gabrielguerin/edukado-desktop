@@ -44,6 +44,13 @@
             <%= f.error_messages %>
           </div>
         <% end %>
+        <%= f.form_group :group, class: "row" do |f| %>
+          <%= f.label 'Votre université', class: "col-sm-4 col-form-label" %>
+          <div class="col-md-8">
+            <%= f.collection_select(:group_id, Group.all, :id, :name, {}, {class: 'custom-select'}) %>
+            <%= f.error_messages %>
+          </div>
+        <% end %>
         <%= f.form_group :password, class: "row" do |f| %>
           <%= f.label "Mot de passe", class: "col-sm-4 col-form-label" %>
           <div class="col-md-8">
