@@ -30,6 +30,18 @@ PostsTag.delete_all
 
 Blog.delete_all
 
+Notification.delete_all
+
+Group.delete_all
+
+# Create groups
+
+20.times do
+  Group.create!(
+    name: Faker::University.name
+  )
+end
+
 # Create users
 
 20.times do
@@ -46,12 +58,16 @@ Blog.delete_all
 
     password: 'password',
 
-    password_confirmation: 'password'
+    password_confirmation: 'password',
+
+    group: Group.all.sample
   )
 
   user.skip_confirmation!
 
   user.save!
+
+  user.add_points(rand(2000))
 end
 
 # Create tags
@@ -72,12 +88,18 @@ end
 
     description: Faker::Movies::VForVendetta.quote,
 
-    tags: Tag.all.sample(3)
+    tags: Tag.all.sample(3),
+
+    group: Group.all.sample
   )
+
   @post.file.attach(
     io: File.open('app/assets/images/seed/SEO.pdf'),
+
     filename: 'SEO.pdf',
+
     content_type: 'application/pdf',
+
     identify: false
   )
 end
@@ -90,7 +112,7 @@ end
 
     post: Post.all.sample,
 
-    description: Faker::Movies::StarWars.quote
+    description: Faker::Lorem.paragraph(sentence_count: 2)
   )
 end
 
@@ -128,10 +150,14 @@ end
 
     body: Faker::Lorem.paragraphs
   )
+
   @blog.cover.attach(
     io: File.open('app/assets/images/seed/blog_cover.jpg'),
+
     filename: 'blog_cover.jpg',
+
     content_type: 'image/jpg',
+
     identify: false
   )
 end

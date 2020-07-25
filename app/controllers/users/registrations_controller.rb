@@ -2,7 +2,25 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    layout '_app_nav', only: %i[edit]
+    # Layout
+
+    layout :determine_layout
+
+    # Set layout based on action
+
+    def determine_layout
+      case action_name
+
+      when 'edit'
+
+        'scaffold'
+
+      when 'new'
+
+        'statics'
+
+      end
+    end
 
     # POST /resource
 
@@ -126,7 +144,8 @@ module Users
           :description,
           :avatar,
           :password,
-          :password_confirmation
+          :password_confirmation,
+          :group_id
         )
       end
 
@@ -140,7 +159,8 @@ module Users
           :avatar,
           :password,
           :password_confirmation,
-          :current_password
+          :current_password,
+          :group_id
         )
       end
     end

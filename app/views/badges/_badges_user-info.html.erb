@@ -1,0 +1,37 @@
+<%# Badges %>
+<% if user.badges.count > 0 %>
+  <%# Points %>
+  <small class="font-weight-bold mr-2 text-primary" style="font-size: 12px;" data-placement="bottom" data-toggle="tooltip" data-original-title="Score de réputation">
+    <%= user.points %>
+  </small>
+  <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count > 0 %>
+    <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count) %> d'or">
+      <span style="color: #F2CA50; margin-right: 0.250rem;">
+        • 
+      </span>
+      <small class="text-muted mr-2" style="font-size: 12px;">
+        <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count %>
+      </small>
+    </div>
+  <% end %>
+  <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count > 0 %>
+    <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count) %> d'argent">
+      <span style="color: #BFBFBF; margin-right: 0.250rem;">
+        • 
+      </span>
+      <small class="text-muted mr-2" style="font-size: 12px;">
+        <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %>
+      </small>
+    </div>
+  <% end %>
+  <% if (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count > 0 %>
+    <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count) %> de bronze">
+      <span style="color: #A66641; margin-right: 0.250rem;">
+        • 
+      </span>
+      <small class="text-muted mr-2" style="font-size: 12px;">
+        <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count %>
+      </small>
+    </div>
+  <% end %>
+<% end %>

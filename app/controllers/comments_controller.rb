@@ -1,64 +1,104 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
 
-  before_action :post
+  # Find post
 
-  before_action :set_comment, only: %i[show edit update destroy like dislike]
+  before_action :set_post
 
-  # GET /comments
+  # Authenticate user
 
-  def index
-    @comments = post.comments.order(created_at: :desc)
-  end
+  before_action :authenticate_user!
 
-  # GET /comments/1
+  # Find comment
 
-  def show; end
+  before_action :set_comment, only: %i[
+
+    show
+
+    edit
+
+    update
+
+    destroy
+
+    like
+
+    unlike
+
+    dislike
+
+    undislike
+
+  ]
+
+  # Respond to different formats
+
+  respond_to :js, :html, :json
 
   # GET /comments/new
 
   def new
-    @comment = post.comments.build
+    @comment = @post.comments.build
   end
 
   # GET /comments/1/edit
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # POST /comments
 
   def create
-    @comment = Comment.new(post: post,
+    @comment = @post.comments.build(
+      comment_params
+    )
 
-                           user: current_user,
+    respond_to do |format|
+      if @comment.save
 
-                           description: comment_params[:description])
+        create_notification @post, @comment
 
-    if @comment.save
+        format.html { redirect_to @post, notice: 'Votre commentaire a été créé avec succès.' }
 
-      flash[:success] = 'Votre commentaire a été créé avec succès.'
+        format.json { render :show, status: :created, location: @post }
 
-    else
+      else
 
-      flash[:danger] = "Votre commentaire n'a pas été créé."
+        format.html { render :new }
 
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+
+      end
+
+      format.js
     end
-
-    redirect_to post
   end
 
   # PATCH/PUT /comments/1
 
   def update
-    if @comment.update(comment_params)
+    if @comment.update!(
+      comment_params
+    )
 
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @post }
+
+        format.js
+      end
 
     else
 
-      render :edit
+      flash[:alert] = 'Votre commentaire n\'a pas pu être modifié, veuillez essayer à nouveau.'
+
+      redirect_to @post
 
     end
   end
@@ -68,48 +108,113 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to posts_path, notice: 'Votre commentaire a bien été supprimé.'
+    respond_to do |format|
+      format.html do
+        redirect_to :back,
+                    notice: 'Votre commentaire a bien été supprimé.'
+      end
+
+      format.json { head :no_content }
+
+      format.js   { render layout: false }
+    end
   end
+
+  # Like comment
 
   def like
-    @comment.liked_by current_user
+    if @comment.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to posts_path }
+      @comment.liked_by current_user
 
-      format.js
+      if @comment.save!
 
-      format.json
+      else
+
+        flash.now[:error] = 'Could not upvote this comment.'
+
+      end
+
+    else
+
+      flash.now[:error] = 'You cannot upvote your own comment.'
+
     end
   end
 
+  # Unlike comment
+
+  def unlike
+    @comment.unliked_by current_user if @comment.user != current_user
+  end
+
+  # Dislike comment
+
   def dislike
-    @comment.disliked_by current_user
+    if @comment.user != current_user
 
-    respond_to do |format|
-      format.html { redirect_to posts_path }
+      @comment.disliked_by current_user
 
-      format.js
+      if @comment.save!
 
-      format.json
+      else
+
+        flash.now[:error] = 'Could not downvote this comment.'
+
+      end
+
+    else
+
+      flash.now[:error] = 'You cannot downvote your own comment.'
+
     end
+  end
+
+  # Undislike comment
+
+  def undislike
+    @comment.undisliked_by current_user if @comment.user != current_user
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set comment
 
   def set_comment
-    @comment = post.comments.find(params[:id])
+    @comment = @post.comments.find(params[:id])
   end
 
-  def post
-    Post.friendly.find(params[:post_id])
+  # Set post
+
+  def set_post
+    @post = Post.friendly.find(params[:post_id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Create notification when commenting on a post
+
+  def create_notification(post, comment)
+    return if post.user.id == current_user.id
+
+    Notification.create(user_id: post.user.id,
+
+                        notified_by_id: current_user.id,
+
+                        post_id: post.id,
+
+                        identifier: comment.id,
+
+                        notice_type: 'commenté')
+  end
+
+  # Comment parameters
 
   def comment_params
-    params.require(:comment).permit(:description)
+    params.require(:comment).permit(
+      :description,
+      :file,
+      :post_id
+    ).merge(
+      user: current_user
+    )
   end
 end

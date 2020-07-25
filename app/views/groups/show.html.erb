@@ -1,0 +1,55 @@
+<% @title = @group.name %>
+<%# content_for :description do
+  <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
+end %>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <%= form_tag(group_path(@group), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+        <%# Search field %>
+        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%# Submit button %>
+        <%= submit_tag '', style: "display: none;" %>
+      <% end %>
+    </div>
+    <div class="col-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Universités', groups_path %>
+        </li>
+        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>">
+          <%= @group.name %>
+        </li>
+      </ol>
+      <div class="card">
+        <div class="card-header">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Publications les plus populaires</h6>
+          <% end %>
+        </div>
+        <table class="table table-hover inspectable">
+          <tbody>
+            <% if @search.present? %>
+              <% @posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% else %>
+              <% @group.posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<%# Clickable table row element %>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>

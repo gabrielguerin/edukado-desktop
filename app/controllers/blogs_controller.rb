@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
 class BlogsController < ApplicationController
+  # Layout
+
+  layout 'statics'
+
+  # Find blog
+
   before_action :set_blog, only: %i[show edit update destroy]
+
+  # Respong to different formats
+
+  respond_to :js, :html, :json
 
   # GET /blogs
 
   def index
     @blogs = Blog.order(created_at: :desc).page(params[:page])
-    respond_to do |format|
-      format.js
-      format.html
-    end
+
+    @blogs_size = Blog.all.size
   end
 
   # GET /blogs/1
@@ -67,13 +75,13 @@ class BlogsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set blog
 
   def set_blog
     @blog = Blog.friendly.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Blog parameters
 
   def blog_params
     params.require(:blog).permit(

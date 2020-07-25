@@ -1,0 +1,4 @@
+$('#delete_comment_<%= @comment.id %>').bind('ajax:success', function() {
+<%# Remove comment %>
+$('#comment_<%= @comment.id %>').fadeOut(); 
+})

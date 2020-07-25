@@ -55,10 +55,6 @@ group :development, :test do
 
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
-  # Seed with Faker
-
-  gem 'faker'
-
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
@@ -138,6 +134,22 @@ gem 'kaminari'
 
 gem 'sendgrid-ruby'
 
-# official AWS SDK for Ruby
+# Official AWS SDK for Ruby
 
 gem 'aws-sdk-s3', require: false
+
+# Intelligent search made easy with Rails and Elasticsearch
+
+gem 'searchkick'
+
+# Support for `render` with Turbolinks in Rails controllers
+
+gem 'turbolinks_render'
+
+# Rails Plugin that tracks impressions and page views
+
+gem 'impressionist'
+
+# Seed with Faker
+
+gem 'faker'

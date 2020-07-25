@@ -1,51 +1,56 @@
-<div class="card">
+<%= form_with model: @post, html: { multipart: true, class: "card form" }, data: {controller: 'form'} do |f| %>
   <div class="card-header d-flex justify-content-center">
-    <h5 class="mb-0">Ajouter une publication</h5>
+    <h5 class="mb-0">
+      <% if current_page?(new_post_path) %>
+        Ajouter une publication
+      <% else %>
+        Modifier votre publication
+      <% end %>
+    </h5>
   </div>
   <div class="card-body">
-    <%= form_for @post, url: posts_path(@post),
-                html: { multipart: true, class: "form" } do |f| %>
-      <%= f.error_notification %>
-      <%= f.form_group :tag_list, class: "row" do |f| %>
-        <%= f.label "Tags", class: "col-sm-4 col-form-label" %>
-        <div class="col-12">
-          <%= f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: 'tag1, tag2, tag3...', required: true %>
-          <%= f.error_messages %>
-        </div>
-      <% end %>
-      <%= f.form_group :title, class: "row" do |f| %>
-        <%= f.label "Titre", class: "col-sm-4 col-form-label" %>
-        <div class="col-12 m-0">
-          <%= f.text_field :title, autofocus: true, class: "form-control", placeholder: 'Titre', required: true %>
-          <%= f.error_messages %>
-        </div>
-      <% end %>
-      <%= f.form_group :description, class: "row" do |f| %>
-        <%= f.label :description, class: "col-sm-4 col-form-label" %>
-        <div class="col-12">
-          <%= f.text_area :description, autofocus: true, class: "form-control", placeholder: 'Description', required: true %>
-          <%= f.error_messages %>
-        </div>
-      <% end %>
-      <%= f.form_group :file, class: "column" do |f| %>
-        <label class="col-sm-4 col-form-label pl-0">Fichier</label>
-        <div class="col-12">
-          <%= f.label "Fichier", class: "custom-file-label" %>
-          <%= f.file_field :file, class: "custom-file-input", required: true %>
-          <%= f.error_messages %>
-        </div>
-        <script type="application/javascript">
-          $('input[type="file"]').change(function(e){
-              var fileName = e.target.files[0].name;
-              $('.custom-file-label').html(fileName);
-          });
-        </script>
-      <% end %>
-      <div class="d-flex">
-        <div class="ml-auto">
-          <%= link_to "Retour", posts_path, class: "btn btn-outline-default" %>
-          <%= f.submit "Publier", class: "btn btn-primary" %>
+    <%# Tags %>
+    <%= f.form_group :tag_list, class: "row" do |f| %>
+      <%= f.label "Tags (5 maximum)", class: "col-sm-4 col-form-label" %>
+      <div class="col-12">
+        <%= f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: 'tag1, tag2, tag3...', required: true %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
+    <%# Title %>
+    <%= f.form_group :title, class: "row" do |f| %>
+      <%= f.label "Titre", class: "col-sm-4 col-form-label" %>
+      <div class="col-12 m-0">
+        <%= f.text_field :title, class: "form-control", placeholder: 'Titre', required: true %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
+    <%# Description %>
+    <%= f.form_group :description, class: "row" do |f| %>
+      <%= f.label :description, class: "col-sm-4 col-form-label" %>
+      <div class="col-12">
+        <%= f.text_area :description, class: "form-control", placeholder: 'Description', required: true %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
+    <%# File %>
+    <%= f.form_group :file, class: "column" do |f| %>
+      <%= f.label :file, 'Fichier', class: "col-sm-4 col-form-label pl-0" %>
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-max-file-size="5" data-dropzone-max-files="1">
+        <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
+        <div class="dropzone-msg dz-message needsclick text-gray-600">
+          <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
+          <span class="dropzone-msg-desc text-sm">2 Mo maximum. Types de fichier autorisés : jpg, pdf & png.</span>
         </div>
       </div>
     <% end %>
+    <div class="d-flex">
+      <div class="ml-auto">
+        <%# Buttons %>
+        <%= link_to "Retour", posts_path, class: "btn btn-outline-default", local: true %>
+        <%= f.submit "Publier", class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
+</div>
+<% end %>

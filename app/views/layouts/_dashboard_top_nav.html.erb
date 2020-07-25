@@ -1,29 +1,42 @@
 <nav class="navbar navbar-expand-lg my-0 justify-content-end inspectable">
-  <!-- component-title: Top Nav Bar -->
+  <%# Navbar toggler %>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <%# Navbar links %>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item d-none d-lg-block">
         <a href="javascript:" class="SideNavToggle nav-link">
           <%= theme_icon_tag "menu" %>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if current_page?(posts_path) %>">
         <a class="nav-link" href="<%= posts_path %>">Accueil</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
         <a class="nav-link" href="<%= new_post_path %>">Publier</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if current_page?(new_user_invitation_path) %>">
         <a class="nav-link" href="<%= new_user_invitation_path %>">Inviter</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if current_page?(posts_user_path(current_user)) %>">
         <a class="nav-link" href="<%= posts_user_path(current_user) %>">Mes publications</a>
       </li>
     </ul>
     <%= yield :navbar %>
-    <%= render partial: 'layouts/navbar' %>
+    <ul class="nav navbar-nav">
+      <%# Search dropdown %>
+      <%= render 'searches/search_dropdown' %>
+      <%# Badge dropdown %>
+      <%= render 'badges/badge_dropdown' %>
+      <%# Help dropdown%>
+      <li class="nav-item">
+        <%= link_to '/about', class: 'nav-link' do %>
+          <%= theme_icon_tag "help-alt" %>
+        <% end %>
+      </li>
+      <%= render 'users/user_dropdown' %>
+    </ul>
   </div>
 </nav>

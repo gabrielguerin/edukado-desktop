@@ -1,0 +1,8 @@
+$("#like_post_<%= @post.id %>").on('ajax:success', function(){
+<%# Update like count %>
+$(this).find('#like_count').html('Vote positif · <%= @post.likes_sum %>');
+<%# Remove like button class %>
+$(this).closest("#like_post_<%= @post.id %>").removeClass('text-success');
+<%# Set like button url to like %>
+$(this).attr("href", '/posts/<%= @post.id %>/like');
+});

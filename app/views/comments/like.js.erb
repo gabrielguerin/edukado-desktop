@@ -1,2 +1,19 @@
-$("#dislike_comment_<%= @comment.id %>").removeClass('btn btn-light text-danger').addClass('btn btn-light');
-$("#like_comment_<%= @comment.id %>").removeClass('btn btn-light mb-2').addClass('btn btn-light text-success');
+<% if @comment.user != current_user %>
+  $("#like_comment_<%= @comment.id %>").on('ajax:success', function(){
+  <%# Update dislike count %>
+  $('#dislike_comment_<%= @comment.id %>').find('#dislike_count_<%= @comment.id %>').html('Vote négatif · <%= @comment.dislikes_sum %>');
+  <%# Remove dislike button class %>
+  $("#dislike_comment_<%= @comment.id %>").removeClass('text-danger');
+  <%# Update like count %>
+  $(this).find("#like_count_<%= @comment.id %>").html('Vote positif · <%= @comment.likes_sum %>');
+  <%# Add like button class %>
+  $(this).closest("#like_comment_<%= @comment.id %>").addClass('text-success');
+  <%# Set like button url to unlike %>
+  $("#like_comment_<%= @comment.id %>").attr("href", '/posts/<%= @post.id %>/comments/<%= @comment.id %>/unlike');
+  <%# Set dislike button url to dislike %>
+  $("#dislike_comment_<%= @comment.id %>").attr("href", '/posts/<%= @post.id %>/comments/<%= @comment.id %>/dislike');
+  });
+<% else %>
+  <%# Render flash message %>
+  <%= ajax_flash('#flashes') %>
+<% end %>

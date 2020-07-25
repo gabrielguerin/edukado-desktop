@@ -2,7 +2,7 @@
   <div class="h-100 d-flex flex-column">
     <div class="card-header pb-0">
       <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle shadow image-offset', style: 'object-fit: cover;', width: '128', height: '128', alt: 'profile picture'), posts_user_path(@user) %>
-      <h4 class="card-title text-primary text-center mt-4 my-2"><%= link_to "#{@user.first_name} #{@user.last_name}", posts_user_path(@user) %></h4>
+      <h4 class="card-title text-primary text-center mt-4 my-2"><%= link_to "#{@user.full_name}", posts_user_path(@user) %></h4>
     </div>
     <div class="card-body">
       <h6 class="text-center text-muted">Description</h6>
@@ -15,14 +15,19 @@
           <p class="text-center"><%= @user.first_name %> n'a pas encore de description</p>
         <% end %>
       <% end %>
-      <h6 class="text-center text-muted">Publications</h6>
-      <p class="text-center"><%= @user.posts.count %></p>
-      <h6 class="text-center text-muted">Votes positifs</h6>
-      <p class="text-center"><%= @user.posts.sum(&:likes_sum) %></p>
-      <h6 class="text-center text-muted">Votes négatifs</h6>
-      <p class="text-center"><%= @user.posts.sum(&:dislikes_sum) %></p>
-      <h6 class="text-center text-muted"><%= link_to 'Badges', user_badge_path(@user) %></h6>
-      <p class="text-center"><%= @user.badges.count %></p>
+      <p class="text-center text-muted">Publications</p>
+      <h6 class="text-center"><%= @user.posts.count %></h6>
+      <%# Number of likes received by user %>
+      <p class="text-center text-muted">Votes positifs</p>
+      <h6 class="text-center"><%= @user.posts.sum(&:likes_sum) %></h6>
+      <%# Number of dislikes received by user %>
+      <p class="text-center text-muted">Votes négatifs</p>
+      <h6 class="text-center"><%= @user.posts.sum(&:dislikes_sum) %></h6>
+      <%# User badges %>
+      <p class="text-center text-muted">Badges</p>
+      <h6 class="text-center"><%= link_to @user.badges.count, user_badge_path(@user) %></h6>
+      <p class="text-center text-muted">Université</p>
+      <h6 class="text-center"><%= link_to @user.group.name, group_path(@user.group) %></h6>
     </div>
   </div>
 </div>

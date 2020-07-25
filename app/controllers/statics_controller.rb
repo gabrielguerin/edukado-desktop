@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
 class StaticsController < ApplicationController
-  layout '_base'
+  # Layout
+
+  layout 'statics'
+
+  # Check if user is signed in
 
   before_action :check_signed_in
 
-  def index; end
+  # GET /:page
 
   def show
     if valid_page?
 
-      render template: "statics/#{params[:page]}"
+      render template: params[:page].to_s
 
     else
 
-      render template: 'statics/errors/404', status: :not_found
+      render page: '/public/404', status: :not_found
 
     end
   end
 
-  # Redirects users to the web application if they are already signed in
-
-  def check_signed_in
-    redirect_to posts_path if signed_in?
-  end
-
   private
+
+  # Check if file exists in views/statics
 
   def valid_page?
     File.exist?(
@@ -33,5 +33,11 @@ class StaticsController < ApplicationController
         Rails.root + "app/views/statics/#{params[:page]}.html.erb"
       )
     )
+  end
+
+  # Redirect to posts#index if user is already signed in
+
+  def check_signed_in
+    redirect_to posts_path if signed_in?
   end
 end

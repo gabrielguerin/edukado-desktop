@@ -1,0 +1,10 @@
+<% @title = "Vos badges" %>
+<% if current_user.badges.present? %>
+  <%= render 'badges/user-badges' %>
+<% else %>
+  <div class="card">
+    <div class="card-body text-center">
+      <p>Vous n'avez pas encore obtenu de badges.</p>
+    </div>
+  </div>
+<% end %>

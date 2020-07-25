@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class TagsController < ApplicationController
+  # Layout
+
   layout 'scaffold'
 
-  before_action :authenticate_user!
+  # Find tag
 
   before_action :set_tag, only: [:show]
 
@@ -28,6 +30,8 @@ class TagsController < ApplicationController
   end
 
   private
+
+  # Set tag
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_174253) do
+ActiveRecord::Schema.define(version: 2020_07_01_155220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,40 @@ ActiveRecord::Schema.define(version: 2020_03_16_174253) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_groups_on_slug", unique: true
+  end
+
+  create_table "impressions", force: :cascade do |t|
+    t.string "impressionable_type"
+    t.integer "impressionable_id"
+    t.integer "user_id"
+    t.string "controller_name"
+    t.string "action_name"
+    t.string "view_name"
+    t.string "request_hash"
+    t.string "ip_address"
+    t.string "session_hash"
+    t.text "message"
+    t.text "referrer"
+    t.text "params"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
+    t.index ["user_id"], name: "index_impressions_on_user_id"
+  end
+
   create_table "merit_actions", force: :cascade do |t|
     t.integer "user_id"
     t.string "action_method"
@@ -139,13 +173,18 @@ ActiveRecord::Schema.define(version: 2020_03_16_174253) do
     t.index ["sash_id"], name: "index_merit_scores_on_sash_id"
   end
 
-  create_table "pg_search_documents", force: :cascade do |t|
-    t.text "content"
-    t.string "searchable_type"
-    t.bigint "searchable_id"
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "notified_by_id"
+    t.bigint "post_id"
+    t.integer "identifier"
+    t.string "notice_type"
+    t.boolean "read", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
+    t.index ["notified_by_id"], name: "index_notifications_on_notified_by_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -155,6 +194,8 @@ ActiveRecord::Schema.define(version: 2020_03_16_174253) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -223,8 +264,11 @@ ActiveRecord::Schema.define(version: 2020_03_16_174253) do
     t.integer "sash_id"
     t.integer "level", default: 0
     t.string "slug"
+    t.integer "download_count", default: 0
+    t.bigint "group_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
@@ -250,4 +294,9 @@ ActiveRecord::Schema.define(version: 2020_03_16_174253) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "notifications", "posts"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "notified_by_id"
+  add_foreign_key "posts", "groups"
+  add_foreign_key "users", "groups"
 end
