@@ -14,33 +14,37 @@ end %>
     </div>
     <div class="col-12">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><%= link_to 'Universités', groups_path %></li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>"><%= @group.name %></a></li>
-    </ol>
-    <div class="card">
-      <div class="card-header">
-        <% if @search.present? %>
-          <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-        <% else %>
-          <h6 class="card-title">Publications les plus populaires</h6>
-        <% end %>
-      </div>
-      <table class="table table-hover inspectable">
-        <tbody>
+        <li class="breadcrumb-item">
+          <%= link_to 'Universités', groups_path %>
+        </li>
+        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>">
+          <%= @group.name %>
+        </li>
+      </ol>
+      <div class="card">
+        <div class="card-header">
           <% if @search.present? %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <% @group.posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
+            <h6 class="card-title">Publications les plus populaires</h6>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+        <table class="table table-hover inspectable">
+          <tbody>
+            <% if @search.present? %>
+              <% @posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% else %>
+              <% @group.posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 <%# Clickable table row element %>
