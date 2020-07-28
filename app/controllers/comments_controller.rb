@@ -61,7 +61,7 @@ class CommentsController < ApplicationController
     )
 
     respond_to do |format|
-      if @comment.save
+      if @comment.save!
 
         create_notification @post, @comment
 
@@ -71,7 +71,7 @@ class CommentsController < ApplicationController
 
       else
 
-        format.html { render :new }
+        format.html { redirect_to @post }
 
         format.json { render json: @post.errors, status: :unprocessable_entity }
 
