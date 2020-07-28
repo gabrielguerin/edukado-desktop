@@ -230,61 +230,55 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 10
-      end
-
-      grant_on 'users/sessions#create',
-               badge_id: 18,
-
-               level: 2,
-
-               model_name: 'User',
-
-               to: :itself do |user|
         user.points >= 100
       end
 
       grant_on 'users/sessions#create',
                badge_id: 18,
 
+               level: 2,
+
+               model_name: 'User',
+
+               to: :itself do |user|
+        user.points >= 2500
+      end
+
+      grant_on 'users/sessions#create',
+               badge_id: 18,
+
                level: 3,
 
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 200
+        user.points >= 10000
       end
 
       # Comments per post
 
-      grant_on 'comments#create',
+      grant_on 'posts#show',
                badge_id: 30,
 
                level: 1,
-
-               model_name: 'Post',
 
                to: :user do |post|
         post.comments.count == 10
       end
 
-      grant_on 'comments#create',
+      grant_on 'posts#show',
                badge_id: 31,
 
                level: 2,
-
-               model_name: 'Post',
 
                to: :user do |post|
         post.comments.count == 25
       end
 
-      grant_on 'comments#create',
+      grant_on 'posts#show',
                badge_id: 32,
 
                level: 3,
-
-               model_name: 'Post',
 
                to: :user do |post|
         post.comments.count == 100

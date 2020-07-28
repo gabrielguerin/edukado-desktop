@@ -1,4 +1,4 @@
 <%# Render comment %>
 $('#comments_<%= @post.id %>').prepend("<%= j render @comment %>");
 <%# Remove comment description in comment form %>
-document.getElementById('comment_description_<%= @post.id %>').value = '';
+document.getElementById('comment_description').value = '';
