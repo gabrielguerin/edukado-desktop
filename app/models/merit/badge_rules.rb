@@ -230,7 +230,7 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 10
+        user.points >= 100
       end
 
       grant_on 'users/sessions#create',
@@ -241,7 +241,7 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 100
+        user.points >= 2500
       end
 
       grant_on 'users/sessions#create',
@@ -252,7 +252,7 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 200
+        user.points >= 10000
       end
 
       # Comments per post
@@ -263,7 +263,7 @@ module Merit
                level: 1,
 
                to: :user do |post|
-        post.comments.count == 1
+        post.comments.count == 10
       end
 
       grant_on 'posts#show',
@@ -272,7 +272,7 @@ module Merit
                level: 2,
 
                to: :user do |post|
-        post.comments.count == 2
+        post.comments.count == 25
       end
 
       grant_on 'posts#show',
@@ -281,7 +281,7 @@ module Merit
                level: 3,
 
                to: :user do |post|
-        post.comments.count == 3
+        post.comments.count == 100
       end
 
       # Votes per post
