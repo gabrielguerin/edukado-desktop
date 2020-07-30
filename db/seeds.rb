@@ -106,8 +106,6 @@ categories.each do |category|
   Category.create!(
     name: category
   )
-
-  categories.shift
 end
 
 # Create posts
