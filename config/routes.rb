@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :categories
   # Admin routes
 
   namespace :admin do
@@ -97,6 +96,10 @@ Rails.application.routes.draw do
       get :posts
     end
   end
+
+  # Categories routes
+
+  resources :categories, only: %i[index show]
 
   # Posts routes
 
