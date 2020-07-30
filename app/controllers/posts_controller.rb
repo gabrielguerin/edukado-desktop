@@ -250,7 +250,8 @@ class PostsController < ApplicationController
       :created_at,
       :updated_at,
       :file,
-      :tag_list
+      :tag_list,
+      :category
     ).merge(
       user: current_user
     )
