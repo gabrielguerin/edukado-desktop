@@ -13,6 +13,7 @@ end %>
       <% end %>
     </div>
     <div class="col-12">
+      <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <%= link_to 'Universités', groups_path %>
@@ -21,8 +22,11 @@ end %>
           <%= @group.name %>
         </li>
       </ol>
+      <%# Card %>
       <div class="card">
+        <%# Card header %>
         <div class="card-header">
+          <%# Render group's posts %>
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
@@ -45,7 +49,6 @@ end %>
       </div>
     </div>
   </div>
-</div>
 </div>
 <%# Clickable table row element %>
 <script>
