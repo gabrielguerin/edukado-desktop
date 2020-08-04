@@ -53,11 +53,13 @@
           <div class="mr-auto d-flex flex-column">
             <div class="d-flex flex-row align-items-center">
               <%# User's full name & Group %>
-              <h6 class="mb-0 mr-1"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
-              <span class="mr-1">|</span><%= link_to post.group.name, group_path(post.group) %>
-              <div class="d-flex align-items-center flex-row">
-                <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
-              </div>
+              <h6 class="mb-0"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
+              <span class="mx-1">|</span><%= link_to post.group.name, group_path(post.group) %>
+              <span class="mx-1">|</span><%= link_to post.category.name, category_path(post.category) %>
+            </div>
+            <%# User badges info %>
+            <div class="d-flex align-items-center flex-row">
+              <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
             </div>
             <%# Date published %>
             <small>

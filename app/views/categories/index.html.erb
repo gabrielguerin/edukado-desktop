@@ -1,0 +1,51 @@
+<% @title = "Voici les différentes catégories de fichiers" %>
+<%# content_for :description do
+  <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
+end %>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <%= form_tag(categories_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+        <%# Search field %>
+        <%= text_field_tag :search, nil, placeholder: "Rechercher une catégorie.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%# Submit button %>
+        <%= submit_tag '', style: "display: none;" %>
+      <% end %>
+    </div>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(categories_path) %>">
+          <%= link_to 'Catégories', categories_path %>
+        </li>
+      </ol>
+      <%# Groups %>
+      <div class="card">
+        <div class="card-header">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Toutes les catégories</h6>
+          <% end %>
+        </div>
+        <table class="table table-hover inspectable">
+          <tbody>
+            <% if @search.present? %>
+              <% @categories.each do |category| %>
+                <%= render partial: 'categories/category', locals: { category: category } %>
+              <% end %>
+            <% else %>
+              <%= render @categories %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<%# Clickable table row element %>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
