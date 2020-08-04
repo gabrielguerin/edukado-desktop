@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
 
                 Group.all.order('name ASC').page(params[:page])
 
-             end
+              end
   end
 
   # GET /groups/1
@@ -36,7 +36,15 @@ class GroupsController < ApplicationController
 
       # Render search results
 
-      @posts = Post.search(params[:search], where: { group_id: @group.id }, page: params[:page], per_page: 20)
+      @posts = Post.search(
+        params[:search],
+        
+        where: { group_id: @group.id },
+
+        page: params[:page],
+
+        per_page: 20
+      )
 
     else
 
@@ -63,9 +71,13 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
+
       redirect_to @group, notice: 'Group was successfully created.'
+
     else
+
       render :new
+
     end
   end
 
@@ -73,9 +85,13 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
+
       redirect_to @group, notice: 'Group was successfully updated.'
+
     else
+
       render :edit
+
     end
   end
 
@@ -83,6 +99,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
+
     redirect_to groups_url, notice: 'Group was successfully destroyed.'
   end
 

@@ -7,15 +7,52 @@ class CategoriesController < ApplicationController
 
   before_action :set_category, only: %i[show edit update destroy]
 
+  # Set search
+
+  before_action :set_search, only: %i[show index]
+
   # GET /categories
 
   def index
-    @categories = Category.all
+    @categories = if search
+
+                    # Render search results
+
+                    Category.search(params[:search], page: params[:page], per_page: 20)
+
+                  else
+
+                    # Render categories
+
+                    Category.all.order('name ASC').page(params[:page])
+
+                  end
   end
 
   # GET /categories/1
 
-  def show; end
+  def show
+    if @search
+
+      # Render search results
+
+      @posts = Post.search(
+        params[:search],
+        where: { category_id: @category.id },
+
+        page: params[:page],
+
+        per_page: 20
+      )
+
+    else
+
+      # Render Category
+
+      @category = Category.friendly.find(params[:id])
+
+    end
+  end
 
   # GET /categories/new
 
@@ -57,6 +94,12 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  # Set search
+
+  def set_search
+    @search = params[:search].present? ? params[:search] : nil
+  end
 
   # Set category
 

@@ -70,7 +70,9 @@ class Post < ApplicationRecord
 
       group_name: group.name,
 
-      group_id: group.id
+      group_id: group.id,
+
+      category_id: category.id
 
     }.merge(
       tag: tags.map(&:title),
