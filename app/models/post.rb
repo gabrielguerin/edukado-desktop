@@ -68,11 +68,7 @@ class Post < ApplicationRecord
 
       user_full_name: user.full_name,
 
-      group_name: group.name,
-
-      group_id: group.id,
-
-      category_id: category.id
+      group_name: group.name
 
     }.merge(
       tag: tags.map(&:title),

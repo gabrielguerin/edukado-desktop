@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
   # GET /categories
 
   def index
-    @categories = if search
+    @categories = if @search
 
                     # Render search results
 
