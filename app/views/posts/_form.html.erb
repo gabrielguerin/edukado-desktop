@@ -33,7 +33,14 @@
         <%= f.error_messages %>
       </div>
     <% end %>
-    <%# Group %>
+    <%# Subject %>
+    <%= f.form_group :subject, class: "row" do |f| %>
+      <%= f.label 'Matière', class: "col-sm-4 col-form-label" %>
+      <div class="col-12 m-0">
+        <%= f.collection_select(:subject_id, Subject.all, :id, :name, {}, {class: 'custom-select'}) %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
     <%# Description %>
     <%= f.form_group :description, class: "row" do |f| %>
       <%= f.label :description, class: "col-sm-4 col-form-label" %>
