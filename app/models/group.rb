@@ -19,7 +19,7 @@ class Group < ApplicationRecord
 
   has_many :groups_subjects, dependent: :destroy
 
-  has_many :subject, through: :groups_subjects
+  has_many :subjects, through: :groups_subjects
 
 
   # Search data

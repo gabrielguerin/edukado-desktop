@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
 
               else
 
-                # Render posts
+                # Render groups
 
                 Group.all.order('name ASC').page(params[:page])
 

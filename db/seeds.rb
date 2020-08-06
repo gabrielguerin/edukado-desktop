@@ -32,15 +32,17 @@ Blog.delete_all
 
 Notification.delete_all
 
+GroupsSubject.delete_all
+
 Group.delete_all
+
+Subject.delete_all
 
 Category.delete_all
 
-GroupsSubject.delete_all
-
 # Create groups
 
-20.times do
+30.times do
   Group.create!(
     name: Faker::University.name
   )
@@ -48,7 +50,7 @@ end
 
 # Create subjects
 
-40.times do
+50.times do
   Subject.create!(
     name: Faker::Educator.subject
   )
