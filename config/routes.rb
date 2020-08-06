@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :subjects
   # Admin routes
 
   namespace :admin do
@@ -47,6 +46,10 @@ Rails.application.routes.draw do
 
     root to: 'users#index'
   end
+
+  # Subject routes
+
+  resources :subjects, only: %i[show index]
 
   # Group routes
 
