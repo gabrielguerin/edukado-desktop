@@ -42,13 +42,9 @@ end %>
       </div>
     </div>
   </div>
-  <% if Group.count >= 20 %>
+  <% if Group.count > 20 %>
     <%# Pagination %>
-    <div class="card">
-      <div class="card-body d-flex justify-content-center" id="paginate">
-        <%= paginate @groups %>
-      </div>
-    </div>
+    <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local' } %>
   <% end %>
 </div>
 <%# Clickable table row element %>
