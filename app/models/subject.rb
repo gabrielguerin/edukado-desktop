@@ -26,10 +26,6 @@ class Subject < ApplicationRecord
 
       name: name
 
-    }.merge(
-
-      post: posts.map(&:title)
-
-    )
+    }
   end  
 end

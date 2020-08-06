@@ -70,7 +70,17 @@ class Post < ApplicationRecord
 
       user_full_name: user.full_name,
 
-      group_name: group.name
+      group_name: group.name,
+
+      group_id: group.id,
+
+      category_name: category.name,
+
+      category_id: category.id,
+
+      subject_name: subject.name,
+
+      subject_id: subject.id
 
     }.merge(
       tag: tags.map(&:title),

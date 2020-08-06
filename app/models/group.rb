@@ -21,7 +21,6 @@ class Group < ApplicationRecord
 
   has_many :subjects, through: :groups_subjects
 
-
   # Search data
 
   def search_data
@@ -29,10 +28,6 @@ class Group < ApplicationRecord
 
       name: name
 
-    }.merge(
-
-      post: posts.map(&:title)
-
-    )
+    }
   end
 end

@@ -22,10 +22,6 @@ class Category < ApplicationRecord
 
       name: name
 
-    }.merge(
-
-      post: posts.map(&:title)
-
-    )
+    }
   end
 end
