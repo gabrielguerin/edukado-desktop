@@ -46,9 +46,7 @@ class SubjectsController < ApplicationController
 
     else
 
-      # Render Subject
-
-      @subject = Subject.friendly.find(params[:id])
+      # Render subject
 
       @posts = @subject.posts.page(params[:page])
 

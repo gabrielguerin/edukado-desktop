@@ -38,6 +38,7 @@ class CategoriesController < ApplicationController
 
       @posts = Post.search(
         params[:search],
+
         where: { category_id: @category.id },
 
         page: params[:page],
@@ -48,8 +49,6 @@ class CategoriesController < ApplicationController
     else
 
       # Render Category
-
-      @category = Category.friendly.find(params[:id])
 
       @posts = @category.posts.page(params[:page])
 
