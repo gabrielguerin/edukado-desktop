@@ -50,6 +50,8 @@ class SubjectsController < ApplicationController
 
       @subject = Subject.friendly.find(params[:id])
 
+      @posts = @subject.posts.page(params[:page])
+
     end
   end
 

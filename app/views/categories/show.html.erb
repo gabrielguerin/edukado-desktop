@@ -40,7 +40,7 @@ end %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% else %>
-              <% @category.posts.each do |post| %>
+              <% @posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% end %>
@@ -49,12 +49,14 @@ end %>
       </div>
     </div>
   </div>
+  <% if @posts.count >= 20 %>
   <%# Pagination %>
   <div class="card">
     <div class="card-body d-flex justify-content-center" id="paginate">
       <%= paginate @groups %>
     </div>
   </div>
+  <% end %>
 </div>
 <%# Clickable table row element %>
 <script>

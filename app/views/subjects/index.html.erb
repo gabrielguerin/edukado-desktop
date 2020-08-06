@@ -42,12 +42,14 @@ end %>
       </div>
     </div>
   </div>
+  <% if Subject.count >= 20 %>
   <%# Pagination %>
   <div class="card">
     <div class="card-body d-flex justify-content-center" id="paginate">
       <%= paginate @subjects %>
     </div>
   </div>
+  <% end %>
 </div>
 <%# Clickable table row element %>
 <script>
