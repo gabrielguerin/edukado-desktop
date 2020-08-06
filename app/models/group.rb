@@ -17,6 +17,11 @@ class Group < ApplicationRecord
 
   has_many :posts
 
+  has_many :groups_subjects, dependent: :destroy
+
+  has_many :subject, through: :groups_subjects
+
+
   # Search data
 
   def search_data
