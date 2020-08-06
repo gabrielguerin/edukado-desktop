@@ -16,6 +16,8 @@ require 'faker'
 
 # Delete everything
 
+Notification.delete_all
+
 User.delete_all
 
 Tag.delete_all
@@ -30,8 +32,6 @@ PostsTag.delete_all
 
 Blog.delete_all
 
-Notification.delete_all
-
 GroupsSubject.delete_all
 
 Group.delete_all
@@ -39,6 +39,20 @@ Group.delete_all
 Subject.delete_all
 
 Category.delete_all
+
+# Reindex all
+
+User.reindex
+
+Post.reindex
+
+Category.reindex
+
+Subject.reindex
+
+Tag.reindex
+
+Group.reindex
 
 # Create groups
 
