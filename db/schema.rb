@@ -112,21 +112,21 @@ ActiveRecord::Schema.define(version: 2020_08_06_120344) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "group_subjects", force: :cascade do |t|
-    t.bigint "group_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_group_subjects_on_group_id"
-    t.index ["subject_id"], name: "index_group_subjects_on_subject_id"
-  end
-
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
+  end
+
+  create_table "groups_subjects", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_groups_subjects_on_group_id"
+    t.index ["subject_id"], name: "index_groups_subjects_on_subject_id"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -323,8 +323,8 @@ ActiveRecord::Schema.define(version: 2020_08_06_120344) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "group_subjects", "groups"
-  add_foreign_key "group_subjects", "subjects"
+  add_foreign_key "groups_subjects", "groups"
+  add_foreign_key "groups_subjects", "subjects"
   add_foreign_key "notifications", "posts"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"

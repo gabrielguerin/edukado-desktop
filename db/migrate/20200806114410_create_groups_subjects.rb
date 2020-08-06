@@ -1,6 +1,6 @@
-class CreateGroupSubjects < ActiveRecord::Migration[6.0]
+class CreateGroupsSubjects < ActiveRecord::Migration[6.0]
   def change
-    create_table :group_subjects do |t|
+    create_table :groups_subjects do |t|
       t.references :group, null: false, foreign_key: true
       t.references :subject, null: false, foreign_key: true
 
