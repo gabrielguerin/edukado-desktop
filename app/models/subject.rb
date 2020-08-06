@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Group < ApplicationRecord
+class Subject < ApplicationRecord
   # Search
 
   searchkick word_start: %i[name]
@@ -10,16 +10,14 @@ class Group < ApplicationRecord
   extend FriendlyId
 
   friendly_id :name, use: :slugged
-
+  
   # Associations
-
-  has_many :users
 
   has_many :posts
 
   has_many :groups_subjects, dependent: :destroy
 
-  has_many :subjects, through: :groups_subjects
+  has_many :groups, through: :groups_subjects
 
   # Search data
 
@@ -29,5 +27,5 @@ class Group < ApplicationRecord
       name: name
 
     }
-  end
+  end  
 end

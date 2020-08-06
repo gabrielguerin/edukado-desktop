@@ -47,6 +47,10 @@ Rails.application.routes.draw do
     root to: 'users#index'
   end
 
+  # Subject routes
+
+  resources :subjects, only: %i[show index]
+
   # Group routes
 
   resources :groups, only: %i[show index]
@@ -96,6 +100,10 @@ Rails.application.routes.draw do
       get :posts
     end
   end
+
+  # Categories routes
+
+  resources :categories, only: %i[index show]
 
   # Posts routes
 

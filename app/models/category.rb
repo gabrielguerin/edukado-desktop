@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Group < ApplicationRecord
+class Category < ApplicationRecord
   # Search
 
   searchkick word_start: %i[name]
@@ -13,14 +13,8 @@ class Group < ApplicationRecord
 
   # Associations
 
-  has_many :users
-
   has_many :posts
-
-  has_many :groups_subjects, dependent: :destroy
-
-  has_many :subjects, through: :groups_subjects
-
+  
   # Search data
 
   def search_data

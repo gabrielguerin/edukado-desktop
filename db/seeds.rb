@@ -16,6 +16,8 @@ require 'faker'
 
 # Delete everything
 
+Notification.delete_all
+
 User.delete_all
 
 Tag.delete_all
@@ -30,15 +32,41 @@ PostsTag.delete_all
 
 Blog.delete_all
 
-Notification.delete_all
+GroupsSubject.delete_all
 
 Group.delete_all
 
+Subject.delete_all
+
+Category.delete_all
+
+# Reindex all
+
+User.reindex
+
+Post.reindex
+
+Category.reindex
+
+Subject.reindex
+
+Tag.reindex
+
+Group.reindex
+
 # Create groups
 
-20.times do
+30.times do
   Group.create!(
     name: Faker::University.name
+  )
+end
+
+# Create subjects
+
+50.times do
+  Subject.create!(
+    name: Faker::Educator.subject
   )
 end
 
@@ -78,6 +106,34 @@ end
   )
 end
 
+# Create categories
+
+categories = [
+
+  'Notes de cours',
+
+  'Anciens examens',
+
+  'Travaux pratiques',
+
+  'Résumés',
+
+  'Devoirs Maison',
+
+  'Travaux dirigés',
+
+  'Dissertations',
+
+  'Autre'
+
+]
+
+categories.each do |category|
+  Category.create!(
+    name: category
+  )
+end
+
 # Create posts
 
 100.times do
@@ -90,7 +146,11 @@ end
 
     tags: Tag.all.sample(3),
 
-    group: Group.all.sample
+    group: Group.all.sample,
+
+    category: Category.all.sample,
+
+    subject: Subject.all.sample
   )
 
   @post.file.attach(
@@ -169,5 +229,15 @@ end
     blog: Blog.all.sample,
 
     tag: Tag.all.sample
+  )
+end
+
+# Link groups to subjects
+
+40.times do
+  GroupsSubject.create!(
+    group: Group.all.sample,
+
+    subject: Subject.all.sample
   )
 end

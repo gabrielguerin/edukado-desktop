@@ -21,6 +21,10 @@ class Post < ApplicationRecord
 
   belongs_to :group
 
+  belongs_to :category
+
+  belongs_to :subject
+
   has_many :comments, dependent: :destroy
 
   has_many :posts_tags, dependent: :destroy
@@ -68,7 +72,15 @@ class Post < ApplicationRecord
 
       group_name: group.name,
 
-      group_id: group.id
+      group_id: group.id,
+
+      category_name: category.name,
+
+      category_id: category.id,
+
+      subject_name: subject.name,
+
+      subject_id: subject.id
 
     }.merge(
       tag: tags.map(&:title),

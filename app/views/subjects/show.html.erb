@@ -1,13 +1,13 @@
-<% @title = @group.name %>
+<% @title = @subject.name %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
 <div class="container">
   <div class="row">
     <div class="card">
-      <%= form_tag(group_path(@group), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+      <%= form_tag(subject_path(@subject), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
         <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
         <%# Submit button %>
         <%= submit_tag '', style: "display: none;" %>
       <% end %>
@@ -16,17 +16,17 @@ end %>
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <%= link_to 'Universités', groups_path %>
+          <%= link_to 'Matières', subjects_path %>
         </li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>">
-          <%= @group.name %>
+        <li class="breadcrumb-item <%= 'active' if current_page?(subject_path(@subject)) %>">
+          <%= @subject.name %>
         </li>
       </ol>
       <%# Card %>
       <div class="card">
         <%# Card header %>
         <div class="card-header">
-          <%# Render group's posts %>
+          <%# Render subject's posts %>
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
@@ -49,8 +49,8 @@ end %>
       </div>
     </div>
   </div>
-  <% if @group.posts.count > 20 %>
-    <%# Pagination %>
+  <%# Pagination %>
+  <% if @subject.posts.count > 20 %>
     <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
   <% end %>
 </div>

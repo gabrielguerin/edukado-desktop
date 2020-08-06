@@ -1,13 +1,13 @@
-<% @title = "À quelle université étudiez-vous ?" %>
+<% @title = "Quelle matière recherchez-vous ?" %>
 <%# content_for :description do
   <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
 end %>
 <div class="container">
   <div class="row">
     <div class="card">
-      <%= form_tag(groups_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+      <%= form_tag(subjects_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
         <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Rechercher une université et trouver du contenu pour celle-ci.", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%= text_field_tag :search, nil, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci.", class: "form-control border-0", name: "search", autocomplete: :off%>
         <%# Submit button %>
         <%= submit_tag '', style: "display: none;" %>
       <% end %>
@@ -16,7 +16,7 @@ end %>
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
-          <%= link_to 'Universités', groups_path %>
+          <%= link_to 'Matières', subjects_path %>
         </li>
       </ol>
       <%# Groups %>
@@ -25,26 +25,26 @@ end %>
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title">Toutes les universités</h6>
+            <h6 class="card-title">Toutes les matières</h6>
           <% end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
             <% if @search.present? %>
-              <% @groups.each do |group| %>
-                <%= render partial: 'groups/group', locals: { group: group } %>
+              <% @subjects.each do |subject| %>
+                <%= render partial: 'subjects/subject', locals: { subject: subject } %>
               <% end %>
             <% else %>
-              <%= render @groups %>
+              <%= render @subjects %>
             <% end %>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  <% if Group.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local' } %>
+  <%# Pagination %>
+  <% if Subject.count >= 20 %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
   <% end %>
 </div>
 <%# Clickable table row element %>

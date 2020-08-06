@@ -35,6 +35,10 @@ class PostsController < ApplicationController
 
   before_action :posts, only: %i[show create]
 
+  # Set group
+
+  before_action :set_group, only: :create
+
   # Respond to different formats
 
   respond_to :js, :html, :json
@@ -87,7 +91,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
 
     respond_to do |format|
-      if @post.save
+      if @post.save!
 
         format.html do
           redirect_to @post, notice: 'Votre publication a bien été ajoutée.'
@@ -225,6 +229,12 @@ class PostsController < ApplicationController
     @post = Post.friendly.find(params[:id])
   end
 
+  # Set group
+
+  def set_group
+    params[:post][:group_id] = current_user.group.id
+  end
+
   # Create notification when post is liked
 
   def create_notification(post)
@@ -247,10 +257,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :description,
-      :created_at,
-      :updated_at,
       :file,
-      :tag_list
+      :tag_list,
+      :category_id,
+      :group_id,
+      :subject_id
     ).merge(
       user: current_user
     )
