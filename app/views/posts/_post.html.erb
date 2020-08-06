@@ -56,6 +56,7 @@
               <h6 class="mb-0"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
               <span class="mx-1">|</span><%= link_to post.group.name, group_path(post.group) %>
               <span class="mx-1">|</span><%= link_to post.category.name, category_path(post.category) %>
+              <span class="mx-1">|</span><%= link_to post.subject.name, subject_path(post.subject) %>
             </div>
             <%# User badges info %>
             <div class="d-flex align-items-center flex-row">

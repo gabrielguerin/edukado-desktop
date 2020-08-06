@@ -40,7 +40,7 @@ end %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% else %>
-              <% @group.posts.each do |post| %>
+              <% @posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% end %>
@@ -49,6 +49,10 @@ end %>
       </div>
     </div>
   </div>
+  <% if @group.posts.count > 20 %>
+    <%# Pagination %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+  <% end %>
 </div>
 <%# Clickable table row element %>
 <script>

@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
 
               else
 
-                # Render posts
+                # Render groups
 
                 Group.all.order('name ASC').page(params[:page])
 
@@ -48,9 +48,11 @@ class GroupsController < ApplicationController
 
     else
 
-      # Render Group
+      # Render group
 
       @group = Group.friendly.find(params[:id])
+      
+      @posts = @group.posts.page(params[:page])
 
     end
   end

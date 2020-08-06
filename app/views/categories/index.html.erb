@@ -42,6 +42,10 @@ end %>
       </div>
     </div>
   </div>
+  <%# Pagination %>
+  <% if Category.count > 20 %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
+  <% end %>
 </div>
 <%# Clickable table row element %>
 <script>

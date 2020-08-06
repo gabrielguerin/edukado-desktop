@@ -260,7 +260,8 @@ class PostsController < ApplicationController
       :file,
       :tag_list,
       :category_id,
-      :group_id
+      :group_id,
+      :subject_id
     ).merge(
       user: current_user
     )

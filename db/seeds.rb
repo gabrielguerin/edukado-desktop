@@ -32,15 +32,27 @@ Blog.delete_all
 
 Notification.delete_all
 
+GroupsSubject.delete_all
+
 Group.delete_all
+
+Subject.delete_all
 
 Category.delete_all
 
 # Create groups
 
-20.times do
+30.times do
   Group.create!(
     name: Faker::University.name
+  )
+end
+
+# Create subjects
+
+50.times do
+  Subject.create!(
+    name: Faker::Educator.subject
   )
 end
 
@@ -122,7 +134,9 @@ end
 
     group: Group.all.sample,
 
-    category: Category.all.sample
+    category: Category.all.sample,
+
+    subject: Subject.all.sample
   )
 
   @post.file.attach(
@@ -201,5 +215,15 @@ end
     blog: Blog.all.sample,
 
     tag: Tag.all.sample
+  )
+end
+
+# Link groups to subjects
+
+40.times do
+  GroupsSubject.create!(
+    group: Group.all.sample,
+
+    subject: Subject.all.sample
   )
 end

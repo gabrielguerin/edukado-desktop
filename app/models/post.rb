@@ -23,6 +23,8 @@ class Post < ApplicationRecord
 
   belongs_to :category
 
+  belongs_to :subject
+
   has_many :comments, dependent: :destroy
 
   has_many :posts_tags, dependent: :destroy

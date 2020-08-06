@@ -51,6 +51,8 @@ class CategoriesController < ApplicationController
 
       @category = Category.friendly.find(params[:id])
 
+      @posts = @category.posts.page(params[:page])
+
     end
   end
 
