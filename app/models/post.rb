@@ -25,6 +25,8 @@ class Post < ApplicationRecord
 
   belongs_to :subject
 
+  belongs_to :year
+
   has_many :comments, dependent: :destroy
 
   has_many :posts_tags, dependent: :destroy
