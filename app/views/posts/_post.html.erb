@@ -65,7 +65,7 @@
             <%# Date published %>
             <small>
               <time>
-                Publié il y a <%= time_ago_in_words(post.created_at) %> | 
+                <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
                 <% if post.impressionist_count(filter: :ip_address) == 0 %>
                   0 vue
                 <% else %>
