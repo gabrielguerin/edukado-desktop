@@ -62,7 +62,7 @@
             <div class="d-flex align-items-center flex-row">
               <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
             </div>
-            <%# Date published & views %>
+            <%# Date published, views & level %>
             <small>
               <time>
                 <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
@@ -70,6 +70,9 @@
                   0 vue
                 <% else %>
                   <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
+                <% end %> |
+                <% post.levels.each do |level| %>
+                  <%= level.level %>
                 <% end %>
               </time>
             </small>

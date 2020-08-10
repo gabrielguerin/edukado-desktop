@@ -58,6 +58,10 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
+
+  # Shows objects in nicely formatted columns for easy reading
+
+  gem 'table_print'
 end
 
 group :development do

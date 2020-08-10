@@ -35,6 +35,10 @@ class Post < ApplicationRecord
 
   has_many :notifications, dependent: :destroy
 
+  has_many :levels_posts, dependent: :destroy
+
+  has_many :levels, through: :levels_posts
+
   # Vote
 
   acts_as_votable
