@@ -61,6 +61,8 @@ class Post < ApplicationRecord
 
   }
 
+  validates :level_ids, presence: true
+
   # Limit tags per post
 
   validate :validate_tags

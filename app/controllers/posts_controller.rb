@@ -262,7 +262,8 @@ class PostsController < ApplicationController
       :category_id,
       :group_id,
       :subject_id,
-      :year_id
+      :year_id,
+      level_ids:[]
     ).merge(
       user: current_user
     )
