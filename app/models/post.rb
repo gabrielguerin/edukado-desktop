@@ -25,6 +25,8 @@ class Post < ApplicationRecord
 
   belongs_to :subject
 
+  belongs_to :year
+
   has_many :comments, dependent: :destroy
 
   has_many :posts_tags, dependent: :destroy
@@ -32,6 +34,10 @@ class Post < ApplicationRecord
   has_many :tags, through: :posts_tags
 
   has_many :notifications, dependent: :destroy
+
+  has_many :levels_posts, dependent: :destroy
+
+  has_many :levels, through: :levels_posts
 
   # Vote
 
@@ -54,6 +60,8 @@ class Post < ApplicationRecord
     minimum: 2, too_short: '%<count> caractères est le minimum autorisé'
 
   }
+
+  validates :level_ids, presence: true
 
   # Limit tags per post
 

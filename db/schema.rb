@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_120344) do
+ActiveRecord::Schema.define(version: 2020_08_09_142202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,21 @@ ActiveRecord::Schema.define(version: 2020_08_06_120344) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.integer "level"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "levels_posts", force: :cascade do |t|
+    t.bigint "level_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["level_id"], name: "index_levels_posts_on_level_id"
+    t.index ["post_id"], name: "index_levels_posts_on_post_id"
+  end
+
   create_table "merit_actions", force: :cascade do |t|
     t.integer "user_id"
     t.string "action_method"
@@ -214,11 +229,13 @@ ActiveRecord::Schema.define(version: 2020_08_06_120344) do
     t.bigint "group_id"
     t.bigint "category_id", null: false
     t.bigint "subject_id", null: false
+    t.bigint "year_id", null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["subject_id"], name: "index_posts_on_subject_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["year_id"], name: "index_posts_on_year_id"
   end
 
   create_table "posts_tags", force: :cascade do |t|
@@ -322,14 +339,24 @@ ActiveRecord::Schema.define(version: 2020_08_06_120344) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
+  create_table "years", force: :cascade do |t|
+    t.integer "start_year"
+    t.integer "end_year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "groups_subjects", "groups"
   add_foreign_key "groups_subjects", "subjects"
+  add_foreign_key "levels_posts", "levels"
+  add_foreign_key "levels_posts", "posts"
   add_foreign_key "notifications", "posts"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "subjects"
+  add_foreign_key "posts", "years"
   add_foreign_key "users", "groups"
 end

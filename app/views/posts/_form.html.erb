@@ -41,6 +41,26 @@
         <%= f.error_messages %>
       </div>
     <% end %>
+    <%# Year %>
+    <%= f.form_group :year, class: "row" do |f| %>
+      <%= f.label 'Année', class: "col-sm-4 col-form-label" %>
+      <div class="col-12 m-0">
+        <%= f.collection_select(:year_id, Year.all, :id, :year, {}, {class: 'custom-select'}) %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
+    <%# Level %>
+    <%= f.form_group :year, class: "row" do |f| %>
+      <%= f.label 'Niveau(x)', class: "col-sm-4 col-form-label" %>
+      <div class="col-12 m-0">
+        <%= collection_check_boxes(:post, :level_ids, Level.all, :id, :level) do |level| %>
+          <div class="form-check form-check-inline checkbox">
+            <%= level.check_box %> <%= level.label %>
+          </div>
+        <% end %>
+        <%= f.error_messages %>
+      </div>
+    <% end %>
     <%# Description %>
     <%= f.form_group :description, class: "row" do |f| %>
       <%= f.label :description, class: "col-sm-4 col-form-label" %>

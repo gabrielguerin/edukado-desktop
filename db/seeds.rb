@@ -40,6 +40,12 @@ Subject.delete_all
 
 Category.delete_all
 
+Year.delete_all
+
+LevelsPost.delete_all
+
+Level.delete_all
+
 # Reindex all
 
 User.reindex
@@ -67,6 +73,42 @@ end
 50.times do
   Subject.create!(
     name: Faker::Educator.subject
+  )
+end
+
+# Create years
+
+years = [
+
+  2015,
+
+  2016,
+
+  2017,
+
+  2018,
+
+  2019,
+
+  2020,
+
+  2021
+
+]
+
+years.each do |year|
+  Year.create!(
+    start_year: year,
+
+    end_year: year + 1
+  )
+end
+
+# Create levels
+
+(1..10).each do |level|
+  Level.create!(
+    level: level
   )
 end
 
@@ -150,7 +192,11 @@ end
 
     category: Category.all.sample,
 
-    subject: Subject.all.sample
+    subject: Subject.all.sample,
+
+    year: Year.all.sample,
+
+    levels: Level.all.sample(1)
   )
 
   @post.file.attach(
@@ -173,6 +219,16 @@ end
     post: Post.all.sample,
 
     description: Faker::Lorem.paragraph(sentence_count: 2)
+  )
+end
+
+# Link levels to posts
+
+10.times do
+  LevelsPost.create!(
+    level: Level.all.sample,
+
+    post: Post.all.sample
   )
 end
 
