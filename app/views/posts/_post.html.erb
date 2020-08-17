@@ -4,8 +4,12 @@
       <div class="dropdown" style="visibility: hidden;">
         <%= button_tag theme_icon_tag('more'), class: 'nav-link btn btn-icon' %>
       </div>
-      <%# Title %>
-      <h4><%= link_to post.title, post_path(post) %></h4>
+      <div class="text-center">
+        <%# Tags %>
+        <% post.tags.each do |tag| %>
+          <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
+        <% end %>
+      </div>
       <%# Dropdown menu %>
       <div class="dropdown">
         <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
@@ -36,12 +40,6 @@
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="text-center border-bottom pb-4">
-      <%# Tags %>
-      <% post.tags.each do |tag| %>
-        <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
-      <% end %>
     </div>
   </div>
   <div class="card-body pb-0 pt-3">
