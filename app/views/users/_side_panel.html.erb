@@ -4,30 +4,37 @@
       <%= link_to image_tag(user_avatar(@user), class: 'rounded-circle shadow image-offset', style: 'object-fit: cover;', width: '128', height: '128', alt: 'profile picture'), posts_user_path(@user) %>
       <h4 class="card-title text-primary text-center mt-4 my-2"><%= link_to "#{@user.full_name}", posts_user_path(@user) %></h4>
     </div>
-    <div class="card-body">
-      <h6 class="text-center text-muted">Description</h6>
+    <div class="card-body text-center">
+      <%# User badges %>
+      <h6 class="text-muted"><%= link_to 'Badges', user_badge_path(@user) %></h6>
+      <div class="d-flex flex-row justify-content-center">
+        <%= render partial: 'badges/badges_user-info', locals: { user: @user } %>
+      </div>
+      <%# User reputation %>
+      <h6 class="text-muted mt-3">Réputation</h6>
+      <p data-placement="bottom" data-toggle="tooltip" data-original-title="Score de réputation">
+        <%= @user.points %>
+      </p>
+      <h6 class="text-muted mt-3">Université</h6>
+      <p><%= @user.group.name %></p>
+      <h6 class="text-muted mt-3">Description</h6>
       <% if @user.description? %>
-        <p class="text-center"><%= @user.description %></p>
+        <p><%= @user.description %></p>
       <% else %>
         <% if current_user == @user %>
-          <p class="text-center">Vous n'avez pas encore de description</p>
+          <p >Vous n'avez pas encore de description</p>
         <% else %>
-          <p class="text-center"><%= @user.first_name %> n'a pas encore de description</p>
+          <p ><%= @user.first_name %> n'a pas encore de description</p>
         <% end %>
       <% end %>
-      <p class="text-center text-muted">Publications</p>
-      <h6 class="text-center"><%= @user.posts.count %></h6>
+      <h6 class="text-muted mt-3">Publications</h6>
+      <p><%= @user.posts.count %></p>
       <%# Number of likes received by user %>
-      <p class="text-center text-muted">Votes positifs</p>
-      <h6 class="text-center"><%= @user.posts.sum(&:likes_sum) %></h6>
+      <h6 class="text-muted mt-3">Votes positifs</h6>
+      <p><%= @user.posts.sum(&:likes_sum) %></p>
       <%# Number of dislikes received by user %>
-      <p class="text-center text-muted">Votes négatifs</p>
-      <h6 class="text-center"><%= @user.posts.sum(&:dislikes_sum) %></h6>
-      <%# User badges %>
-      <p class="text-center text-muted">Badges</p>
-      <h6 class="text-center"><%= link_to @user.badges.count, user_badge_path(@user) %></h6>
-      <p class="text-center text-muted">Université</p>
-      <h6 class="text-center"><%= link_to @user.group.name, group_path(@user.group) %></h6>
+      <h6 class="text-muted mt-3">Votes négatifs</h6>
+      <p><%= @user.posts.sum(&:dislikes_sum) %></p>
     </div>
   </div>
 </div>
