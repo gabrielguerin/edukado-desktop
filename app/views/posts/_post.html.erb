@@ -44,26 +44,6 @@
   </div>
   <div class="card-body pb-0 pt-3">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex pb-0 px-0">
-        <div class="mr-auto d-flex align-items-center">
-          <div class="mr-auto d-flex flex-column">
-            <%# Date published, views & level %>
-            <small>
-              <time>
-                <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
-                <% if post.impressionist_count(filter: :ip_address) == 0 %>
-                  0 vue
-                <% else %>
-                  <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
-                <% end %> |
-                <% post.levels.each do |level| %>
-                  <%= level.level %>A
-                <% end %>
-              </time>
-            </small>
-          </div>
-        </div>
-      </li>
       <%# Description %>
       <li class="list-group-item d-flex pt-0 px-0 border-top-0 border-bottom">
         <p class="mt-1 mb-1 text-break"><%= post.description %></p>
