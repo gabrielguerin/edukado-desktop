@@ -21,24 +21,29 @@
         <code class="text=muted"><%= File.extname(post.file.filename.to_s).last(-1) %></code>
       </div>
       <div class="media-body text-left pl-3">
-        <h6 class="m-0"><%= post.title %></h6>
+      <div class="d-flex flex-row">
+        <h6 class="my-0 mr-2"><%= post.title %></h6>
+          <span class="badge badge-light">
+            <%= post.category.name %>
+          </span>
+        </div>
         <p class="my-0">
-        <%= post.subject.name %>
-        •
-        <%= post.group.name %>
-        •
+          <%= post.subject.name %>
+          •
+          <%= post.group.name %>
+          •
           <% post.levels.each do |level| %>
             <%= level.level %>A /
           <% end %>
         </p>
         <%# Date published & views %>
         <small class="text-muted">
-            <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
-            <% if post.impressionist_count(filter: :ip_address) == 0 %>
-              0 vue
-            <% else %>
-              <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
-            <% end %>
+          <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
+          <% if post.impressionist_count(filter: :ip_address) == 0 %>
+            0 vue
+          <% else %>
+            <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
+          <% end %>
         </small>
       </div>
       <div class="text-muted">
