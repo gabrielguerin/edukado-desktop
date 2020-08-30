@@ -18,7 +18,7 @@ end %>
         <li class="breadcrumb-item">
           <%= link_to 'Universités', groups_path %>
         </li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>">
+        <li class="breadcrumb-item">
           <%= @group.name %>
         </li>
       </ol>
