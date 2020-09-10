@@ -48,7 +48,17 @@ end %>
         <% if @search.present? %>
           <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
         <% else %>
-          <h6 class="card-title">Publications les plus populaires</h6>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#popular">Populaires</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#subject">Matières</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#level">Année</a>
+            </li>
+          </ul>
         <% end %>
       </div>
       <table class="table table-hover inspectable">
@@ -58,9 +68,20 @@ end %>
               <%= render partial: 'posts/post-list_item', locals: { post: post } %>
             <% end %>
           <% else %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
+            <div class="tab-content" id="tabs">
+              <div class="tab-pane" id="popular">
+                <%# Popular %>
+                <% @posts.order(cached_votes_score: :desc).each do |post| %>
+                  <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="subject">
+                <%# Subject %>
+              </div>
+              <div class="tab-pane" id="level">
+                <%# Level %>
+              </div>
+            </div>
           <% end %>
         </tbody>
       </table>
@@ -74,7 +95,15 @@ end %>
 </div>
 <%# Clickable table row element %>
 <script>
+  // Clickable table rows
   $("tr[data-link]").click(function() {
     window.location = $(this).data("link")
   })
+  
+  // Tabs
+    function activateTab(tab){
+      $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+  };
+  
+  activateTab('popular');
 </script>
