@@ -1,0 +1,13 @@
+<div class="media align-items-center">
+  <div class="media-body text-left">
+    <div class="d-flex flex-row">
+      <h6 class="my-0 mr-2"><%= subject.name %></h6>
+    </div>
+  </div>
+  <div class="text-muted">
+    <%# Number of posts %>
+    <%= theme_icon_tag('file') %>
+    •
+    <%= subject.posts.count %>
+  </div>
+</div>

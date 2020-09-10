@@ -19,7 +19,7 @@ end %>
           <%= link_to 'Universités', groups_path %>
         </li>
         <li class="breadcrumb-item">
-          <%= @group.name %>
+          <%= link_to "#{@group.name}", group_path(@group) %>
         </li>
       </ol>
       <%# Statistics %>
@@ -48,20 +48,45 @@ end %>
         <% if @search.present? %>
           <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
         <% else %>
-          <h6 class="card-title">Publications les plus populaires</h6>
+          <h6 class="card-title"><%= @group.name %></h6>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#popular">Populaires</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#subject">Matières</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#level">Année</a>
+            </li>
+          </ul>
         <% end %>
       </div>
-      <table class="table table-hover inspectable">
+      <table class="table table-hover table-striped">
         <tbody>
-          <% if @search.present? %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+          <div class="card-body tab-content" id="tabs">
+            <% if @search.present? %>
+              <% @posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% else %>
+              <div class="tab-pane active" id="popular">
+                <%# Popular %>
+                <% @posts.order(cached_votes_score: :desc).each do |post| %>
+                  <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="subject">
+                <%# Subject %>
+                <% @group.subjects.each do |subject| %>
+                  <%= render partial: 'subjects/subject-list_item', locals: { subject: subject } %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="level">
+                <%# Level %>
+              </div>
             <% end %>
-          <% else %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
-          <% end %>
+          </div>
         </tbody>
       </table>
     </div>
@@ -72,9 +97,3 @@ end %>
   <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 <% end %>
 </div>
-<%# Clickable table row element %>
-<script>
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-</script>

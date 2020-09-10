@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_142202) do
+ActiveRecord::Schema.define(version: 2020_09_10_142145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,20 @@ ActiveRecord::Schema.define(version: 2020_08_09_142202) do
     t.bigint "category_id", null: false
     t.bigint "subject_id", null: false
     t.bigint "year_id", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
+    t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
+    t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
+    t.index ["cached_votes_up"], name: "index_posts_on_cached_votes_up"
+    t.index ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average"
+    t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
+    t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
