@@ -19,7 +19,7 @@ end %>
           <%= link_to 'Universités', groups_path %>
         </li>
         <li class="breadcrumb-item">
-          <%= @group.name %>
+          <%= link_to "#{@group.name}", group_path(@group) %>
         </li>
       </ol>
       <%# Statistics %>
