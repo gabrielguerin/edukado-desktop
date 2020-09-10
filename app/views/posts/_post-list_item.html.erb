@@ -21,8 +21,8 @@
         <code class="text=muted"><%= File.extname(post.file.filename.to_s).last(-1) %></code>
       </div>
       <div class="media-body text-left pl-3">
-      <div class="d-flex flex-row">
-        <h6 class="my-0 mr-2"><%= post.title %></h6>
+        <div class="d-flex flex-row">
+          <h6 class="my-0 mr-2"><%= post.title %></h6>
           <span class="badge badge-light">
             <%= post.category.name %>
           </span>
@@ -33,7 +33,7 @@
           <%= post.group.name %>
           •
           <% post.levels.each do |level| %>
-            <%= level.level %>A /
+            <%= level.level %>A 
           <% end %>
         </p>
         <%# Date published & views %>
