@@ -48,6 +48,7 @@ end %>
         <% if @search.present? %>
           <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
         <% else %>
+          <h6 class="card-title"><%= @group.name %></h6>
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#popular">Populaires</a>
@@ -61,30 +62,29 @@ end %>
           </ul>
         <% end %>
       </div>
-      <table class="table table-hover inspectable">
-        <tbody>
-          <% if @search.present? %>
-            <% @posts.each do |post| %>
+      <div class="card-body tab-content" id="tabs">
+        <% if @search.present? %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+          <% end %>
+        <% else %>
+          <div class="tab-pane" id="popular">
+            <%# Popular %>
+            <% @posts.order(cached_votes_score: :desc).each do |post| %>
               <%= render partial: 'posts/post-list_item', locals: { post: post } %>
             <% end %>
-          <% else %>
-            <div class="tab-content" id="tabs">
-              <div class="tab-pane" id="popular">
-                <%# Popular %>
-                <% @posts.order(cached_votes_score: :desc).each do |post| %>
-                  <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-                <% end %>
-              </div>
-              <div class="tab-pane" id="subject">
-                <%# Subject %>
-              </div>
-              <div class="tab-pane" id="level">
-                <%# Level %>
-              </div>
-            </div>
-          <% end %>
-        </tbody>
-      </table>
+          </div>
+          <div class="tab-pane" id="subject">
+            <%# Subject %>
+            <% @group.subjects.each do |subject| %>
+              <%= render partial: 'subjects/subject-list_item', locals: { subject: subject } %>
+            <% end %>
+          </div>
+          <div class="tab-pane" id="level">
+            <%# Level %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
