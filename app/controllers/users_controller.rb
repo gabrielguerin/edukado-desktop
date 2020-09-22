@@ -7,18 +7,14 @@ class UsersController < ApplicationController
 
   # Find user
 
-  before_action :set_user, only: %i[show posts]
+  before_action :set_user, only: %i[show posts dashboard]
 
   # GET /users/1
 
   def show
-    unless current_user == @user
-
-      redirect_back fallback_location: root_path,
-
-                    notice: "Vous ne pouvez pas modifier le profil d'un autre utilisateur."
-
-    end
+    return if current_user == @user
+    @error_message = 'Vous ne pouvez pas modifier le profil d\'un autre utilisateur.'
+    redirect_back fallback_location: group_path(current_user.group)
   end
 
   # Display user's posts
@@ -31,6 +27,14 @@ class UsersController < ApplicationController
 
       format.html
     end
+  end
+
+  # User dashboard
+
+  def dashboard
+    return if current_user == @user
+    @error_message = 'Vous ne pouvez pas accéder au dashboard d\'un autre utilisateur'
+    redirect_back fallback_location: group_path(current_user.group)
   end
 
   private
@@ -53,6 +57,10 @@ class UsersController < ApplicationController
     when 'show'
 
       '_app_nav'
+
+    when 'dashboard'
+
+      'scaffold'
 
     end
   end
