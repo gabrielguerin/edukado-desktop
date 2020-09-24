@@ -1,0 +1,8 @@
+    <div class="card">
+      <%= form_tag(search_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
+        <%# Search field %>
+        <%= text_field_tag :search, nil, placeholder: "#{placeholder}", class: "form-control border-0", name: "search", autocomplete: :off%>
+        <%# Submit button %>
+        <%= submit_tag '', style: "display: none;" %>
+      <% end %>
+    </div>

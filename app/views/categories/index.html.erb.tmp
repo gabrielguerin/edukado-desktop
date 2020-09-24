@@ -1,15 +1,15 @@
-<% @title = "À quelle université étudiez-vous ?" %>
+<% @title = "Voici les différentes catégories de fichiers" %>
 <%# content_for :description do
   <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
 end %>
 <div class="container">
   <div class="row">
-    <%= render partial: 'search/form', locals: { search_path: groups_path, placeholder: "Rechercher une université et trouver du contenu pour celle-ci." } %>
+    <%= render partial: 'search/form', locals: { search_path: categories_path, placeholder: "Rechercher une catégorie." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
-          <%= link_to 'Universités', groups_path %>
+        <li class="breadcrumb-item <%= 'active' if current_page?(categories_path) %>">
+          <%= link_to 'Catégories', categories_path %>
         </li>
       </ol>
       <%# Groups %>
@@ -18,26 +18,26 @@ end %>
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title">Toutes les universités</h6>
+            <h6 class="card-title">Toutes les catégories</h6>
           <% end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
             <% if @search.present? %>
-              <% @groups.each do |group| %>
-                <%= render partial: 'groups/group', locals: { group: group } %>
+              <% @categories.each do |category| %>
+                <%= render partial: 'categories/category', locals: { category: category } %>
               <% end %>
             <% else %>
-              <%= render @groups %>
+              <%= render @categories %>
             <% end %>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  <% if Group.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local' } %>
+  <%# Pagination %>
+  <% if Category.count > 20 %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
   <% end %>
 </div>
 <%# Clickable table row element %>
