@@ -4,14 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
-    <div class="card">
-      <%= form_tag(subjects_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci.", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+      <%= render partial: 'search/form', locals: { search_path: subjects_path, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
@@ -43,8 +36,14 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if Subject.count >= 20 %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
+  <% if @search.present? %>
+    <% if @subjects.count >= 20 %>
+        <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
+    <% end %>
+  <% else %>
+    <% if Subject.count >= 20 %>
+      <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
+    <% end %>
   <% end %>
 </div>
 <%# Clickable table row element %>

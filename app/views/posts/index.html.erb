@@ -1,14 +1,7 @@
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
-    <div class="card">
-      <%= form_tag(posts_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Tabs %>
       <%# Card %>
