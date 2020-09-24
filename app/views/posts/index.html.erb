@@ -47,9 +47,3 @@
   <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 <% end %>
 </div>
-<%# Clickable table row element %>
-<script>
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-</script>

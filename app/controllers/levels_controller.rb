@@ -1,7 +1,9 @@
 class LevelsController < ApplicationController
-  layout "scaffold"
+  layout 'scaffold'
 
-  before_action :set_level, only: [:show, :edit, :update, :destroy]
+  # Set level
+
+  before_action :set_level, only: %i[show edit update destroy]
 
   # GET /levels
   def index
@@ -9,8 +11,7 @@ class LevelsController < ApplicationController
   end
 
   # GET /levels/1
-  def show
-  end
+  def show; end
 
   # GET /levels/new
   def new
@@ -18,8 +19,7 @@ class LevelsController < ApplicationController
   end
 
   # GET /levels/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /levels
   def create
@@ -50,7 +50,7 @@ class LevelsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_level
-      @level = Level.find(params[:id])
+      @level = Level.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -36,27 +36,21 @@ end %>
     <%# List of posts %>
     <div class="card">
       <%# Card header %>
-      <div class="card-header">
-        <%# Render group's posts %>
+      <div class="card-header d-flex align-items-center">
         <% if @search.present? %>
           <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
         <% else %>
           <h6 class="card-title"><%= @group.name %></h6>
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#popular">Populaires</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#subject">Matières</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#level">Année</a>
-            </li>
-          </ul>
         <% end %>
+        <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-default active">Populaires</button>
+          <button type="button" class="btn btn-default">Matières</button>
+          <button type="button" class="btn btn-default">Années</button>
+        </div>
       </div>
       <table class="table table-hover table-striped">
         <tbody>
+          <%# Render group's posts %>
           <div class="card-body tab-content" id="tabs">
             <% if @search.present? %>
               <% @posts.each do |post| %>
