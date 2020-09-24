@@ -29,6 +29,10 @@ class AdminNavigation
 
     pg_search/documents
 
+    groups_subjects
+
+    levels_posts
+
   ].freeze
 
   def self.routes(admin)

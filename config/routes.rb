@@ -24,6 +24,20 @@ Rails.application.routes.draw do
 
     resources :blogs_tags
 
+    resources :years
+
+    resources :levels
+
+    resources :levels_posts
+
+    resources :categories
+
+    resources :groups
+
+    resources :subjects
+
+    resources :groups_subjects
+
     namespace :merit do
       resources :activity_logs
 
