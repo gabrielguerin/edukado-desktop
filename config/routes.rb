@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :levels
+
   # Admin routes
 
   namespace :admin do
@@ -96,9 +97,11 @@ Rails.application.routes.draw do
 
   # Users routes
 
-  resources :users, only: %i[show posts] do
+  resources :users, only: %i[show posts dashboard] do
     member do
       get :posts
+
+      get :dashboard
     end
   end
 
