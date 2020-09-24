@@ -1,0 +1,49 @@
+<% @title = "#{@level.level}A" %>
+<%# content_for :description do
+  <p>Edit this template in <code>app/views/Categories/show.html.erb</code>.</p>
+end %>
+<div class="container">
+  <div class="row">
+    <%= render partial: 'search/form', locals: { search_path: level_path(@level), placeholder: "Recherchez un fichier de cette année et trouvez du contenu à ce sujet." } %>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Années', levels_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to "#{@level.level}A", level_path(@level) %>
+        </li>
+      </ol>
+      <%# Card %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Publications les plus populaires</h6>
+          <% end %>
+        </div>
+        <table class="table table-hover inspectable">
+          <tbody>
+            <%# Render category's posts %>
+            <% if @search.present? %>
+              <% @level.posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% else %>
+              <% @level.posts.each do |post| %>
+                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <% if @level.posts.count > 20 %>
+    <%# Pagination %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+  <% end %>
+</div>
