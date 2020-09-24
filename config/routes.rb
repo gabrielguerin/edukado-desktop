@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :levels
-
   # Admin routes
 
   namespace :admin do
@@ -156,6 +154,10 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+
+  # Levels routes
+
+  resources :levels, only: %i[index show]
 
   # Notifications routes
 
