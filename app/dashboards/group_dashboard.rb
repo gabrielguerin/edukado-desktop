@@ -25,36 +25,31 @@ class GroupDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    id
+    name
   users
   posts
-  groups_subjects
   subjects
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  users
-  posts
-  groups_subjects
-  subjects
-  id
-  name
-  created_at
-  updated_at
-  slug
+    id
+    name  
+    users
+    posts
+    subjects
+    created_at
+    updated_at
+    slug
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  users
-  posts
-  groups_subjects
-  subjects
   name
-  slug
   ].freeze
 
   # COLLECTION_FILTERS
