@@ -36,8 +36,14 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if Category.count > 20 %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
+  <% if @search.present? %>
+    <% if @categories.count >= 20 %>
+        <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
+    <% end %>
+  <% else %>
+    <% if Category.count >= 20 %>
+      <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
+    <% end %>
   <% end %>
 </div>
 <%# Clickable table row element %>
