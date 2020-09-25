@@ -251,3 +251,7 @@ fr:
       gold: "d'or"
       silver: "d'argent"
       bronze: "de bronze"
+    badge:
+      zero: "0 badge"
+      one: "1 badge"
+      other: "%{count} badges"
