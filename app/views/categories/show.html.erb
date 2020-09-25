@@ -4,6 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
+  <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: category_path(@category), placeholder: "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>

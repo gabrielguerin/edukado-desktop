@@ -15,6 +15,7 @@
           <%= link_to "Voir les dernières publications →", posts_path, class: 'btn btn-info' %>
         </div>
         <div class="col-12 col-md-6">
+        <%# Search form %>
           <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
           <div class="d-flex flex-row justify-content-between">
             <%# Gold badges %>
