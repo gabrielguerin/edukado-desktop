@@ -1,18 +1,18 @@
-<% @title = @category.name %>
+<% @title = "#{@level.level}A" %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Categories/show.html.erb</code>.</p>
 end %>
 <div class="container">
   <div class="row">
-    <%= render partial: 'search/form', locals: { search_path: category_path(@category), placeholder: "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." } %>
+    <%= render partial: 'search/form', locals: { search_path: level_path(@level), placeholder: "Recherchez un fichier de cette année et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <%= link_to 'Catégories', categories_path %>
+          <%= link_to 'Années', levels_path %>
         </li>
         <li class="breadcrumb-item">
-          <%= link_to @category.name, category_path(@category) %>
+          <%= link_to "#{@level.level}A", level_path(@level) %>
         </li>
       </ol>
       <%# Card %>
@@ -29,11 +29,11 @@ end %>
           <tbody>
             <%# Render category's posts %>
             <% if @search.present? %>
-              <% @posts.each do |post| %>
+              <% @level.posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% else %>
-              <% @posts.each do |post| %>
+              <% @level.posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% end %>
@@ -42,7 +42,7 @@ end %>
       </div>
     </div>
   </div>
-  <% if @category.posts.count > 20 %>
+  <% if @level.posts.count > 20 %>
     <%# Pagination %>
     <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
   <% end %>

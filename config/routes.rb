@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :levels
   # Admin routes
 
   namespace :admin do
@@ -22,6 +21,20 @@ Rails.application.routes.draw do
     resources :tags_users
 
     resources :blogs_tags
+
+    resources :years
+
+    resources :levels
+
+    resources :levels_posts
+
+    resources :categories
+
+    resources :groups
+
+    resources :subjects
+
+    resources :groups_subjects
 
     namespace :merit do
       resources :activity_logs
@@ -96,9 +109,11 @@ Rails.application.routes.draw do
 
   # Users routes
 
-  resources :users, only: %i[show posts] do
+  resources :users, only: %i[show posts dashboard] do
     member do
       get :posts
+
+      get :dashboard
     end
   end
 
@@ -139,6 +154,10 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
+
+  # Levels routes
+
+  resources :levels, only: %i[index show]
 
   # Notifications routes
 

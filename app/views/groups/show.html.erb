@@ -4,59 +4,83 @@
 end %>
 <div class="container">
   <div class="row">
-    <div class="card">
-      <%= form_tag(group_path(@group), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+    <%= render partial: 'search/form', locals: { search_path: group_path(@group), placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <%= link_to 'Universités', groups_path %>
         </li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(group_path(@group)) %>">
-          <%= @group.name %>
+        <li class="breadcrumb-item">
+          <%= link_to "#{@group.name}", group_path(@group) %>
         </li>
       </ol>
-      <%# Card %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header">
-          <%# Render group's posts %>
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Publications les plus populaires</h6>
-          <% end %>
+      <%# Statistics %>
+      <div class="d-flex flex-row justify-content-around">
+        <div class="card card-mini mx-1">
+          <div class="card-body">
+            <h6 class="m-0 pt-2 text-muted text-wrap">Nombre de documents</h6>
+            <h4 class="m-0 counter"><%= @group.posts.count %></h4>
+          </div>
         </div>
-        <table class="table table-hover inspectable">
-          <tbody>
+        <% Category.all.sample(5).each do |category| %>
+          <div class="card card-mini mx-1">
+            <div class="card-body">
+              <h6 class="m-0 pt-2 text-muted text-wrap"><%= category.name %></h6>
+              <h4 class="m-0 counter"><%= category.posts.where(group: @group).count %></h4>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%# List of posts %>
+    <div class="card">
+      <%# Card header %>
+      <div class="card-header d-flex align-items-center">
+        <% if @search.present? %>
+          <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+        <% else %>
+          <h6 class="card-title"><%= @group.name %></h6>
+        <% end %>
+        <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-default active">Populaires</button>
+          <button type="button" class="btn btn-default">Matières</button>
+          <button type="button" class="btn btn-default">Années</button>
+        </div>
+      </div>
+      <table class="table table-hover table-striped">
+        <tbody>
+          <%# Render group's posts %>
+          <div class="card-body tab-content" id="tabs">
             <% if @search.present? %>
               <% @posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
             <% else %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
+              <div class="tab-pane active" id="popular">
+                <%# Popular %>
+                <% @posts.order(cached_votes_score: :desc).each do |post| %>
+                  <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="subject">
+                <%# Subject %>
+                <% @group.subjects.each do |subject| %>
+                  <%= render partial: 'subjects/subject-list_item', locals: { subject: subject } %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="level">
+                <%# Level %>
+              </div>
             <% end %>
-          </tbody>
-        </table>
-      </div>
+          </div>
+        </tbody>
+      </table>
     </div>
   </div>
-  <% if @group.posts.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-  <% end %>
 </div>
-<%# Clickable table row element %>
-<script>
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-</script>
+<% if @group.posts.count > 20 %>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+<% end %>
+</div>

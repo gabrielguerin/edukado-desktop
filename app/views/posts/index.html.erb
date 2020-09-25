@@ -1,27 +1,49 @@
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
-    <div class="col-lg-9 col-md-12 col-sm-12">
-      <% if @posts.present? %>
-        <%# Posts %>
-        <div id="posts">
-          <%= render @posts %>
-        </div>
-        <%# Pagination %>
-        <% if @posts.count > 20 %>
-          <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'remote' } %>
+    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
+    <div class="col-12">
+      <%# Tabs %>
+      <%# Card %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Trouver votre fichier</i></h6>
         <% end %>
-      <% else %>
-        <div class="card">
-          <div class="card-body text-center">
-            <p>Il n'y a pas encore eu de publications.</p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%# Side panel %>
-    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
-      <%= render partial: 'side_panel' %>
+        <ul class="nav nav-tabs nav-tabs-primary card-header-tabs" id="navTab1" role="tablist">
+          <li class="nav-item">
+            <a href="#profile" data-toggle="tab" class="nav-link">Populaires</a>
+          </li>
+          <li class="nav-item">
+            <a href="#badges" data-toggle="tab" class="nav-link">Matières</a>
+          </li>
+          <li class="nav-item">
+            <a href="#support" data-toggle="tab" class="nav-link">Année</a>
+          </li>
+        </ul>
+      </div>
+      <table class="table table-hover inspectable">
+        <tbody>
+          <%# Render posts %>
+          <% if @search.present? %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+            <% end %>
+          <% else %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
+<% if @posts.count >= 20 %>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+<% end %>
 </div>

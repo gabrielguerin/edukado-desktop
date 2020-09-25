@@ -38,6 +38,6 @@ class StaticsController < ApplicationController
   # Redirect to posts#index if user is already signed in
 
   def check_signed_in
-    redirect_to posts_path if signed_in?
+    redirect_to dashboard_user_path(current_user) if signed_in?
   end
 end

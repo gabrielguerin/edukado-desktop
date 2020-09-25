@@ -1,23 +1,63 @@
-<tr class="tr-group" data-link="<%= post_path(post) %>">
-  <td class="d-flex align-items-center">
-    <span class="mr-2">
-      <%# Image %>
-      <% if post.file.content_type.include? 'image' %>
-        <i class="ti-image" style="font-size: 25px;"></i>
-        <%# Text %>
-      <% elsif post.file.content_type.include? 'text' %>
-        <i class="ti-text" style="font-size: 25px;"></i>
-        <%# Audio %>
-      <% elsif post.file.content_type.include? 'audio' %>
-        <i class="ti-music-alt" style="font-size: 25px;"></i>
-        <%# Video %>
-      <% elsif post.file.content_type.include? 'video' %>
-        <i class="ti-video-clapper" style="font-size: 25px;"></i>
-        <%# Document %>
-      <% else %>
-        <i class="ti-file" style="font-size: 25px;"></i>
-      <% end %>
-    </span>
-    <%= post.title %>
+<tr>
+  <td>
+    <div class="media align-items-center">
+      <div class="d-flex align-self-center flex-column">
+        <%# Image %>
+        <% if post.file.content_type.include? 'image' %>
+          <i class="ti-image" style="font-size: 25px;"></i>
+          <%# Text %>
+        <% elsif post.file.content_type.include? 'text' %>
+          <i class="ti-text" style="font-size: 25px;"></i>
+          <%# Audio %>
+        <% elsif post.file.content_type.include? 'audio' %>
+          <i class="ti-music-alt" style="font-size: 25px;"></i>
+          <%# Video %>
+        <% elsif post.file.content_type.include? 'video' %>
+          <i class="ti-video-clapper" style="font-size: 25px;"></i>
+          <%# Document %>
+        <% else %>
+          <i class="ti-file" style="font-size: 25px;"></i>
+        <% end %>
+        <code class="text=muted"><%= File.extname(post.file.filename.to_s).last(-1) %></code>
+      </div>
+      <div class="media-body text-left pl-3">
+        <div class="d-flex flex-row">
+          <h6 class="my-0 mr-2"><%= link_to post.title, post_path(post) %></h6>
+          <span class="badge badge-light">
+            <%= link_to post.category.name, category_path(post.category) %>
+          </span>
+        </div>
+        <p class="my-0">
+          <%= link_to post.subject.name, subject_path(post.subject) %>
+          •
+          <%= link_to post.group.name, group_path(post.group) %>
+          •
+          <% post.levels.each do |level| %>
+            <%= link_to "#{level.level}A", level_path(level.level) %>
+          <% end %>
+        </p>
+        <%# Date published & views %>
+        <small class="text-muted">
+          <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
+          <% if post.impressionist_count(filter: :ip_address) == 0 %>
+            0 vue
+          <% else %>
+            <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
+          <% end %>
+        </small>
+      </div>
+      <div class="text-muted">
+        <span class="mr-3">
+          <%# Likes %>
+          <%= theme_icon_tag('arrow-up') %>
+          •
+          <%= post.likes_sum %>
+        </span>
+        <%# Dislikes %>
+        <%= theme_icon_tag('arrow-down') %>
+        •
+        <%= post.dislikes_sum %>
+      </div>
+    </div>
   </td>
 </tr>

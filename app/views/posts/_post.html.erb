@@ -1,11 +1,15 @@
 <div class="card" id="post_<%= post.id %>">
   <div class="pb-2">
-    <div class="card-header pb-0 border-bottom-0" style="min-height: 0rem;">
+    <div class="card-header" style="min-height: 0rem;">
       <div class="dropdown" style="visibility: hidden;">
         <%= button_tag theme_icon_tag('more'), class: 'nav-link btn btn-icon' %>
       </div>
-      <%# Title %>
-      <h4><%= link_to post.title, post_path(post) %></h4>
+      <div class="text-center">
+        <%# Tags %>
+        <% post.tags.each do |tag| %>
+          <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
+        <% end %>
+      </div>
       <%# Dropdown menu %>
       <div class="dropdown">
         <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
@@ -37,48 +41,9 @@
         </div>
       </div>
     </div>
-    <div class="text-center border-bottom pb-4">
-      <%# Tags %>
-      <% post.tags.each do |tag| %>
-        <a href="<%= tag_path(tag) %>" class="badge badge-light" title="<%= tag.title %>">#<%= tag.title %></a>
-      <% end %>
-    </div>
   </div>
   <div class="card-body pb-0 pt-3">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex pb-0 px-0">
-        <div class="mr-auto d-flex align-items-center">
-          <%# User avatar %>
-          <%= link_to image_tag(user_avatar(post.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(post.user) %>
-          <div class="mr-auto d-flex flex-column">
-            <div class="d-flex flex-row align-items-center">
-              <%# User's full name & Group %>
-              <h6 class="mb-0"><%= link_to "#{post.user.full_name}", posts_user_path(post.user) %></h6>
-              <span class="mx-1">|</span><%= link_to post.group.name, group_path(post.group) %>
-              <span class="mx-1">|</span><%= link_to post.category.name, category_path(post.category) %>
-              <span class="mx-1">|</span><%= link_to post.subject.name, subject_path(post.subject) %>
-            </div>
-            <%# User badges info %>
-            <div class="d-flex align-items-center flex-row">
-              <%= render partial: 'badges/badges_user-info', locals: { user: post.user } %>
-            </div>
-            <%# Date published, views & level %>
-            <small>
-              <time>
-                <%= "#{post.year.start_year}/#{post.year.end_year}" %> | 
-                <% if post.impressionist_count(filter: :ip_address) == 0 %>
-                  0 vue
-                <% else %>
-                  <%= pluralize(post.impressionist_count(filter: :ip_address), 'vue', plural: 'vues') %>
-                <% end %> |
-                <% post.levels.each do |level| %>
-                  <%= level.level %>
-                <% end %>
-              </time>
-            </small>
-          </div>
-        </div>
-      </li>
       <%# Description %>
       <li class="list-group-item d-flex pt-0 px-0 border-top-0 border-bottom">
         <p class="mt-1 mb-1 text-break"><%= post.description %></p>

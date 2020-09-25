@@ -20,23 +20,8 @@
       <li class="nav-item <%= 'active' if current_page?(new_user_invitation_path) %>">
         <a class="nav-link" href="<%= new_user_invitation_path %>">Inviter</a>
       </li>
-      <li class="nav-item <%= 'active' if current_page?(posts_user_path(current_user)) %>">
-        <a class="nav-link" href="<%= posts_user_path(current_user) %>">Mes publications</a>
-      </li>
     </ul>
     <%= yield :navbar %>
-    <ul class="nav navbar-nav">
-      <%# Search dropdown %>
-      <%= render 'searches/search_dropdown' %>
-      <%# Badge dropdown %>
-      <%= render 'badges/badge_dropdown' %>
-      <%# Help dropdown%>
-      <li class="nav-item">
-        <%= link_to '/about', class: 'nav-link' do %>
-          <%= theme_icon_tag "help-alt" %>
-        <% end %>
-      </li>
-      <%= render 'users/user_dropdown' %>
-    </ul>
+    <%= render partial: 'layouts/navbar' %>
   </div>
 </nav>

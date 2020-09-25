@@ -1,7 +1,7 @@
 <%= render :layout => "layouts/base" do %>
   <nav class="navbar navbar-expand-lg">
     <%# Navbar icon %>
-    <a href="<%= posts_path %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
+    <a href="<%= dashboard_user_path(current_user) %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
     <%# Navbar toggler %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -4,14 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
-    <div class="card">
-      <%= form_tag(groups_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Rechercher une université et trouver du contenu pour celle-ci.", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+    <%= render partial: 'search/form', locals: { search_path: groups_path, placeholder: "Rechercher une université et trouver du contenu pour celle-ci." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">

@@ -1,0 +1,100 @@
+<% @title = "Votre dashboard" %>
+<div class="animate-fade-in-500">
+  <section class="bg-light px-3 pt-5 pb-3 mb-3 d-flex flex-column">
+    <div class="container-fluid">
+      <div class="row equal-cols">
+        <div class="col-12 col-md-3">
+          <h4 class="leading-normal m-0 p-0">Bon retour parmi nous, <%= current_user.first_name %>.</h4>
+          <p class="leading-normal small">Today is going to be a great day!</p>
+          <ul class="m-0 p-0 mb-5 small">
+            <li>You have 5 new followers.</li>
+            <li>132 people have liked your posts.</li>
+            <li>Network maintenance is happening at 5pm today.</li>
+          </ul>
+          <%= link_to "Consulter l'espace universitaire →", group_path(current_user.group), class: 'btn btn-primary mb-3' %>
+          <%= link_to "Voir les dernières publications →", posts_path, class: 'btn btn-info' %>
+        </div>
+        <div class="col-12 col-md-6">
+          <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
+          <div class="d-flex flex-row justify-content-between">
+            <%# Gold badges %>
+            <% %w[gold silver bronze].each do |difficulty| %>
+              <div class="card mx-2">
+                <div class="card-body pt-4 text-center">
+                  <h3 class="m-0 mt-2"><%= (current_user.badges.select { |badge| badge.custom_fields[:difficulty] === "#{difficulty}" }).count %></h3>
+                  <p class="text-uppercase">Badges d'<%= difficulty %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 d-flex flex-column justify-items-between">
+          <div class="card card-mini card-mini-solid-icon">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h6 class="m-0 text-muted">Réputation</h6>
+                  <h4 class="m-0 counter"><%= current_user.points %></h4>
+                </div>
+                <div class="d-flex align-self-center text-primary ml-3">
+                  <span>
+                    <i class="display-4 ti-cup"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-mini card-mini-solid-icon">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h6 class="m-0 text-muted">Vues</h6>
+                  <h4 class="m-0 counter"><%# current_user.total_views_count %></h4>
+                </div>
+                <div class="d-flex align-self-center text-primary ml-3">
+                  <span>
+                    <i class="display-4 ti-eye"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-mini card-mini-solid-icon">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h6 class="m-0 text-muted">Transactions</h6>
+                  <h4 class="m-0 counter" data-from="0" data-to="1383" data-speed="5000" data-refresh-interval="80">1,412</h4>
+                </div>
+                <div class="d-flex align-self-center text-primary ml-3">
+                  <span>
+                    <i class="display-4 ti-package  "></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<%# Ranking %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h6>Les plus grands contributeurs des 30 derniers jours</h6>
+          <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-default active">Week</button>
+            <button type="button" class="btn btn-default">Month</button>
+            <button type="button" class="btn btn-default">Quarter</button>
+          </div>
+        </div>
+        <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

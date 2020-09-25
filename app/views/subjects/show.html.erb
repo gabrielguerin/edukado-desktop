@@ -4,22 +4,15 @@
 end %>
 <div class="container">
   <div class="row">
-    <div class="card">
-      <%= form_tag(subject_path(@subject), method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet.", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+    <%= render partial: 'search/form', locals: { search_path: subject_path(@subject), placeholder: "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <%= link_to 'Matières', subjects_path %>
         </li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(subject_path(@subject)) %>">
-          <%= @subject.name %>
+        <li class="breadcrumb-item">
+          <%= link_to @subject.name, subject_path(@subject) %>
         </li>
       </ol>
       <%# Card %>
@@ -54,9 +47,3 @@ end %>
     <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
   <% end %>
 </div>
-<%# Clickable table row element %>
-<script>
-  $("tr[data-link]").click(function() {
-    window.location = $(this).data("link")
-  })
-</script>
