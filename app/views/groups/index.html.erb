@@ -24,9 +24,9 @@ end %>
         </div>
         <table class="table table-hover">
           <tbody>
-          <%# Render groups %>
+            <%# Render groups %>
             <% @groups.each do |group| %>
-              <%= render partial: 'groups/group', locals: { group: group } %>
+              <%= render partial: 'table/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
             <% end %>
           </tbody>
         </table>

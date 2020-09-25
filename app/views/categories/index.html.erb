@@ -26,7 +26,7 @@ end %>
           <tbody>
           <%# Render categories %>
             <% @categories.each do |category| %>
-              <%= render partial: 'categories/category', locals: { category: category } %>
+              <%= render partial: 'table/tr-object', locals: { attribute: category.name, icon: 'book', path: category_path(category) } %>
             <% end %>
           </tbody>
         </table>
