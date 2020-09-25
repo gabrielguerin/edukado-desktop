@@ -247,3 +247,7 @@ fr:
     granted_badge: "a obtenu le badge %{badge_name}"
     granted_points: "a obtenu %{points} points"
     removed_badge: "a retiré le badge %{badge_name}"
+    difficulty:
+      gold: "d'or"
+      silver: "d'argent"
+      bronze: "de bronze"
