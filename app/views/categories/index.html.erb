@@ -24,12 +24,9 @@ end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
-            <% if @search.present? %>
-              <% @categories.each do |category| %>
-                <%= render partial: 'categories/category', locals: { category: category } %>
-              <% end %>
-            <% else %>
-              <%= render @categories %>
+          <%# Render categories %>
+            <% @categories.each do |category| %>
+              <%= render partial: 'categories/category', locals: { category: category } %>
             <% end %>
           </tbody>
         </table>
@@ -37,15 +34,7 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if @search.present? %>
-    <% if @categories.count >= 20 %>
-        <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
-    <% end %>
-  <% else %>
-    <% if Category.count >= 20 %>
-      <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
-    <% end %>
-  <% end %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>

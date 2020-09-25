@@ -1,7 +1,7 @@
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
-  <%# Search form %>
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -28,22 +28,14 @@
       <table class="table table-hover inspectable">
         <tbody>
           <%# Render posts %>
-          <% if @search.present? %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
-          <% else %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'posts/post-list_item', locals: { post: post } %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<% if @posts.count >= 20 %>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-<% end %>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 </div>

@@ -28,23 +28,15 @@ end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
-            <%# Render category's posts %>
-            <% if @search.present? %>
+            <%# Render posts %>
               <% @posts.each do |post| %>
                 <%= render partial: 'posts/post-list_item', locals: { post: post } %>
               <% end %>
-            <% else %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
-            <% end %>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  <% if @category.posts.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-  <% end %>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 </div>

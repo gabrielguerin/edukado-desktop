@@ -4,7 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
-  <%# Search form %>
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: level_path(@level), placeholder: "Recherchez un fichier de cette année et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -28,15 +28,9 @@ end %>
         </div>
         <table class="table table-hover inspectable">
           <tbody>
-            <%# Render category's posts %>
-            <% if @search.present? %>
-              <% @level.posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
-            <% else %>
-              <% @level.posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
+            <%# Render posts %>
+            <% @level.posts.each do |post| %>
+              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
             <% end %>
           </tbody>
         </table>

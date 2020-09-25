@@ -3,7 +3,7 @@
     <ul class="list-group list-group-flush w-100">
       <li class="list-group-item px-0 pb-0">
         <div class="d-flex justify-content-between">
-          <div class="mr-auto d-flex flex-row align-items-center">
+          <div class="mr-auto d-flex flex-row align-items-center p-2 rounded bg-gray-300">
             <%# User avatar %>
             <%= link_to image_tag(user_avatar(comment.user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(comment.user) %>
             <div class="mr-auto d-flex flex-column">
