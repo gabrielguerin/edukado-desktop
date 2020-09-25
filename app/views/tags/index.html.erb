@@ -24,7 +24,7 @@
         <tbody>
           <%# Render tags %>
           <% @tags.each do |tag| %>
-            <%= render partial: 'tags/tag', locals: { tag: tag } %>
+            <%= render partial: 'table/tr-object', locals: { attribute: tag.title, icon: 'tag', path: tag_path(tag) } %>
           <% end %>
         </tbody>
       </table>
