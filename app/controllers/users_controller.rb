@@ -8,8 +8,6 @@ class UsersController < ApplicationController
 
   layout :determine_layout
 
-
-
   # Find user
 
 
@@ -96,8 +94,6 @@ class UsersController < ApplicationController
 
   end
 
-
-
   # Set layout based on action
 
 
@@ -125,8 +121,6 @@ class UsersController < ApplicationController
 
 
     when 'dashboard'
-
-
 
       'scaffold'
 

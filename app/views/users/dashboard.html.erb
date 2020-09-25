@@ -15,18 +15,29 @@
           <%= link_to "Voir les dernières publications →", posts_path, class: 'btn btn-info' %>
         </div>
         <div class="col-12 col-md-6">
-        <%# Search form %>
+          <%# Search form %>
           <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
           <div class="d-flex flex-row justify-content-between">
-            <%# Gold badges %>
+            <%# Badges %>
             <% %w[gold silver bronze].each do |difficulty| %>
               <div class="card mx-2">
                 <div class="card-body pt-4 text-center">
                   <h3 class="m-0 mt-2"><%= (current_user.badges.select { |badge| badge.custom_fields[:difficulty] === "#{difficulty}" }).count %></h3>
-                  <p class="text-uppercase">Badges d'<%= difficulty %></p>
+                  <% if difficulty === 'gold' %>
+                    <p class="text-uppercase">Badges d'or</p>
+                  <% elsif difficulty === 'silver' %>
+                    <p class="text-uppercase">Badges d'argent</p>
+                  <% else %>
+                    <p class="text-uppercase">Badges de bronze</p>
+                  <% end %>
                 </div>
               </div>
             <% end %>
+          </div>
+          <%# Publish & Invite buttons %>
+          <div class="d-flex flex-row justify-content-between">
+            <%= link_to 'Contribuer à la communauté', new_post_path, class: 'btn btn-lg btn-default w-100 my-2 mx-2' %>
+            <%= link_to 'Inviter un utilisateur', new_user_invitation_path, class: 'btn btn-lg btn-primary w-100 my-2 mx-2' %>
           </div>
         </div>
         <div class="col-12 col-md-3 d-flex flex-column justify-items-between">
@@ -79,23 +90,22 @@
       </div>
     </div>
   </section>
-<%# Ranking %>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header d-flex align-items-center">
-          <h6>Les plus grands contributeurs des 30 derniers jours</h6>
-          <div class="ml-auto btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default active">Week</button>
-            <button type="button" class="btn btn-default">Month</button>
-            <button type="button" class="btn btn-default">Quarter</button>
+  <%# Ranking %>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex align-items-center">
+            <h6>Les plus grands contributeurs des 30 derniers jours</h6>
+            <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-default active">Week</button>
+              <button type="button" class="btn btn-default">Month</button>
+              <button type="button" class="btn btn-default">Quarter</button>
+            </div>
           </div>
+          <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago } %>
         </div>
-        <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago } %>
       </div>
     </div>
   </div>
-</div>
-
 </div>
