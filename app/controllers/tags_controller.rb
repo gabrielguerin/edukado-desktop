@@ -9,6 +9,24 @@ class TagsController < ApplicationController
 
   before_action :set_tag, only: [:show]
 
+  # GET /tags
+
+  def index
+    @tags = if @search
+
+                    # Render search results
+
+                  Tag.search(params[:search], page: params[:page], per_page: 20)
+
+                  else
+
+                    # Render categories
+
+                    Tag.all.order('title ASC').page(params[:page])
+
+                  end
+  end
+
   # GET /tags/1
 
   def show
@@ -30,6 +48,12 @@ class TagsController < ApplicationController
   end
 
   private
+
+  # Set search
+
+  def set_search
+    @search = params[:search].present? ? params[:search] : nil
+  end
 
   # Set tag
 

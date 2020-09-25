@@ -20,7 +20,7 @@
     <% else %>
       <% if object.file.attached? %>
         <%= link_to downloads_path("#{object.class.name.downcase}_id": object.id), class: 'file w-100', method: :post do %>
-          <div class="card card-mini card-mini-split inspectable">
+          <div class="card card-mini card-mini-split">
             <div class="card-body">
               <div class="media align-items-center">
                 <div class="d-flex align-self-center">
