@@ -24,7 +24,7 @@
         <tbody>
           <%# Render tags %>
           <% Level.order(level: :asc).each do |level| %>
-            <%= render partial: 'table/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
+            <%= render partial: 'tables/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
           <% end %>
         </tbody>
       </table>

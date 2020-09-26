@@ -31,11 +31,11 @@ end %>
           <tbody>
             <% if @search.present? %>
               <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
               <% end %>
             <% else %>
               <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
               <% end %>
             <% end %>
           </tbody>

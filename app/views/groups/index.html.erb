@@ -26,7 +26,7 @@ end %>
           <tbody>
             <%# Render groups %>
             <% @groups.each do |group| %>
-              <%= render partial: 'table/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
             <% end %>
           </tbody>
         </table>
