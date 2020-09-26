@@ -60,6 +60,8 @@ Tag.reindex
 
 Group.reindex
 
+Level.reindex
+
 # Create groups
 
 30.times do
@@ -78,25 +80,7 @@ end
 
 # Create years
 
-years = [
-
-  2015,
-
-  2016,
-
-  2017,
-
-  2018,
-
-  2019,
-
-  2020,
-
-  2021
-
-]
-
-years.each do |year|
+(2015..2021).each do |year|
   Year.create!(
     start_year: year,
 
@@ -115,14 +99,18 @@ end
 # Create users
 
 20.times do
-  user = User.new(
-    first_name: Faker::Name.first_name,
+  first_name = Faker::Name.unique.first_name
 
-    last_name: Faker::Name.last_name,
+  last_name = Faker::Name.unique.last_name
+
+  user = User.new(
+    first_name: first_name,
+
+    last_name: last_name,
 
     gender: Faker::Gender.binary_type,
 
-    email: Faker::Internet.email,
+    email: "#{first_name}.#{last_name}@edukado.co",
 
     description: Faker::Lorem.paragraph,
 
@@ -142,7 +130,7 @@ end
 
 # Create tags
 
-20.times do
+50.times do
   Tag.create!(
     title: Faker::Nation.language
   )
