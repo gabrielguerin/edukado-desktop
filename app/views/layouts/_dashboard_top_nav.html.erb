@@ -12,7 +12,7 @@
         </a>
       </li>
       <li class="nav-item <%= 'active' if current_page?(posts_path) %>">
-        <a class="nav-link" href="<%= posts_path %>">Accueil</a>
+        <a class="nav-link" href="<%= dashboard_user_path(current_user) %>">Dashboard</a>
       </li>
       <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
         <a class="nav-link" href="<%= new_post_path %>">Publier</a>
