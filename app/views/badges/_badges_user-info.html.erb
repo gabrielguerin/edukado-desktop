@@ -1,30 +1,17 @@
 <%# Badges %>
 <% if user.badges.count > 0 %>
-  <%# Gold badges %>
-  <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count) %> d'or">
-    <span style="color: #F2CA50; margin-right: 0.250rem;">
-      • 
-    </span>
-    <p class="text-muted my-0 mr-3">
-      <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'gold' }).count %>
-    </p>
-  </div>
-  <%# Silver badges %>
-  <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count) %> d'argent">
-    <span style="color: #BFBFBF; margin-right: 0.250rem;">
-      • 
-    </span>
-    <p class="text-muted my-0 mr-3">
-      <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'silver' }).count %>
-    </p>
-  </div>
-  <%# Bronze badges %>
-  <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count %> <%= "badge".pluralize((user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count) %> de bronze">
-    <span style="color: #A66641; margin-right: 0.250rem;">
-      • 
-    </span>
-    <p class="text-muted my-0">
-      <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === 'bronze' }).count %>
-    </p>
-  </div>
+  <% %w[gold silver bronze].each do |difficulty| %>
+    <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= t "merit.badge", count: (user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count  %> <%= t("merit.difficulty.#{difficulty}") %>">
+      <% if difficulty === 'gold' %>
+        <span style="color: #F2CA50; margin-right: 0.250rem;">•</span>
+      <% elsif difficulty === 'silver' %>
+        <span style="color: #BFBFBF; margin-right: 0.250rem;">•</span>
+      <% else %>
+        <span style="color: #A66641; margin-right: 0.250rem;">•</span>
+      <% end %>
+      <small class="text-muted my-0 mr-3">
+        <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count %>
+      </small>
+    </div>
+  <% end %>
 <% end %>

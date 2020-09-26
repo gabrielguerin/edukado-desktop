@@ -9,6 +9,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%# Navbar links %>
       <ul class="navbar-nav mr-auto">
+        <% if current_user.admin? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= admin_users_path %>">Espace admin</a>
+          </li>
+        <% end %>
         <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
           <a class="nav-link" href="<%= new_post_path %>">Publier</a>
         </li>

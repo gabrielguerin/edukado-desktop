@@ -18,8 +18,12 @@
       <%= theme_icon_tag "help-alt" %>
     <% end %>
   </li>
+  <% if user_signed_in? %>
+  <% unless current_user.admin? %>
   <%# Notification dropdown %>
   <%= render 'notifications/notification_dropdown' %>
+  <% end %>
+  <% end %>
   <%# User dropdown %>
   <%= render 'users/user_dropdown' %>
 </ul>

@@ -4,6 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: group_path(@group), placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -50,37 +51,14 @@ end %>
       </div>
       <table class="table table-hover table-striped">
         <tbody>
-          <%# Render group's posts %>
-          <div class="card-body tab-content" id="tabs">
-            <% if @search.present? %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
-            <% else %>
-              <div class="tab-pane active" id="popular">
-                <%# Popular %>
-                <% @posts.order(cached_votes_score: :desc).each do |post| %>
-                  <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-                <% end %>
-              </div>
-              <div class="tab-pane" id="subject">
-                <%# Subject %>
-                <% @group.subjects.each do |subject| %>
-                  <%= render partial: 'subjects/subject-list_item', locals: { subject: subject } %>
-                <% end %>
-              </div>
-              <div class="tab-pane" id="level">
-                <%# Level %>
-              </div>
-            <% end %>
-          </div>
+          <%# Render posts %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+          <% end %>
         </tbody>
       </table>
     </div>
   </div>
-</div>
-<% if @group.posts.count > 20 %>
   <%# Pagination %>
   <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-<% end %>
 </div>

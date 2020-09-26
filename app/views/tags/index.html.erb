@@ -1,13 +1,13 @@
-<% @title = "Niveau d'étude" %>
+<% @title = "Tags" %>
 <div class="container">
   <div class="row">
     <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: levels_path, placeholder: "Recherchez le niveau d'études qui vous correspond." } %>
+    <%= render partial: 'search/form', locals: { search_path: tags_path, placeholder: "Recherchez le tag qui vous intéresse." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(levels_path) %>">
-          <%= link_to 'Années', levels_path %>
+        <li class="breadcrumb-item <%= 'active' if current_page?(tags_path) %>">
+          <%= link_to 'Tags', tags_path %>
         </li>
       </ol>
       <%# Card %>
@@ -17,21 +17,21 @@
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title">Trouvez le niveau d'études qui vous correspond.</i></h6>
+            <h6 class="card-title">Trouvez les tags qui vous intéressent</i></h6>
         <% end %>
       </div>
       <table class="table table-hover">
         <tbody>
           <%# Render tags %>
-          <% Level.order(level: :asc).each do |level| %>
-            <%= render partial: 'table/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
+          <% @tags.each do |tag| %>
+            <%= render partial: 'table/tr-object', locals: { attribute: tag.title, icon: 'tag', path: tag_path(tag) } %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
   <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @levels, ajax: 'local' } %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @tags, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>

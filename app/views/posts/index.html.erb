@@ -1,49 +1,41 @@
 <% @title = "Dernières publications" %>
 <div class="container">
   <div class="row">
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
-      <%# Tabs %>
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+          <%= link_to 'Publications', posts_path %>
+        </li>
+      </ol>
       <%# Card %>
       <div class="card">
         <%# Card header %>
-        <div class="card-header">
+        <div class="card-header d-flex align-items-center">
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
             <h6 class="card-title">Trouver votre fichier</i></h6>
         <% end %>
-        <ul class="nav nav-tabs nav-tabs-primary card-header-tabs" id="navTab1" role="tablist">
-          <li class="nav-item">
-            <a href="#profile" data-toggle="tab" class="nav-link">Populaires</a>
-          </li>
-          <li class="nav-item">
-            <a href="#badges" data-toggle="tab" class="nav-link">Matières</a>
-          </li>
-          <li class="nav-item">
-            <a href="#support" data-toggle="tab" class="nav-link">Année</a>
-          </li>
-        </ul>
+        <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+          <%= link_to 'Populaires', posts_path, class: 'btn btn-default active' %>
+          <%= link_to 'Matières', subjects_path, class: 'btn btn-default' %>
+          <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
+        </div>
       </div>
-      <table class="table table-hover inspectable">
+      <table class="table table-hover">
         <tbody>
           <%# Render posts %>
-          <% if @search.present? %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
-          <% else %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-            <% end %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'posts/post-list_item', locals: { post: post } %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<% if @posts.count >= 20 %>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-<% end %>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 </div>

@@ -4,6 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
+  <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: categories_path, placeholder: "Rechercher une catégorie." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -21,14 +22,11 @@ end %>
             <h6 class="card-title">Toutes les catégories</h6>
           <% end %>
         </div>
-        <table class="table table-hover inspectable">
+        <table class="table table-hover">
           <tbody>
-            <% if @search.present? %>
-              <% @categories.each do |category| %>
-                <%= render partial: 'categories/category', locals: { category: category } %>
-              <% end %>
-            <% else %>
-              <%= render @categories %>
+          <%# Render categories %>
+            <% @categories.each do |category| %>
+              <%= render partial: 'table/tr-object', locals: { attribute: category.name, icon: 'book', path: category_path(category) } %>
             <% end %>
           </tbody>
         </table>
@@ -36,9 +34,7 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if Category.count > 20 %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
-  <% end %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>
