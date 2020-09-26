@@ -109,7 +109,7 @@ Rails.application.routes.draw do
 
   # Users routes
 
-  resources :users, only: %i[show posts dashboard] do
+  resources :users, only: %i[index show posts dashboard] do
     member do
       get :posts
 
