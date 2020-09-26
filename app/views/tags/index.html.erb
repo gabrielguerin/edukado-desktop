@@ -6,7 +6,7 @@
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+        <li class="breadcrumb-item <%= 'active' if current_page?(tags_path) %>">
           <%= link_to 'Tags', tags_path %>
         </li>
       </ol>
@@ -17,7 +17,7 @@
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title">Trouver le tag qui vous intéresse</i></h6>
+            <h6 class="card-title">Trouvez les tags qui vous intéressent</i></h6>
         <% end %>
       </div>
       <table class="table table-hover">

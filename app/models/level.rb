@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Level < ApplicationRecord
+  # Search
+
+  searchkick
+  
   # Associations
 
   has_many :levels_posts, dependent: :destroy
