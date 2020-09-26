@@ -16,13 +16,17 @@ require 'faker'
 
 # Delete everything
 
+LevelsPost.delete_all
+
+Level.delete_all
+
+Post.delete_all
+
 Notification.delete_all
 
 User.delete_all
 
 Tag.delete_all
-
-Post.delete_all
 
 Comment.delete_all
 
@@ -34,17 +38,13 @@ Blog.delete_all
 
 GroupsSubject.delete_all
 
-Group.delete_all
-
 Subject.delete_all
 
 Category.delete_all
 
 Year.delete_all
 
-LevelsPost.delete_all
-
-Level.delete_all
+Group.delete_all
 
 # Reindex all
 
