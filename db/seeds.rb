@@ -14,6 +14,11 @@
 
 require 'faker'
 
+# Seed from a CSV file
+
+require 'csv'
+
+
 # Delete everything
 
 LevelsPost.delete_all
@@ -63,6 +68,18 @@ Group.reindex
 Level.reindex
 
 # Create groups
+
+# French universities
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
+
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+
+csv.each do |row|
+  t = Group.new
+  t.name = row['name']
+  t.save
+end
 
 30.times do
   Group.create!(
