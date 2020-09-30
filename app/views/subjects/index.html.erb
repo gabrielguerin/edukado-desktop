@@ -26,7 +26,7 @@ end %>
           <tbody>
             <%# Render subjects %>
             <% @subjects.each do |subject| %>
-              <%= render partial: 'table/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
             <% end %>
           </tbody>
         </table>

@@ -1,0 +1,24 @@
+<tr>
+  <td>
+    <div class="media align-items-center">
+      <div class="d-flex align-self-center flex-column">
+        <%# User avatar %>
+        <%= link_to image_tag(user_avatar(user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '40', height: '40'), posts_user_path(user) %>
+      </div>
+      <div class="media-body text-left pl-3">
+        <div class="d-flex flex-row">
+          <h6 class="my-0 mr-2"><%= link_to user.full_name, posts_user_path(user) %></h6>
+        </div>
+        <%# Group %>
+        <p class="my-0">
+          <%= link_to user.group.name, group_path(user.group) %>
+        </p>
+      </div>
+      <%# Actions %>
+      <div class="btn-group btn-group-xs">
+        <a href="<%= posts_user_path(user) %>" data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses publications"><i class="ti-files"></i></a>
+        <a href="<%= user_badge_path(user) %>"data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses badges"><i class="ti-cup"></i> </a>
+      </div>
+    </div>
+  </td>
+</tr>

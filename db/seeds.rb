@@ -14,15 +14,24 @@
 
 require 'faker'
 
+# Seed from a CSV file
+
+require 'csv'
+
+
 # Delete everything
+
+LevelsPost.delete_all
+
+Level.delete_all
+
+Post.delete_all
 
 Notification.delete_all
 
 User.delete_all
 
 Tag.delete_all
-
-Post.delete_all
 
 Comment.delete_all
 
@@ -34,17 +43,13 @@ Blog.delete_all
 
 GroupsSubject.delete_all
 
-Group.delete_all
-
 Subject.delete_all
 
 Category.delete_all
 
 Year.delete_all
 
-LevelsPost.delete_all
-
-Level.delete_all
+Group.delete_all
 
 # Reindex all
 
@@ -60,7 +65,21 @@ Tag.reindex
 
 Group.reindex
 
+Level.reindex
+
 # Create groups
+
+# French universities
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
+
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+
+csv.each do |row|
+  t = Group.new
+  t.name = row['name']
+  t.save
+end
 
 30.times do
   Group.create!(
@@ -78,25 +97,7 @@ end
 
 # Create years
 
-years = [
-
-  2015,
-
-  2016,
-
-  2017,
-
-  2018,
-
-  2019,
-
-  2020,
-
-  2021
-
-]
-
-years.each do |year|
+(2015..2021).each do |year|
   Year.create!(
     start_year: year,
 
@@ -115,14 +116,18 @@ end
 # Create users
 
 20.times do
-  user = User.new(
-    first_name: Faker::Name.first_name,
+  first_name = Faker::Name.unique.first_name
 
-    last_name: Faker::Name.last_name,
+  last_name = Faker::Name.unique.last_name
+
+  user = User.new(
+    first_name: first_name,
+
+    last_name: last_name,
 
     gender: Faker::Gender.binary_type,
 
-    email: Faker::Internet.email,
+    email: "#{first_name}.#{last_name}@edukado.co",
 
     description: Faker::Lorem.paragraph,
 
@@ -142,7 +147,7 @@ end
 
 # Create tags
 
-20.times do
+50.times do
   Tag.create!(
     title: Faker::Nation.language
   )
@@ -154,13 +159,13 @@ categories = [
 
   'Notes de cours',
 
-  'Anciens examens',
+  'Annales d\'examens',
 
   'Travaux pratiques',
 
   'Résumés',
 
-  'Devoirs Maison',
+  'Devoirs maison',
 
   'Travaux dirigés',
 

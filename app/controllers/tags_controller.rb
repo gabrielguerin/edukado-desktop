@@ -14,15 +14,15 @@ class TagsController < ApplicationController
   def index
     @tags = if @search
 
-                    # Render search results
+              # Render search results
 
-                  Tag.search(params[:search], page: params[:page], per_page: 20)
+              Tag.search(params[:search], page: params[:page], per_page: 20)
 
-                  else
+            else
 
-                    # Render categories
+              # Render tags
 
-                    Tag.all.order('title ASC').page(params[:page])
+              Tag.all.order('title ASC').page(params[:page])
 
                   end
   end

@@ -1,13 +1,13 @@
-<% @title = "Tags" %>
+<% @title = "Utilisateurs" %>
 <div class="container">
   <div class="row">
     <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: tags_path, placeholder: "Recherchez le tag qui vous intéresse." } %>
+    <%= render partial: 'search/form', locals: { search_path: users_path, placeholder: "Trouvez les fiches d'un étudiant en particulier." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(tags_path) %>">
-          <%= link_to 'Tags', tags_path %>
+        <li class="breadcrumb-item <%= 'active' if current_page?(users_path) %>">
+          <%= link_to 'Utilisateurs', users_path %>
         </li>
       </ol>
       <%# Card %>
@@ -17,21 +17,21 @@
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title">Trouvez les tags qui vous intéressent</i></h6>
+            <h6 class="card-title">Trouvez les fiches d'un étudiant en particulier.</i></h6>
         <% end %>
       </div>
       <table class="table table-hover">
         <tbody>
-          <%# Render tags %>
-          <% @tags.each do |tag| %>
-            <%= render partial: 'tables/tr-object', locals: { attribute: tag.title, icon: 'tag', path: tag_path(tag) } %>
+          <%# Render users %>
+          <% @users.each do |user| %>
+            <%= render partial: 'tables/tr-user', locals: { user: user } %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
   <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @tags, ajax: 'local' } %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @users, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>
