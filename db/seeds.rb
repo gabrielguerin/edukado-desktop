@@ -18,7 +18,6 @@ require 'faker'
 
 require 'csv'
 
-
 # Delete everything
 
 LevelsPost.delete_all
@@ -127,7 +126,7 @@ end
 
     gender: Faker::Gender.binary_type,
 
-    email: "#{first_name}.#{last_name}@edukado.co",
+    email: "#{first_name}.#{last_name}@#{Faker::Internet.domain_name}",
 
     description: Faker::Lorem.paragraph,
 
