@@ -142,13 +142,13 @@ categories = [
 
   'Notes de cours',
 
-  'Anciens examens',
+  'Annales d\'examens',
 
   'Travaux pratiques',
 
   'Résumés',
 
-  'Devoirs Maison',
+  'Devoirs maison',
 
   'Travaux dirigés',
 
