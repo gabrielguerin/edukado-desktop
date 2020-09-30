@@ -14,11 +14,10 @@
           <%= link_to user.group.name, group_path(user.group) %>
         </p>
       </div>
-      <div class="text-muted">
-        <%# Number of posts %>
-        <%= theme_icon_tag('files') %>
-        •
-        <%= user.posts.count %>
+      <%# Actions %>
+      <div class="btn-group btn-group-xs">
+        <a href="<%= posts_user_path(user) %>" data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses publications"><i class="ti-files"></i></a>
+        <a href="<%= user_badge_path(user) %>"data-toggle="tooltip" class="btn btn-default" data-original-title="Voir ses badges"><i class="ti-cup"></i> </a>
       </div>
     </div>
   </td>
