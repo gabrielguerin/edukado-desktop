@@ -24,7 +24,7 @@
         <tbody>
           <%# Render users %>
           <% @users.each do |user| %>
-            <%= render partial: 'tables/tr-object', locals: { attribute: user.first_name, icon: 'user', path: tag_path(tag) } %>
+            <%= render partial: 'tables/tr-user', locals: { user: user } %>
           <% end %>
         </tbody>
       </table>
