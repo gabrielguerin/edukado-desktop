@@ -74,7 +74,7 @@
                   <h4 class="m-0 counter">
                     <%= total_impressions = Rails.cache.fetch("user:#{current_user.id}:total_impressions") do
                       Post.where(user: current_user).reduce(0) do |sum, post|
-                        sum + post.impressionist_count(:filter=>:all)
+                        sum + post.impressionist_count(filter: :all)
                       end
                     end %>
                   </h4>
