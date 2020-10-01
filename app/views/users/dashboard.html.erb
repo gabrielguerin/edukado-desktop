@@ -71,7 +71,13 @@
               <div class="media">
                 <div class="media-body text-left">
                   <h6 class="m-0 text-muted">Vues</h6>
-                  <h4 class="m-0 counter"><%# current_user.total_views_count %></h4>
+                  <h4 class="m-0 counter">
+                    <%= total_impressions = Rails.cache.fetch("user:#{current_user.id}:total_impressions") do
+                      Post.where(user: current_user).reduce(0) do |sum, post|
+                        sum + post.impressionist_count(:filter=>:all)
+                      end
+                    end %>
+                  </h4>
                 </div>
                 <div class="d-flex align-self-center text-primary ml-3">
                   <span>
