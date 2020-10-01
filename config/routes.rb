@@ -121,6 +121,10 @@ Rails.application.routes.draw do
 
   resources :categories, only: %i[index show]
 
+  # Categories routes
+
+  resources :rankings, only: %i[index]
+
   # Posts routes
 
   resources :posts do
