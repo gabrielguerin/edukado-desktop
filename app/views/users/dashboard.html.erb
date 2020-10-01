@@ -4,13 +4,13 @@
     <div class="container-fluid">
       <div class="row equal-cols">
         <div class="col-12 col-md-3">
-        <% if current_user.sign_in_count === 0 %>
-          <h4 class="leading-normal m-0 p-0">Bienvenue sur Edukado, <%= current_user.first_name %>.</h4>
-          <p class="leading-normal small">La plateforme qui décloisonne le savoir produit quotidiennement par les étudiants.</p>
-        <% else %>
-          <h4 class="leading-normal m-0 p-0">Bon retour parmi nous, <%= current_user.first_name %>.</h4>
-          <p class="leading-normal small">Today is going to be a great day!</p>
-        <% end %>
+          <% if current_user.sign_in_count === 0 %>
+            <h4 class="leading-normal m-0 p-0">Bienvenue sur Edukado, <%= current_user.first_name %>.</h4>
+            <p class="leading-normal small">La plateforme qui décloisonne le savoir produit quotidiennement par les étudiants.</p>
+          <% else %>
+            <h4 class="leading-normal m-0 p-0">Bon retour parmi nous, <%= current_user.first_name %>.</h4>
+            <p class="leading-normal small">Today is going to be a great day!</p>
+          <% end %>
           <ul class="m-0 p-0 mb-5 small">
             <li>You have 5 new followers.</li>
             <li>132 people have liked your posts.</li>
@@ -48,6 +48,7 @@
             <%= link_to 'Inviter un utilisateur', new_user_invitation_path, class: 'btn btn-lg btn-default w-100 my-2 mx-2' %>
           </div>
         </div>
+        <%# Reputation %>
         <div class="col-12 col-md-3 d-flex flex-column justify-items-between">
           <div class="card card-mini card-mini-solid-icon">
             <div class="card-body">
@@ -64,6 +65,7 @@
               </div>
             </div>
           </div>
+          <%# Total views count %>
           <div class="card card-mini card-mini-solid-icon">
             <div class="card-body">
               <div class="media">
@@ -79,16 +81,21 @@
               </div>
             </div>
           </div>
+          <%# Ranking %>
           <div class="card card-mini card-mini-solid-icon">
             <div class="card-body">
               <div class="media">
                 <div class="media-body text-left">
-                  <h6 class="m-0 text-muted">Transactions</h6>
-                  <h4 class="m-0 counter" data-from="0" data-to="1383" data-speed="5000" data-refresh-interval="80">1,412</h4>
+                  <h6 class="m-0 text-muted">Votre classement</h6>
+                  <h4 class="m-0 counter">
+                    <%= Merit::Score.top_scored(limit: 25).map do |top_score_hash| %>
+                      <% debug(top_score_hash) %>
+                    <% end %>
+                  </h4>
                 </div>
                 <div class="d-flex align-self-center text-primary ml-3">
                   <span>
-                    <i class="display-4 ti-package  "></i>
+                    <i class="display-4 ti-medall"></i>
                   </span>
                 </div>
               </div>
@@ -106,9 +113,8 @@
           <div class="card-header d-flex align-items-center">
             <h6>Les plus grands contributeurs des 30 derniers jours</h6>
             <div class="ml-auto btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-default active">Week</button>
-              <button type="button" class="btn btn-default">Month</button>
-              <button type="button" class="btn btn-default">Quarter</button>
+              <button type="button" class="btn btn-default active">Mois</button>
+              <button type="button" class="btn btn-default">Établissement</button>
             </div>
           </div>
           <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago } %>
