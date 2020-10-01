@@ -4,8 +4,13 @@
     <div class="container-fluid">
       <div class="row equal-cols">
         <div class="col-12 col-md-3">
+        <% if current_user.sign_in_count === 0 %>
+          <h4 class="leading-normal m-0 p-0">Bienvenue sur Edukado, <%= current_user.first_name %>.</h4>
+          <p class="leading-normal small">La plateforme qui décloisonne le savoir produit quotidiennement par les étudiants.</p>
+        <% else %>
           <h4 class="leading-normal m-0 p-0">Bon retour parmi nous, <%= current_user.first_name %>.</h4>
           <p class="leading-normal small">Today is going to be a great day!</p>
+        <% end %>
           <ul class="m-0 p-0 mb-5 small">
             <li>You have 5 new followers.</li>
             <li>132 people have liked your posts.</li>
