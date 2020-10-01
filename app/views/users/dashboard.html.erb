@@ -88,9 +88,6 @@
                 <div class="media-body text-left">
                   <h6 class="m-0 text-muted">Votre classement</h6>
                   <h4 class="m-0 counter">
-                    <%= Merit::Score.top_scored(limit: 25).map do |top_score_hash| %>
-                      <% debug(top_score_hash) %>
-                    <% end %>
                   </h4>
                 </div>
                 <div class="d-flex align-self-center text-primary ml-3">
