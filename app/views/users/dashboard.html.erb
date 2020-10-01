@@ -11,8 +11,17 @@
             <li>132 people have liked your posts.</li>
             <li>Network maintenance is happening at 5pm today.</li>
           </ul>
-          <%= link_to "Consulter l'espace universitaire →", group_path(current_user.group), class: 'btn btn-primary mb-3' %>
-          <%= link_to "Voir les dernières publications →", posts_path, class: 'btn btn-info' %>
+          <div class="btn-group" role="group">
+            <a href="<%= group_path(current_user.group) %>" data-toggle="tooltip" data-placement="top" class="btn btn-default" data-original-title="Consulter l'espace universitaire">
+              <i class="ti-book"></i>
+            </a>
+            <a href="<%= posts_path %>" data-toggle="tooltip" data-placement="top" class="btn btn-default" data-original-title="Voir les dernières publications">
+              <i class="ti-files"></i>
+            </a>
+            <a href="<%= posts_path %>" data-toggle="tooltip" data-placement="top" class="btn btn-default" data-original-title="Classement général">
+              <i class="ti-cup"></i>
+            </a>
+          </div>
         </div>
         <div class="col-12 col-md-6">
           <%# Search form %>
