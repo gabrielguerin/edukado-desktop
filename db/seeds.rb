@@ -50,22 +50,6 @@ Year.delete_all
 
 Group.delete_all
 
-# Reindex all
-
-User.reindex
-
-Post.reindex
-
-Category.reindex
-
-Subject.reindex
-
-Tag.reindex
-
-Group.reindex
-
-Level.reindex
-
 # Create groups
 
 # French universities
@@ -128,7 +112,7 @@ end
 
     gender: Faker::Gender.binary_type,
 
-    email: "#{first_name}.#{last_name}@#{Faker::Internet.domain_name}",
+    email: "#{first_name}.#{last_name.strip!}@#{Faker::Internet.domain_name}",
 
     description: Faker::Lorem.paragraph,
 
@@ -307,3 +291,19 @@ end
 # Delete Badges Sash
 
 Merit::BadgesSash.delete_all
+
+# Reindex all
+
+User.reindex
+
+Post.reindex
+
+Category.reindex
+
+Subject.reindex
+
+Tag.reindex
+
+Group.reindex
+
+Level.reindex
