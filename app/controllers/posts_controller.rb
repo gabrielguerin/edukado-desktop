@@ -46,9 +46,9 @@ class PostsController < ApplicationController
   # GET /posts
 
   def index
-    search = params[:search].present? ? params[:search] : nil
+    @search = params[:search].present? ? params[:search] : nil
 
-    @posts = if search
+    @posts = if @search
 
                # Render search results
 

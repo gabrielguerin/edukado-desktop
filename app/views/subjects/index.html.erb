@@ -4,7 +4,8 @@
 end %>
 <div class="container">
   <div class="row">
-      <%= render partial: 'search/form', locals: { search_path: subjects_path, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci." } %>
+    <%# Search form %>
+    <%= render partial: 'search/form', locals: { search_path: subjects_path, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
@@ -21,14 +22,11 @@ end %>
             <h6 class="card-title">Toutes les matières</h6>
           <% end %>
         </div>
-        <table class="table table-hover inspectable">
+        <table class="table table-hover">
           <tbody>
-            <% if @search.present? %>
-              <% @subjects.each do |subject| %>
-                <%= render partial: 'subjects/subject', locals: { subject: subject } %>
-              <% end %>
-            <% else %>
-              <%= render @subjects %>
+            <%# Render subjects %>
+            <% @subjects.each do |subject| %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
             <% end %>
           </tbody>
         </table>
@@ -36,15 +34,7 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if @search.present? %>
-    <% if @subjects.count >= 20 %>
-        <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
-    <% end %>
-  <% else %>
-    <% if Subject.count >= 20 %>
-      <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
-    <% end %>
-  <% end %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>

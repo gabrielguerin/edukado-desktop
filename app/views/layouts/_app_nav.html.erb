@@ -1,7 +1,11 @@
 <%= render :layout => "layouts/base" do %>
   <nav class="navbar navbar-expand-lg">
     <%# Navbar icon %>
-    <a href="<%= dashboard_user_path(current_user) %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
+    <% if signed_in? %>
+      <a href="<%= dashboard_user_path(current_user) %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
+    <% else %>
+      <a href="<%= root_path %>" class="navbar-brand"><%= image_tag image_path('logos/edukado_white.png'), width: 140, class: 'mr-2'%></a>
+    <% end %>
     <%# Navbar toggler %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,6 +13,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%# Navbar links %>
       <ul class="navbar-nav mr-auto">
+        <% if signed_in? %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= admin_users_path %>">Espace admin</a>
+            </li>
+          <% end %>
+        <% end %>
         <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
           <a class="nav-link" href="<%= new_post_path %>">Publier</a>
         </li>

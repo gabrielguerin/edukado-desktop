@@ -4,6 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: category_path(@category), placeholder: "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -25,25 +26,19 @@ end %>
             <h6 class="card-title">Publications les plus populaires</h6>
           <% end %>
         </div>
-        <table class="table table-hover inspectable">
-          <tbody>
-            <%# Render category's posts %>
-            <% if @search.present? %>
+        <div class="table responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render posts %>
               <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
               <% end %>
-            <% else %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'posts/post-list_item', locals: { post: post } %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <% if @category.posts.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-  <% end %>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 </div>

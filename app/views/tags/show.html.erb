@@ -1,23 +1,40 @@
-<% @title = "##{@tag.title}" %>
+<% @title = "##{@tag.title}".downcase %>
 <div class="container">
   <div class="row">
-    <div class="col-lg-9 col-md-12 col-sm-12">
-      <% if @posts.present? %>
-        <%# Posts %>
-        <div id="posts">
-          <%= render partial: 'posts', locals: { posts: @posts } %>
-        </div>
-        <% if @tag.posts.length > 20 %>
-          <%# Pagination  %>
-          <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+    <%# Search form %>
+    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+          <%= link_to 'Tags', tags_path %>
+        </li>
+        <li class="breadcrumb-item <%= 'active' if current_page?(tag_path(@tag)) %>">
+          <%= link_to "##{@tag.title.downcase}", tag_path(@tag) %>
+        </li>
+      </ol>
+      <%# Card %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header d-flex align-items-center">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Trouver votre fichier</i></h6>
         <% end %>
-      <% else %>
-        <div class="card">
-          <div class="card-body text-center">
-            <p>Il n'y a pas encore eu de publications.</p>
-          </div>
-        </div>
-      <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <%# Render posts %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'tables/tr-post', locals: { post: post } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
 </div>

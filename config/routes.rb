@@ -63,11 +63,11 @@ Rails.application.routes.draw do
 
   # Subject routes
 
-  resources :subjects, only: %i[show index]
+  resources :subjects, only: %i[index show]
 
   # Group routes
 
-  resources :groups, only: %i[show index]
+  resources :groups, only: %i[index show]
 
   # FAQ routes
 
@@ -75,11 +75,11 @@ Rails.application.routes.draw do
 
   # Blogs routes
 
-  resources :blogs, only: %i[show index], path: 'blog'
+  resources :blogs, only: %i[index show], path: 'blog'
 
   # Tags routes
 
-  resources :tags, only: %i[show]
+  resources :tags, only: %i[index show]
 
   # Badges routes
 
@@ -109,7 +109,7 @@ Rails.application.routes.draw do
 
   # Users routes
 
-  resources :users, only: %i[show posts dashboard] do
+  resources :users, only: %i[index show posts dashboard] do
     member do
       get :posts
 
@@ -120,6 +120,10 @@ Rails.application.routes.draw do
   # Categories routes
 
   resources :categories, only: %i[index show]
+
+  # Categories routes
+
+  resources :rankings, only: %i[index]
 
   # Posts routes
 

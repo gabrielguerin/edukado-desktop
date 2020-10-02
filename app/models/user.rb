@@ -26,7 +26,7 @@ class User < ApplicationRecord
   # Devise modules
 
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :trackable
 
   # Associations
 

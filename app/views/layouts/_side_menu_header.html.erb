@@ -1,25 +1,28 @@
 <div class="navbar-header">
   <div class="profile">
     <%# User avatar %>
-    <%= image_tag(user_avatar(current_user), class: 'rounded-circle profile-image', style: 'object-fit: cover;', width: '60', height: '60', alt: 'profile picture') %>
+    <%= link_to (image_tag(user_avatar(current_user), class: 'rounded-circle profile-image', style: 'object-fit: cover;', width: '60', height: '60', alt: 'profile picture')), dashboard_user_path(current_user) %>
     <div class="profile-body">
       <%# User full name %>
-      <h6><%= current_user.first_name %> <%= current_user.last_name %></h6>
+      <h6 class="text-white"><%= current_user.full_name %></h6>
       <%# User links %>
       <div class="user-links">
         <%# Edit user %>
         <a class="btn btn-link" href="<%= edit_user_registration_path %>" data-placement="bottom" data-toggle="tooltip" data-original-title="Profil">
           <%= theme_icon_tag "user" %>
         </a>
-        <a class="btn btn-link" href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Messages">
-          <%= theme_icon_tag "email" %>
+        <%# Dashboard %>
+        <a class="btn btn-link" href="<%= dashboard_user_path(current_user) %>" data-placement="bottom" data-toggle="tooltip" data-original-title="Dashboard">
+          <%= theme_icon_tag "dashboard" %>
         </a>
-        <a class="btn btn-link" href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Settings">
-          <%= theme_icon_tag "settings" %>
+        <%# Notifications %>
+        <a class="btn btn-link" href="<%= notifications_path %>" data-placement="bottom" data-toggle="tooltip" data-original-title="Notifications">
+          <%= theme_icon_tag "bell" %>
         </a>
-        <a class="btn btn-link" href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Logout">
+        <%# Sign out %>
+        <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-link", title: 'Se déconnecter', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom' do %>
           <%= theme_icon_tag "power-off" %>
-        </a>
+        <% end %>
       </div>
     </div>
   </div>

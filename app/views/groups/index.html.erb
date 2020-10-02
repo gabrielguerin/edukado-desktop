@@ -4,6 +4,7 @@
 end %>
 <div class="container">
   <div class="row">
+    <%# Search form %>
     <%= render partial: 'search/form', locals: { search_path: groups_path, placeholder: "Rechercher une université et trouver du contenu pour celle-ci." } %>
     <div class="col-12">
       <%# Breadcrumb %>
@@ -21,24 +22,21 @@ end %>
             <h6 class="card-title">Toutes les universités</h6>
           <% end %>
         </div>
-        <table class="table table-hover inspectable">
-          <tbody>
-            <% if @search.present? %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render groups %>
               <% @groups.each do |group| %>
-                <%= render partial: 'groups/group', locals: { group: group } %>
+                <%= render partial: 'tables/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
               <% end %>
-            <% else %>
-              <%= render @groups %>
-            <% end %>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <% if Group.count > 20 %>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local' } %>
-  <% end %>
+  <%# Pagination %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local' } %>
 </div>
 <%# Clickable table row element %>
 <script>

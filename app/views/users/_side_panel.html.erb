@@ -7,16 +7,18 @@
     <div class="card-body text-center">
       <%# User badges %>
       <h6 class="text-muted"><%= link_to 'Badges', user_badge_path(@user) %></h6>
-      <div class="d-flex flex-row justify-content-center">
-        <%= render partial: 'badges/badges_user-info', locals: { user: @user } %>
-      </div>
+      <p>
+        <div class="d-flex flex-row justify-content-center">
+          <%= render partial: 'badges/badges_user-info', locals: { user: @user } %>
+        </div>
+      </p>
       <%# User reputation %>
       <h6 class="text-muted mt-3">Réputation</h6>
       <p data-placement="bottom" data-toggle="tooltip" data-original-title="Score de réputation">
         <%= @user.points %>
       </p>
       <h6 class="text-muted mt-3">Université</h6>
-      <p><%= @user.group.name %></p>
+      <p><%= link_to @user.group.name, group_path(@user.group) %></p>
       <h6 class="text-muted mt-3">Description</h6>
       <% if @user.description? %>
         <p><%= @user.description %></p>

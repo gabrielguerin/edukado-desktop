@@ -1,6 +1,16 @@
 <% @title = "Badges" %>
 <div class="container">
   <div class="row">
+      <%# Search form %>
+    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Badges', badges_path %>
+        </li>
+      </ol>
+    </div>
     <div class="col-lg-9 col-md-12 col-sm-12">
       <% if @badges.present? %>
         <%# Badges %>

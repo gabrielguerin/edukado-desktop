@@ -1,0 +1,52 @@
+<% @title = "Classement" %>
+<%# content_for :description do
+  <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
+end %>
+<div class="container">
+  <div class="row">
+    <%# Search form %>
+    <%= render partial: 'search/form', locals: { search_path: users_path, placeholder: "Trouvez les fiches d'un étudiants en particulier" } %>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Classement', rankings_path %>
+        </li>
+      </ol>
+      <%# Ranking %>
+      <div class="card card-tabbed">
+        <div class="card-header d-flex align-items-center">
+          <%# Title %>
+          <h6 class="mt-2">Les 100 meilleurs contributeurs</h6>
+          <ul class="nav rounded-nav-tabs">
+            <li class="nav-item">
+              <a href="#today" data-toggle="tab" class="nav-link active">Cette semaine</a>
+            </li>
+            <li class="nav-item">
+              <a href="#week" data-toggle="tab" class="nav-link">Ce mois-ci</a>
+            </li>
+            <li class="nav-item">
+              <a href="#month" data-toggle="tab" class="nav-link">Tous les temps</a>
+            </li>
+          </ul>
+        </div>
+        <div class="table-responsive">
+          <div class="tab-content" id="tabs">
+            <div class="tab-pane active" id="today">
+              <%# Daily point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.week.ago, limit: 100 } %>
+            </div>
+            <div class="tab-pane" id="week">
+              <%# Weekly point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago, limit: 100 } %>
+            </div>
+            <div class="tab-pane" id="month">
+              <%# Monthly point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 20.year.ago, limit: 100 } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
