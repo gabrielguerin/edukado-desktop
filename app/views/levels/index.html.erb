@@ -20,14 +20,16 @@
             <h6 class="card-title">Trouvez le niveau d'études qui vous correspond.</i></h6>
         <% end %>
       </div>
-      <table class="table table-hover">
-        <tbody>
-          <%# Render tags %>
-          <% Level.order(level: :asc).each do |level| %>
-            <%= render partial: 'tables/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <%# Render tags %>
+            <% Level.order(level: :asc).each do |level| %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <%# Pagination %>

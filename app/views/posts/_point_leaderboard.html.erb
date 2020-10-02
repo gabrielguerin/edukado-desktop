@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <%= Merit::Score.top_scored(since_date: since_date, limit: 25).map do |top_score_hash| %>
+      <%= Merit::Score.top_scored(since_date: since_date, limit: limit).map do |top_score_hash| %>
         <tr>
           <%= content_tag :td do %>
             <%# User avatar %>
