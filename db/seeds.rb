@@ -66,12 +66,6 @@ csv.each do |row|
   t.save
 end
 
-30.times do
-  Group.create!(
-    name: Faker::University.name
-  )
-end
-
 # Create subjects
 
 50.times do
