@@ -27,19 +27,21 @@ end %>
             <h6 class="card-title">Publications les plus populaires</h6>
           <% end %>
         </div>
-        <table class="table table-hover">
-          <tbody>
-            <% if @search.present? %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'tables/tr-post', locals: { post: post } %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <% if @search.present? %>
+                <% @posts.each do |post| %>
+                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
+                <% end %>
+              <% else %>
+                <% @posts.each do |post| %>
+                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
+                <% end %>
               <% end %>
-            <% else %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'tables/tr-post', locals: { post: post } %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

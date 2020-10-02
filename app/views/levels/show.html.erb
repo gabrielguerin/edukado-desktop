@@ -26,14 +26,16 @@ end %>
             <h6 class="card-title">Publications les plus populaires</h6>
           <% end %>
         </div>
-        <table class="table table-hover">
-          <tbody>
-            <%# Render posts %>
-            <% @level.posts.each do |post| %>
-              <%= render partial: 'tables/tr-post', locals: { post: post } %>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render posts %>
+              <% @level.posts.each do |post| %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

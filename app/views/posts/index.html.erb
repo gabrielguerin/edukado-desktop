@@ -25,14 +25,16 @@
           <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
         </div>
       </div>
-      <table class="table table-hover">
-        <tbody>
-          <%# Render posts %>
-          <% @posts.each do |post| %>
-            <%= render partial: 'tables/tr-post', locals: { post: post } %>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <%# Render posts %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'tables/tr-post', locals: { post: post } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
