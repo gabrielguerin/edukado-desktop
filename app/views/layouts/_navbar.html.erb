@@ -19,7 +19,7 @@
     <% end %>
   </li>
   <% if user_signed_in? %>
-    <% unless current_user.admin? %>
+    <% unless current_user.superadmin_role? %>
       <%# Notification dropdown %>
       <%= render 'notifications/notification_dropdown' %>
     <% end %>

@@ -16,12 +16,10 @@
         <div class="dropdown-menu dropdown-menu-right">
           <%# Show post %>
           <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
-          <% if owner?(post) %>
-            <%# Edit %>
-            <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
-            <%# Delete %>
-            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
-          <% end %>
+          <%# Edit %>
+          <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' if policy(post).update? %>
+          <%# Delete %>
+          <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" if policy(post).destroy? %>
           <%# Share %>
           <h6 class="dropdown-header text-muted">Partager</h6>
           <%= content_tag(:div, class: 'd-flex justify-content-between', style: 'padding: 0 1.5rem;') do %>
