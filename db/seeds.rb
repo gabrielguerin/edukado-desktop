@@ -285,19 +285,3 @@ end
 # Delete Badges Sash
 
 Merit::BadgesSash.delete_all
-
-# Reindex all
-
-User.reindex
-
-Post.reindex
-
-Category.reindex
-
-Subject.reindex
-
-Tag.reindex
-
-Group.reindex
-
-Level.reindex
