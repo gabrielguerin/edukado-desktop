@@ -16,7 +16,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def show?
-    user_is_owner_of_record? || @record.published?
+    user_is_owner_of_record?
   end
 
   def update?
