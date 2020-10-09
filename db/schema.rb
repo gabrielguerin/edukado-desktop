@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_095117) do
+ActiveRecord::Schema.define(version: 2020_10_09_154612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -314,7 +314,6 @@ ActiveRecord::Schema.define(version: 2020_10_01_095117) do
     t.string "last_name"
     t.string "gender"
     t.text "description"
-    t.boolean "admin", default: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
