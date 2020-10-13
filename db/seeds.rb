@@ -58,7 +58,7 @@ csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 
-csv.each do |row|
+csv.take(10).each do |row|
   t = Group.new
 
   t.name = row['name']
@@ -163,7 +163,7 @@ end
 # Create posts
 
 Group.all.each do |group|
-  2.times do
+  10.times do
     @post = Post.create!(
       user: User.all.sample,
 
