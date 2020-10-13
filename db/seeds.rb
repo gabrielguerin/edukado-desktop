@@ -289,3 +289,69 @@ end
 # Delete Badges Sash
 
 Merit::BadgesSash.delete_all
+
+# Create superusers
+
+gabriel_guerin_superadmin = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: 'gabriel.guerin@edukado.co',
+
+  password: 'H133J68zTYED%$T2BgM!',
+
+  password_confirmation: 'H133J68zTYED%$T2BgM!',
+
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+hugo_pochet_superadmin = User.new(
+  first_name: 'Hugo',
+
+  last_name: 'Pochet',
+
+  gender: 'Masculin',
+
+  email: 'hugo.pochet0@gmail.com',
+
+  password: 'FG4U5lK07jbfxIM1Ry*L',
+
+  password_confirmation: 'FG4U5lK07jbfxIM1Ry*L',
+
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+# Create supervisor
+
+gabriel_guerin_supervisor = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: 'gabriel.gueringg@gmail.com',
+
+  password: '0a2P$oY7y1E2*09#j4rg',
+
+  password_confirmation: '0a2P$oY7y1E2*09#j4rg',
+
+  group: Group.first,
+
+  supervisor_role: true
+)
+
+superusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor]
+
+superusers.each do |superuser|
+  superuser.skip_confirmation!
+
+  superuser.save!
+end
