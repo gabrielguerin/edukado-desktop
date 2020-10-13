@@ -84,7 +84,7 @@ class UsersController < ApplicationController
 
     when 'dashboard'
 
-      'scaffold'
+      '_app_nav'
 
     when 'index'
 
