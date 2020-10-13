@@ -24,9 +24,9 @@ LevelsPost.delete_all
 
 Level.delete_all
 
-Post.delete_all
-
 Notification.delete_all
+
+Post.delete_all
 
 User.delete_all
 
@@ -196,14 +196,16 @@ end
 
 # Create comments
 
-100.times do
-  Comment.create!(
-    user: User.all.sample,
+Post.all.each do |post|
+  5.times do
+    Comment.create!(
+      user: User.all.sample,
 
-    post: Post.all.sample,
+      post: post,
 
-    description: Faker::Lorem.paragraph(sentence_count: 2)
-  )
+      description: Faker::Lorem.paragraph(sentence_count: 2)
+    )
+  end
 end
 
 # Link levels to posts
