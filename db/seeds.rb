@@ -162,36 +162,38 @@ end
 
 # Create posts
 
-100.times do
-  @post = Post.create!(
-    user: User.all.sample,
+Group.all.each do |group|
+  2.times do
+    @post = Post.create!(
+      user: User.all.sample,
 
-    title: Faker::BossaNova.song,
+      title: Faker::BossaNova.song,
 
-    description: Faker::Movies::VForVendetta.quote,
+      description: Faker::Movies::VForVendetta.quote,
 
-    tags: Tag.all.sample(3),
+      tags: Tag.all.sample(3),
 
-    group: Group.all.sample,
+      group: group,
 
-    category: Category.all.sample,
+      category: Category.all.sample,
 
-    subject: Subject.all.sample,
+      subject: Subject.all.sample,
 
-    year: Year.all.sample,
+      year: Year.all.sample,
 
-    levels: Level.all.sample(1)
-  )
+      levels: Level.all.sample(1)
+    )
 
-  @post.file.attach(
-    io: File.open('app/assets/images/seed/SEO.pdf'),
+    @post.file.attach(
+      io: File.open('app/assets/images/seed/SEO.pdf'),
 
-    filename: 'SEO.pdf',
+      filename: 'SEO.pdf',
 
-    content_type: 'application/pdf',
+      content_type: 'application/pdf',
 
-    identify: false
-  )
+      identify: false
+    )
+  end
 end
 
 # Create comments
