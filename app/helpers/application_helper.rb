@@ -30,7 +30,17 @@ module ApplicationHelper
   # Check if current user is group's supervisor
 
   def supervisor?(object)
+    return if current_user.nil?
+
     current_user.supervisor_role? && object.group == current_user.group
+  end
+
+  # Check if current user is superadmin
+
+  def superadmin?
+    return if current_user.nil?
+
+    current_user.superadmin_role?
   end
 
   # Render flash messages with AJAX

@@ -19,7 +19,7 @@
             </div>
           </div>
           <%# Edit & Delete comment %>
-          <% if owner?(comment) || current_user.superadmin_role? || supervisor?(comment.post) %>
+          <% if owner?(comment) || superadmin? || supervisor?(comment.post) %>
             <div class="dropdown" id="dropdown-menu_comment_<%= comment.id %>">
               <button class="nav-link btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= theme_icon_tag('more') %></button>
               <div class="dropdown-menu dropdown-menu-right">
