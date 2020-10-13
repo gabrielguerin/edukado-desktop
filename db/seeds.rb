@@ -24,9 +24,9 @@ LevelsPost.delete_all
 
 Level.delete_all
 
-Post.delete_all
-
 Notification.delete_all
+
+Post.delete_all
 
 User.delete_all
 
@@ -58,18 +58,12 @@ csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 
-csv.each do |row|
+csv.take(10).each do |row|
   t = Group.new
 
   t.name = row['name']
 
   t.save
-end
-
-30.times do
-  Group.create!(
-    name: Faker::University.name
-  )
 end
 
 # Create subjects
@@ -168,48 +162,52 @@ end
 
 # Create posts
 
-100.times do
-  @post = Post.create!(
-    user: User.all.sample,
+Group.all.each do |group|
+  10.times do
+    @post = Post.create!(
+      user: User.all.sample,
 
-    title: Faker::BossaNova.song,
+      title: Faker::BossaNova.song,
 
-    description: Faker::Movies::VForVendetta.quote,
+      description: Faker::Movies::VForVendetta.quote,
 
-    tags: Tag.all.sample(3),
+      tags: Tag.all.sample(3),
 
-    group: Group.all.sample,
+      group: group,
 
-    category: Category.all.sample,
+      category: Category.all.sample,
 
-    subject: Subject.all.sample,
+      subject: Subject.all.sample,
 
-    year: Year.all.sample,
+      year: Year.all.sample,
 
-    levels: Level.all.sample(1)
-  )
+      levels: Level.all.sample(1)
+    )
 
-  @post.file.attach(
-    io: File.open('app/assets/images/seed/SEO.pdf'),
+    @post.file.attach(
+      io: File.open('app/assets/images/seed/SEO.pdf'),
 
-    filename: 'SEO.pdf',
+      filename: 'SEO.pdf',
 
-    content_type: 'application/pdf',
+      content_type: 'application/pdf',
 
-    identify: false
-  )
+      identify: false
+    )
+  end
 end
 
 # Create comments
 
-100.times do
-  Comment.create!(
-    user: User.all.sample,
+Post.all.each do |post|
+  5.times do
+    Comment.create!(
+      user: User.all.sample,
 
-    post: Post.all.sample,
+      post: post,
 
-    description: Faker::Lorem.paragraph(sentence_count: 2)
-  )
+      description: Faker::Lorem.paragraph(sentence_count: 2)
+    )
+  end
 end
 
 # Link levels to posts
@@ -292,18 +290,68 @@ end
 
 Merit::BadgesSash.delete_all
 
-# Reindex all
+# Create superusers
 
-User.reindex
+gabriel_guerin_superadmin = User.new(
+  first_name: 'Gabriel',
 
-Post.reindex
+  last_name: 'Guérin',
 
-Category.reindex
+  gender: 'Masculin',
 
-Subject.reindex
+  email: 'gabriel.guerin@edukado.co',
 
-Tag.reindex
+  password: 'GOj%ChgoJ0SbQ10jm5jW',
 
-Group.reindex
+  password_confirmation: 'GOj%ChgoJ0SbQ10jm5jW',
 
-Level.reindex
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+hugo_pochet_superadmin = User.new(
+  first_name: 'Hugo',
+
+  last_name: 'Pochet',
+
+  gender: 'Masculin',
+
+  email: 'hugo.pochet0@gmail.com',
+
+  password: 'FG4U5lK07jbfxIM1Ry*L',
+
+  password_confirmation: 'FG4U5lK07jbfxIM1Ry*L',
+
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+# Create supervisor
+
+gabriel_guerin_supervisor = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: 'gabriel.gueringg@gmail.com',
+
+  password: '0a2P$oY7y1E2*09#j4rg',
+
+  password_confirmation: '0a2P$oY7y1E2*09#j4rg',
+
+  group: Group.first,
+
+  supervisor_role: true
+)
+
+superusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor]
+
+superusers.each do |superuser|
+  superuser.skip_confirmation!
+
+  superuser.save!
+end
