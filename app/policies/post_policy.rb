@@ -7,35 +7,47 @@ class PostPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    user_is_owner_of_record?
-  end
-
-  def create?
-    user_is_owner_of_record?
+  def index?
+    true
   end
 
   def show?
-    user_is_owner_of_record?
+    true
+  end
+
+  def create?
+    superadmin_or_supervisor_or_owner?
   end
 
   def update?
-    user_is_owner_of_record? || @user.superadmin_role? || is_group_supervisor? === true
+    superadmin_or_supervisor_or_owner?
   end
 
   def destroy?
-    user_is_owner_of_record? || @user.superadmin_role? || is_group_supervisor? === true
+    superadmin_or_supervisor_or_owner?
+  end
+
+  def like?
+    true
+  end
+
+  def unlike?
+    true
+  end
+
+  def dislike?
+    true
+  end
+
+  def undislike?
+    true
   end
 
   private
 
-  def user_is_owner_of_record?
-    @user == @record.user
-  end
-
-  def is_group_supervisor?
-    if @user.supervisor_role? === true && @record.group === @user.group
-      return true
+  def superadmin_or_supervisor_or_owner?
+    unless @user == nil
+      @user.superadmin_role == true || @user.supervisor_role == true && @record.group === @user.group || @user == @record.user ? true : false
     end
   end
 end
