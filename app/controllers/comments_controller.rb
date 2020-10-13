@@ -182,6 +182,7 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = @post.comments.find(params[:id])
+    authorize @comment
   end
 
   # Set post
