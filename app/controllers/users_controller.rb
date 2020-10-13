@@ -80,11 +80,11 @@ class UsersController < ApplicationController
 
     when 'show'
 
-      '_app_nav'
+      'statics'
 
     when 'dashboard'
 
-      '_app_nav'
+      'statics'
 
     when 'index'
 

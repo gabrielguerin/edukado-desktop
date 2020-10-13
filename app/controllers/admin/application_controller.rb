@@ -21,7 +21,7 @@ module Admin
 
     # Authenticate admin user
     def authenticate_admin
-      unless current_user&.admin?
+      unless current_user&.superadmin_role? || current_user&.supervisor_role?
         redirect_to '/',
                     alert: "Vous n'êtes pas autorisé à accéder à cette page."
       end

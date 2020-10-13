@@ -1,23 +1,10 @@
-<% if user_signed_in? %>
-  <%= render "layouts/app_nav" do %>
-    <div class='container'>
-      <div class='row'>
-        <div class="col-12">
-          <%= render "layouts/flashes" %>
-        </div>
+<%= render "layouts/app_nav" do %>
+  <div class='container'>
+    <div class='row'>
+      <div class="col-12">
+        <%= render "layouts/flashes" %>
       </div>
     </div>
-    <%= yield %>
-  <% end %>
-<% else %>
-  <%= render "layouts/statics_nav" do %>
-    <div class='container'>
-      <div class='row'>
-        <div class="col-12">
-          <%= render "layouts/flashes" %>
-        </div>
-      </div>
-    </div>
-    <%= yield %>
-  <% end %>
+  </div>
+  <%= yield %>
 <% end %>
