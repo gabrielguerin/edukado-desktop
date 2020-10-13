@@ -301,9 +301,9 @@ gabriel_guerin_superadmin = User.new(
 
   email: 'gabriel.guerin@edukado.co',
 
-  password: 'H133J68zTYED%$T2BgM!',
+  password: 'GOj%ChgoJ0SbQ10jm5jW',
 
-  password_confirmation: 'H133J68zTYED%$T2BgM!',
+  password_confirmation: 'GOj%ChgoJ0SbQ10jm5jW',
 
   group: Group.first,
 
