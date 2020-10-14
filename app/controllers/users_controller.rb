@@ -31,13 +31,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
 
-  def show
-    return if current_user == @user
-
-    @error_message = 'Vous ne pouvez pas modifier le profil d\'un autre utilisateur.'
-
-    redirect_back fallback_location: root_path
-  end
+  def show; end
 
   # Display user's posts
 
@@ -53,13 +47,7 @@ class UsersController < ApplicationController
 
   # User dashboard
 
-  def dashboard
-    return if current_user == @user
-
-    @error_message = 'Vous ne pouvez pas accéder au dashboard d\'un autre utilisateur'
-
-    redirect_back fallback_location: root_path
-  end
+  def dashboard; end
 
   private
 
@@ -67,6 +55,7 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.friendly.find(params[:id])
+    authorize @user
   end
 
   # Set layout based on action
