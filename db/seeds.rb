@@ -106,7 +106,7 @@ end
 
     gender: Faker::Gender.binary_type,
 
-    email: "#{first_name}.#{last_name.strip!}@#{Faker::Internet.domain_name}",
+    email: "#{first_name}.#{last_name.parameterize(separator: '_')}@#{Faker::Internet.domain_name}",
 
     description: Faker::Lorem.paragraph,
 
