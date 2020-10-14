@@ -46,8 +46,12 @@ class PostPolicy < ApplicationPolicy
   private
 
   def superadmin_or_supervisor_or_owner?
-    unless @user == nil
-      @user.superadmin_role == true || @user.supervisor_role == true && @record.group === @user.group || @user == @record.user ? true : false
+    return if @user.nil?
+
+    if (@user.superadmin_role == true) ||
+       (@user.supervisor_role == true && @record.group == @user.group) ||
+       (@user == @record.user)
+      true
     end
   end
 end

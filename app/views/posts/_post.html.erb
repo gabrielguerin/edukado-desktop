@@ -59,13 +59,19 @@
       <% if user_signed_in? %>
         <%# Current user avatar %>
         <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2 d-flex align-items-center', style: 'object-fit: cover; max-height: ', width: '40', height: '40'), posts_user_path(current_user) %>
+        <%# Comment form %>
+        <div class="w-100" id="new_comment_<%= post.id %>">
+          <%= render partial: 'comments/form', locals: { post: post } %>
+        </div>
       <% else %>
         <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
+        <%# Comment form %>
+        <div class="w-100" id="new_comment_<%= post.id %>">
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Connectez ou inscrivez-vous pour commenter ce fichier" readonly>
+          </div>
+        </div>
       <% end %>
-      <%# Comment form %>
-      <div class="w-100" id="new_comment_<%= post.id %>">
-        <%= render partial: 'comments/form', locals: { post: post } %>
-      </div>
     </div>
   <% end %>
   <%# Comments %>
