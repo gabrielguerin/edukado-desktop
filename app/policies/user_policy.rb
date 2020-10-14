@@ -5,6 +5,8 @@ class UserPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+
+    m
   end
 
   def index?
@@ -28,8 +30,8 @@ class UserPolicy < ApplicationPolicy
   def superadmin_or_supervisor_or_owner?
     return if @user.nil?
 
-    if (@user.superadmin_role == true) ||
-       (@user.supervisor_role == true && @record.group == @user.group) ||
+    if (@user&.superadmin_role == true) ||
+       (@usersupervisor_role == true && @record.group == @user.group) ||
        (@user == @record)
       true
     end
