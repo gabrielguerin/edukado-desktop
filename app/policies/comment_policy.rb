@@ -42,10 +42,8 @@ class CommentPolicy < ApplicationPolicy
   private
 
   def superadmin_or_supervisor_or_owner?
-    return if @user.nil?
-
-    if (@user.superadmin_role == true) ||
-       (@user.supervisor_role == true && @record.post.group == @user.group) ||
+    if (@user&.superadmin_role == true) ||
+       (@user&.supervisor_role == true && @record&.post&.group == @user&.group) ||
        (@user == @record.user)
       true
     end
