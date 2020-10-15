@@ -30,10 +30,4 @@ class BlogPolicy < ApplicationPolicy
   def destroy?
     superadmin?
   end
-
-  private
-
-  def superadmin?
-    @user&.superadmin_role?
-  end
 end
