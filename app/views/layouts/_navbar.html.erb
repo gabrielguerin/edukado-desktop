@@ -14,11 +14,9 @@
       <%= theme_icon_tag "help-alt" %>
     <% end %>
   </li>
-  <% if user_signed_in? %>
-    <% unless current_user.superadmin_role? %>
-      <%# Notification dropdown %>
-      <%= render 'notifications/notification_dropdown' %>
-    <% end %>
+  <% unless current_user&.superadmin_role? %>
+    <%# Notification dropdown %>
+    <%= render 'notifications/notification_dropdown' %>
   <% end %>
   <%# User dropdown %>
   <%= render 'users/user_dropdown' %>
