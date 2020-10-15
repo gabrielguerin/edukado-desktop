@@ -16,15 +16,15 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    superadmin_or_supervisor_or_owner?(@record&.post&.group)
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def update?
-    superadmin_or_supervisor_or_owner?(@record&.post&.group)
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def destroy?
-    superadmin_or_supervisor_or_owner?(@record&.post&.group)
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def like?
