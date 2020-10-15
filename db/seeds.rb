@@ -94,34 +94,36 @@ end
 
 # Create users
 
-20.times do
-  first_name = Faker::Name.unique.first_name
+Group.all.each do |group|
+  10.times do
+    first_name = Faker::Name.first_name
 
-  last_name = Faker::Name.unique.last_name
+    last_name = Faker::Name.last_name
 
-  user = User.new(
-    first_name: first_name,
+    user = User.new(
+      first_name: first_name,
 
-    last_name: last_name,
+      last_name: last_name,
 
-    gender: Faker::Gender.binary_type,
+      gender: Faker::Gender.binary_type,
 
-    email: "#{first_name}.#{last_name.parameterize(separator: '_')}@#{Faker::Internet.domain_name}",
+      email: "#{first_name}.#{last_name.parameterize(separator: '_')}@#{Faker::Internet.domain_name}",
 
-    description: Faker::Lorem.paragraph,
+      description: Faker::Lorem.paragraph,
 
-    password: 'password',
+      password: 'password',
 
-    password_confirmation: 'password',
+      password_confirmation: 'password',
 
-    group: Group.all.sample
-  )
+      group: group
+    )
 
-  user.skip_confirmation!
+    user.skip_confirmation!
 
-  user.save!
+    user.save!
 
-  user.add_points(rand(2000))
+    user.add_points(rand(2000))
+  end
 end
 
 # Create tags
