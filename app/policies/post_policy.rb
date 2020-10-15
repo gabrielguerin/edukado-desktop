@@ -7,11 +7,7 @@ class PostPolicy < ApplicationPolicy
     end
 
     def resolve_admin
-      if @user.superadmin_role?
-        scope.all
-      else
-        scope.where({ group_id: @user.group.id })
-      end
+      @user.superadmin_role? ? scope.all : scope.where({ group_id: @user.group.id })
     end
   end
 

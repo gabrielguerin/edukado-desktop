@@ -7,11 +7,7 @@ class SubjectPolicy < ApplicationPolicy
     end
 
     def resolve_admin
-      if @user.superadmin_role?
-        scope.all
-      else
-        scope.joins(:groups).where('groups.id = ?', @user.group.id)
-      end
+      @user.superadmin_role? ? scope.all : scope.joins(:groups).where('groups.id = ?', @user.group.id)
     end
   end
 
