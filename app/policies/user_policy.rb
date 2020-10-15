@@ -26,14 +26,4 @@ class UserPolicy < ApplicationPolicy
   def show?
     superadmin_or_supervisor_or_owner?
   end
-
-  private
-
-  def superadmin_or_supervisor_or_owner?
-    if (@user&.superadmin_role == true) ||
-       (@user&.supervisor_role == true && @record&.group == @user&.group) ||
-       (@user == @record)
-      true
-    end
-  end
 end

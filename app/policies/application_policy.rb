@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -45,5 +47,11 @@ class ApplicationPolicy
     def resolve
       scope.all
     end
+  end
+
+  def superadmin_or_supervisor_or_owner?(record = @record)
+    return true if (@user&.superadmin_role?) ||
+                   (@user&.supervisor_role? && record == @user&.group) ||
+                   (@user == @record.user)
   end
 end

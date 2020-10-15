@@ -16,15 +16,15 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record&.post&.group)
   end
 
   def update?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record&.post&.group)
   end
 
   def destroy?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record&.post&.group)
   end
 
   def like?
@@ -41,15 +41,5 @@ class CommentPolicy < ApplicationPolicy
 
   def undislike?
     true
-  end
-
-  private
-
-  def superadmin_or_supervisor_or_owner?
-    if (@user&.superadmin_role == true) ||
-       (@user&.supervisor_role == true && @record&.post&.group == @user&.group) ||
-       (@user == @record.user)
-      true
-    end
   end
 end
