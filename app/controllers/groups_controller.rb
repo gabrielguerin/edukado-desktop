@@ -32,27 +32,26 @@ class GroupsController < ApplicationController
   # GET /groups/1
 
   def show
-    if @search
+    @posts = if @search
 
-      # Render search results
+               # Render search results
 
-      @posts = Post.search(
-        params[:search],
-        
-        where: { group_id: @group.id },
+               Post.search(
+                 params[:search],
+                 where: { group_id: @group.id },
 
-        page: params[:page],
+                 page: params[:page],
 
-        per_page: 20
-      )
+                 per_page: 20
+               )
 
-    else
+             else
 
-      # Render group
-      
-      @posts = @group.posts.page(params[:page])
+               # Render group
 
-    end
+               @group.posts.page(params[:page])
+
+             end
   end
 
   # GET /groups/new
@@ -115,6 +114,7 @@ class GroupsController < ApplicationController
 
   def set_group
     @group = Group.friendly.find(params[:id])
+    authorize @group
   end
 
   # Group parameters

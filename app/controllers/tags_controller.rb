@@ -59,7 +59,6 @@ class TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])
-
     authorize @tag
   end
 end

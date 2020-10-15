@@ -106,7 +106,6 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.friendly.find(params[:id])
-
     authorize @category
   end
 
