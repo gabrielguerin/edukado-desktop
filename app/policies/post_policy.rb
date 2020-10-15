@@ -5,6 +5,14 @@ class PostPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+
+    def resolve_admin
+      if @user.superadmin_role?
+        scope.all
+      else
+        scope.where({ group_id: @user.group.id })
+      end
+    end
   end
 
   def index?; end
