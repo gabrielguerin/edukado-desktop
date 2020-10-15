@@ -20,10 +20,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def dashboard?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@user, @user)
   end
 
   def show?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@user, @user)
   end
 end

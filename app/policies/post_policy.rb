@@ -20,15 +20,15 @@ class PostPolicy < ApplicationPolicy
   def create?; end
 
   def edit?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record.user.group)
   end
 
   def update?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record.user.group)
   end
 
   def destroy?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record.user.group)
   end
 
   def like?

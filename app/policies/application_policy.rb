@@ -49,10 +49,10 @@ class ApplicationPolicy
     end
   end
 
-  def superadmin_or_supervisor_or_owner?(record = @record)
+  def superadmin_or_supervisor_or_owner?(owner = @record.user, record = @record)
     return true if superadmin? ||
                    (@user&.supervisor_role? && record == @user&.group) ||
-                   (@user == @record.user)
+                   (@user == owner)
   end
 
   def superadmin?
