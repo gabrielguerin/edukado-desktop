@@ -7,15 +7,15 @@ class PostPolicy < ApplicationPolicy
     end
   end
 
-  def index?
-    true
-  end
+  def index?; end
 
   def show?
     true
   end
 
-  def create?
+  def create?; end
+
+  def edit?
     superadmin_or_supervisor_or_owner?
   end
 
@@ -48,7 +48,7 @@ class PostPolicy < ApplicationPolicy
   def superadmin_or_supervisor_or_owner?
     if (@user&.superadmin_role == true) ||
        (@user&.supervisor_role == true && @record&.group == @user&.group) ||
-       (@user == @record)
+       (@user == @record.user)
       true
     end
   end
