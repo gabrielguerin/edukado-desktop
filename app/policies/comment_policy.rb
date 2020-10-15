@@ -10,7 +10,7 @@ class CommentPolicy < ApplicationPolicy
       if @user.superadmin_role?
         scope.all
       else
-        Comment.joins(:post).where('posts.group_id = ?', @user.group.id)
+        scope.joins(:post).where('posts.group_id = ?', @user.group.id)
       end
     end
   end
