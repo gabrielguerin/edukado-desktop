@@ -12,6 +12,10 @@
 
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    # Authorizations
+
+    include Administrate::Punditize
+
     # Layout
 
     layout 'sidenav'
@@ -21,10 +25,10 @@ module Admin
 
     # Authenticate admin user
     def authenticate_admin
-      unless current_user&.superadmin_role? || current_user&.supervisor_role?
-        redirect_to '/',
-                    alert: "Vous n'êtes pas autorisé à accéder à cette page."
-      end
+      return if current_user&.superadmin_role? || current_user&.supervisor_role?
+
+      redirect_to '/',
+                  alert: "Vous n'êtes pas autorisé à accéder à cette page."
     end
 
     # Override this value to specify the number of elements to display at a time
