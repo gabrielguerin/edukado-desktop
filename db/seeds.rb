@@ -95,7 +95,7 @@ end
 # Create users
 
 Group.all.each do |group|
-  10.times do
+  20.times do
     first_name = Faker::Name.first_name
 
     last_name = Faker::Name.last_name
@@ -167,7 +167,7 @@ end
 Group.all.each do |group|
   10.times do
     @post = Post.create!(
-      user: User.all.sample,
+      user: User.where(group: group).sample,
 
       title: Faker::BossaNova.song,
 
