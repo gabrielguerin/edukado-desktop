@@ -17,7 +17,9 @@ class PostPolicy < ApplicationPolicy
     true
   end
 
-  def create?; end
+  def create?
+    superadmin_or_supervisor_or_owner?(@record.user, @record.user)
+  end
 
   def edit?
     superadmin_or_supervisor_or_owner?(@record.user, @record.user.group)

@@ -19,9 +19,13 @@ class SubjectPolicy < ApplicationPolicy
     true
   end
 
-  def new?; end
+  def new?
+    superadmin?
+  end
 
-  def edit?; end
+  def edit?
+    superadmin?
+  end
 
   def create?
     superadmin?

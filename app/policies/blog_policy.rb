@@ -13,7 +13,9 @@ class BlogPolicy < ApplicationPolicy
     true
   end
 
-  def new?; end
+  def new?
+    superadmin?
+  end
 
   def edit?
     superadmin?
