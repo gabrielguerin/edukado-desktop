@@ -162,6 +162,86 @@ categories.each do |category|
   )
 end
 
+# Create test users
+
+gabriel_guerin_superadmin = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_email),
+
+  password: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_password),
+
+  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_password),
+
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+hugo_pochet_superadmin = User.new(
+  first_name: 'Hugo',
+
+  last_name: 'Pochet',
+
+  gender: 'Masculin',
+
+  email: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_email),
+
+  password: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_password),
+
+  password_confirmation: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_password),
+
+  group: Group.first,
+
+  superadmin_role: true
+)
+
+gabriel_guerin_supervisor = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_email),
+
+  password: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_password),
+
+  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_password),
+
+  group: Group.first,
+
+  supervisor_role: true
+)
+
+gabriel_guerin_user = User.new(
+  first_name: 'Gabriel',
+
+  last_name: 'Guérin',
+
+  gender: 'Masculin',
+
+  email: Rails.application.credentials.dig(:development, :gabriel_guerin_user_email),
+
+  password: Rails.application.credentials.dig(:development, :gabriel_guerin_user_password),
+
+  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_user_password),
+
+  group: Group.first
+)
+
+testusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor, gabriel_guerin_user]
+
+testusers.each do |testuser|
+  testuser.skip_confirmation!
+
+  testuser.save!
+end
+
 # Create posts
 
 Group.all.each do |group|
@@ -291,69 +371,3 @@ end
 # Delete Badges Sash
 
 Merit::BadgesSash.delete_all
-
-# Create superusers
-
-gabriel_guerin_superadmin = User.new(
-  first_name: 'Gabriel',
-
-  last_name: 'Guérin',
-
-  gender: 'Masculin',
-
-  email: 'gabriel.guerin@edukado.co',
-
-  password: 'GOj%ChgoJ0SbQ10jm5jW',
-
-  password_confirmation: 'GOj%ChgoJ0SbQ10jm5jW',
-
-  group: Group.first,
-
-  superadmin_role: true
-)
-
-hugo_pochet_superadmin = User.new(
-  first_name: 'Hugo',
-
-  last_name: 'Pochet',
-
-  gender: 'Masculin',
-
-  email: 'hugo.pochet0@gmail.com',
-
-  password: 'FG4U5lK07jbfxIM1Ry*L',
-
-  password_confirmation: 'FG4U5lK07jbfxIM1Ry*L',
-
-  group: Group.first,
-
-  superadmin_role: true
-)
-
-# Create supervisor
-
-gabriel_guerin_supervisor = User.new(
-  first_name: 'Gabriel',
-
-  last_name: 'Guérin',
-
-  gender: 'Masculin',
-
-  email: 'gabriel.gueringg@gmail.com',
-
-  password: '0a2P$oY7y1E2*09#j4rg',
-
-  password_confirmation: '0a2P$oY7y1E2*09#j4rg',
-
-  group: Group.first,
-
-  supervisor_role: true
-)
-
-superusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor]
-
-superusers.each do |superuser|
-  superuser.skip_confirmation!
-
-  superuser.save!
-end
