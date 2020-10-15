@@ -5,6 +5,10 @@ class UserPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+
+    def resolve_admin
+      @user.superadmin_role? ? scope.all : scope.where(group_id: @user.group.id)
+    end
   end
 
   def index?
