@@ -1,8 +1,8 @@
 <ul class="navbar-nav">
   <%# Search form %>
-  <%= form_tag(posts_path, method: 'get', class: 'form-inline', role: 'search') do %>
+  <%= form_tag(posts_path, method: 'get', class: 'form-inline', role: 'search', style: 'margin-right: 0.7rem;') do %>
     <%# Search field %>
-    <%= text_field_tag :search, nil, placeholder: "Rechercher", class: "form-control border-0 w-100", name: "search", autocomplete: :off, style: 'background-color: #fff; margin-right: 0.7rem; min-width: 300px' %>
+    <%= text_field_tag :search, nil, placeholder: "Rechercher", class: "form-control border-0 w-100", name: "search", autocomplete: :off, style: 'background-color: #fff; min-width: 300px' %>
     <%# Submit button %>
     <%= submit_tag '', style: "display: none;" %>
   <% end %>
