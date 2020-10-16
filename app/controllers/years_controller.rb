@@ -51,6 +51,7 @@ class YearsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_year
       @year = Year.find(params[:id])
+      authorize @year
     end
 
     # Only allow a trusted parameter "white list" through.

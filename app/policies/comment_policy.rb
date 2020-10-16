@@ -5,6 +5,10 @@ class CommentPolicy < ApplicationPolicy
     def resolve
       scope.all
     end
+
+    def resolve_admin
+      @user.superadmin_role? ? scope.all : scope.joins(:post).where('posts.group_id = ?', @user.group.id)
+    end
   end
 
   def show?
@@ -12,15 +16,15 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def update?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def destroy?
-    superadmin_or_supervisor_or_owner?
+    superadmin_or_supervisor_or_owner?(@record.user, @record&.post&.group)
   end
 
   def like?
@@ -37,17 +41,5 @@ class CommentPolicy < ApplicationPolicy
 
   def undislike?
     true
-  end
-
-  private
-
-  def superadmin_or_supervisor_or_owner?
-    return if @user.nil?
-
-    if (@user.superadmin_role == true) ||
-       (@user.supervisor_role == true && @record.post.group == @user.group) ||
-       (@user == @record.user)
-      true
-    end
   end
 end

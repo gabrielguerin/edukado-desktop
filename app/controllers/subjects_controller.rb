@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class SubjectsController < ApplicationController
-  layout "scaffold"
+  layout 'scaffold'
 
   # Set group
 
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_subject, only: %i[show edit update destroy]
 
   # Set search
 
@@ -14,43 +16,42 @@ class SubjectsController < ApplicationController
   def index
     @subjects = if @search
 
-      # Render search results
+                  # Render search results
 
-      Subject.search(params[:search], page: params[:page], per_page: 20)
+                  Subject.search(params[:search], page: params[:page], per_page: 20)
 
-    else
+                else
 
-      # Render subjects
+                  # Render subjects
 
-      Subject.all.order('name ASC').page(params[:page])
+                  Subject.all.order('name ASC').page(params[:page])
 
-    end
+                end
   end
 
   # GET /subjects/1
 
   def show
-    if @search
+    @posts = if @search
 
-      # Render search results
+               # Render search results
 
-      @posts = Post.search(
-        params[:search],
-        
-        where: { subject_id: @subject.id },
+               Post.search(
+                 params[:search],
+                 where: { subject_id: @subject.id },
 
-        page: params[:page],
+                 page: params[:page],
 
-        per_page: 20
-      )
+                 per_page: 20
+               )
 
-    else
+             else
 
-      # Render subject
+               # Render subject
 
-      @posts = @subject.posts.page(params[:page])
+               @subject.posts.page(params[:page])
 
-    end
+             end
   end
 
   # GET /subjects/new
@@ -104,6 +105,7 @@ class SubjectsController < ApplicationController
 
   def set_subject
     @subject = Subject.friendly.find(params[:id])
+    authorize @subject
   end
 
   # Subject parameters

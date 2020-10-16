@@ -38,9 +38,7 @@ module ApplicationHelper
   # Check if current user is superadmin
 
   def superadmin?
-    return if current_user.nil?
-
-    current_user.superadmin_role?
+    current_user&.superadmin_role?
   end
 
   # Render flash messages with AJAX

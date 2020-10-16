@@ -7,7 +7,15 @@ class BlogsController < ApplicationController
 
   # Find blog
 
-  before_action :set_blog, only: %i[show edit update destroy]
+  before_action :set_blog, only: %i[
+    show
+
+    edit
+
+    update
+
+    destroy
+  ]
 
   # Respong to different formats
 
@@ -79,6 +87,7 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.friendly.find(params[:id])
+    authorize @blog
   end
 
   # Blog parameters
