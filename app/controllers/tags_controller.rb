@@ -24,7 +24,7 @@ class TagsController < ApplicationController
 
               Tag.all.order('title ASC').page(params[:page])
 
-                  end
+            end
   end
 
   # GET /tags/1
@@ -59,5 +59,6 @@ class TagsController < ApplicationController
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])
+    authorize @tag
   end
 end

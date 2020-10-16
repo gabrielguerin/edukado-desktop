@@ -13,19 +13,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%# Navbar links %>
       <ul class="navbar-nav mr-auto">
-        <% if signed_in? %>
-          <% if current_user.admin? %>
-            <li class="nav-item">
-              <a class="nav-link" href="<%= admin_users_path %>">Espace admin</a>
-            </li>
-          <% end %>
+        <% if superadmin? || supervisor?(current_user) %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= admin_users_path %>">Espace admin</a>
+          </li>
         <% end %>
-        <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
-          <a class="nav-link" href="<%= new_post_path %>">Publier</a>
-        </li>
-        <li class="nav-item <%= 'active' if current_page?(new_user_invitation_path) %>">
-          <a class="nav-link" href="<%= new_user_invitation_path %>">Inviter</a>
-        </li>
+        <% if signed_in? %>
+          <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
+            <a class="nav-link" href="<%= new_post_path %>">Publier</a>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(new_user_invitation_path) %>">
+            <a class="nav-link" href="<%= new_user_invitation_path %>">Inviter</a>
+          </li>
+        <% else %>
+          <li class="nav-item <%= 'active' if current_page?(posts_path) %>">
+            <a class="nav-link" href="<%= posts_path %>">Publications</a>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(blogs_path) %>">
+            <a class="nav-link" href="<%= blogs_path %>">Blog</a>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?("mailto:contact@edukado.co") %>">
+            <a class="nav-link" href="mailto:contact@edukado.co">Contact</a>
+          </li>
+        <% end %>
       </ul>
       <%= render partial: 'layouts/navbar' %>
     </div>

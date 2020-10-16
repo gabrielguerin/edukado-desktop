@@ -35,7 +35,7 @@ class PostsController < ApplicationController
 
   before_action :posts, only: %i[show create]
 
-  # Set group
+  # Find group
 
   before_action :set_group, only: :create
 
@@ -227,6 +227,7 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.friendly.find(params[:id])
+    authorize @post
   end
 
   # Set group

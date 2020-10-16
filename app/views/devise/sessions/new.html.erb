@@ -38,21 +38,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-md-6 mr-md-auto ml-md-auto">
-        <ul class="list-unstyled options row">
-          <li class="col-12 col-md-6"><%= link_to "S'inscrire", new_registration_path(resource_name) %></li>
-          <%- if devise_mapping.recoverable? %>
-            <li class="col-12 col-md-6"><%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %></li>
-          <% end -%>
-          <%- if devise_mapping.confirmable? %>
-            <li class="col-12 col-md-6"><%= link_to "Vous n'avez pas reçu d'instructions de confirmation ?", new_confirmation_path(resource_name) %></li>
-          <% end -%>
-          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) %>
-            <li class="col-12 col-md-6"><%= link_to "Vous n'avez pas reçu d'instructions de déverrouillage ?", new_unlock_path(resource_name) %></li>
-          <% end -%>
-        </ul>
-      </div>
+      <ul class="list-unstyled options row">
+        <li class="col-12 col-md-6"><%= link_to "S'inscrire", new_registration_path(resource_name) %></li>
+        <%- if devise_mapping.recoverable? %>
+          <li class="col-12 col-md-6"><%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %></li>
+        <% end -%>
+        <%- if devise_mapping.confirmable? %>
+          <li class="col-12 col-md-6"><%= link_to "Vous n'avez pas reçu d'instructions de confirmation ?", new_confirmation_path(resource_name) %></li>
+        <% end -%>
+        <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) %>
+          <li class="col-12 col-md-6"><%= link_to "Vous n'avez pas reçu d'instructions de déverrouillage ?", new_unlock_path(resource_name) %></li>
+        <% end -%>
+      </ul>
     </div>
   </div>
+</div>

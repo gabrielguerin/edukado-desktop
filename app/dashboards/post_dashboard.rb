@@ -19,6 +19,7 @@ class PostDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     description: Field::Text,
+    group: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String
@@ -32,7 +33,7 @@ class PostDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     title
-    description
+    group
     file
     tags
     user
@@ -48,6 +49,7 @@ class PostDashboard < Administrate::BaseDashboard
     tags
     file
     user
+    group
     comments
     votes_for
     created_at

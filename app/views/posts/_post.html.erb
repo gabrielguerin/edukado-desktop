@@ -16,12 +16,10 @@
         <div class="dropdown-menu dropdown-menu-right">
           <%# Show post %>
           <%= link_to 'Voir la publication', post_path(post), class: 'dropdown-item' %>
-          <% if owner?(post) %>
-            <%# Edit %>
-            <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' %>
-            <%# Delete %>
-            <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" %>
-          <% end %>
+          <%# Edit %>
+          <%= link_to 'Modifier', edit_post_path(post), class: 'dropdown-item' if policy(post).update? %>
+          <%# Delete %>
+          <%= link_to 'Supprimer', post, data: { confirm: 'Êtes-vous sûr ?' }, method: :delete, remote: true, class: 'dropdown-item', id: "delete_post_#{post.id}" if policy(post).destroy? %>
           <%# Share %>
           <h6 class="dropdown-header text-muted">Partager</h6>
           <%= content_tag(:div, class: 'd-flex justify-content-between', style: 'padding: 0 1.5rem;') do %>
@@ -31,7 +29,7 @@
             <% end %>
             <%# Twitter %>
             <%= link_to("https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", data: { network: 'facebook' }, target: '_blank') do %>
-               <span style="font-size: 20px"><%= fa_icon_tag('twitter-square') %></span>
+              <span style="font-size: 20px"><%= fa_icon_tag('twitter-square') %></span>
             <% end %>
             <%# Email %>
             <%= link_to("https://www.facebook.com/sharer/sharer.php?u=http://www.edukado.co#{post_path(post)}", data: { network: 'facebook' }, target: '_blank') do %>
@@ -56,26 +54,30 @@
     <%= render partial: 'posts/vote', locals: { post: post } %>
   </div>
   <%# Comment section %>
-  <% unless current_page?(posts_path) || current_page?(posts_user_path(post.user)) || current_page?(tag_path) %>
-      <div class="card-footer d-flex flex-row w-100" style="background-color: #fff">
-        <% if user_signed_in? %>
-          <%# Current user avatar %>
-          <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2 d-flex align-items-center', style: 'object-fit: cover; max-height: ', width: '40', height: '40'), posts_user_path(current_user) %>
-        <% else %>
-          <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
-        <% end %>
-          <%# Comment form %>
-          <div class="w-100" id="new_comment_<%= post.id %>">
-            <%= render partial: 'comments/form', locals: { post: post } %>
-          </div>
+  <div class="card-footer d-flex flex-row w-100" style="background-color: #fff">
+    <% if user_signed_in? %>
+      <%# Current user avatar %>
+      <%= link_to image_tag(user_avatar(current_user), class: 'rounded-circle mr-2 d-flex align-items-center', style: 'object-fit: cover; max-height: ', width: '40', height: '40'), posts_user_path(current_user) %>
+      <%# Comment form %>
+      <div class="w-100" id="new_comment_<%= post.id %>">
+        <%= render partial: 'comments/form', locals: { post: post } %>
       </div>
-  <% end %>
+    <% else %>
+      <%= image_tag(image_url('fallback/default.png'),  class: 'rounded-circle mr-2', style: 'object-fit: cover;', width: '40', height: '40') %>
+      <%# Comment form %>
+      <div class="w-100" id="new_comment_<%= post.id %>">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Connectez ou inscrivez-vous pour commenter ce fichier" readonly>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <%# Comments %>
   <% if post.comments.present? %>
     <div id="comments_<%= post.id %>">
-    <% if current_page?(post_path(post)) %>
-      <%= render post.comments.order(created_at: :desc) %>
-    <% end %>
+      <% if current_page?(post_path(post)) %>
+        <%= render post.comments.order(created_at: :desc) %>
+      <% end %>
     </div>
   <% end %>
 </div>
