@@ -1,0 +1,12 @@
+<div class="card-header d-flex align-items-center flex-md-row flex-column text-md-left text-center">
+  <% if @search.present? %>
+    <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+  <% else %>
+    <h6 class="card-title"><%= title %></i></h6>
+<% end %>
+<%# Button groups %>
+<div class="ml-0 ml-md-auto mt-2 mt-md-0 btn-group" role="group" aria-label="Basic example">
+  <%= link_to 'Populaires', posts_path, class: 'btn btn-default active' %>
+  <%= link_to 'Matières', subjects_path, class: 'btn btn-default' %>
+  <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
+</div>

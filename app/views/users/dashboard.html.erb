@@ -30,7 +30,7 @@
         <div class="col-12 col-md-6 col-sm-12 pb-4">
           <%# Search form %>
           <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
-          <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex d-flex flex-md-row flex-column justify-content-between">
             <%# Badges %>
             <% %w[gold silver bronze].each do |difficulty| %>
               <div class="card mx-2">
@@ -112,61 +112,56 @@
     <div class="row equal-cols">
       <div class="col-12 col-md-6 col-sm-12">
         <div class="card">
-          <div class="card-header">
-            <h6 class="card-title">Dernières publications</h6>
-            <div class="ml-auto btn-group" role="group" aria-label="Basic example">
-              <%= link_to 'Dernières', posts_path, class: 'btn btn-default active' %>
-              <%= link_to 'Matières', subjects_path, class: 'btn btn-default' %>
-              <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <tbody>
-                <%# Render posts %>
-                <% Post.last(10).each do |post| %>
-                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+          <%# Card header %>
+          <%= render partial: 'posts/card-header', locals: { title: 'Dernières publications' } %>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render posts %>
+              <% Post.last(10).each do |post| %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="col-6 col-md-6 col-sm-12">
-        <div class="card card-tabbed">
-          <div class="card-header d-flex align-items-center">
-            <%# Title %>
-            <h6 class="mt-2">Hall of fame</h6>
-            <ul class="nav rounded-nav-tabs">
-              <li class="nav-item">
-                <a href="#today" data-toggle="tab" class="nav-link active">Cette semaine</a>
-              </li>
-              <li class="nav-item">
-                <a href="#week" data-toggle="tab" class="nav-link">Ce mois-ci</a>
-              </li>
-              <li class="nav-item">
-                <a href="#month" data-toggle="tab" class="nav-link">Tous les temps</a>
-              </li>
-            </ul>
-          </div>
-          <div class="table-responsive">
-            <div class="tab-content" id="tabs">
-              <div class="tab-pane active" id="today">
-                <%# Daily point leaderboard %>
-                <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.week.ago, limit: 15 } %>
-              </div>
-              <div class="tab-pane" id="week">
-                <%# Weekly point leaderboard %>
-                <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago, limit: 15 } %>
-              </div>
-              <div class="tab-pane" id="month">
-                <%# Monthly point leaderboard %>
-                <%= render partial: 'posts/point_leaderboard', locals: { since_date: 20.year.ago, limit: 15 } %>
-              </div>
+    </div>
+    <div class="col-12 col-md-6 col-sm-12">
+      <div class="card card-tabbed">
+        <div class="card-header d-flex align-items-center">
+          <%# Title %>
+          <h6 class="mt-2">Hall of fame</h6>
+          <ul class="nav rounded-nav-tabs">
+            <li class="nav-item">
+              <a href="#today" data-toggle="tab" class="nav-link active">Cette semaine</a>
+            </li>
+            <li class="nav-item">
+              <a href="#week" data-toggle="tab" class="nav-link">Ce mois-ci</a>
+            </li>
+            <li class="nav-item">
+              <a href="#month" data-toggle="tab" class="nav-link">Tous les temps</a>
+            </li>
+          </ul>
+        </div>
+        <div class="table-responsive">
+          <div class="tab-content" id="tabs">
+            <div class="tab-pane active" id="today">
+              <%# Daily point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.week.ago, limit: 15 } %>
+            </div>
+            <div class="tab-pane" id="week">
+              <%# Weekly point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago, limit: 15 } %>
+            </div>
+            <div class="tab-pane" id="month">
+              <%# Monthly point leaderboard %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 20.year.ago, limit: 15 } %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

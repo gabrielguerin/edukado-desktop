@@ -13,17 +13,7 @@
       <%# Card %>
       <div class="card">
         <%# Card header %>
-        <div class="card-header d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Trouvez votre fichier</i></h6>
-        <% end %>
-        <div class="ml-auto btn-group" role="group" aria-label="Basic example">
-          <%= link_to 'Populaires', posts_path, class: 'btn btn-default active' %>
-          <%= link_to 'Matières', subjects_path, class: 'btn btn-default' %>
-          <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
-        </div>
+        <%= render partial: 'card-header', locals: { title: 'Trouvez votre fichier' } %>
       </div>
       <div class="table-responsive">
         <table class="table table-hover">

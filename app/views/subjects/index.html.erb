@@ -15,13 +15,9 @@ end %>
       </ol>
       <%# Groups %>
       <div class="card">
-        <div class="card-header">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Toutes les matières</h6>
-          <% end %>
-        </div>
+        <%# Card header %>
+        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
+      </div>
         <table class="table table-hover">
           <tbody>
             <%# Render subjects %>
@@ -30,6 +26,7 @@ end %>
             <% end %>
           </tbody>
         </table>
+
       </div>
     </div>
   </div>
