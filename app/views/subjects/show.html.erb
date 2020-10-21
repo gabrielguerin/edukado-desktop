@@ -46,7 +46,5 @@ end %>
     </div>
   </div>
   <%# Pagination %>
-  <% if @subject.posts.count > 20 %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-  <% end %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @subject.posts } %>
 </div>

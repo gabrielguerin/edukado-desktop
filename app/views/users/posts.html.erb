@@ -1,7 +1,7 @@
 <% if current_user == @user %>
-  <% @title = "Vos publications" %>
+  <% @title = "Mon profil" %>
 <% else %>
-  <% @title = "Publications de #{@user.first_name} #{@user.last_name}" %>
+  <% @title = "Profil de #{@user.first_name} #{@user.last_name}" %>
 <% end %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
@@ -20,36 +20,42 @@ end %>
           <%= link_to "#{@user.full_name}", user_path(@user) %>
         </li>
       </ol>
-  </div>
-  <div class="row">
-    <div class="col-lg-9 col-md-12 col-sm-12">
+    </div>
+    <div class="row">
+      <div class="col-lg-9 col-md-12 col-sm-12">
         <%# List of posts %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+        <div class="card">
+          <%# Card header %>
+          <div class="card-header d-flex align-items-center">
+            <% if @search.present? %>
+              <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+            <% else %>
+              <h6 class="card-title">Publications de <%= @user.full_name %></h6>
+            <% end %>
+          </div>
+          <% if @user.posts.count > 0 %>
+            <table class="table table-hover table-striped">
+              <tbody>
+                <%# Render posts %>
+                <% @user.posts.each do |post| %>
+                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
+                <% end %>
+              </tbody>
+            </table>
           <% else %>
-            <h6 class="card-title">Publications de <%= @user.full_name %></h6>
+            <div class="card-body">
+              <p><%= @user.first_name %> n'a pas encore publié.</p>
+            </div>
           <% end %>
         </div>
-        <table class="table table-hover table-striped">
-          <tbody>
-            <%# Render posts %>
-            <% @user.posts.each do |post| %>
-              <%= render partial: 'tables/tr-post', locals: { post: post } %>
-            <% end %>
-          </tbody>
-        </table>
+      </div>
+      <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+        <%# User side panel %>
+        <%= render partial: 'side_panel' %>
+        <%# Badge side panel %>
+        <%= render partial: 'badges/side_panel-user' %>
       </div>
     </div>
-    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
-      <%# User side panel %>
-      <%= render partial: 'side_panel' %>
-      <%# Badge side panel %>
-      <%= render partial: 'badges/side_panel-user' %>
-    </div>
+    <%# Pagination %>
+    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @user.posts } %>
   </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
-</div>

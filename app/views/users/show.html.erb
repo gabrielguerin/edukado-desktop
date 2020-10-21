@@ -16,9 +16,11 @@
     <li class="nav-item">
       <a href="#badges" data-toggle="tab" class="nav-link">Badges</a>
     </li>
+    <!-- 
     <li class="nav-item">
-      <a href="#support" data-toggle="tab" class="nav-link">Support</a>
+      <a href="#support" data-toggle="tab" class="nav-link">Support</#a>
     </li>
+    -->
   </ul>
 </div>
 <div class="container">
@@ -33,22 +35,24 @@
           <%# User badges %>
           <%= render partial: 'users/_user_account/badges' %>
         </div>
+        <!-- 
         <div class="tab-pane" id="support">
           <div class="card">
             <div class="card-body">
               <%# Support %>
               <%= render partial: 'users/_user_account/support' %>
+                <#/div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        -->
       </div>
-    </div>
-  </div>
-</div>
-<script>
-  function activateTab(tab){
-      $('.nav-tabs a[href="#' + tab + '"]').tab('show');
-  };
-  
-  activateTab('profile');
-</script>
+      <script>
+        function activateTab(tab){
+            $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+        };
+        
+        activateTab('profile');
+      </script>

@@ -8,7 +8,7 @@
     <% else %>
       <span style="color: #A66641; margin-right: 0.250rem;">•</span>
     <% end %>
-    <small class="text-muted my-0 mr-3">
+    <small class="text-muted my-0">
       <%= (user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count %>
     </small>
   </div>
