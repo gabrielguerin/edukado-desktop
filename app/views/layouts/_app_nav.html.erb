@@ -19,6 +19,15 @@
           </li>
         <% end %>
         <% if signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link <%= 'active' if current_page?(dashboard_user_path(current_user)) %>" href="<%= dashboard_user_path(current_user) %>">Dashboard</a>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(group_path(current_user.group)) %>">
+            <a class="nav-link" href="<%= group_path(current_user.group) %>">Mon université</a>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(posts_path) %>">
+            <a class="nav-link" href="<%= posts_path %>">Publications</a>
+          </li>
           <li class="nav-item <%= 'active' if current_page?(new_post_path) %>">
             <a class="nav-link" href="<%= new_post_path %>">Publier</a>
           </li>
