@@ -33,30 +33,30 @@ end %>
           </div>
         <% end %>
       </div>
-    </div>
-    <%# List of posts %>
-    <div class="card">
-      <%# Card header %>
-      <div class="card-header d-flex align-items-center">
-        <% if @search.present? %>
-          <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-        <% else %>
-          <h6 class="card-title"><%= @group.name %></h6>
-        <% end %>
-        <div class="ml-auto btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-default active">Populaires</button>
-          <button type="button" class="btn btn-default">Matières</button>
-          <button type="button" class="btn btn-default">Années</button>
-        </div>
-      </div>
-      <table class="table table-hover table-striped">
-        <tbody>
-          <%# Render posts %>
-          <% @posts.each do |post| %>
-            <%= render partial: 'tables/tr-post', locals: { post: post } %>
+      <%# List of posts %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header d-flex align-items-center">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title"><%= @group.name %></h6>
           <% end %>
-        </tbody>
-      </table>
+          <div class="ml-auto btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-default active">Populaires</button>
+            <button type="button" class="btn btn-default">Matières</button>
+            <button type="button" class="btn btn-default">Années</button>
+          </div>
+        </div>
+        <table class="table table-hover table-striped">
+          <tbody>
+            <%# Render posts %>
+            <% @posts.each do |post| %>
+              <%= render partial: 'tables/tr-post', locals: { post: post } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <%# Pagination %>
