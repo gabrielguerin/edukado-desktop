@@ -30,21 +30,27 @@
     <div class="card-header justify-content-center">
       <h6>Badges récents</h6>
     </div>
-    <div class="card-body text-left p-0">
-      <div class="table-responsive">
-        <table class="table table-sm-responsive">
-          <tbody>
-            <% Merit::BadgesSash.last_granted(limit: 20).each do |user| %>
-              <tr>
-                <td>
-                  <%= render partial: 'badge', locals: { badge: user[:badge] } %>
-                  <%= link_to user[:user].full_name, posts_user_path(user[:user]) %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+    <% if Merit::BadgesSash.all.count > 0 %>
+      <div class="card-body text-left p-0">
+        <div class="table-responsive">
+          <table class="table table-sm-responsive">
+            <tbody>
+              <% Merit::BadgesSash.last_granted(limit: 20).each do |user| %>
+                <tr>
+                  <td>
+                    <%= render partial: 'badge', locals: { badge: user[:badge] } %>
+                    <%= link_to user[:user].full_name, posts_user_path(user[:user]) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class="card-body">
+        <p>Aucun badge n'a encore été attribué</p>
+      </div>
+    <% end %>
   </div>
 </div>
