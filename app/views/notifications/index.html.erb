@@ -8,10 +8,8 @@
             <%= render @notifications.order(created_at: :desc) %>
           </div>
         </div>
-        <% if @notifications.count === 20 %>
-          <%# Pagination %>
-          <%= render partial: 'kaminari/pagination', locals: { object: @notifications, ajax: 'remote' } %>
-        <% end %>
+        <%# Pagination %>
+        <%= render partial: 'kaminari/pagination', locals: { object: @notifications, ajax: 'remote', model: Notification } %>
       <% else %>
         <div class="card">
           <div class="card-body text-center">

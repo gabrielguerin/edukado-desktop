@@ -68,7 +68,7 @@ end
 
 # Create subjects
 
-50.times do
+30.times do
   Subject.create!(
     name: Faker::Educator.subject
   )

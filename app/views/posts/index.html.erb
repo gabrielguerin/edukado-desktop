@@ -39,5 +39,5 @@
   </div>
 </div>
 <%# Pagination %>
-<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local' } %>
+<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: Post } %>
 </div>
