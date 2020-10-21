@@ -6,7 +6,7 @@
 <% end %>
 <%# Button groups %>
 <div class="ml-0 ml-md-auto mt-2 mt-md-0 btn-group" role="group" aria-label="Basic example">
-  <%= link_to 'Populaires', posts_path, class: 'btn btn-default active' %>
-  <%= link_to 'Matières', subjects_path, class: 'btn btn-default' %>
-  <%= link_to 'Années', levels_path, class: 'btn btn-default' %>
+  <%= link_to 'Populaires', posts_path, class: "btn btn-default #{'active' if current_page?(posts_path)}" %>
+  <%= link_to 'Matières', subjects_path, class: "btn btn-default #{'active' if current_page?(subjects_path)}" %>
+  <%= link_to 'Années', levels_path, class: "btn btn-default #{'active' if current_page?(levels_path)}" %>
 </div>
