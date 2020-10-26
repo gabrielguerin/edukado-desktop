@@ -36,6 +36,6 @@ class AdminNavigation
   ].freeze
 
   def self.routes(admin)
-    admin.resources.reject { |i| i.resource.in?(HIDDEN_PAGES) }
+    admin.resources.reject { |i| i.in?(HIDDEN_PAGES) }
   end
 end
