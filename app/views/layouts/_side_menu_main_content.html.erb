@@ -1,8 +1,10 @@
 <% resources = AdminNavigation.routes(Administrate::Namespace.new(namespace)) %>
 <% resources.each do |resource| %>
-  <%= content_tag(:li, link_to(
-      display_resource_name(resource),
-      [namespace, resource_index_route_key(resource)],
-      class: "nav-link"
-    ), class: "nav-item #{nav_link_state(resource)}") %>
+  <li class="nav-item">
+    <%= link_to(
+        display_resource_name(resource),
+        [namespace, resource_index_route_key(resource)],
+        class: "nav-link #{nav_link_state(resource)}"
+      ) if valid_action? :index, resource  %>
+  </li>
 <% end %>
