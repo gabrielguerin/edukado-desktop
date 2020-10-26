@@ -2,7 +2,7 @@
   <section class="bg-light px-3 pt-5 pb-3 mb-3 d-flex flex-column">
     <div class="container-fluid">
       <div class="row equal-cols">
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 col-sm-12 pb-4">
           <% if current_user.sign_in_count === 1 %>
             <h4 class="leading-normal m-0 p-0">Bienvenue sur Edukado, <%= current_user.first_name %>.</h4>
             <p class="leading-normal small">La plateforme qui décloisonne le savoir produit quotidiennement par les étudiants.</p>
@@ -10,7 +10,7 @@
             <h4 class="leading-normal m-0 p-0">Bon retour parmi nous, <%= current_user.first_name %>.</h4>
             <p class="leading-normal small">Today is going to be a great day!</p>
           <% end %>
-          <ul class="m-0 p-0 mb-5 small">
+          <ul class="m-0 pl-3 mb-5 small">
             <li>You have 5 new followers.</li>
             <li>132 people have liked your posts.</li>
             <li>Network maintenance is happening at 5pm today.</li>
@@ -27,10 +27,10 @@
             </a>
           </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 col-sm-12 pb-4">
           <%# Search form %>
           <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
-          <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex d-flex flex-md-row flex-column justify-content-between">
             <%# Badges %>
             <% %w[gold silver bronze].each do |difficulty| %>
               <div class="card mx-2">
@@ -42,13 +42,13 @@
             <% end %>
           </div>
           <%# Publish & Invite buttons %>
-          <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-md-row flex-column justify-content-between">
             <%= link_to 'Contribuer à la communauté', new_post_path, class: 'btn btn-lg btn-primary w-100 my-2 mx-2' %>
             <%= link_to 'Inviter un utilisateur', new_user_invitation_path, class: 'btn btn-lg btn-default w-100 my-2 mx-2' %>
           </div>
         </div>
         <%# Reputation %>
-        <div class="col-12 col-md-3 d-flex flex-column justify-items-between">
+        <div class="col-12 col-md-3 col-sm-12 d-flex flex-column justify-items-between">
           <div class="card card-mini card-mini-solid-icon">
             <div class="card-body">
               <div class="media">
@@ -86,18 +86,18 @@
               </div>
             </div>
           </div>
-          <%# Ranking %>
+          <%# Profile %>
           <div class="card card-mini card-mini-solid-icon">
             <div class="card-body">
-              <div class="media">
+              <div class="media d-flex align-items-center">
                 <div class="media-body text-left">
-                  <h6 class="m-0 text-muted">Votre classement</h6>
-                  <h4 class="m-0 counter">
-                  </h4>
+                  <h5 class="m-0 counter">
+                    <%= link_to 'Voir mon profil', posts_user_path(current_user), class: 'btn btn-sm btn-default' %>
+                  </h5>
                 </div>
                 <div class="d-flex align-self-center text-primary ml-3">
                   <span>
-                    <i class="display-4 ti-medall"></i>
+                    <i class="display-4 ti-user"></i>
                   </span>
                 </div>
               </div>
@@ -108,13 +108,30 @@
     </div>
   </section>
   <%# Ranking %>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
+  <div class="container-fluid">
+    <div class="row equal-cols">
+      <div class="col-12 col-md-6 col-sm-12">
+        <div class="card">
+          <%# Card header %>
+          <%= render partial: 'posts/card-header', locals: { title: 'Dernières publications' } %>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render posts %>
+              <% Post.last(10).each do |post| %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-sm-12">
       <div class="card card-tabbed">
         <div class="card-header d-flex align-items-center">
           <%# Title %>
-          <h6 class="mt-2">Classement</h6>
+          <h6 class="mt-2">Hall of fame</h6>
           <ul class="nav rounded-nav-tabs">
             <li class="nav-item">
               <a href="#today" data-toggle="tab" class="nav-link active">Cette semaine</a>
@@ -131,20 +148,20 @@
           <div class="tab-content" id="tabs">
             <div class="tab-pane active" id="today">
               <%# Daily point leaderboard %>
-              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.week.ago, limit: 100 } %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.week.ago, limit: 15 } %>
             </div>
             <div class="tab-pane" id="week">
               <%# Weekly point leaderboard %>
-              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago, limit: 100 } %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 1.month.ago, limit: 15 } %>
             </div>
             <div class="tab-pane" id="month">
               <%# Monthly point leaderboard %>
-              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 20.year.ago, limit: 100 } %>
+              <%= render partial: 'posts/point_leaderboard', locals: { since_date: 20.year.ago, limit: 15 } %>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
   </div>
+</div>
 </div>

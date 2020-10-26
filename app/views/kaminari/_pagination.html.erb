@@ -1,4 +1,4 @@
-<% if object.count >= 20 %>
+<% if model.count >= 20 %>
   <div class="card">
     <div class="card-body d-flex justify-content-center" id="paginate">
       <%= paginate object, "#{ajax}": true %>

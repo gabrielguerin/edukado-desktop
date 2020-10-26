@@ -13,12 +13,7 @@
       <%# Card %>
       <div class="card">
         <%# Card header %>
-        <div class="card-header d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Trouvez le niveau d'études qui vous correspond.</i></h6>
-        <% end %>
+        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
       </div>
       <div class="table-responsive">
         <table class="table table-hover">
@@ -33,7 +28,7 @@
     </div>
   </div>
   <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @levels, ajax: 'local' } %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @levels, ajax: 'local', model: Level } %>
 </div>
 <%# Clickable table row element %>
 <script>

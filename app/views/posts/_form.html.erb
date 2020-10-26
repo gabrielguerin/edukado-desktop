@@ -1,4 +1,4 @@
-<%= form_with model: @post, html: { multipart: true, class: "card form" }, data: {controller: 'form'} do |f| %>
+<%= form_with model: @post, html: { multipart: true, class: "card form" } do |f| %>
   <div class="card-header d-flex justify-content-center">
     <h5 class="mb-0">
       <% if current_page?(new_post_path) %>
@@ -43,7 +43,7 @@
     <% end %>
     <%# Year %>
     <%= f.form_group :year, class: "row" do |f| %>
-      <%= f.label 'Année', class: "col-sm-4 col-form-label" %>
+      <%= f.label 'Année académique', class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
         <%= f.collection_select(:year_id, Year.all, :id, :year, {}, {class: 'custom-select'}) %>
         <%= f.error_messages %>
@@ -76,7 +76,7 @@
         <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
         <div class="dropzone-msg dz-message needsclick text-gray-600">
           <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
-          <span class="dropzone-msg-desc text-sm">2 Mo maximum. Types de fichier autorisés : jpg, pdf & png.</span>
+          <span class="dropzone-msg-desc text-sm">Veillez à ne pas déposer de fichiers trop lourds.</span>
         </div>
       </div>
     <% end %>

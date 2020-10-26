@@ -322,7 +322,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable
-  administrate
+  administrate (~> 0.13.0)
   administrate-field-active_storage
   aws-sdk-s3
   better_errors
