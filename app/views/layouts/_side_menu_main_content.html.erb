@@ -1,5 +1,5 @@
-<% resources = AdminNavigation.routes(Administrate::Namespace.new(namespace)) %>
-<% resources.each do |resource| %>
+<%# resources = AdminNavigation.routes(Administrate::Namespace.new(namespace)) %>
+<% Administrate::Namespace.new(namespace).resources.each do |resource| %>
   <li class="nav-item">
     <%= link_to(
         display_resource_name(resource),
