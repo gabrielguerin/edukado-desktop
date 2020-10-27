@@ -33,11 +33,11 @@
         <%= f.error_messages %>
       </div>
     <% end %>
-    <%# Subject %>
-    <%= f.form_group :subject, class: "row" do |f| %>
+    <%# Course %>
+    <%= f.form_group :course, class: "row" do |f| %>
       <%= f.label 'Matière', class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
-        <%= f.collection_select(:subject_id, Subject.all, :id, :name, {}, {class: 'custom-select'}) %>
+        <%= f.collection_select(:course_id, Course.all, :id, :name, {}, {class: 'custom-select'}) %>
         <%= f.error_messages %>
       </div>
     <% end %>

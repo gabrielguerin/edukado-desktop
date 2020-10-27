@@ -117,6 +117,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # Courses routes
+
+  resources :courses, only: %i[index show]
+
   # Categories routes
 
   resources :categories, only: %i[index show]

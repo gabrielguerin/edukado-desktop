@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_173340) do
+ActiveRecord::Schema.define(version: 2020_10_27_175136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_173340) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.bigint "course_id", null: false
     t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
     t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
@@ -249,6 +250,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_173340) do
     t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["course_id"], name: "index_posts_on_course_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -379,6 +381,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_173340) do
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "courses"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "years"
   add_foreign_key "users", "groups"

@@ -86,9 +86,9 @@ class Post < ApplicationRecord
 
       category_id: category.id,
 
-      subject_name: subject.name,
+      course_name: course.name,
 
-      subject_id: subject.id
+      course_id: course.id
 
     }.merge(
       tag: tags.map(&:title),
