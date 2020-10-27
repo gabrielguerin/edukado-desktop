@@ -16,22 +16,21 @@ end %>
       <%# Groups %>
       <div class="card">
         <%# Card header %>
-        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
+        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez la matière que vous recherchez.' } %>
       </div>
-        <table class="table table-hover">
-          <tbody>
-            <%# Render subjects %>
-            <% @subjects.each do |subject| %>
-              <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
-            <% end %>
-          </tbody>
-        </table>
-
-      </div>
+      <table class="table table-hover">
+        <tbody>
+          <%# Render subjects %>
+          <% @subjects.each do |subject| %>
+            <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local', model: Subject } %>
+</div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local', model: Subject } %>
 </div>
 <%# Clickable table row element %>
 <script>

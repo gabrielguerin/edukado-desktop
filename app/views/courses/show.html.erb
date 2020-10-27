@@ -1,64 +1,50 @@
-<% @title = @group.name %>
+<% @title = @course.name %>
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
 <div class="container">
   <div class="row">
     <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: group_path(@group), placeholder: "Recherchez un cours dans cette université et trouvez du contenu à ce sujet." } %>
+    <%= render partial: 'search/form', locals: { search_path: course_path(@course), placeholder: "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet." } %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <%= link_to 'Universités', groups_path %>
+          <%= link_to 'Matières', courses_path %>
         </li>
         <li class="breadcrumb-item">
-          <%= link_to "#{@group.name}", group_path(@group) %>
+          <%= link_to @course.name, course_path(@course) %>
         </li>
       </ol>
-      <%# Statistics %>
-      <div class="d-flex flex-md-row flex-column justify-content-around text-md-left text-center">
-        <div class="card card-mini mx-1">
-          <div class="card-body">
-            <h6 class="m-0 pt-2 text-muted text-wrap">Nombre de documents</h6>
-            <h4 class="m-0 counter"><%= @group.posts.count %></h4>
-          </div>
-        </div>
-        <% Category.all.sample(5).each do |category| %>
-          <div class="card card-mini mx-1 text-md-left text-center">
-            <div class="card-body">
-              <h6 class="m-0 pt-2 text-muted text-wrap"><%= category.name %></h6>
-              <h4 class="m-0 counter"><%= category.posts.where(group: @group).count %></h4>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <%# List of posts %>
+      <%# Card %>
       <div class="card">
         <%# Card header %>
-        <div class="card-header flex-md-row flex-column d-flex align-items-center">
+        <div class="card-header">
+          <%# Render course's posts %>
           <% if @search.present? %>
             <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
           <% else %>
-            <h6 class="card-title"><%= @group.name %></h6>
+            <h6 class="card-title">Publications les plus populaires</h6>
           <% end %>
-          <div class="ml-0 ml-md-auto mt-2 mt-md-0 btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default active">Populaires</button>
-            <button type="button" class="btn btn-default">Matières</button>
-            <button type="button" class="btn btn-default">Années</button>
-          </div>
         </div>
-        <table class="table table-hover table-striped">
-          <tbody>
-            <%# Render posts %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'tables/tr-post', locals: { post: post } %>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+              <% if @search.present? %>
+                <% @posts.each do |post| %>
+                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
+                <% end %>
+              <% else %>
+                <% @posts.each do |post| %>
+                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
   <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @group.posts } %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @course.posts } %>
 </div>
