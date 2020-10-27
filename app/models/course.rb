@@ -1,4 +1,4 @@
-class GroupsSubject < ApplicationRecord
+class Course < ApplicationRecord
   # Associations
 
   belongs_to :group

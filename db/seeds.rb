@@ -40,7 +40,7 @@ PostsTag.delete_all
 
 Blog.delete_all
 
-GroupsSubject.delete_all
+Course.delete_all
 
 Subject.delete_all
 
