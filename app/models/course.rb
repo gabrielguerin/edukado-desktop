@@ -13,6 +13,8 @@ class Course < ApplicationRecord
 
   # Associations
 
+  has_many :posts
+
   belongs_to :group
 
   belongs_to :subject

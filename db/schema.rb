@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_155002) do
+ActiveRecord::Schema.define(version: 2020_10_27_173340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,7 +233,6 @@ ActiveRecord::Schema.define(version: 2020_10_27_155002) do
     t.string "slug"
     t.bigint "group_id"
     t.bigint "category_id", null: false
-    t.bigint "subject_id", null: false
     t.bigint "year_id", null: false
     t.integer "cached_votes_total", default: 0
     t.integer "cached_votes_score", default: 0
@@ -252,7 +251,6 @@ ActiveRecord::Schema.define(version: 2020_10_27_155002) do
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
-    t.index ["subject_id"], name: "index_posts_on_subject_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
     t.index ["year_id"], name: "index_posts_on_year_id"
   end
@@ -382,7 +380,6 @@ ActiveRecord::Schema.define(version: 2020_10_27_155002) do
   add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "groups"
-  add_foreign_key "posts", "subjects"
   add_foreign_key "posts", "years"
   add_foreign_key "users", "groups"
 end

@@ -23,9 +23,9 @@ class Post < ApplicationRecord
 
   belongs_to :category
 
-  belongs_to :subject
-
   belongs_to :year
+
+  belongs_to :course
 
   has_many :comments, dependent: :destroy
 

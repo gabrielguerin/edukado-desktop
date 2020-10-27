@@ -134,6 +134,18 @@ end
   )
 end
 
+# Create courses
+
+40.times do
+  Course.create!(
+    name: Faker::Book.title,
+
+    group: Group.all.sample,
+
+    subject: Subject.all.sample
+  )
+end
+
 # Create categories
 
 categories = [
@@ -259,7 +271,7 @@ Group.all.each do |group|
 
       category: Category.all.sample,
 
-      subject: Subject.all.sample,
+      course: Course.all.sample,
 
       year: Year.all.sample,
 
@@ -355,18 +367,6 @@ end
     blog: Blog.all.sample,
 
     tag: Tag.all.sample
-  )
-end
-
-# Link groups to subjects through courses
-
-40.times do
-  Course.create!(
-    name: Faker::Book.title,
-
-    group: Group.all.sample,
-
-    subject: Subject.all.sample
   )
 end
 

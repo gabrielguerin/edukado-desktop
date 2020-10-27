@@ -13,8 +13,6 @@ class Subject < ApplicationRecord
 
   # Associations
 
-  has_many :posts
-
   has_many :courses, dependent: :destroy
 
   has_many :groups, through: :courses
