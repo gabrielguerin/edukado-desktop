@@ -10,14 +10,14 @@ class Subject < ApplicationRecord
   extend FriendlyId
 
   friendly_id :name, use: :slugged
-  
+
   # Associations
 
   has_many :posts
 
-  has_many :groups_subjects, dependent: :destroy
+  has_many :courses, dependent: :destroy
 
-  has_many :groups, through: :groups_subjects
+  has_many :groups, through: :courses
 
   # Search data
 
@@ -27,5 +27,5 @@ class Subject < ApplicationRecord
       name: name
 
     }
-  end  
+  end
 end

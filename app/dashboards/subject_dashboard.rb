@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class SubjectDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -9,13 +11,13 @@ class SubjectDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     posts: Field::HasMany,
-    groups_subjects: Field::HasMany,
+    courses: Field::HasMany,
     groups: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    slug: Field::String,
+    slug: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -46,7 +48,7 @@ class SubjectDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  name
+    name
   ].freeze
 
   # COLLECTION_FILTERS

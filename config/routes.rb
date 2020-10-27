@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
     resources :subjects
 
-    resources :groups_subjects
+    resources :courses
 
     namespace :merit do
       resources :activity_logs
