@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_155147) do
+ActiveRecord::Schema.define(version: 2020_10_27_155002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,18 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "slug"
+    t.index ["group_id"], name: "index_courses_on_group_id"
+    t.index ["slug"], name: "index_courses_on_slug", unique: true
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
+  end
+
   create_table "faqs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -118,15 +130,6 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
-  end
-
-  create_table "groups_subjects", force: :cascade do |t|
-    t.bigint "group_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_groups_subjects_on_group_id"
-    t.index ["subject_id"], name: "index_groups_subjects_on_subject_id"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -370,8 +373,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "groups_subjects", "groups"
-  add_foreign_key "groups_subjects", "subjects"
+  add_foreign_key "courses", "groups"
+  add_foreign_key "courses", "subjects"
   add_foreign_key "levels_posts", "levels"
   add_foreign_key "levels_posts", "posts"
   add_foreign_key "notifications", "posts"
