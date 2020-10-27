@@ -30,5 +30,4 @@ class GroupPolicy < ApplicationPolicy
   def destroy?
     superadmin?
   end
-
 end
