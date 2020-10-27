@@ -358,11 +358,11 @@ end
   )
 end
 
-# Link groups to subjects
+# Link groups to subjects through courses
 
 40.times do
   Course.create!(
-    Faker::Book.title,
+    name: Faker::Book.title,
 
     group: Group.all.sample,
 
