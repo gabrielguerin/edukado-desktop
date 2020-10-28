@@ -1,40 +1,37 @@
 <% @title = "Utilisateurs" %>
-<div class="container">
-  <div class="row">
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: users_path, placeholder: "Trouvez les fiches d'un étudiant en particulier." } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(users_path) %>">
-          <%= link_to 'Utilisateurs', users_path %>
-        </li>
-      </ol>
-      <%# Card %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Trouvez les fiches d'un étudiant en particulier.</i></h6>
-        <% end %>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <tbody>
-            <%# Render users %>
-            <% @users.each do |user| %>
-              <%= render partial: 'tables/tr-user', locals: { user: user } %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<%# Search form %>
+<% @search_path = users_path %>
+<% @search_placeholder = "Trouvez les fiches d'un étudiant en particulier." %>
+<div class="col-12">
+  <%# Breadcrumb %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item <%= 'active' if current_page?(users_path) %>">
+      <%= link_to 'Utilisateurs', users_path %>
+    </li>
+  </ol>
+  <%# Card %>
+  <div class="card">
+    <%# Card header %>
+    <div class="card-header d-flex align-items-center">
+      <% if @search.present? %>
+        <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+      <% else %>
+        <h6 class="card-title">Trouvez les fiches d'un étudiant en particulier.</i></h6>
+    <% end %>
   </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @users, ajax: 'local', model: User } %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <tbody>
+        <%# Render users %>
+        <% @users.each do |user| %>
+          <%= render partial: 'tables/tr-user', locals: { user: user } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @users, ajax: 'local', model: User } %>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

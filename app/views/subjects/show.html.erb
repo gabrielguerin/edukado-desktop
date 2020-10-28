@@ -2,49 +2,52 @@
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
-<div class="container">
-  <div class="row">
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: subject_path(@subject), placeholder: "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet." } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <%= link_to 'Matières', subjects_path %>
-        </li>
-        <li class="breadcrumb-item">
-          <%= link_to @subject.name, subject_path(@subject) %>
-        </li>
-      </ol>
-      <%# Card %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header">
-          <%# Render subject's posts %>
+<%# Search form %>
+<% @search_path = subject_path(@subject) %>
+<% @search_placeholder = "Recherchez un cours dans cette matière et trouvez du contenu à ce sujet." %>
+<div class="col-12">
+  <%# Breadcrumb %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Matières', subjects_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @subject.name, subject_path(@subject) %>
+    </li>
+  </ol>
+  <%# Card %>
+  <div class="card">
+    <%# Card header %>
+    <div class="card-header">
+      <%# Render subject's courses %>
+      <% if @search.present? %>
+        <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+      <% else %>
+        <h6 class="card-title">Cours les plus populaires</h6>
+      <% end %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
           <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+            <% @courses.each do |course| %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: course.name, icon: 'book', path: course_path(course) } %>
+            <% end %>
           <% else %>
-            <h6 class="card-title">Publications les plus populaires</h6>
+            <% @courses.each do |course| %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: course.name, icon: 'book', path: course_path(course) } %>
+            <% end %>
           <% end %>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <tbody>
-              <% if @search.present? %>
-                <% @posts.each do |post| %>
-                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
-                <% end %>
-              <% else %>
-                <% @posts.each do |post| %>
-                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   </div>
   <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @subject.posts } %>
+  <%= render partial: 'kaminari/pagination', locals: { object: @courses, ajax: 'local', model: @subject.courses } %>
 </div>
+<%# Clickable table row element %>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>

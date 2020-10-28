@@ -2,41 +2,38 @@
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Categories/show.html.erb</code>.</p>
 end %>
-<div class="container">
-  <div class="row">
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: category_path(@category), placeholder: "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <%= link_to 'Catégories', categories_path %>
-        </li>
-        <li class="breadcrumb-item">
-          <%= link_to @category.name, category_path(@category) %>
-        </li>
-      </ol>
-      <%# Card %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Publications les plus populaires</h6>
+<%# Search form %>
+<% @search_path = category_path(@category) %>
+<% @search_placeholder = "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." %>
+<div class="col-12">
+  <%# Breadcrumb %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Catégories', categories_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @category.name, category_path(@category) %>
+    </li>
+  </ol>
+  <%# Card %>
+  <div class="card">
+    <%# Card header %>
+    <div class="card-header">
+      <% if @search.present? %>
+        <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+      <% else %>
+        <h6 class="card-title">Publications les plus populaires</h6>
+      <% end %>
+    </div>
+    <div class="table responsive">
+      <table class="table table-hover">
+        <tbody>
+          <%# Render posts %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'tables/tr-post', locals: { post: post } %>
           <% end %>
-        </div>
-        <div class="table responsive">
-          <table class="table table-hover">
-            <tbody>
-              <%# Render posts %>
-              <% @posts.each do |post| %>
-                <%= render partial: 'tables/tr-post', locals: { post: post } %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   </div>
   <%# Pagination %>

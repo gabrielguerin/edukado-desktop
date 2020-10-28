@@ -6,56 +6,55 @@
 <%# content_for :description do
   <p>Edit this template in <code>app/views/Groups/show.html.erb</code>.</p>
 end %>
-<div class="container">
-  <div class='row'>
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Vous n'avez pas trouver ce que vous souhaitez ? Faites une nouvelle recherche !" } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <%= link_to 'Utilisateurs', users_path %>
-        </li>
-        <li class="breadcrumb-item">
-          <%= link_to "#{@user.full_name}", user_path(@user) %>
-        </li>
-      </ol>
-    </div>
-    <div class="row">
-      <div class="col-lg-9 col-md-12 col-sm-12">
-        <%# List of posts %>
-        <div class="card">
-          <%# Card header %>
-          <div class="card-header d-flex align-items-center">
-            <% if @search.present? %>
-              <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-            <% else %>
-              <h6 class="card-title">Publications de <%= @user.full_name %></h6>
+<%# Search form %>
+<% @search_path = posts_path %>
+<% @search_placeholder = "Vous n'avez pas trouver ce que vous souhaitez ? Faites une nouvelle recherche !" %>
+<div class="col-12">
+  <%# Breadcrumb %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Utilisateurs', users_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to "#{@user.full_name}", user_path(@user) %>
+    </li>
+  </ol>
+</div>
+<div class="row">
+  <div class="col-lg-9 col-md-12 col-sm-12">
+    <%# List of posts %>
+    <div class="card">
+      <%# Card header %>
+      <div class="card-header d-flex align-items-center">
+        <% if @search.present? %>
+          <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+        <% else %>
+          <h6 class="card-title">Publications de <%= @user.full_name %></h6>
+        <% end %>
+      </div>
+      <% if @user.posts.count > 0 %>
+        <table class="table table-hover table-striped">
+          <tbody>
+            <%# Render posts %>
+            <% @user.posts.each do |post| %>
+              <%= render partial: 'tables/tr-post', locals: { post: post } %>
             <% end %>
-          </div>
-          <% if @user.posts.count > 0 %>
-            <table class="table table-hover table-striped">
-              <tbody>
-                <%# Render posts %>
-                <% @user.posts.each do |post| %>
-                  <%= render partial: 'tables/tr-post', locals: { post: post } %>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            <div class="card-body">
-              <p><%= @user.first_name %> n'a pas encore publié.</p>
-            </div>
-          <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="card-body">
+          <p><%= @user.first_name %> n'a pas encore publié.</p>
         </div>
-      </div>
-      <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
-        <%# User side panel %>
-        <%= render partial: 'side_panel' %>
-        <%# Badge side panel %>
-        <%= render partial: 'badges/side_panel-user' %>
-      </div>
+      <% end %>
     </div>
-    <%# Pagination %>
-    <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @user.posts } %>
   </div>
+  <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+    <%# User side panel %>
+    <%= render partial: 'side_panel' %>
+    <%# Badge side panel %>
+    <%= render partial: 'badges/side_panel-user' %>
+  </div>
+</div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @user.posts } %>
+</div>

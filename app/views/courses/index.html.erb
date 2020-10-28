@@ -5,7 +5,8 @@ end %>
 <div class="container">
   <div class="row">
     <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: courses_path, placeholder: "Recherchez un cours et trouvez du contenu pour celle-ci." } %>
+    <% @search_path = courses_path %>
+    <% @search_placeholder = "Recherchez un cours et trouvez du contenu pour celle-ci." %>
     <div class="col-12">
       <%# Breadcrumb %>
       <ol class="breadcrumb">
