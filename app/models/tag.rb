@@ -35,6 +35,16 @@ class Tag < ApplicationRecord
 
   }
 
+  # Search data
+
+  def search_data
+    {
+
+      title: title
+
+    }
+  end
+
   # Downcase every tag
   before_save :downcase_fields
 

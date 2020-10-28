@@ -40,7 +40,7 @@ PostsTag.delete_all
 
 Blog.delete_all
 
-GroupsSubject.delete_all
+Course.delete_all
 
 Subject.delete_all
 
@@ -131,6 +131,18 @@ end
 50.times do
   Tag.create!(
     title: Faker::Nation.language
+  )
+end
+
+# Create courses
+
+40.times do
+  Course.create!(
+    name: Faker::Book.title,
+
+    group: Group.all.sample,
+
+    subject: Subject.all.sample
   )
 end
 
@@ -259,7 +271,7 @@ Group.all.each do |group|
 
       category: Category.all.sample,
 
-      subject: Subject.all.sample,
+      course: Course.all.sample,
 
       year: Year.all.sample,
 
@@ -355,16 +367,6 @@ end
     blog: Blog.all.sample,
 
     tag: Tag.all.sample
-  )
-end
-
-# Link groups to subjects
-
-40.times do
-  GroupsSubject.create!(
-    group: Group.all.sample,
-
-    subject: Subject.all.sample
   )
 end
 

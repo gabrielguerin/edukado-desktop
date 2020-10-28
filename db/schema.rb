@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_155147) do
+ActiveRecord::Schema.define(version: 2020_10_27_175136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,18 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "slug"
+    t.index ["group_id"], name: "index_courses_on_group_id"
+    t.index ["slug"], name: "index_courses_on_slug", unique: true
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
+  end
+
   create_table "faqs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -118,15 +130,6 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.index ["slug"], name: "index_groups_on_slug", unique: true
-  end
-
-  create_table "groups_subjects", force: :cascade do |t|
-    t.bigint "group_id", null: false
-    t.bigint "subject_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_groups_subjects_on_group_id"
-    t.index ["subject_id"], name: "index_groups_subjects_on_subject_id"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -230,7 +233,6 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.string "slug"
     t.bigint "group_id"
     t.bigint "category_id", null: false
-    t.bigint "subject_id", null: false
     t.bigint "year_id", null: false
     t.integer "cached_votes_total", default: 0
     t.integer "cached_votes_score", default: 0
@@ -239,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.bigint "course_id", null: false
     t.index ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
     t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
@@ -247,9 +250,9 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
     t.index ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score"
     t.index ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["course_id"], name: "index_posts_on_course_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
-    t.index ["subject_id"], name: "index_posts_on_subject_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
     t.index ["year_id"], name: "index_posts_on_year_id"
   end
@@ -370,16 +373,16 @@ ActiveRecord::Schema.define(version: 2020_10_09_155147) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "groups_subjects", "groups"
-  add_foreign_key "groups_subjects", "subjects"
+  add_foreign_key "courses", "groups"
+  add_foreign_key "courses", "subjects"
   add_foreign_key "levels_posts", "levels"
   add_foreign_key "levels_posts", "posts"
   add_foreign_key "notifications", "posts"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"
   add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "courses"
   add_foreign_key "posts", "groups"
-  add_foreign_key "posts", "subjects"
   add_foreign_key "posts", "years"
   add_foreign_key "users", "groups"
 end

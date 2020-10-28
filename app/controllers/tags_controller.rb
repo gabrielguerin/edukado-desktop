@@ -7,7 +7,9 @@ class TagsController < ApplicationController
 
   # Find tag
 
-  before_action :set_tag, only: [:show]
+  before_action :set_tag, only: %i[show]
+
+  before_action :set_search, only: %i[index show]
 
   # GET /tags
 

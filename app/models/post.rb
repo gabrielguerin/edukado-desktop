@@ -23,9 +23,9 @@ class Post < ApplicationRecord
 
   belongs_to :category
 
-  belongs_to :subject
-
   belongs_to :year
+
+  belongs_to :course
 
   has_many :comments, dependent: :destroy
 
@@ -86,9 +86,9 @@ class Post < ApplicationRecord
 
       category_id: category.id,
 
-      subject_name: subject.name,
+      course_name: course.name,
 
-      subject_id: subject.id
+      course_id: course.id
 
     }.merge(
       tag: tags.map(&:title),

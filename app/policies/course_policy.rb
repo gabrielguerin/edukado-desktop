@@ -1,11 +1,19 @@
-class GroupPolicy < ApplicationPolicy
+# frozen_string_literal: true
+
+class CoursePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
     end
+
+    def resolve_admin
+      @user.superadmin_role? ? scope.all : scope.joins(:groups).where('groups.id = ?', @user.group.id)
+    end
   end
 
-  def index?; end
+  def index?
+    true
+  end
 
   def show?
     true
