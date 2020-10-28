@@ -32,11 +32,11 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
 
   def show
-    @posts = if @search
+    @courses = if @search
 
                # Render search results
 
-               Post.search(
+               Course.search(
                  params[:search],
                  where: { subject_id: @subject.id },
 
@@ -49,7 +49,7 @@ class SubjectsController < ApplicationController
 
                # Render subject
 
-               @subject.posts.page(params[:page])
+               @subject.courses.page(params[:page])
 
              end
   end

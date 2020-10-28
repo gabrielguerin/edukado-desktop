@@ -2,37 +2,31 @@
 <%# content_for :description do
   <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
 end %>
-<div class="container">
-  <div class="row">
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: subjects_path, placeholder: "Rechercher une matière et trouver du contenu pour celle-ci." } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
-          <%= link_to 'Matières', subjects_path %>
-        </li>
-      </ol>
-      <%# Groups %>
-      <div class="card">
-        <%# Card header %>
-        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
-      </div>
-        <table class="table table-hover">
-          <tbody>
-            <%# Render subjects %>
-            <% @subjects.each do |subject| %>
-              <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
-            <% end %>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
+<%# Search form %>
+<% @search_path = subjects_path %>
+<% @search_placeholder = "Rechercher une matière et trouver du contenu pour celle-ci." %>
+  <%# Breadcrumb %>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+      <%= link_to 'Matières', subjects_path %>
+    </li>
+  </ol>
+  <%# Groups %>
+  <div class="card">
+    <%# Card header %>
+    <%= render partial: 'posts/card-header', locals: { title: 'Trouvez la matière que vous recherchez.' } %>
   </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local', model: Subject } %>
+  <table class="table table-hover">
+    <tbody>
+      <%# Render subjects %>
+      <% @subjects.each do |subject| %>
+        <%= render partial: 'tables/tr-object', locals: { attribute: subject.name, icon: 'book', path: subject_path(subject) } %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local', model: Subject } %>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

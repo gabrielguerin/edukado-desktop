@@ -1,0 +1,41 @@
+<% @title = "Quel cours recherchez-vous ?" %>
+<%# content_for :description do
+  <p>Rechercher une université et trouver du contenu pour celle-ci.</p>
+end %>
+<div class="container">
+  <div class="row">
+    <%# Search form %>
+    <% @search_path = courses_path %>
+    <% @search_placeholder = "Recherchez un cours et trouvez du contenu pour celle-ci." %>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+          <%= link_to 'Cours', courses_path %>
+        </li>
+      </ol>
+      <%# Groups %>
+      <div class="card">
+        <%# Card header %>
+        <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le cours que vous recherchez.' } %>
+      </div>
+      <table class="table table-hover">
+        <tbody>
+          <%# Render courses %>
+          <% @courses.each do |course| %>
+            <%= render partial: 'tables/tr-object', locals: { attribute: course.name, icon: 'book', path: course_path(course) } %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @courses, ajax: 'local', model: Subject } %>
+</div>
+<%# Clickable table row element %>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>

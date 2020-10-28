@@ -12,7 +12,7 @@ class GroupDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     users: Field::HasMany,
     posts: Field::HasMany,
-    groups_subjects: Field::HasMany,
+    courses: Field::HasMany,
     subjects: Field::HasMany,
     id: Field::Number,
     name: Field::String,

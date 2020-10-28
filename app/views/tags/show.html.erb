@@ -1,40 +1,35 @@
 <% @title = "##{@tag.title}".downcase %>
-<div class="container">
-  <div class="row">
-    <%# Search form %>
-    <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: "Recherchez un fichier et trouvez du contenu à ce sujet." } %>
-    <div class="col-12">
-      <%# Breadcrumb %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
-          <%= link_to 'Tags', tags_path %>
-        </li>
-        <li class="breadcrumb-item <%= 'active' if current_page?(tag_path(@tag)) %>">
-          <%= link_to "##{@tag.title.downcase}", tag_path(@tag) %>
-        </li>
-      </ol>
-      <%# Card %>
-      <div class="card">
-        <%# Card header %>
-        <div class="card-header d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title">Trouver votre fichier</i></h6>
-        <% end %>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <tbody>
-            <%# Render posts %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'tables/tr-post', locals: { post: post } %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @tag.posts } %>
+<%# Search form %>
+<% @search_path = posts_path %>
+<% @search_placeholder = "Recherchez un fichier et trouvez du contenu à ce sujet." %>
+<%# Breadcrumb %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+    <%= link_to 'Tags', tags_path %>
+  </li>
+  <li class="breadcrumb-item <%= 'active' if current_page?(tag_path(@tag)) %>">
+    <%= link_to "##{@tag.title.downcase}", tag_path(@tag) %>
+  </li>
+</ol>
+<%# Card %>
+<div class="card">
+  <%# Card header %>
+  <div class="card-header d-flex align-items-center">
+    <% if @search.present? %>
+      <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+    <% else %>
+      <h6 class="card-title">Trouver votre fichier</i></h6>
+  <% end %>
 </div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <tbody>
+      <%# Render posts %>
+      <% @posts.each do |post| %>
+        <%= render partial: 'tables/tr-post', locals: { post: post } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @tag.posts } %>

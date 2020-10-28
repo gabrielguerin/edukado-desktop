@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
     resources :subjects
 
-    resources :groups_subjects
+    resources :courses
 
     namespace :merit do
       resources :activity_logs
@@ -116,6 +116,10 @@ Rails.application.routes.draw do
       get :dashboard
     end
   end
+
+  # Courses routes
+
+  resources :courses, only: %i[index show]
 
   # Categories routes
 
