@@ -5,7 +5,6 @@ end %>
 <%# Search form %>
 <% @search_path = categories_path %>
 <% @search_placeholder = "Rechercher une catégorie." %>
-<div class="col-12">
   <%# Breadcrumb %>
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -34,7 +33,6 @@ end %>
   </div>
   <%# Pagination %>
   <%= render partial: 'kaminari/pagination', locals: { object: @categories, ajax: 'local', model: Category } %>
-</div>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

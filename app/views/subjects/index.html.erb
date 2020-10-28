@@ -5,7 +5,6 @@ end %>
 <%# Search form %>
 <% @search_path = subjects_path %>
 <% @search_placeholder = "Rechercher une matière et trouver du contenu pour celle-ci." %>
-<div class="col-12">
   <%# Breadcrumb %>
   <ol class="breadcrumb">
     <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
@@ -28,7 +27,6 @@ end %>
 </div>
 <%# Pagination %>
 <%= render partial: 'kaminari/pagination', locals: { object: @subjects, ajax: 'local', model: Subject } %>
-</div>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

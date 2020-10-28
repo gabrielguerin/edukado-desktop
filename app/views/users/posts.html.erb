@@ -9,17 +9,15 @@ end %>
 <%# Search form %>
 <% @search_path = posts_path %>
 <% @search_placeholder = "Vous n'avez pas trouver ce que vous souhaitez ? Faites une nouvelle recherche !" %>
-<div class="col-12">
-  <%# Breadcrumb %>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to 'Utilisateurs', users_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to "#{@user.full_name}", user_path(@user) %>
-    </li>
-  </ol>
-</div>
+<%# Breadcrumb %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <%= link_to 'Utilisateurs', users_path %>
+  </li>
+  <li class="breadcrumb-item">
+    <%= link_to "#{@user.full_name}", user_path(@user) %>
+  </li>
+</ol>
 <div class="row">
   <div class="col-lg-9 col-md-12 col-sm-12">
     <%# List of posts %>

@@ -2,28 +2,26 @@
 <%# Search form %>
 <% @search_path = levels_path %>
 <% @search_placeholder = "Recherchez le niveau d'études qui vous correspond." %>
-<div class="col-12">
-  <%# Breadcrumb %>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item <%= 'active' if current_page?(levels_path) %>">
-      <%= link_to 'Années', levels_path %>
-    </li>
-  </ol>
-  <%# Card %>
-  <div class="card">
-    <%# Card header %>
-    <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <tbody>
-        <%# Render tags %>
-        <% Level.order(level: :asc).each do |level| %>
-          <%= render partial: 'tables/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<%# Breadcrumb %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item <%= 'active' if current_page?(levels_path) %>">
+    <%= link_to 'Années', levels_path %>
+  </li>
+</ol>
+<%# Card %>
+<div class="card">
+  <%# Card header %>
+  <%= render partial: 'posts/card-header', locals: { title: 'Trouvez le niveau d\'études qui vous correspond.' } %>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <tbody>
+      <%# Render tags %>
+      <% Level.order(level: :asc).each do |level| %>
+        <%= render partial: 'tables/tr-object', locals: { attribute: "#{level.level}A", icon: 'medall', path: level_path(level) } %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <%# Pagination %>
 <%= render partial: 'kaminari/pagination', locals: { object: @levels, ajax: 'local', model: Level } %>

@@ -5,39 +5,37 @@ end %>
 <%# Search form %>
 <% @search_path = groups_path %>
 <% @search_placeholder = "Rechercher une université et trouver du contenu pour celle-ci." %>
-<div class="col-12">
-  <%# Breadcrumb %>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
-      <%= link_to 'Universités', groups_path %>
-    </li>
-  </ol>
-  <%# Groups %>
-  <div class="card">
-    <div class="card-header">
-      <% if @search.present? %>
-        <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-      <% else %>
-        <h6 class="card-title">Toutes les universités</h6>
-      <% end %>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <tbody>
-          <%# Render groups %>
-          <% @groups.each do |group| %>
-            <%= render partial: 'tables/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+<%# Breadcrumb %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item <%= 'active' if current_page?(groups_path) %>">
+    <%= link_to 'Universités', groups_path %>
+  </li>
+</ol>
+<%# Groups %>
+<div class="card">
+  <div class="card-header">
+    <% if @search.present? %>
+      <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+    <% else %>
+      <h6 class="card-title">Toutes les universités</h6>
+    <% end %>
   </div>
-  <%# Pagination %>
-  <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local', model: Group } %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <tbody>
+        <%# Render groups %>
+        <% @groups.each do |group| %>
+          <%= render partial: 'tables/tr-object', locals: { attribute: group.name, icon: 'book', path: group_path(group) } %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <%# Clickable table row element %>
-  <script>
-    $("tr[data-link]").click(function() {
-      window.location = $(this).data("link")
-    })
-  </script>
+</div>
+<%# Pagination %>
+<%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local', model: Group } %>
+<%# Clickable table row element %>
+<script>
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+</script>
