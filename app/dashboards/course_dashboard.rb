@@ -50,7 +50,7 @@ class CourseDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
 
   # an array of attributes that will be displayed on the model's show page.
-  course
+
   SHOW_PAGE_ATTRIBUTES = %i[
 
     group
