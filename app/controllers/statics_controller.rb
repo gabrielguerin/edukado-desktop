@@ -5,9 +5,9 @@ class StaticsController < ApplicationController
 
   layout 'statics'
 
-  # Check if user is signed in
+  # # Check if user is signed in
 
-  before_action :check_signed_in
+  # before_action :check_signed_in
 
   # GET /:page
 
@@ -35,9 +35,9 @@ class StaticsController < ApplicationController
     )
   end
 
-  # Redirect to posts#index if user is already signed in
+  # # Redirect to posts#index if user is already signed in
 
-  def check_signed_in
-    redirect_to dashboard_user_path(current_user) if signed_in?
-  end
+  # def check_signed_in
+  #   redirect_to dashboard_user_path(current_user) if signed_in?
+  # end
 end
