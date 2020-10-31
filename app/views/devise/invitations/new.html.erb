@@ -1,8 +1,8 @@
 <% @title = "Agrandissez la communauté" %>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row d-flex align-items-center">
     <div class="col-12 col-md-6 mr-auto ml-auto">
-      <div class="card">
+      <div class="card mb-0">
         <div class="card-body">
           <div class="container">
             <%= form_for resource, as: resource_name, url: invitation_path(resource_name),
@@ -21,6 +21,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-12 col-md-6 mr-auto ml-auto">
+      <%= image_tag image_path('devise/invitation.png'), width: 800 %>
     </div>
   </div>
 </div>
