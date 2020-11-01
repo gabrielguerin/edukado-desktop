@@ -5,34 +5,40 @@ end %>
 <%# Search form %>
 <% @search_path = category_path(@category) %>
 <% @search_placeholder = "Recherchez un fichier de cette catégorie et trouvez du contenu à ce sujet." %>
-<%# Breadcrumb %>
-<ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <%= link_to 'Catégories', categories_path %>
-  </li>
-  <li class="breadcrumb-item">
-    <%= link_to @category.name, category_path(@category) %>
-  </li>
-</ol>
-<%# Card %>
-<div class="card">
-  <%# Card header %>
-  <div class="card-header">
-    <% if @search.present? %>
-      <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-    <% else %>
-      <h6 class="card-title">Publications les plus populaires</h6>
-    <% end %>
-  </div>
-  <div class="table responsive">
-    <table class="table table-hover">
-      <tbody>
-        <%# Render posts %>
-        <% @posts.each do |post| %>
-          <%= render partial: 'tables/tr-post', locals: { post: post } %>
-        <% end %>
-      </tbody>
-    </table>
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Catégories', categories_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @category.name, category_path(@category) %>
+        </li>
+      </ol>
+      <%# Card %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Publications les plus populaires</h6>
+          <% end %>
+        </div>
+        <div class="table responsive">
+          <table class="table table-hover">
+            <tbody>
+              <%# Render posts %>
+              <% @posts.each do |post| %>
+                <%= render partial: 'tables/tr-post', locals: { post: post } %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <%# Pagination %>

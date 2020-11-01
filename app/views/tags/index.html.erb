@@ -2,35 +2,41 @@
 <%# Search form %>
 <% @search_path = tags_path %>
 <% @search_placeholder = "Recherchez le tag qui vous intéresse." %>
-<%# Breadcrumb %>
-<ol class="breadcrumb">
-  <li class="breadcrumb-item <%= 'active' if current_page?(tags_path) %>">
-    <%= link_to 'Tags', tags_path %>
-  </li>
-</ol>
-<%# Card %>
-<div class="card">
-  <%# Card header %>
-  <div class="card-header d-flex align-items-center">
-    <% if @search.present? %>
-      <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-    <% else %>
-      <h6 class="card-title">Trouvez les tags qui vous intéressent</i></h6>
-  <% end %>
-</div>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <tbody>
-      <%# Render tags %>
-      <% @tags.each do |tag| %>
-        <%= render partial: 'tables/tr-object', locals: { attribute: tag.title, icon: 'tag', path: tag_path(tag) } %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item <%= 'active' if current_page?(tags_path) %>">
+          <%= link_to 'Tags', tags_path %>
+        </li>
+      </ol>
+      <%# Card %>
+      <div class="card">
+        <%# Card header %>
+        <div class="card-header d-flex align-items-center">
+          <% if @search.present? %>
+            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
+          <% else %>
+            <h6 class="card-title">Trouvez les tags qui vous intéressent</i></h6>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <%# Render tags %>
+            <% @tags.each do |tag| %>
+              <%= render partial: 'tables/tr-object', locals: { attribute: tag.title, icon: 'tag', path: tag_path(tag) } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 <%# Pagination %>
 <%= render partial: 'kaminari/pagination', locals: { object: @tags, ajax: 'local', model: Tag } %>
+</div>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

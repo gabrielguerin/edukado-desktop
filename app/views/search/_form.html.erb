@@ -1,8 +1,9 @@
-    <div class="card">
-      <%= form_tag(search_path, method: 'get', class: 'input-group input-group-lg', role: 'search') do %>
-        <%# Search field %>
-        <%= text_field_tag :search, nil, placeholder: "#{placeholder}", class: "form-control border-0", name: "search", autocomplete: :off%>
-        <%# Submit button %>
-        <%= submit_tag '', style: "display: none;" %>
-      <% end %>
-    </div>
+<div class="card">
+  <%= form_tag(search_path, method: 'get', class: 'input-group input-group-lg d-flex align-items-center', role: 'search') do %>
+    <%# Search field %>
+    <%= fa_icon_tag("search", { class: "text-primary ml-4" }) %>
+    <%= text_field_tag :search, nil, placeholder: "#{placeholder}", class: "form-control border-0", name: "search", autocomplete: :off%>
+    <%# Submit button %>
+    <%= submit_tag '', style: "display: none;" %>
+  <% end %>
+</div>
