@@ -1,1 +1,142 @@
-
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="pt-5 text-center header-separator">À propos de nous</h2>
+    </div>
+  </div>
+  <div class="container header-caption pb-5">
+    <div class="row d-flex align-items-center">
+      <div class="col-12 col-md-6 px-5">
+        <h2 class="font-weight-bold">"Le savoir est la seule richesse que l'on puisse entièrement dépenser sans en rien la diminuer."</h2>
+        <h5 class="">A. Hampaté Bà</h5>
+      </div>
+      <div class="col-12 col-md-6">
+        <%= image_tag image_path('statics/about.png'), style: "height: 600;" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h4 class="pt-5 text-center header-separator">Qu'est-ce qu'Edukado ?</h4>
+    </div>
+  </div>
+  <div class="row equal-cols d-flex justify-content-between">
+    <div class="col-12 col-md-3 d-flex">
+      <div class="card bg-primary text-white flex-fill">
+        <div class="card-body pt-4 text-center">
+          <%= fa_icon_tag("retweet", { class: "display-1" }) %>
+          <p class="text-white mb-0">Un espace pour partager le contenu produit par les étudiants</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 d-flex">
+      <div class="card bg-primary text-white flex-fill">
+        <div class="card-body pt-4 text-center">
+          <%= fa_icon_tag("globe", { class: "display-1" }) %>
+          <p class="text-white text-wrap mb-0">Une plateforme communautaire accessible à tous !</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 d-flex">
+      <div class="card bg-primary text-white flex-fill">
+        <div class="card-body pt-4 text-center">
+          <%= fa_icon_tag("birthday-cake", { class: "display-1" }) %>
+          <p class="text-white mb-0">Gratuit et sans publicité.
+            Pour toujours.
+            <br>
+            Point barre.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 d-flex">
+      <div class="card bg-primary text-white flex-fill">
+        <div class="card-body pt-4 text-center">
+          <%= fa_icon_tag("university", { class: "display-1" }) %>
+          <p class="text-white mb-0">Des documents vérifiés pour un apprentissage en toute sérénité.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-8 ml-md-auto mr-md-auto">
+      <div class="card well my-5">
+      <div class="card-body p-5">
+          <h3 class="text-center">Notre philosophie</h3>
+          <p class="text-justify mb-0">
+            Chaque jour, des millions d’étudiants francophones produisent du contenu éducatif : prises de notes, fiches de révisions, travaux d’invention, de réflexion … Un vraie mine d'or !
+          </p>
+          <p class="text-justify">
+            Tant d’heures de travail, de sueurs et de larmes… Pour rien, ou presque…
+          </p>
+          <p class="text-justify">
+            En effet, ce contenu sera généralement ré-utilisé une à deux fois à l’occasion d’examens pour finalement prendre la poussière dans un carton ou tomber dans l’oubli sur un disque dur.
+          </p>
+          <p class="text-justify">
+            C'est en partant de ce constat simple que nous est venue l'idée de créer la plateforme Edukado.co, afin de faciliter à notre échelle l'accès à cette ressource intellectuelle.
+          </p>
+          <p class="text-justify">
+            Considérant le savoir comme un bien collectif, en cela qu’il est une source inépuisable de valeur tant qu’il se diffuse. Nous pensons que ces contenus ne peuvent plus disparaitre dans la nature mais au contraire être diffusés au plus grand nombre. 
+          </p>
+          <p class="text-justify">
+            Nous voulons mettre à bas les barrières au partage des connaissances en proposant un espace collaboratif libre, gratuit et performant.
+          </p>
+          <p class="text-justify">
+            C’est pourquoi Edukado.co propose, sous seule condition d’une participation active, un accès privilégié à des contenus éducatifs universitaires de qualité.
+          </p>
+          <p class="text-justify">
+            Alors dès maintenant, nous t’invitons à ressortir tes fiches de révisions de l’année dernières, tes prises de note ou ta dernière dissertation, et à la partager avec la communauté pour faire vivre cette ressource !
+          </p>
+          <div class="alert text-center">
+            <strong>Décloisonnons ensemble le savoir !</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center d-flex justify-content-center">
+    <div class="col-12 col-md-4">
+      <%= link_to 'Contribuer', new_user_session_path, class: "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to 'Nous contacter', 'mailto:contact@edukado.co', class: "btn btn-info btn-block" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-8 ml-md-auto mr-md-auto">
+      <div class="card well my-5">
+        <div class="card-body p-5">
+          <h3 class="text-center">Notre équipe</h3>
+          <p class="text-justify">
+            Une dizaine de personnes participent de près ou de loin au développement d'Edukado.co et font vivre cette aventure depuis près d'un an.
+          </p>
+          <h4>Les fondateurs :</h4>
+          <p class="text-justify">
+            Hugo, 24 ans, nordiste diplômé de Sciences Po Strasbourg et exilé en région parisienne. Notre grand (1m97 !) CEO est responsable du produit, des questions administratives, juridiques ainsi que des partenariats.
+            Gabriel, 24 ans, diplômé de l’ESSEC, en étude à l’Université de Lisbonne et globe-trotter chevronné. Notre infatigable CTO est en charge du développement technique et de la maintenance de la plateforme.
+          </p>
+          <h4>L'équipe de modération :</h4>
+          <p class="text-justify">
+            Ce sont les petites mains qui assurent au quotidien le fonctionnement optimal de la plateforme. 
+            Étudiant(e)s, professeur(e)s ou simples passionné(e)s qui donnent de leur temps et de leur énergie en vérifiant notamment les contenus partagés sur la plateforme.
+          </p>
+          <h4>Toi ?</h4>
+          <p class="text-justify">
+            Nous recherchons activement de jeunes talents qui souhaiteraient nous rejoindre ! N’hésite pas à nous contacter si tu cherches un stage ou tout simplement un engagement pour occuper ton temps libre !
+          </p>
+          <p class="text-justify">
+            Tant d’heures de travail, de sueurs et de larmes… Pour rien, ou presque…
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center d-flex justify-content-center mb-5">
+    <div class="col-12 col-md-4">
+      <%= link_to 'Contribuer', new_user_session_path, class: "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to 'Nous contacter', 'mailto:contact@edukado.co', class: "btn btn-info btn-block" %>
+    </div>
+  </div>
+</div>

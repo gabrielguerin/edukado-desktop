@@ -2,7 +2,9 @@
 <%# Search form %>
 <% @search_path = users_path %>
 <% @search_placeholder = "Trouvez les fiches d'un étudiant en particulier." %>
-<div>
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
   <%# Breadcrumb %>
   <ol class="breadcrumb">
     <li class="breadcrumb-item <%= 'active' if current_page?(users_path) %>">
@@ -28,10 +30,13 @@
         <% end %>
       </tbody>
     </table>
-  </div>
+  </div> 
+</div>
+</div>
 </div>
 <%# Pagination %>
 <%= render partial: 'kaminari/pagination', locals: { object: @users, ajax: 'local', model: User } %>
+</div>
 <%# Clickable table row element %>
 <script>
   $("tr[data-link]").click(function() {

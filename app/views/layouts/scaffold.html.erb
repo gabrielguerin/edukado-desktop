@@ -4,7 +4,7 @@
       <div class="row align-items-center">
         <div class="col-12">
           <%# Title %>
-          <h2 class='m-0 tracking-tighter'><%= @title %></h2>
+          <h2 class='m-0 tracking-tighter header-separator'><%= @title %></h2>
           <%= yield :description %>
         </div>
         <div class="col-12 col-md-6">
@@ -19,13 +19,15 @@
       <div class="col-12">
         <%= render "layouts/flashes" %>
         <%# Search form %>
-        <% if defined?(@search_path && @search_placeholder) %>
-          <%= render partial: 'search/form', locals: { search_path: "#{@search_path}", placeholder: "#{@search_placeholder}" } %>
+        <% if defined?(@search_path) %>
+          <%= render partial: 'search/form',
+          locals: {
+            search_path: "#{@search_path}",
+            placeholder: "#{@search_placeholder}"
+          } %>
         <% end %>
-        <div class="col-12">
-          <%= yield %>
-        </div>
       </div>
     </div>
   </div>
+  <%= yield %>
 <% end %>

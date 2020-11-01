@@ -1,0 +1,44 @@
+<footer class="bg-dark">
+  <div class="container">
+    <div class="row bg-dark pt-5">
+      <div class="col-12 col-md-2 text-center">
+        <div class="d-flex flex-column flex-wrap align-items-start justify-content-center">
+          <%= image_tag image_path('logos/edukado_white.png'), width: 250 %>
+          <p class="text-white">Décloisonnons le savoir !</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-10 ml-md-auto text-white text-center">
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <h6>LA PLATEFORME</h6>
+            <ul class="list-unstyled">
+              <li><%= link_to 'À propos', '/about', class: 'text-hover-light' %></li>
+              <li><%= link_to 'Page d\'accueil', root_path, class: 'text-hover-light' %></li>
+              <li><%= link_to 'Nous contacter', 'mailto:contact@edukado.co', class: 'text-hover-light' %></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <h6>RESSOURCES</h6>
+            <ul class="list-unstyled">
+              <li><%= link_to 'Blog', blogs_path, class: 'text-hover-light' %></li>
+              <li><%= link_to 'Centre d\'aide', 'https://edukadoco.tawk.help/', class: 'text-hover-light' %></li>
+              <li><%= link_to 'CGUs', '#', class: 'text-hover-light' %></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <h6>NOUS SOUTENIR</h6>
+            <ul class="list-unstyled">
+              <li><%= link_to 'Publier du contenu', new_post_path, class: 'text-hover-light' %></li>
+              <li><%= link_to 'Inviter des amis', new_user_invitation_path, class: 'text-hover-light' %></li>
+              <li><a href="javascript:" class="text-hover-light">Devenir modérateur</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <%= image_tag image_path('footer/made_in_france.png'), width: 120, class: 'mb-3' %>
+            <h6>PROUDLY MADE IN FRANCE ❤</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

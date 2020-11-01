@@ -4,32 +4,34 @@
 <% content_for :javascript do %>
   <%= javascript_pack_tag "comment.js" %>
 <% end %>
-<div class="row">
-  <%# Search form %>
-  <% @search_path = posts_path %>
-  <% @search_placeholder = "Ce n'est pas ce que vous recherchez ? Lancez une nouvelle recherche !" %>
-  <div class="col-12">
-    <%# Breadcrumb %>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <%= link_to @post.group.name, group_path(@post.group) %>
-      </li>
-      <li class="breadcrumb-item">
-        <%= link_to @post.category.name, category_path(@post.category) %>
-      </li>
-      <li class="breadcrumb-item">
-        <%= link_to @post.course.name, course_path(@post.course) %>
-      </li>
-    </ol>
-  </div>
-  <div class="col-lg-9 col-md-12 col-sm-12">
-    <%# Post %>
-    <%= render @post %>
-  </div>
-  <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
-    <%# User side panel %>
-    <%= render 'users/side_panel', locals: {user: @user} %>
-    <%# Badges side panel %>
-    <%= render partial: 'badges/side_panel-user' %>
+<%# Search form %>
+<% @search_path = posts_path %>
+<% @search_placeholder = "Ce n'est pas ce que vous recherchez ? Lancez une nouvelle recherche !" %>
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <%# Breadcrumb %>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to @post.group.name, group_path(@post.group) %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @post.category.name, category_path(@post.category) %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to @post.course.name, course_path(@post.course) %>
+        </li>
+      </ol>
+    </div>
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <%# Post %>
+      <%= render @post %>
+    </div>
+    <div id="sidebar" class="col-lg-3 col-md-12 col-sm-12 order-md-2 order-sm-1">
+      <%# User side panel %>
+      <%= render 'users/side_panel', locals: {user: @user} %>
+      <%# Badges side panel %>
+      <%= render partial: 'badges/side_panel-user' %>
+    </div>
   </div>
 </div>
