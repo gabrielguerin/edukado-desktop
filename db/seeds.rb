@@ -115,7 +115,9 @@ Group.all.each do |group|
 
       password_confirmation: 'password',
 
-      group: group
+      group: group,
+
+      terms_of_service: true
     )
 
     user.skip_confirmation!
@@ -191,7 +193,9 @@ gabriel_guerin_superadmin = User.new(
 
   group: Group.first,
 
-  superadmin_role: true
+  superadmin_role: true,
+
+  terms_of_service: true
 )
 
 hugo_pochet_superadmin = User.new(
@@ -209,7 +213,9 @@ hugo_pochet_superadmin = User.new(
 
   group: Group.first,
 
-  superadmin_role: true
+  superadmin_role: true,
+
+  terms_of_service: true
 )
 
 gabriel_guerin_supervisor = User.new(
@@ -227,7 +233,9 @@ gabriel_guerin_supervisor = User.new(
 
   group: Group.first,
 
-  supervisor_role: true
+  supervisor_role: true,
+
+  terms_of_service: true
 )
 
 gabriel_guerin_user = User.new(
@@ -243,7 +251,9 @@ gabriel_guerin_user = User.new(
 
   password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_user_password),
 
-  group: Group.first
+  group: Group.first,
+
+  terms_of_service: true
 )
 
 testusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor, gabriel_guerin_user]

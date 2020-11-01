@@ -56,6 +56,8 @@ class User < ApplicationRecord
 
   }, presence: false
 
+  validates :terms_of_service, acceptance: true
+
   # Full name
 
   def full_name

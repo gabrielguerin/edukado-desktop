@@ -145,7 +145,8 @@ module Users
           :avatar,
           :password,
           :password_confirmation,
-          :group_id
+          :group_id,
+          :terms_of_service
         )
       end
 
