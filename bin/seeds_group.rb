@@ -6,7 +6,7 @@ csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 
-csv.take(10).each do |row|
+csv.each do |row|
   t = Group.new
 
   t.name = row['name']
