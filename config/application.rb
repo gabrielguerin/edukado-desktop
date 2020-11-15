@@ -16,7 +16,7 @@ module EdukadoDesktop
 
     config.load_defaults 6.0
 
-    config.i18n.available_locales = [:en, :fr]
+    config.i18n.available_locales = %i[en fr]
 
     config.i18n.default_locale = :fr
 
@@ -35,5 +35,9 @@ module EdukadoDesktop
     # Add views/statics to default view paths
 
     config.paths['app/views'].unshift("#{Rails.root}/app/views/statics/")
+
+    # Read csv files
+
+    require 'csv'
   end
 end
