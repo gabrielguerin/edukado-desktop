@@ -18,9 +18,13 @@
               var typed = new Typed("#typed", options);
             </script>
           </h1>
-          <p class="">La plateforme entièrement dédiée au partage de fichiers basée sur le principe de donnant-donnant.</p>
-          <div class="mt-5">
-            <%= link_to "Rejoindre la plateforme", new_user_registration_path, class: "btn btn-primary" %>
+          <div class="pt-5">
+            <%= render partial: 'search/form', locals: { search_path: posts_path, placeholder: 'Dissertation Guerre Froide, Fiches Droit des sociétés, Exercices isométriques…' } %>
+            <% @search_path = posts_path %>
+          </div>
+          <div>
+            <p class="">Des milliers de ressources universitaires de qualité, crées par des étudiants & accessibles gratuitement !</p>
+            <%= link_to "Accéder aux contenus", new_user_registration_path, class: "btn btn-lg btn-primary mt-4" %>
           </div>
         </div>
       </div>
