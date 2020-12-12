@@ -37,9 +37,11 @@
             <%= f.error_messages %>
           <% end %>
           <%= f.form_group :terms_of_service, class: "row" do |f| %>
-            <%= f.check_box :terms_of_service, class: 'checkbox mr-2' %>
-            <%= f.label "Conditions générales d'utilisation" %>
-            <%= f.error_messages %>
+            <div class="checkbox m-0 mr-auto">
+              <%= f.check_box :terms_of_service %>
+              <%= f.label :terms_of_service, "Conditions générales d'utilisation", class: "checkbox m-0 mr-auto" %>
+              <%= f.error_messages %>
+            </div>
           <% end %>
           <div class="row d-flex align-items-center mt-3">
             <%= link_to "Se connecter", new_session_path(resource_name) %>
