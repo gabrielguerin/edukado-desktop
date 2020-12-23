@@ -1,11 +1,7 @@
 <%= form_with model: @post, html: { multipart: true, class: "card form", autocomplete: "off" } do |f| %>
   <div class="card-header d-flex justify-content-center">
     <h5 class="mb-0">
-      <% if current_page?(new_post_path) %>
-        Ajouter une publication
-      <% else %>
-        Modifier votre publication
-      <% end %>
+      <%= current_page?(controller: 'posts', action: 'new') ? 'Ajouter une publication' : 'Modifier votre publication' %>
     </h5>
   </div>
   <div class="card-body">
