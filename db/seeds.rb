@@ -54,9 +54,9 @@ Group.delete_all
 
 # French universities
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
+universities_fr = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
-csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv = CSV.parse(universities_fr, headers: true, encoding: 'ISO-8859-1')
 
 csv.take(10).each do |row|
   t = Group.new
@@ -131,7 +131,7 @@ end
 # Create tags
 
 50.times do
-  Tag.create!(
+  Tag.first_or_create!(
     title: Faker::Nation.language
   )
 end
@@ -277,7 +277,7 @@ Group.all.each do |group|
 
       tags: Tag.all.sample(3),
 
-      group: group,
+      group_id: group.id,
 
       category: Category.all.sample,
 
@@ -378,6 +378,36 @@ end
 
     tag: Tag.all.sample
   )
+end
+
+# Posts
+
+posts_test = File.read(Rails.root.join('lib', 'seeds', 'posts', 'posts_test.csv'))
+
+csv = CSV.parse(posts_test, headers: true, encoding: 'ISO-8859-1', col_sep: ';')
+
+csv.each do |row|
+  post = Post.new
+
+  post.user = User.find_by(first_name: row['first_name'], last_name: row['last_name'])
+
+  post.title = row['title']
+
+  post.description = row['description']
+
+  post.tags = row['tag_list'].split(',').map do |title|
+    Tag.where(title: title.strip).first_or_create!
+  end
+
+  post.group = Group.find_by(name: row['group'])
+
+  post.course = Course.find_by(name: row['course'])
+
+  post.category = Category.find_by(name: row['category'])
+
+  post.year = Year.find_by(start_year: row['start_year'], end_year: row['end_year'])
+
+  post.save
 end
 
 # Delete Badges Sash
