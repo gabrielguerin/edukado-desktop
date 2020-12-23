@@ -9,7 +9,7 @@
         </div>
         <% if @blogs.count > 10 %>
           <%# Pagination %>
-          <%= render partial: 'kaminari/pagination', locals: { object: @blogs, ajax: 'remote', model: Blog } %>
+          <%= render partial: 'kaminari/pagination', locals: { object: @blogs, ajax: 'remote', model: @blogs } %>
         <% end %>
       <% else %>
         <div class="card">
