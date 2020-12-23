@@ -20,6 +20,8 @@ class PostDashboard < Administrate::BaseDashboard
     title: Field::String,
     description: Field::Text,
     group: Field::BelongsTo,
+    category: Field::BelongsTo,
+    year: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String
@@ -66,6 +68,9 @@ class PostDashboard < Administrate::BaseDashboard
     description
     file
     slug
+    group
+    category
+    year
   ].freeze
 
   # COLLECTION_FILTERS
