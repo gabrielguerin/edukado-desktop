@@ -407,7 +407,7 @@ csv.each do |row|
 
   post.year = Year.find_by(start_year: row['start_year'], end_year: row['end_year'])
 
-  post.save
+  post.save!
 end
 
 # Delete Badges Sash

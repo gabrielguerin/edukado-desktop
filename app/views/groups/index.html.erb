@@ -35,7 +35,7 @@ end %>
         </div>
       </div>
       <%# Pagination %>
-      <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local', model: Group } %>
+      <%= render partial: 'kaminari/pagination', locals: { object: @groups, ajax: 'local', model: @groups } %>
     </div>
   </div>
 </div>
