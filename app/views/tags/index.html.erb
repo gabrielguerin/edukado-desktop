@@ -35,7 +35,7 @@
   </div>
 </div>
 <%# Pagination %>
-<%= render partial: 'kaminari/pagination', locals: { object: @tags, ajax: 'local', model: Tag } %>
+<%= render partial: 'kaminari/pagination', locals: { object: @tags, ajax: 'local', model: @tags } %>
 </div>
 <%# Clickable table row element %>
 <script>

@@ -31,7 +31,7 @@ end %>
   </div>
 </div>
 <%# Pagination %>
-<%= render partial: 'kaminari/pagination', locals: { object: @courses, ajax: 'local', model: Subject } %>
+<%= render partial: 'kaminari/pagination', locals: { object: @courses, ajax: 'local', model: @courses } %>
 </div>
 <%# Clickable table row element %>
 <script>

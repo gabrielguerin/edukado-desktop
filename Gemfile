@@ -58,10 +58,6 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
-
-  # Shows objects in nicely formatted columns for easy reading
-
-  gem 'table_print'
 end
 
 group :development do
@@ -161,3 +157,7 @@ gem 'faker'
 # Provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design patterns to build a simple, robust and scalable authorization system
 
 gem 'pundit'
+
+# Shows objects in nicely formatted columns for easy reading
+
+gem 'table_print'
