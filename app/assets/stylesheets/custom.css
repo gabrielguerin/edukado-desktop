@@ -60,3 +60,9 @@
 .tr-group:hover {
     cursor: pointer;
 }
+
+/* Carousel */
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(100%);
+}
