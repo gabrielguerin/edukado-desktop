@@ -56,12 +56,12 @@ Group.delete_all
 
 universities_fr = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
-csv = CSV.parse(universities_fr, headers: true, encoding: 'ISO-8859-1')
+csv = CSV.parse(universities_fr, headers: true)
 
-csv.take(10).each do |row|
+csv.first(10).each do |row|
   t = Group.new
 
-  t.name = row['name']
+  t.name = row['name'].strip
 
   t.save
 end
@@ -289,7 +289,7 @@ Group.all.each do |group|
     )
 
     @post.file.attach(
-      io: File.open('app/assets/images/seed/SEO.pdf'),
+      io: File.open('app/assets/images/seed/SEO.pdf', 'r:ISO-8859-1'),
 
       filename: 'SEO.pdf',
 
@@ -384,12 +384,12 @@ end
 
 posts_test = File.read(Rails.root.join('lib', 'seeds', 'posts', 'posts_test.csv'))
 
-csv = CSV.parse(posts_test, headers: true, encoding: 'ISO-8859-1', col_sep: ';')
+csv = CSV.parse(posts_test, headers: true, col_sep: ';')
 
 csv.each do |row|
   post = Post.new
 
-  post.user = User.find_by(first_name: row['first_name'], last_name: row['last_name'])
+  post.user = User.find_by(email: row['email'])
 
   post.title = row['title']
 
@@ -403,9 +403,23 @@ csv.each do |row|
 
   post.course = Course.find_by(name: row['course'])
 
+  post.levels = row['levels'].split(',').map do |level|
+    Level.find_by(level: level)
+  end
+
   post.category = Category.find_by(name: row['category'])
 
   post.year = Year.find_by(start_year: row['start_year'], end_year: row['end_year'])
+
+  post.file.attach(
+    io: File.open(row['path']),
+
+    filename: row['filename'],
+
+    content_type: row['content_type'],
+
+    identify: row['identity']
+  )
 
   post.save!
 end
