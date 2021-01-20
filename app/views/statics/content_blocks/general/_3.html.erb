@@ -3,8 +3,8 @@
     <div class="col-12 col-md-6 px-5">
       <h1 class="mt-5 font-weight-bold">Découvrez la plateforme</h1>
       <p>Elle est gratuite et sans publicité. Pour toujours. Point barre.</p>
-      <a class="btn btn-primary text-white">INSCRIVEZ-VOUS</a>
-      <a class="btn btn-outline-primary text-primnary text-hover-light">CONNECTEZ-VOUS</a>
+      <%= link_to "INSCRIVEZ-VOUS", new_user_registration_path, class: "btn btn-primary text-white" %>
+      <%= link_to "CONNECTEZ-VOUS", new_user_session_path, class: "btn btn-outline-primary text-primary text-hover-light" %>
     </div>
     <div class="col-12 col-md-6 pr-5 pt-5">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
