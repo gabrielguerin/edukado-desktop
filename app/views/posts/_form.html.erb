@@ -1,7 +1,7 @@
 <%= form_with model: @post, html: { multipart: true, class: "card form", autocomplete: "off" } do |f| %>
   <div class="card-header d-flex justify-content-center">
     <h5 class="mb-0">
-      <%= current_page?(controller: 'posts', action: 'new') ? 'Ajouter une publication' : 'Modifier votre publication' %>
+      <%= current_page?(controller: 'posts', action: 'new') ? 'Ajoutez une publication' : 'Modifiez votre publication' %>
     </h5>
   </div>
   <div class="card-body">
@@ -72,7 +72,7 @@
         <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
         <div class="dropzone-msg dz-message needsclick text-gray-600">
           <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
-          <span class="dropzone-msg-desc text-sm">Veillez à ne pas déposer de fichiers trop lourds.</span>
+          <span class="dropzone-msg-desc text-sm">Veuillez à ne pas déposer de fichiers trop lourds.</span>
         </div>
       </div>
     <% end %>
