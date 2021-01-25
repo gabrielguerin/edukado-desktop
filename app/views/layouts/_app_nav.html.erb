@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <%# Navbar links %>
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto text-center">
         <% if superadmin? || supervisor?(current_user) %>
           <li class="nav-item">
             <a class="nav-link" href="<%= admin_users_path %>">Espace admin</a>
