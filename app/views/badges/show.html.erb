@@ -29,8 +29,8 @@
                           <%# User full name %>
                           <h6 class="mb-0"><%= link_to "#{user.full_name}", posts_user_path(user) %></h6>
                           <%# Badges %>
-                          <div class="d-flex align-items-center flex-row justify-content-around">
-                            <%= render partial: 'badges/badges_user-info', locals: { user: user } %>
+                          <div class="d-flex align-items-center flex-row justify-content-between">
+                            <%= render partial: 'badges/badges_user-info', locals: { user: user, block_tag: :small } %>
                           </div>
                         </div>
                       </div>
