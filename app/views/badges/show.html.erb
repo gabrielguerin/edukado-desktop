@@ -21,20 +21,14 @@
               <tbody>
                 <% @badge.users.each do |user| %>
                   <tr>
-                    <td>
-                      <div class="mr-auto d-flex align-items-center">
-                        <%# User avatar %>
-                        <%= link_to image_tag(user_avatar(user), class: 'rounded-circle mr-1', style: 'object-fit: cover;', width: '64', height: '64', alt: 'profile picture'), posts_user_path(user) %>
-                        <div class="mr-auto d-flex flex-column">
-                          <%# User full name %>
-                          <h6 class="mb-0"><%= link_to "#{user.full_name}", posts_user_path(user) %></h6>
-                          <%# Badges %>
-                          <div class="d-flex align-items-center flex-row justify-content-between">
-                            <%= render partial: 'badges/badges_user-info', locals: { user: user, block_tag: :small } %>
-                          </div>
-                        </div>
+                    <%= content_tag :td do %>
+                      <%# User full name %>
+                      <h6 class="mb-0"><%= link_to "#{user.full_name}", posts_user_path(user) %></h6>
+                      <%# Badges %>
+                      <div class="d-flex justify-content-between">
+                        <%= render partial: 'badges/badges_user-info', locals: { user: user, block_tag: :small } %>
                       </div>
-                    </td>
+                    <% end %>
                     <%# Date %>
                     <td>
                       Décerné le <%= I18n.localize((user.sash.badges_sashes[params[:badge_id].to_i].created_at), format: "%-d %B %Y") %>
