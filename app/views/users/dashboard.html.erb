@@ -35,7 +35,7 @@
               <div class="card mx-2">
                 <div class="card-body pt-4 text-center">
                   <h3 class="m-0 mt-2"><%= (current_user.badges.select { |badge| badge.custom_fields[:difficulty] === "#{difficulty}" }).count %></h3>
-                  <%= link_to "#{t "merit.badge", count: (current_user.badges.select { |badge| badge.custom_fields[:difficulty] === "#{difficulty}" }).count} #{t "merit.difficulty.#{difficulty}"}", "#{badges_path}##{difficulty}", class: "text-uppercase" %>
+                  <%= link_to "#{t "merit.badge", count: (current_user.badges.select { |badge| badge.custom_fields[:difficulty] === "#{difficulty}" }).count} #{t "merit.difficulty.#{difficulty}"}", badges_path(tab: difficulty), class: "text-uppercase" %>
                 </div>
               </div>
             <% end %>
