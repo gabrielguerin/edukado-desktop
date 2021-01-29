@@ -1,6 +1,6 @@
 <%# Badges %>
 <% %w[gold silver bronze].each do |difficulty| %>
-  <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= t "merit.badge", count: (user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count  %> <%= t("merit.difficulty.#{difficulty}") %>">
+  <div class="d-flex align-items-center" data-placement="bottom" data-toggle="tooltip" data-original-title="<%= "#{(user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count} " "#{t "merit.badge", count: (user.badges.select { |badge| badge.custom_fields[:difficulty] === difficulty }).count}"  %> <%= t("merit.difficulty.#{difficulty}") %>">
     <% if difficulty === 'gold' %>
       <span style="color: #F2CA50; margin-right: 0.250rem;">•</span>
     <% elsif difficulty === 'silver' %>
