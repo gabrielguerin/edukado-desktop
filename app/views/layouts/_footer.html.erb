@@ -1,13 +1,13 @@
 <footer class="bg-dark">
   <div class="container">
-    <div class="row bg-dark pt-5">
-      <div class="col-12 col-md-2 text-center">
+    <div class="row no-gutter bg-dark p-5">
+      <div class="col-12 col-md-2">
         <div class="d-flex flex-column flex-wrap align-items-start justify-content-center">
-          <%= image_tag image_path('logos/edukado_white.png'), width: 250 %>
-          <p class="text-white">Décloisonnons le savoir !</p>
+          <%= image_tag image_path('logos/application_logo_white.png'), width: 64, class: 'mb-3' %>
+          <h6 class="text-white">EDUKADO</h6>
         </div>
       </div>
-      <div class="col-12 col-md-10 ml-md-auto text-white text-center">
+      <div class="col-12 col-md-10 ml-md-auto text-white">
         <div class="row">
           <div class="col-12 col-md-3">
             <h6>LA PLATEFORME</h6>
@@ -34,8 +34,8 @@
             </ul>
           </div>
           <div class="col-12 col-md-3">
-            <%= image_tag image_path('footer/made_in_france.png'), width: 120, class: 'mb-3' %>
-            <h6>PROUDLY MADE IN FRANCE ❤</h6>
+            <h6>LA PLATEFORME</h6>
+            <%= link_to "REJOIGNEZ-NOUS", new_user_session_path, class: "btn btn-success btn-block mt-2" %>
           </div>
         </div>
       </div>

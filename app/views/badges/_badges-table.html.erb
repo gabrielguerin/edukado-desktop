@@ -1,0 +1,22 @@
+<div class="tab-pane <%= "active" if params[:tab] == tab %>" id="<%= tab %>">
+  <table class="table table-sm-responsive">
+    <thead>
+      <tr>
+        <th>Badge</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @badges.select { |badge| badge.custom_fields[:difficulty] == tab }.each do |badge| %>
+        <tr>
+          <td>
+            <%= render partial: 'badge', locals: { badge: badge } %>
+          </td>
+          <td>
+            <%= badge.description %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
