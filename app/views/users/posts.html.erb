@@ -30,7 +30,7 @@ end %>
               <% if @search.present? %>
                 <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
               <% else %>
-                <h6 class="card-title">Publications de <%= @user.full_name %></h6>
+                <h6 class="card-title"><%= current_user == @user ? "Vos publications" : "Publications de #{@user.full_name}" %></h6>
               <% end %>
             </div>
             <% if @user.posts.count > 0 %>
@@ -44,7 +44,7 @@ end %>
               </table>
             <% else %>
               <div class="card-body">
-                <p><%= @user.first_name %> n'a pas encore publié.</p>
+                <p><%= current_user == @user ? "Vous n'avez pas encore publié" : "#{@user.first_name} n'a pas encore publié." %></p>
               </div>
             <% end %>
           </div>
