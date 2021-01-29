@@ -10,6 +10,7 @@
       <%= f.label "Tags (5 maximum)", class: "col-sm-4 col-form-label" %>
       <div class="col-12">
         <%= f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: 'tag1, tag2, tag3...', required: true %>
+        <small class="form-text text-muted">Merci de choisir des tags simples séparés par une virgule.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -18,6 +19,7 @@
       <%= f.label "Titre", class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
         <%= f.text_field :title, class: "form-control", placeholder: 'Titre', required: true %>
+        <small class="form-text text-muted">Merci de ne pas donner un titre trop long.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -26,6 +28,7 @@
       <%= f.label 'Catégorie', class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
         <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class: 'custom-select'}) %>
+        <small class="form-text text-muted">Merci de sélectionner une catégorie.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -34,6 +37,7 @@
       <%= f.label 'Matière', class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
         <%= f.collection_select(:course_id, Course.all, :id, :name, {}, {class: 'custom-select'}) %>
+        <small class="form-text text-muted">Merci de sélectionner la matière à laquelle se rattache votre publication.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -42,6 +46,7 @@
       <%= f.label 'Année académique', class: "col-sm-4 col-form-label" %>
       <div class="col-12 m-0">
         <%= f.collection_select(:year_id, Year.all, :id, :year, {}, {class: 'custom-select'}) %>
+        <small class="form-text text-muted">Merci de sélectionner l'année de création du fichier.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -54,6 +59,7 @@
             <%= level.check_box %> <%= level.label %>
           </div>
         <% end %>
+        <small class="form-text text-muted">Merci de choisir la ou les année(s) d'études pour lesquels votre fichier s'adresse.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -62,6 +68,7 @@
       <%= f.label :description, class: "col-sm-4 col-form-label" %>
       <div class="col-12">
         <%= f.text_area :description, class: "form-control", placeholder: 'Description', required: true %>
+        <small class="form-text text-muted">Merci de donner autant d'informations supplémentaires que possible.</small>
         <%= f.error_messages %>
       </div>
     <% end %>
@@ -72,7 +79,7 @@
         <%= f.file_field :file, direct_upload: true, required: true, data: { target: "dropzone.input" } %>
         <div class="dropzone-msg dz-message needsclick text-gray-600">
           <h5 class="dropzone-msg-title">Déposer pour télécharger ou cliquer pour parcourir</h5>
-          <span class="dropzone-msg-desc text-sm">Veuillez à ne pas déposer de fichiers trop lourds.</span>
+          <span class="dropzone-msg-desc text-sm">Merci de ne pas déposer de fichiers trop lourds.</span>
         </div>
       </div>
     <% end %>
