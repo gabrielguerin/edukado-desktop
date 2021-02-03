@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
-
 # Be sure to restart your server when you modify this file.
 
 # +grant_on+ accepts:
@@ -224,37 +222,31 @@ module Merit
 
       # Reputation
 
-      grant_on 'users/sessions#create',
+      grant_on 'posts#create',
                badge_id: 18,
 
                level: 1,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 100
+               to: :user do |post|
+        post.user && post.user.points >= 100
       end
 
-      grant_on 'users/sessions#create',
-               badge_id: 18,
+      grant_on 'posts#create',
+               badge_id: 19,
 
                level: 2,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 2500
+               to: :user do |post|
+        post.user && post.user.points >= 2500
       end
 
-      grant_on 'users/sessions#create',
-               badge_id: 18,
+      grant_on 'posts#create',
+               badge_id: 20,
 
                level: 3,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 10_000
+               to: :user do |post|
+        post.user && post.user.points >= 10_000
       end
 
       # Comments per post
@@ -455,6 +447,8 @@ module Merit
                to: :itself do |user|
         user.description.length > 1
       end
+
+      # Ranking
     end
   end
 end
