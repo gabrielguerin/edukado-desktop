@@ -45,8 +45,20 @@ module Merit
 
                                            model_name: 'User',
 
-                                           to: :itself do
-        User.count <= 100
+                                           to: :itself do |user|
+        user.email.present?
+      end
+
+      # Pioneer
+
+      grant_on 'users/confirmations#show', badge_id: 45,
+
+                                           level: 3,
+
+                                           model_name: 'User',
+
+                                           to: :itself do |user|
+        User.order(confirmed_at: :asc).first(1000).include?(user)
       end
 
       # Contributor
@@ -445,7 +457,7 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.description.length > 1
+        user.description.present?
       end
 
       # Ranking
