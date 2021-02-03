@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'byebug'
+
 # Be sure to restart your server when you modify this file.
 
 # +grant_on+ accepts:
@@ -252,7 +254,7 @@ module Merit
                model_name: 'User',
 
                to: :itself do |user|
-        user.points >= 10000
+        user.points >= 10_000
       end
 
       # Comments per post
@@ -441,7 +443,7 @@ module Merit
         user.invitations_count == 100
       end
 
-      grant_on 'users/registrations#update',
+      grant_on 'users#dashboard',
                badge_id: 49,
 
                level: 1,
@@ -450,7 +452,7 @@ module Merit
 
                model_name: 'User',
 
-               to: :action_user do |user|
+               to: :itself do |user|
         user.description.length > 1
       end
     end
