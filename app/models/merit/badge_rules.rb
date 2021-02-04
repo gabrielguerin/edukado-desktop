@@ -447,6 +447,8 @@ module Merit
         user.invitations_count == 100
       end
 
+      # Autobiographer
+
       grant_on 'users#dashboard',
                badge_id: 49,
 
@@ -460,7 +462,46 @@ module Merit
         user.description.present?
       end
 
-      # Ranking
+      # Badges
+
+      grant_on 'users#dashboard',
+               badge_id: 42,
+
+               level: 1,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('bronze')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('bronze')
+                     end.count * 80 / 100
+      end
+
+      grant_on 'users#dashboard',
+               badge_id: 43,
+
+               level: 2,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('silver')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('silver')
+                     end.count * 80 / 100
+      end
+
+      grant_on 'users#dashboard',
+               badge_id: 44,
+
+               level: 3,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('gold')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('gold')
+                     end.count * 80 / 100
+      end
     end
   end
 end
