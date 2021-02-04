@@ -45,8 +45,20 @@ module Merit
 
                                            model_name: 'User',
 
-                                           to: :itself do
-        User.count <= 100
+                                           to: :itself do |user|
+        user.email.present?
+      end
+
+      # Pioneer
+
+      grant_on 'users/confirmations#show', badge_id: 45,
+
+                                           level: 3,
+
+                                           model_name: 'User',
+
+                                           to: :itself do |user|
+        User.order(confirmed_at: :asc).first(1000).include?(user)
       end
 
       # Contributor
@@ -178,81 +190,60 @@ module Merit
 
       # Downloads
 
-      # grant_on 'downloads#create',
+      grant_on 'users#dashboard',
+               badge_id: 15,
 
-      #          badge_id: 15,
+               level: 1,
 
-      #          level: 1,
+               to: :action_user do |user|
+        user.download_count >= 10
+      end
 
-      #          model_name: 'User',
+      grant_on 'users#dashboard',
+               badge_id: 16,
 
-      #          to: :action_user do |post|
+               level: 2,
 
-      #   post.user.download_count == 1
+               to: :action_user do |user|
+        user.download_count >= 100
+      end
 
-      # end
+      grant_on 'users#dashboard',
+               badge_id: 17,
 
-      # grant_on 'downloads#create',
+               level: 3,
 
-      #          badge_id: 16,
-
-      #          level: 2,
-
-      #          model_name: 'User',
-
-      #          to: :action_user do |post|
-
-      #   post.user.download_count == 2
-
-      # end
-
-      # grant_on 'downloads#create',
-
-      #          badge_id: 17,
-
-      #          level: 3,
-
-      #          model_name: 'User',
-
-      #          to: :action_user do |post|
-
-      #   post.user.download_count == 3
-
-      # end
+               to: :action_user do |user|
+        user.download_count >= 500
+      end
 
       # Reputation
 
-      grant_on 'users/sessions#create',
+      grant_on 'posts#create',
                badge_id: 18,
 
                level: 1,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 100
+               to: :user do |post|
+        post.user && post.user.points >= 100
       end
 
-      grant_on 'users/sessions#create',
-               badge_id: 18,
+      grant_on 'posts#create',
+               badge_id: 19,
 
                level: 2,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 2500
+               to: :user do |post|
+        post.user && post.user.points >= 2500
       end
 
-      grant_on 'users/sessions#create',
-               badge_id: 18,
+      grant_on 'posts#create',
+               badge_id: 20,
 
                level: 3,
 
-               model_name: 'User',
-
-               to: :itself do |user|
-        user.points >= 10000
+               to: :user do |post|
+        post.user && post.user.points >= 10_000
       end
 
       # Comments per post
@@ -441,7 +432,9 @@ module Merit
         user.invitations_count == 100
       end
 
-      grant_on 'users/registrations#update',
+      # Autobiographer
+
+      grant_on 'users#dashboard',
                badge_id: 49,
 
                level: 1,
@@ -450,9 +443,157 @@ module Merit
 
                model_name: 'User',
 
-               to: :action_user do |user|
-        user.description.length > 1
+               to: :itself do |user|
+        user.description.present?
       end
+
+      # Badges
+
+      grant_on 'users#dashboard',
+               badge_id: 42,
+
+               level: 1,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('bronze')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('bronze')
+                     end.count * 80 / 100
+      end
+
+      grant_on 'users#dashboard',
+               badge_id: 43,
+
+               level: 2,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('silver')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('silver')
+                     end.count * 80 / 100
+      end
+
+      grant_on 'users#dashboard',
+               badge_id: 44,
+
+               level: 3,
+
+               to: :action_user do |user|
+        user.badges.select do |badge|
+          badge.custom_fields[:difficulty].match?('gold')
+        end.count >= Merit::Badge.all.select do |badge|
+                       badge.custom_fields[:difficulty].match?('gold')
+                     end.count * 80 / 100
+      end
+
+      # # Ranking
+
+      # # Weekly
+
+      # grant_on 'posts#create',
+      #          badge_id: 21,
+
+      #          level: 1,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 22,
+
+      #          level: 2,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 23,
+
+      #          level: 3,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # # Monthly
+
+      # grant_on 'posts#create',
+      #          badge_id: 24,
+
+      #          level: 1,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 25,
+
+      #          level: 2,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 26,
+
+      #          level: 3,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # # Yearly
+
+      # grant_on 'posts#create',
+      #          badge_id: 27,
+
+      #          level: 1,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 28,
+
+      #          level: 2,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
+
+      # grant_on 'posts#create',
+      #          badge_id: 29,
+
+      #          level: 3,
+
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
     end
   end
 end

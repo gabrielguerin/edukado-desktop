@@ -58,6 +58,10 @@ group :development, :test do
   # Replace the standard Rails error page with a much better and more useful error page
 
   gem 'better_errors'
+
+  # Retrieve the binding of a method's caller in MRI (>= 2.0.0) and RBX (Rubinius)
+
+  gem 'binding_of_caller'
 end
 
 group :development do
