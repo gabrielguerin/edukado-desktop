@@ -395,7 +395,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'silver'
+    difficulty: 'bronze'
 
   }
 )
@@ -411,7 +411,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'gold'
+    difficulty: 'bronze'
 
   }
 )
@@ -429,7 +429,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'bronze'
+    difficulty: 'silver'
 
   }
 )
@@ -461,7 +461,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'gold'
+    difficulty: 'silver'
 
   }
 )
@@ -479,7 +479,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'bronze'
+    difficulty: 'gold'
 
   }
 )
@@ -495,7 +495,7 @@ Merit::Badge.create!(
 
   custom_fields: {
 
-    difficulty: 'silver'
+    difficulty: 'gold'
 
   }
 )
