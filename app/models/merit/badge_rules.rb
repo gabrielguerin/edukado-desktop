@@ -190,47 +190,32 @@ module Merit
 
       # Downloads
 
-      # grant_on 'downloads#create',
+      grant_on 'users#dashboard',
+               badge_id: 15,
 
-      #          badge_id: 15,
+               level: 1,
 
-      #          level: 1,
+               to: :action_user do |user|
+        user.download_count >= 10
+      end
 
-      #          model_name: 'User',
+      grant_on 'users#dashboard',
+               badge_id: 16,
 
-      #          to: :action_user do |post|
+               level: 2,
 
-      #   post.user.download_count == 1
+               to: :action_user do |user|
+        user.download_count >= 100
+      end
 
-      # end
+      grant_on 'users#dashboard',
+               badge_id: 17,
 
-      # grant_on 'downloads#create',
+               level: 3,
 
-      #          badge_id: 16,
-
-      #          level: 2,
-
-      #          model_name: 'User',
-
-      #          to: :action_user do |post|
-
-      #   post.user.download_count == 2
-
-      # end
-
-      # grant_on 'downloads#create',
-
-      #          badge_id: 17,
-
-      #          level: 3,
-
-      #          model_name: 'User',
-
-      #          to: :action_user do |post|
-
-      #   post.user.download_count == 3
-
-      # end
+               to: :action_user do |user|
+        user.download_count >= 500
+      end
 
       # Reputation
 
