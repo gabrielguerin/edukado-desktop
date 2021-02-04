@@ -366,155 +366,155 @@ Merit::Badge.create!(
   }
 )
 
-# Weekly ranking
+# # Weekly ranking
 
-Merit::Badge.create!(
-  id: 21,
+# Merit::Badge.create!(
+#   id: 21,
 
-  name: 'Top 500 hebdomadaire',
+#   name: 'Top 500 hebdomadaire',
 
-  description: 'Faire partie du top 500 hebdomadaire.',
+#   description: 'Faire partie du top 500 hebdomadaire.',
 
-  level: 1,
+#   level: 1,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'bronze'
+#     difficulty: 'bronze'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 22,
+# Merit::Badge.create!(
+#   id: 22,
 
-  name: 'Top 100 hebdomadaire',
+#   name: 'Top 100 hebdomadaire',
 
-  description: 'Faire partie du top 100 hebdomadaire.',
+#   description: 'Faire partie du top 100 hebdomadaire.',
 
-  level: 2,
+#   level: 2,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'bronze'
+#     difficulty: 'bronze'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 23,
+# Merit::Badge.create!(
+#   id: 23,
 
-  name: 'Top 10 hebdomadaire',
+#   name: 'Top 10 hebdomadaire',
 
-  description: 'Faire partie du top 10 hebdomadaire.',
+#   description: 'Faire partie du top 10 hebdomadaire.',
 
-  level: 3,
+#   level: 3,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'bronze'
+#     difficulty: 'bronze'
 
-  }
-)
+#   }
+# )
 
-# Monthly ranking
+# # Monthly ranking
 
-Merit::Badge.create!(
-  id: 24,
+# Merit::Badge.create!(
+#   id: 24,
 
-  name: 'Top 500 mensuel',
+#   name: 'Top 500 mensuel',
 
-  description: 'Faire partie du top 500 mensuel.',
+#   description: 'Faire partie du top 500 mensuel.',
 
-  level: 1,
+#   level: 1,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'silver'
+#     difficulty: 'silver'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 25,
+# Merit::Badge.create!(
+#   id: 25,
 
-  name: 'Top 100 mensuel',
+#   name: 'Top 100 mensuel',
 
-  description: 'Faire partie du top 100 mensuel.',
+#   description: 'Faire partie du top 100 mensuel.',
 
-  level: 2,
+#   level: 2,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'silver'
+#     difficulty: 'silver'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 26,
+# Merit::Badge.create!(
+#   id: 26,
 
-  name: 'Top 10 mensuel',
+#   name: 'Top 10 mensuel',
 
-  description: 'Faire partie du top 10 mensuel.',
+#   description: 'Faire partie du top 10 mensuel.',
 
-  level: 3,
+#   level: 3,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'silver'
+#     difficulty: 'silver'
 
-  }
-)
+#   }
+# )
 
-# All-time ranking
+# # All-time ranking
 
-Merit::Badge.create!(
-  id: 27,
+# Merit::Badge.create!(
+#   id: 27,
 
-  name: 'Top 500 de tous les temps',
+#   name: 'Top 500 de tous les temps',
 
-  description: 'Faire partie du top 500 de tous les temps.',
+#   description: 'Faire partie du top 500 de tous les temps.',
 
-  level: 1,
+#   level: 1,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'gold'
+#     difficulty: 'gold'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 28,
+# Merit::Badge.create!(
+#   id: 28,
 
-  name: 'Top 100 de tous les temps',
+#   name: 'Top 100 de tous les temps',
 
-  description: 'Faire partie du top 100 de tous les temps.',
+#   description: 'Faire partie du top 100 de tous les temps.',
 
-  level: 2,
+#   level: 2,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'gold'
+#     difficulty: 'gold'
 
-  }
-)
+#   }
+# )
 
-Merit::Badge.create!(
-  id: 29,
+# Merit::Badge.create!(
+#   id: 29,
 
-  name: 'Top 10 de tous les temps',
+#   name: 'Top 10 de tous les temps',
 
-  description: 'Faire partie du top 10 de tous les temps.',
+#   description: 'Faire partie du top 10 de tous les temps.',
 
-  level: 3,
+#   level: 3,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'gold'
+#     difficulty: 'gold'
 
-  }
-)
+#   }
+# )
 
 # Comments per post
 
@@ -854,21 +854,21 @@ Merit::Badge.create!(
 
 # Help Section
 
-Merit::Badge.create!(
-  id: 50,
+# Merit::Badge.create!(
+#   id: 50,
 
-  name: 'Informé',
+#   name: 'Informé',
 
-  description: 'Lire la page "Notre philoshophie".',
+#   description: 'Lire la page "Notre philoshophie".',
 
-  level: 1,
+#   level: 1,
 
-  custom_fields: {
+#   custom_fields: {
 
-    difficulty: 'bronze'
+#     difficulty: 'bronze'
 
-  }
-)
+#   }
+# )
 
 # Invitations
 

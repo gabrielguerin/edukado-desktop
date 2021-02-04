@@ -488,112 +488,112 @@ module Merit
                      end.count * 80 / 100
       end
 
-      # Ranking
+      # # Ranking
 
-      # Weekly
+      # # Weekly
 
-      grant_on 'posts#create',
-               badge_id: 21,
+      # grant_on 'posts#create',
+      #          badge_id: 21,
 
-               level: 1,
+      #          level: 1,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.week.ago, limit: 500).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 22,
+      # grant_on 'posts#create',
+      #          badge_id: 22,
 
-               level: 2,
+      #          level: 2,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.week.ago, limit: 100).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 23,
+      # grant_on 'posts#create',
+      #          badge_id: 23,
 
-               level: 3,
+      #          level: 3,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.week.ago, limit: 10).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.week.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      # Monthly
+      # # Monthly
 
-      grant_on 'posts#create',
-               badge_id: 24,
+      # grant_on 'posts#create',
+      #          badge_id: 24,
 
-               level: 1,
+      #          level: 1,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.month.ago, limit: 500).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 25,
+      # grant_on 'posts#create',
+      #          badge_id: 25,
 
-               level: 2,
+      #          level: 2,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.month.ago, limit: 100).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 26,
+      # grant_on 'posts#create',
+      #          badge_id: 26,
 
-               level: 3,
+      #          level: 3,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 1.month.ago, limit: 10).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 1.month.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      # Yearly
+      # # Yearly
 
-      grant_on 'posts#create',
-               badge_id: 27,
+      # grant_on 'posts#create',
+      #          badge_id: 27,
 
-               level: 1,
+      #          level: 1,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 5.years.ago, limit: 500).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 500).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 28,
+      # grant_on 'posts#create',
+      #          badge_id: 28,
 
-               level: 2,
+      #          level: 2,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 5.years.ago, limit: 100).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 100).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
 
-      grant_on 'posts#create',
-               badge_id: 29,
+      # grant_on 'posts#create',
+      #          badge_id: 29,
 
-               level: 3,
+      #          level: 3,
 
-               to: :user do |post|
-        Merit::Score.top_scored(since_date: 5.years.ago, limit: 10).to_a.any? do |user|
-          user['user_id'] == post.user.id
-        end
-      end
+      #          to: :user do |post|
+      #   Merit::Score.top_scored(since_date: 5.years.ago, limit: 10).to_a.any? do |user|
+      #     user['user_id'] == post.user.id
+      #   end
+      # end
     end
   end
 end
