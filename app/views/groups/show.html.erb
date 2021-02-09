@@ -37,29 +37,19 @@ end %>
       <%# List of posts %>
       <div class="card">
         <%# Card header %>
-        <div class="card-header flex-md-row flex-column d-flex align-items-center">
-          <% if @search.present? %>
-            <h6 class="card-title">Vous avez recherché : <i><%= @search %></i></h6>
-          <% else %>
-            <h6 class="card-title"><%= @group.name %></h6>
-          <% end %>
-          <div class="ml-0 ml-md-auto mt-2 mt-md-0 btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-default active">Populaires</button>
-            <button type="button" class="btn btn-default">Matières</button>
-            <button type="button" class="btn btn-default">Années</button>
-          </div>
-        </div>
-        <table class="table table-hover table-striped">
-          <tbody>
-            <%# Render posts %>
-            <% @posts.each do |post| %>
-              <%= render partial: 'tables/tr-post', locals: { post: post } %>
-            <% end %>
-          </tbody>
-        </table>
+        <%= render partial: 'posts/card-header', locals: { title: "#{@group.name}" } %>
       </div>
+      <table class="table table-hover table-striped">
+        <tbody>
+          <%# Render posts %>
+          <% @posts.each do |post| %>
+            <%= render partial: 'tables/tr-post', locals: { post: post } %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-  <%# Pagination %>
+</div>
+<%# Pagination %>
 <%= render partial: 'kaminari/pagination', locals: { object: @posts, ajax: 'local', model: @group.posts } %>
 </div>
