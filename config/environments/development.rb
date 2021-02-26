@@ -57,31 +57,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
 
-  # Sendgrid
-
-  ActionMailer::Base.smtp_settings = {
-
-    user_name: Rails.application.credentials.sendgrid[:user_name],
-
-    password: Rails.application.credentials.sendgrid[:password],
-
-    address: 'smtp.sendgrid.net',
-
-    port: 587,
-
-    authentication: :plain,
-
-    domain: 'herokuapp.com',
-
-    enable_starttls_auto: true
-
-  }
-
   # Open emails using letter_opener
 
   config.action_mailer.delivery_method = :letter_opener
-
-  config.action_mailer.default_url_options = { host: 'http://localhost:3000' }
 
   # Print deprecation notices to the Rails logger.
 
