@@ -12,9 +12,9 @@ Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
 
-  user_name: Rails.application.credentials[:production][:sendgrid_username],
+  user_name: Rails.application.credentials.sendgrid[:user_name],
 
-  password: Rails.application.credentials[:production][:sendgrid_password],
+  password: Rails.application.credentials.sendgrid[:password],
 
   domain: 'herokuapp.com',
 
