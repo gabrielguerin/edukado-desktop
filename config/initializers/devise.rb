@@ -632,22 +632,4 @@ Devise.setup do |config|
 
     Devise::Mailer.send(:helper, EmailTemplateHelper)
   end
-
-  ActionMailer::Base.smtp_settings = {
-
-    user_name: Rails.application.credentials[:production][:sendgrid_username],
-
-    password: Rails.application.credentials[:production][:sendgrid_password],
-
-    domain: 'edukado.co',
-
-    address: 'smtp.sendgrid.net',
-
-    port: 587,
-
-    authentication: :plain,
-
-    enable_starttls_auto: true
-
-  }
 end
