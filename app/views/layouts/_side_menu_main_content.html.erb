@@ -3,7 +3,7 @@
   <li class="nav-item">
     <%= link_to(
       display_resource_name(resource),
-      [namespace, resource_index_route_key(resource)],
+      resource_index_route(resource),
       class: "nav-link #{nav_link_state(resource)}"
     ) if valid_action? :index, resource  %>
   </li>
