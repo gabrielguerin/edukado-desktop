@@ -11,7 +11,9 @@ class PostPolicy < ApplicationPolicy
     end
   end
 
-  def index?; end
+  def index?
+    true
+  end
 
   def show?
     true
