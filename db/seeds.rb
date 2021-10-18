@@ -56,12 +56,16 @@ Group.delete_all
 
 universities_fr = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv'))
 
-csv = CSV.parse(universities_fr, headers: true)
+csv = CSV.parse(universities_fr, headers: true, col_sep: ',', encoding: 'iso-8859-1:utf-8')
+
+puts csv
 
 csv.first(10).each do |row|
   t = Group.new
 
-  t.name = row['name'].strip
+  t.name = row
+
+  t.name = t.name.strip
 
   t.save
 end
@@ -124,7 +128,7 @@ Group.all.each do |group|
 
     user.save!
 
-    user.add_points(rand(2000))
+    user.add_points(rand(400))
   end
 end
 
@@ -178,18 +182,18 @@ end
 
 # Create test users
 
-gabriel_guerin_superadmin = User.new(
-  first_name: 'Gabriel',
+user_superadmin = User.new(
+  first_name: 'John',
 
-  last_name: 'Guérin',
+  last_name: 'Doe',
 
   gender: 'Masculin',
 
-  email: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_email),
+  email: Rails.application.credentials.dig(:development, :superadmin_email),
 
-  password: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_password),
+  password: Rails.application.credentials.dig(:development, :superadmin_password),
 
-  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_superadmin_password),
+  password_confirmation: Rails.application.credentials.dig(:development, :superadmin_password),
 
   group: Group.first,
 
@@ -198,38 +202,18 @@ gabriel_guerin_superadmin = User.new(
   terms_of_service: true
 )
 
-hugo_pochet_superadmin = User.new(
-  first_name: 'Hugo',
+user_supervisor = User.new(
+  first_name: 'John',
 
-  last_name: 'Pochet',
-
-  gender: 'Masculin',
-
-  email: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_email),
-
-  password: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_password),
-
-  password_confirmation: Rails.application.credentials.dig(:development, :hugo_pochet_superadmin_password),
-
-  group: Group.first,
-
-  superadmin_role: true,
-
-  terms_of_service: true
-)
-
-gabriel_guerin_supervisor = User.new(
-  first_name: 'Gabriel',
-
-  last_name: 'Guérin',
+  last_name: 'Doe',
 
   gender: 'Masculin',
 
-  email: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_email),
+  email: Rails.application.credentials.dig(:development, :supervisor_email),
 
-  password: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_password),
+  password: Rails.application.credentials.dig(:development, :supervisor_password),
 
-  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_supervisor_password),
+  password_confirmation: Rails.application.credentials.dig(:development, :supervisor_password),
 
   group: Group.first,
 
@@ -238,30 +222,30 @@ gabriel_guerin_supervisor = User.new(
   terms_of_service: true
 )
 
-gabriel_guerin_user = User.new(
-  first_name: 'Gabriel',
+user = User.new(
+  first_name: 'John',
 
-  last_name: 'Guérin',
+  last_name: 'Doe',
 
   gender: 'Masculin',
 
-  email: Rails.application.credentials.dig(:development, :gabriel_guerin_user_email),
+  email: Rails.application.credentials.dig(:development, :user_email),
 
-  password: Rails.application.credentials.dig(:development, :gabriel_guerin_user_password),
+  password: Rails.application.credentials.dig(:development, :user_password),
 
-  password_confirmation: Rails.application.credentials.dig(:development, :gabriel_guerin_user_password),
+  password_confirmation: Rails.application.credentials.dig(:development, :user_password),
 
   group: Group.first,
 
   terms_of_service: true
 )
 
-testusers = [gabriel_guerin_superadmin, hugo_pochet_superadmin, gabriel_guerin_supervisor, gabriel_guerin_user]
+test_users = [user_superadmin, user_supervisor, user]
 
-testusers.each do |testuser|
-  testuser.skip_confirmation!
+test_users.each do |test_user|
+  test_user.skip_confirmation!
 
-  testuser.save!
+  test_user.save!
 end
 
 # Create posts
@@ -384,7 +368,7 @@ end
 
 posts_test = File.read(Rails.root.join('lib', 'seeds', 'posts', 'posts_test.csv'))
 
-csv = CSV.parse(posts_test, headers: true, col_sep: ';')
+csv = CSV.parse(posts_test, headers: true, col_sep: ',', encoding: 'iso-8859-1:utf-8')
 
 csv.each do |row|
   post = Post.new
