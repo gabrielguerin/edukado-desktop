@@ -120,7 +120,7 @@ gem 'friendly_id', '~> 5.2.4'
 
 # Framework for creating flexible, powerful admin dashboards in Rails
 
-gem 'administrate', '~> 0.13.0'
+gem 'administrate'
 
 # Support Active Storage in Administrate
 

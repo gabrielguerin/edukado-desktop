@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoryPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -5,7 +7,9 @@ class CategoryPolicy < ApplicationPolicy
     end
   end
 
-  def index?; end
+  def index?
+    true
+  end
 
   def show?
     true
