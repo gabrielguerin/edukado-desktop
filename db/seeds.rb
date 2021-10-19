@@ -58,8 +58,6 @@ universities_fr = File.read(Rails.root.join('lib', 'seeds', 'universities_fr.csv
 
 csv = CSV.parse(universities_fr, headers: true, col_sep: ',', encoding: 'iso-8859-1:utf-8')
 
-puts csv
-
 csv.first(10).each do |row|
   t = Group.new
 
