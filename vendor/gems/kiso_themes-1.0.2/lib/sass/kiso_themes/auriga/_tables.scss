@@ -1,0 +1,54 @@
+.thead {
+  th {
+    color: $table-dark-color;
+    background-color: $table-dark-bg;
+  }
+}
+
+.table {
+  color: $table-dark-color;
+  background-color: $table-dark-bg;
+
+  th,
+  td,
+  thead th {
+    border-color: $table-dark-border-color;
+  }
+
+  &.table-bordered {
+    border: 0;
+  }
+
+  &.table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: $table-dark-accent-bg;
+    }
+  }
+
+  &.table-hover {
+    tbody tr {
+      @include hover {
+        background-color: $table-dark-hover-bg;
+      }
+    }
+  }
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table-striped {
+  tbody tr:nth-of-type(odd) {
+    background-color: $gray-200;
+  }
+}
+
+.table-hover {
+  tbody {
+    tr:hover {
+      background-color: $gray-400;
+    }
+  }
+}

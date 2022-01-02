@@ -1,0 +1,102 @@
+$sans-serif-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
+// Border thicknesses
+$none: 0 !default;
+$border-thin: 1px !default;
+$border-thick: 2px !default;
+
+// Whites
+$white-color: #fdfcfc !default;
+$white-bg: #fff !default;
+
+// Blacks
+$black-bg: #202942;
+$light-black: #444 !default;
+$black-color: #2c2c2c !default;
+$black-hr: #444 !default;
+$dark-color: $black-color;
+
+// Backgrounds
+$main-bg: #151b31;
+$dark-background: #555 !default;
+
+@include theme-colors((
+ text-color: #95a0bd,
+ brand-default: #242a3d,
+ brand-primary: #2aa2ef,
+ brand-success: #73c16b,
+ brand-info: #5cc6d2,
+ brand-warning: #e08e45,
+ brand-danger: #c55e5e,
+ brand-light: #2e364f,
+ brand-dark: $dark-color,
+
+ sidenav-menu-bg: #1e253d,
+ sidenav-header-bg: #1e253d,
+ sidenav-header-link: lighten(#95a0bd, 25%),
+ sidenav-color: #9ccbf9,
+ sidenav-menu-item-bg: #296dcf,
+ sidenav-menu-item-icon: #2e547e,
+
+ tooltip-bg: lighten(#242a3d, 25%),
+ tooltip-color: white,
+
+ button-default-bg: #3f4453,
+ button-default-state-bg: lighten(#3f4453, 10%),
+
+ dropdown-bg: #2f364d,
+ dropdown-item-color: #9ccbf9,
+
+ form-input-color: #2aa2ef,
+ form-input-placeholder: rgba(lighten(#2aa2ef, 40%), .2),
+ form-input-disabled-bg: #31394c,
+
+ checkbox-check: #2aa2ef
+));
+
+$metric-details-background: rgba(255,255,255,0.4);
+$metric-details-border: transparent;
+$metric-details-text: $black-color;
+
+$navbar-background: #242a3d;
+$navbar-box-shadow: 0 0 20px 0 rgba(0, 0, 0, .15);
+
+$card-header-bg: #2e364f;
+$card-bg: #1b2238;
+
+$card-header-border-color: transparent;
+$card-border-radius: $border-radius-small;
+$card-outer-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+
+$navbar-navlink-color: $white-color;
+$navbar-navlink-hover-bg: $opacity-2;
+$form-input-radius: $btn-round-radius;
+
+
+$navbar-toggle: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"), "#", "%23");
+
+$landing-nav-bg: transparent;
+$landing-nav-color: $white-color;
+$landing-nav-brand-color: $white-color;
+
+$pagination-color: $white-color;
+$pagination-bg: $default-color;
+$pagination-hover-color: $white-color;
+$pagination-hover-bg: $opacity-gray-3;
+$pagination-disabled-bg: #212d35;
+$pagination-disabled-color: #445062;
+
+$progress-bar-bg: #30374b;
+
+$card-sheet-bg: #2e364f;
+$listgroup-item-border-color: 1px solid rgba(228, 228, 228, 0.23);
+
+$scaffold-page-header-bg: #373d50;
+$scaffold-page-header-color: $text-color;
+
+$nav-stacked-active-link-bg: #373d50;
+$nav-stacked-link-border-color: #2a4557;
+$nav-stacked-link-hover-bg: #3e4660;
+$nav-stacked-chevron-bg: #373d50;
+
+$plan-selector-active-bg: transparent;
