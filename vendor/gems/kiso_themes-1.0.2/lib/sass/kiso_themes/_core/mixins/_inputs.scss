@@ -1,0 +1,117 @@
+@mixin input-size($padding-vertical, $padding-horizontal) {
+  padding: $padding-vertical $padding-horizontal;
+}
+
+@mixin form-control-placeholder($color) {
+
+  .form-control::-moz-placeholder {
+    color: $color;
+  }
+
+  .form-control:-moz-placeholder {
+    color: $color;
+  }
+
+  .form-control::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  .form-control:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin light-form() {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+@mixin input-lg-padding($padding-vertical, $padding-horizontal) {
+
+  .form-group.form-group-no-border.input-lg,
+  .input-group.form-group-no-border.input-lg {
+
+    .input-group-prepend,
+    .input-group-append {
+      padding: $padding-vertical - 1 0 $padding-vertical -1 $padding-horizontal;
+    }
+
+    .form-control {
+      padding: $padding-vertical - 1 $padding-horizontal - 1;
+
+      & + .input-group-prepend,
+      & + .input-group-append {
+        padding: $padding-vertical - 1 $padding-horizontal $padding-vertical - 1 0;
+      }
+    }
+  }
+
+  .form-group.input-lg,
+  .input-group.input-lg {
+
+    .form-control {
+      padding: $padding-vertical - 1 $padding-horizontal - 1;
+
+      & + .input-group-prepend,
+      & + .input-group-append {
+        padding: $padding-vertical - 1 $padding-horizontal - 1 $padding-vertical - 1 0;
+      }
+    }
+
+    .input-group-prepend,
+    .input-group-append {
+      padding: $padding-vertical - 1 0 $padding-vertical $padding-horizontal - 1;
+
+      & + .form-control {
+        padding: $padding-vertical $padding-horizontal - 1 $padding-vertical $padding-horizontal - 3;
+      }
+    }
+  }
+}
+
+@mixin input-base-padding($padding-vertical, $padding-horizontal) {
+
+  .form-group.form-group-no-border,
+  .input-group.form-group-no-border {
+
+    .form-control {
+      padding: $padding-vertical $padding-horizontal;
+
+      & + .input-group-prepend,
+      & + .input-group-append {
+        padding: $padding-vertical $padding-horizontal $padding-vertical 0;
+      }
+    }
+
+    .input-group-prepend,
+    .input-group-append {
+      padding: $padding-vertical 0 $padding-vertical $padding-horizontal;
+    }
+  }
+
+  .input-group-btn {
+    font-size: inherit;
+  }
+
+  .form-group,
+  .input-group {
+
+    .form-control {
+      padding: calc(#{$padding-base-vertical} - 1px) $padding-base-horizontal calc($padding-base-vertical - 1px) $padding-base-horizontal;
+    }
+  }
+
+  .input-group {
+
+    .form-control {
+
+      &:not(:first-child):not(:last-child) {
+        border-right: 0;
+        border-left: 0;
+      }
+    }
+  }
+}
+

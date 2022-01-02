@@ -92,7 +92,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Kiso themes
 
-gem 'kiso_themes', '~>1.0.2', source: 'https://gems.kiso.io/'
+gem 'kiso_themes', '~>1.0.2', path: 'vendor/gems/kiso_themes-1.0.2'
 
 # Flexible authentication solution for Rails with Warden
 

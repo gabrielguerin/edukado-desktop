@@ -1,0 +1,12 @@
+
+1.0.2 / 2019-11-03
+==================
+
+  * Allow webpacker install to be forced
+
+1.0.1 / 2019-10-09
+==================
+
+  * Fixup jquery-parallax.js includes
+  * Relax sass-rails to >=5.1.0 now that it works with Rails 6
+  * Re-enable Rails 5.2.3 support
