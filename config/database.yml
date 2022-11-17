@@ -83,3 +83,4 @@ production:
   database: edukado_web_production
   username: edukado_web
   password: <%= ENV['EDUKADO_WEB_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
